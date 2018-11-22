@@ -1,13 +1,13 @@
 package src_basic.Model;
 
-import java.awt.Point;
-
-import javafx.geometry.*;
+import javafx.geometry.Point2D;
+import javafx.scene.shape.Circle;
 
 public class Planet {
 	private Point2D origin;
 	private double radius;
 	
+	Hitbox hitbox;
 	private int poductionSpeed;
 	private int stock;
 	private int squadSize;
@@ -20,15 +20,20 @@ public class Planet {
 		
 		this.poductionSpeed = 0;
 		this.stock = 0;
-		this.squadSize = 0;
+		this.squadSize = 1;
 		
 		this.owner = 0;
+		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
 	}
 	
-	public Planet(Point2D origin, double radius, int productionSpeed) {
+	public Planet(Point2D origin, double radius, int productionSpeed, int owner) {
 		this.origin = new Point2D(origin.getX(), origin.getY());
 		this.radius = radius;
 		this.poductionSpeed = productionSpeed;
+		this.owner = owner;
+		this.stock = 0;
+		this.squadSize = 1;
+		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
 	}
 	
 	public int getNbUnitPerSquad() {
