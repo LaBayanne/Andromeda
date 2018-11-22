@@ -1,7 +1,5 @@
 package src_basic.Model;
 
-import java.awt.Point;
-
 import javafx.geometry.*;
 
 public class Planet {
