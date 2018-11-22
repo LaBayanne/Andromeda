@@ -3,6 +3,14 @@ package src_basic.Model;
 import javafx.geometry.*;
 
 public class StarShip {
+	static final int WIDTH;
+	static final int HEIGHT;
+	
+	static {
+		WIDTH  = 30;
+		HEIGHT = 30;
+	}
+	
 	private Point2D position;
 	private Point2D destination;
 	private int speed;
