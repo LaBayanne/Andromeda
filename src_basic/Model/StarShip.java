@@ -24,7 +24,7 @@ public class StarShip {
 	}
 
 	public Point2D getPosition() {
-		return position;
+		return new Point2D(this.position.getX(), this.position.getY());
 	}
 
 	public void setPosition(Point2D position) {
@@ -32,7 +32,7 @@ public class StarShip {
 	}
 
 	public Point2D getDestination() {
-		return destination;
+		return new Point2D(this.destination.getX(), this.destination.getY());
 	}
 
 	public void setDestination(Point2D destination) {
