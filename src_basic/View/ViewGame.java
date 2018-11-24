@@ -27,7 +27,7 @@ public class ViewGame{
 	}
 	
 	public void displaySquads(ArrayList<Squad> squads) {
-		
+		return;
 	}
 	
 

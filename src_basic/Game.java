@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import src_basic.Model.Scene.SceneManager;
 
 public class Game extends Application {
-	private SceneManager sceneManager;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -28,11 +27,13 @@ public class Game extends Application {
 	         
 	    GraphicsContext gc = canvas.getGraphicsContext2D();
 	    
-	    this.sceneManager = new SceneManager(gc);
+	    SceneManager sceneManager = new SceneManager(gc);
 		
 	    new AnimationTimer(){
 	        public void handle(long currentNanoTime){
-	        	
+	        	if (!sceneManager.tick()) {
+	        		return;
+	        	}
 	        }
 	    }.start();
 		

@@ -14,6 +14,9 @@ public class SceneManager {
 		
 		this.gameScene = new SceneGame(gc);
 		this.menuScene = new SceneMenu(gc);
+		
+		// A changer si on voudra commencer le jeu avec le menu
+		this.activeScene = this.gameScene;
 	}
 	
 	/**
