@@ -35,7 +35,6 @@ public class StarShip {
 	
 	public StarShip() {
 		this(Point2D.ZERO, Point2D.ZERO, 0, 0, 0.0);
-		
 	}
 	
 	

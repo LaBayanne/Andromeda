@@ -16,6 +16,13 @@ public class Squad{
 	public void add(StarShip starship) {
 		this.starships.add(starship);
 	}
-
+	/**
+	 * Set the positions of starship at the surface of the planet
+	 * @param planetRadius  Radius of the planet
+	 * @param planetPos		Position of the planet
+	 */
+	public void repartsStarships(double planetRadius, Point2D planetPos) {
+		//Penser à bien répartir les vaisseaux du bon côté de la planette
+	}
 	
 }
