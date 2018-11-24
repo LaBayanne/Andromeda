@@ -84,4 +84,8 @@ public class StarShip {
 		
 		this.setPosition(newPos);
 	}
+	
+	public Squad makeSquad() {
+		return null;
+	}
 }
