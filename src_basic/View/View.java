@@ -1,5 +1,5 @@
 package src_basic.View;
 
-interface View {
+public interface View {
 	public void tick();
 }

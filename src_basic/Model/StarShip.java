@@ -21,6 +21,7 @@ public class StarShip {
 	private double angle;//In °
 	private int damage;
 	private String className;
+	private Hitbox hitbox;
 	
 	public StarShip(Point2D position, Point2D destination,int speed, int damage, double angle) {
 		this.position = new Point2D(position.getX(), position.getY());
@@ -29,7 +30,7 @@ public class StarShip {
 		this.damage = damage;
 		this.angle = 0;
 		
-		this.className = "StarShip";
+		this.className = "StarShip"; // Besoin pour la création dynamique des startships
 	}
 	
 	
@@ -82,7 +83,7 @@ public class StarShip {
 	public void move() {
 		this.calculateNewAngle();
 		Point2D newPos = this.calculateNewPos();
-		//Checker si collision avec planete
+		//Checker si collision avec planete. Que faire s'il y a collision innatendue ?
 		
 		this.setPosition(newPos);
 	}
@@ -101,6 +102,6 @@ public class StarShip {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return squad;
 	}
 }

@@ -12,8 +12,8 @@ public class SceneManager {
 	public SceneManager(GraphicsContext gc) {
 		this.gc = gc;
 		
-		this.gameScene = new SceneGame();
-		this.menuScene = new SceneMenu();
+		this.gameScene = new SceneGame(gc);
+		this.menuScene = new SceneMenu(gc);
 	}
 	
 	/**
@@ -21,6 +21,6 @@ public class SceneManager {
 	 * @return true if the game continue, else false
 	 */
 	public boolean tick() {
-		return false;
+		return this.activeScene.tick();	//C'est pour ça que Scene nous est utile et que je l'ai remis
 	}
 }
