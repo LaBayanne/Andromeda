@@ -9,7 +9,7 @@ import src_basic.View.ViewGame;
 
 public class SceneGame implements Scene{
 	private GraphicsContext gc;
-	private View view;
+	private ViewGame view;
 	
 	ArrayList<Squad> squads;
 	ArrayList<Planet> planets;
@@ -22,10 +22,19 @@ public class SceneGame implements Scene{
 	
 	@Override
 	public boolean tick() {
+		this.view.tick(this);
 		return false;
 	}
 	
 	public void generatePlanets() {
 		
+	}
+	
+	public ArrayList<Planet> getPlanets() {
+		return this.planets;
+	}
+	
+	public ArrayList<Squad> getSquads() {
+		return this.squads;
 	}
 }
