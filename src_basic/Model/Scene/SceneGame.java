@@ -4,6 +4,7 @@ import src_basic.Model.*;
 import src_basic.View.*;
 import java.util.ArrayList;
 
+import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import src_basic.View.ViewGame;
 
@@ -17,7 +18,7 @@ public class SceneGame implements Scene{
 	
 	public SceneGame(GraphicsContext gc) {
 		this.gc = gc;
-		this.view = new ViewGame();
+		this.view = new ViewGame(gc);
 	}
 	
 	@Override

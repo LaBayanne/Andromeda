@@ -63,4 +63,8 @@ public class Planet {
 	public Point2D getOrigin() {
 		return new Point2D(this.origin.getX(), this.origin.getY());
 	}
+	
+	public double getRadius() {
+		return this.radius;
+	}
 }

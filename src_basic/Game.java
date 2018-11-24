@@ -9,8 +9,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import src_basic.Model.Scene.SceneManager;
 
 public class Game extends Application {
+	private SceneManager sceneManager;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -24,6 +27,8 @@ public class Game extends Application {
 	    root.getChildren().add( canvas );
 	         
 	    GraphicsContext gc = canvas.getGraphicsContext2D();
+	    
+	    this.sceneManager = new SceneManager(gc);
 		
 	    new AnimationTimer(){
 	        public void handle(long currentNanoTime){
