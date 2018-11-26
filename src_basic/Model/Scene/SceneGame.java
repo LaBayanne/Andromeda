@@ -30,9 +30,16 @@ public class SceneGame implements Scene{
 	}
 	
 	public boolean tick() {
+		this.moveSquad();
 		this.view.tick(this);
 		
 		return true;
+	}
+	
+	public void moveSquad() {
+		for (Squad squad: this.squads) {
+			squad.moveStarships();
+		}
 	}
 	
 	public void generatePlanets() {
@@ -44,7 +51,7 @@ public class SceneGame implements Scene{
 	}
 	
 	public void generateStarShip() {
-		StarShip s = new StarShip(new Point2D(0, 0), new Point2D(200, 200), 3, 0, 0);
+		StarShip s = new StarShip(new Point2D(100, 100), new Point2D(200, 200), 30, 0, 0);
 		Squad squad = new Squad(1);
 		squad.add(s);
 		

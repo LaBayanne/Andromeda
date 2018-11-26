@@ -30,4 +30,10 @@ public class Squad{
 		return this.starships;
 	}
 	
+	public void moveStarships() {
+		for (StarShip starship: this.starships) {
+			starship.move();
+		}
+	}
+	
 }

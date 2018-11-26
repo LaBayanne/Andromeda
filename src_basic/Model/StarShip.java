@@ -65,10 +65,14 @@ public class StarShip {
 	
 	
 	private void calculateNewAngle() {
-		double angleToDest = this.position.angle(destination);
+		double angleToDest = Math.toDegrees(Math.atan2(this.destination.getY() - this.position.getY(),  this.destination.getX() - this.position.getX()));
+		
+		
+		System.err.println("Destination : " + this.destination.getX() + " : " + this.destination.getY());
+		System.err.println("Angle to dest : " + angleToDest);
 		
 		if (Math.abs(angleToDest) > this.angleMax) {
-			this.angle += angleToDest/Math.abs(angleToDest) * angleMax;
+			this.angle += (angleToDest/Math.abs(angleToDest)) * angleMax;
 		} else {
 			this.angle += angleToDest;
 		}
@@ -86,10 +90,14 @@ public class StarShip {
 	
 	
 	public void move() {
+		System.err.println("Old angle : " + this.angle);
 		this.calculateNewAngle();
+		System.err.println("Calculate angle : " + this.angle);
 		Point2D newPos = this.calculateNewPos();
+		
 		//Checker si collision avec planete. Que faire s'il y a collision innatendue ?
 		
+		System.err.println("New ship pos : " + newPos.getX() + ":" + newPos.getY());
 		this.setPosition(newPos);
 	}
 	
