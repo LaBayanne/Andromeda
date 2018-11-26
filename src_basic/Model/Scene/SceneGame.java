@@ -51,9 +51,9 @@ public class SceneGame implements Scene{
 	}
 	
 	public void generateStarShip() {
-		StarShip s = new StarShip(new Point2D(0, 0), new Point2D(400, 400), 2, 0, 0);
-		Squad squad = new Squad(1);
-		squad.add(s);
+		Squad squad = new Squad(2);
+		squad.add(new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0));
+		squad.add(new StarShip(new Point2D(0, 200), new Point2D(700, 540), 1.3, 0, 0));
 		
 		System.err.println("Starship add to game.");
 		this.squads.add(squad);

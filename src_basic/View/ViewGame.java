@@ -40,7 +40,7 @@ public class ViewGame{
 	
 
 	public void tick(SceneGame game) {
-		this.gc.clearRect(0, 0, 920, 640); // PASSER EN PARAM
+		//this.gc.clearRect(0, 0, 920, 640); // PASSER EN PARAM
 		this.displayPlanets(game.getPlanets());
 		this.displaySquads(game.getSquads());
 	}

@@ -15,20 +15,20 @@ public class StarShip {
 	private static int width;
 	
 	static {
-		angleMax = 20.0;
-		height = 30;
-		width = 30;
+		angleMax = 10.0;
+		height = 10;
+		width = 10;
 	}
 	
 	private Point2D position;
 	private Point2D destination;
-	private int speed;
+	private double speed;
 	private double angle;//In °
 	private int damage;
 	private static String className;
 	private Hitbox hitbox;
 	
-	public StarShip(Point2D position, Point2D destination,int speed, int damage, double angle) {
+	public StarShip(Point2D position, Point2D destination,double speed, int damage, double angle) {
 		this.position = new Point2D(position.getX(), position.getY());
 		this.destination = new Point2D(destination.getX(), destination.getY());
 		this.speed = speed;
@@ -74,15 +74,15 @@ public class StarShip {
 		if (Math.abs(this.angle - angleToDest) > this.angleMax) {
 			this.angle += (angleToDest/Math.abs(angleToDest)) * angleMax;
 		} else {
-			this.angle += this.angle - angleToDest;
+			this.angle = this.angle - angleToDest;
 		}
 	}
 	
 	
 	private Point2D calculateNewPos() {
 		
-		double dx = Math.floor(this.speed * Math.cos(Math.toRadians(this.angle)));
-		double dy = Math.floor(this.speed * Math.sin(Math.toRadians(this.angle)));
+		double dx = Math.round(this.speed * Math.cos(Math.toRadians(this.angle)));
+		double dy = Math.round(this.speed * Math.sin(Math.toRadians(this.angle)));
 		
 		System.err.println("DX : " + dx + " DY : " + dy);
 		
