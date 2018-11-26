@@ -71,18 +71,20 @@ public class StarShip {
 		System.err.println("Destination : " + this.destination.getX() + " : " + this.destination.getY());
 		System.err.println("Angle to dest : " + angleToDest);
 		
-		if (Math.abs(angleToDest) > this.angleMax) {
+		if (Math.abs(this.angle - angleToDest) > this.angleMax) {
 			this.angle += (angleToDest/Math.abs(angleToDest)) * angleMax;
 		} else {
-			this.angle += angleToDest;
+			this.angle += this.angle - angleToDest;
 		}
 	}
 	
 	
 	private Point2D calculateNewPos() {
 		
-		double dx = this.speed * Math.cos(this.angle);
-		double dy = this.speed * Math.sin(this.angle);
+		double dx = Math.floor(this.speed * Math.cos(Math.toRadians(this.angle)));
+		double dy = Math.floor(this.speed * Math.sin(Math.toRadians(this.angle)));
+		
+		System.err.println("DX : " + dx + " DY : " + dy);
 		
 		Point2D newPos = new Point2D(this.position.getX() + dx, this.position.getY() + dy);
 		return newPos;
@@ -90,7 +92,7 @@ public class StarShip {
 	
 	
 	public void move() {
-		System.err.println("Old angle : " + this.angle);
+		System.err.println("\n\n\n\nOld angle : " + this.angle);
 		this.calculateNewAngle();
 		System.err.println("Calculate angle : " + this.angle);
 		Point2D newPos = this.calculateNewPos();
