@@ -3,9 +3,9 @@ package src_basic.Model.Scene;
 import javafx.scene.canvas.GraphicsContext;
 
 public class SceneManager {
-	private Scene activeScene;
-	private Scene gameScene;
-	private Scene menuScene;
+	private Scenery activeScene;
+	private Scenery gameScene;
+	private Scenery menuScene;
 	
 	private GraphicsContext gc;
 	

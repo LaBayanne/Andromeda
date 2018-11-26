@@ -12,6 +12,8 @@ public class Planet {
 	private int stock;
 	private int squadSize;
 	
+	private StarShip starshipModel;
+	
 	private int owner;
 	
 	public Planet() {
@@ -24,6 +26,7 @@ public class Planet {
 		
 		this.owner = 0;
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
+		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0);
 	}
 	
 	public Planet(Point2D origin, double radius, int productionSpeed, int owner) {
@@ -34,10 +37,18 @@ public class Planet {
 		this.stock = 0;
 		this.squadSize = 1;
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
+		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0);
 	}
 	
 	public int getNbUnitPerSquad() {
 		return Math.floorDiv(this.squadSize * this.stock, 100);
+	}
+	
+	public Squad generateSquad() {
+		
+		Squad squad = new Squad(10, this.starshipModel, this);
+		squad.repartsStarships();
+		return squad;
 	}
 	
 	// Return true if the new squadSize is correct

@@ -38,6 +38,16 @@ public class StarShip {
 		this.className = "StarShip"; // Besoin pour la création dynamique des startships
 	}
 	
+	public StarShip(StarShip starship) {
+		this.position = new Point2D(starship.getPosition().getX(), starship.getPosition().getY());
+		this.destination = new Point2D(starship.getDestination().getX(), starship.getDestination().getY());
+		this.speed = starship.getSpeed();
+		this.damage = starship.getDamage();
+		this.angle = 0;
+		
+		this.className = "StarShip";
+	}
+	
 	
 	public StarShip() {
 		this(Point2D.ZERO, Point2D.ZERO, 0, 0, 0.0);
@@ -50,7 +60,7 @@ public class StarShip {
 
 	// Plutôt faire une copie ?
 	public void setPosition(Point2D position) {
-		this.position = position;
+		this.position = new Point2D(position.getX(), position.getY());
 	}
 
 	
@@ -60,7 +70,7 @@ public class StarShip {
 
 	
 	public void setDestination(Point2D destination) {
-		this.destination = destination;
+		this.destination = new Point2D(destination.getX(), destination.getY());;
 	}
 	
 	
@@ -103,7 +113,10 @@ public class StarShip {
 		this.setPosition(newPos);
 	}
 	
-	public static Squad makeSquad(int nbUnit) {
+	
+	//Pourquoi mettre ça dans StarShip ? Ce n'est pas à l'unité de créer son escouade
+	
+	/*public static Squad makeSquad(int nbUnit) {
 		Squad squad = new Squad(nbUnit);
 		
 		for (int i = 0; i < nbUnit; i++) {
@@ -118,14 +131,11 @@ public class StarShip {
 			}
 		}
 		return squad;
-	}
+	}*/
 
-	public static int getWidth() {
-		return width;
-	}
-
-	public static int getHeight() {
-		return height;
-	}
+	public static int getWidth() {return width;}
+	public static int getHeight() {return height;}
+	public static int getSpeed() {return width;}
+	public static int getDamage() {return height;}
 
 }

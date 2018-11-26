@@ -22,7 +22,11 @@ public class ViewGame{
 		
 		for (Planet planet : planets) {
 			Point2D where = planet.getOrigin();
-			this.gc.fillOval(where.getX(), where.getY(), planet.getRadius(), planet.getRadius());
+			this.gc.setFill(Color.web("#4bf221"));
+			this.gc.fillOval(where.getX(), where.getY(), planet.getRadius() * 2, planet.getRadius() * 2);
+			this.gc.setFill(Color.web("#ff0405"));
+			this.gc.fillOval(where.getX(), where.getY(), 5, 5);
+			this.gc.fillOval(where.getX() + planet.getRadius(), where.getY() + planet.getRadius(), 5, 5);
 		}
 	    
 	}
@@ -40,7 +44,7 @@ public class ViewGame{
 	
 
 	public void tick(SceneGame game) {
-		//this.gc.clearRect(0, 0, 920, 640); // PASSER EN PARAM
+		this.gc.clearRect(0, 0, 920, 640); // PASSER EN PARAM
 		this.displayPlanets(game.getPlanets());
 		this.displaySquads(game.getSquads());
 	}
