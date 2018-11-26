@@ -32,25 +32,24 @@ public class Squad{
 		double x, y;
 		double xCenter = this.planetOrigin.getOrigin().getX() + this.planetOrigin.getRadius();
 		double yCenter = this.planetOrigin.getOrigin().getY() + this.planetOrigin.getRadius();
-		System.err.println("Origin : " + xCenter + "," + yCenter);
+		
+		int restUnit = 0;
+		if(this.nbUnit > 360) {
+			restUnit = this.nbUnit - 360;
+			this.nbUnit = 360;
+		}
 		double angle = 0;
-		double angleDist = 360 / this.nbUnit;
-		int nbStarshipGenerated = 0;
+		double angleDist = 360.0 / this.nbUnit;
+		
 		for(int i = 0; i < this.nbUnit; i++) {
 			
-			x = xCenter + this.planetOrigin.getRadius() * Math.cos(angle * 3.14 / 180);
-			y = yCenter + this.planetOrigin.getRadius() * Math.sin(angle * 3.14 / 180);
-			System.err.println("Pos : " + x + "," + y);
+			x = xCenter + (this.planetOrigin.getRadius() + 5) * Math.cos(angle * 3.14 / 180);
+			y = yCenter + (this.planetOrigin.getRadius() + 5) * Math.sin(angle * 3.14 / 180);
 			this.starshipModel.setPosition(new Point2D(x, y));
 			this.starships.add(new StarShip(this.starshipModel));
 			angle += angleDist;
-			nbStarshipGenerated ++;
-			if(angle > 360) {
-				
-				break;
-			}
 		}
-		return this.nbUnit - nbStarshipGenerated;
+		return restUnit;
 	}
 
 	public ArrayList<StarShip> getStarships() {

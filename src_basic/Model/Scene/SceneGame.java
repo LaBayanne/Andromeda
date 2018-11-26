@@ -26,13 +26,15 @@ public class SceneGame implements Scenery{
 		this.selectedPlanets = new ArrayList<Planet>();
 		
 		this.generatePlanets();
-		for(Planet planet:this.planets) {
-			this.squads.add(planet.generateSquad());
-		}
+		
 	}
 	
 	public boolean tick() {
 		this.moveSquad();
+		for(Planet planet:this.planets) {
+			if(planet.getNbStarshipToGenerate() > 0)
+				this.squads.add(planet.generateSquad());
+		}
 		this.view.tick(this);
 		
 		return true;

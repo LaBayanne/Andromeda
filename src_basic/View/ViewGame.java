@@ -24,9 +24,6 @@ public class ViewGame{
 			Point2D where = planet.getOrigin();
 			this.gc.setFill(Color.web("#4bf221"));
 			this.gc.fillOval(where.getX(), where.getY(), planet.getRadius() * 2, planet.getRadius() * 2);
-			this.gc.setFill(Color.web("#ff0405"));
-			this.gc.fillOval(where.getX(), where.getY(), 5, 5);
-			this.gc.fillOval(where.getX() + planet.getRadius(), where.getY() + planet.getRadius(), 5, 5);
 		}
 	    
 	}
