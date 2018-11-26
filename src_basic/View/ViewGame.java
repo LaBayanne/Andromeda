@@ -27,8 +27,8 @@ public class ViewGame{
 	    
 	}
 
-	public void displaySquad(ArrayList<Squad> squads) {
-		this.gc.setFill(Color.web("#ff0000"));
+	public void displaySquads(ArrayList<Squad> squads) {
+		this.gc.setFill(Color.web("#ff0405"));
 
 		for (Squad squad: squads) {
 			for (StarShip startship: squad.getStarships()) {
@@ -36,10 +36,6 @@ public class ViewGame{
 				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
 			}
 		}
-	}
-	
-	public void displaySquads(ArrayList<Squad> squads) {
-		return;
 	}
 	
 

@@ -26,9 +26,9 @@ public class SceneGame implements Scene{
 		this.selectedPlanets = new ArrayList<Planet>();
 		
 		this.generatePlanets();
+		this.generateStarShip();
 	}
 	
-	@Override
 	public boolean tick() {
 		this.view.tick(this);
 		
@@ -41,6 +41,15 @@ public class SceneGame implements Scene{
  
 		this.planets.add(new Planet(new Point2D(600, 200), 170, 0, 0));
 		this.planets.add(new Planet(new Point2D(300, 150), 90, 0, 0));
+	}
+	
+	public void generateStarShip() {
+		StarShip s = new StarShip(new Point2D(0, 0), new Point2D(200, 200), 3, 0, 0);
+		Squad squad = new Squad(1);
+		squad.add(s);
+		
+		System.err.println("Starship add to game.");
+		this.squads.add(squad);
 	}
 	
 	public ArrayList<Planet> getPlanets() {

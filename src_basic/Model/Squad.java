@@ -11,6 +11,7 @@ public class Squad{
 	
 	public Squad(int nbUnit) {
 		this.nbUnit = nbUnit;
+		this.starships = new ArrayList<StarShip>();
 	}
 
 	public void add(StarShip starship) {

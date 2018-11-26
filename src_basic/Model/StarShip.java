@@ -25,7 +25,7 @@ public class StarShip {
 	private int speed;
 	private double angle;//In °
 	private int damage;
-	private String className;
+	private static String className;
 	private Hitbox hitbox;
 	
 	public StarShip(Point2D position, Point2D destination,int speed, int damage, double angle) {
@@ -93,12 +93,12 @@ public class StarShip {
 		this.setPosition(newPos);
 	}
 	
-	public Squad makeSquad(int nbUnit) {
+	public static Squad makeSquad(int nbUnit) {
 		Squad squad = new Squad(nbUnit);
 		
 		for (int i = 0; i < nbUnit; i++) {
 			try {
-				squad.add((StarShip) Class.forName(this.className).newInstance());
+				squad.add((StarShip) Class.forName(className).newInstance());
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {

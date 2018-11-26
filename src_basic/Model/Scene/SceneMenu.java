@@ -12,7 +12,6 @@ public class SceneMenu implements Scene {
 		this.view = new ViewMenu(gc);
 	}
 	
-	@Override
 	public boolean tick() {
 		this.view.tick();
 		return false;
