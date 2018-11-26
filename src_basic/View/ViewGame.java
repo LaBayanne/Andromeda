@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import src_basic.Model.Planet;
 import src_basic.Model.Squad;
+import src_basic.Model.StarShip;
 import src_basic.Model.Scene.SceneGame;
 
 public class ViewGame{
@@ -24,6 +25,17 @@ public class ViewGame{
 			this.gc.fillOval(where.getX(), where.getY(), planet.getRadius(), planet.getRadius());
 		}
 	    
+	}
+
+	public void displaySquad(ArrayList<Squad> squads) {
+		this.gc.setFill(Color.web("#ff0000"));
+
+		for (Squad squad: squads) {
+			for (StarShip startship: squad.getStarships()) {
+				Point2D where = startship.getPosition();
+				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
+			}
+		}
 	}
 	
 	public void displaySquads(ArrayList<Squad> squads) {

@@ -11,8 +11,13 @@ import javafx.geometry.*;
 public class StarShip {
 	private static double angleMax;
 	
+	private static int height;
+	private static int width;
+	
 	static {
 		angleMax = 20.0;
+		height = 30;
+		width = 30;
 	}
 	
 	private Point2D position;
@@ -104,4 +109,13 @@ public class StarShip {
 		}
 		return squad;
 	}
+
+	public static int getWidth() {
+		return width;
+	}
+
+	public static int getHeight() {
+		return height;
+	}
+
 }

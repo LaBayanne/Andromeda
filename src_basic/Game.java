@@ -27,7 +27,7 @@ public class Game extends Application {
 	         
 	    GraphicsContext gc = canvas.getGraphicsContext2D();
 	    
-	    SceneManager sceneManager = new SceneManager(gc);
+	    final SceneManager sceneManager = new SceneManager(gc);
 		
 	    new AnimationTimer(){
 	        public void handle(long currentNanoTime){

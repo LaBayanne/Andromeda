@@ -24,5 +24,9 @@ public class Squad{
 	public void repartsStarships(double planetRadius, Point2D planetPos) {
 		//Penser à bien répartir les vaisseaux du bon côté de la planette
 	}
+
+	public ArrayList<StarShip> getStarships() {
+		return this.starships;
+	}
 	
 }
