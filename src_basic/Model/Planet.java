@@ -18,6 +18,9 @@ public class Planet {
 	
 	private int nbStarshipToGenerate;
 	
+	private double timerMax;
+	private double timer;
+	
 	public Planet() {
 		this.origin = new Point2D(0, 0);
 		this.radius = 0;
@@ -30,7 +33,9 @@ public class Planet {
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
 		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0);
 		
-		this.nbStarshipToGenerate = 30;
+		this.nbStarshipToGenerate = 60;
+		this.timerMax = 60;
+		this.timer = 0;
 	}
 	
 	public Planet(Point2D origin, double radius, int productionSpeed, int owner) {
@@ -42,7 +47,9 @@ public class Planet {
 		this.squadSize = 1;
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
 		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0);
-		this.nbStarshipToGenerate = 30;
+		this.nbStarshipToGenerate = 60;
+		this.timerMax = 60;
+		this.timer = 0;
 	}
 	
 	public int getNbUnitPerSquad() {
@@ -50,6 +57,7 @@ public class Planet {
 	}
 	
 	public Squad generateSquad() {
+		reloadTimer();
 		Squad squad = new Squad(this.nbStarshipToGenerate, this.starshipModel, this);
 		this.nbStarshipToGenerate = squad.repartsStarships();
 		return squad;
@@ -67,6 +75,16 @@ public class Planet {
 		this.squadSize = newSize;
 		
 		return true;
+	}
+	
+	public double decreaseTimer() {
+		if(this.timer > 0)
+			this.timer -= 1;
+		return this.timer;
+	}
+	
+	public void reloadTimer() {
+		this.timer = this.timerMax;
 	}
 	
 	public void setOwner(int owner) {

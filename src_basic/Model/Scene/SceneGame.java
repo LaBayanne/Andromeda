@@ -32,7 +32,7 @@ public class SceneGame implements Scenery{
 	public boolean tick() {
 		this.moveSquad();
 		for(Planet planet:this.planets) {
-			if(planet.getNbStarshipToGenerate() > 0)
+			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0)
 				this.squads.add(planet.generateSquad());
 		}
 		this.view.tick(this);
@@ -42,7 +42,7 @@ public class SceneGame implements Scenery{
 	
 	public void moveSquad() {
 		for (Squad squad: this.squads) {
-			//squad.moveStarships();
+			squad.moveStarships();
 		}
 	}
 	
@@ -52,6 +52,7 @@ public class SceneGame implements Scenery{
  
 		this.planets.add(new Planet(new Point2D(600, 200), 85, 0, 0));
 		this.planets.add(new Planet(new Point2D(300, 150), 45, 0, 0));
+		this.planets.add(new Planet(new Point2D(500, 350), 20, 0, 0));
 	}
 		
 	

@@ -23,28 +23,31 @@ public class Squad{
 		this.starships.add(starship);
 	}
 	/**
-	 * Set the positions of starship at the surface of the planet
-	 * @param planetRadius  Radius of the planet
-	 * @param planetPos		Position of the planet
+	 * 
+	 * @return
 	 */
 	public int repartsStarships() {
-		//Penser à bien répartir les vaisseaux du bon côté de la planette
+		
 		double x, y;
 		double xCenter = this.planetOrigin.getOrigin().getX() + this.planetOrigin.getRadius();
 		double yCenter = this.planetOrigin.getOrigin().getY() + this.planetOrigin.getRadius();
-		
+		double radius = this.planetOrigin.getRadius();
 		int restUnit = 0;
-		if(this.nbUnit > 360) {
-			restUnit = this.nbUnit - 360;
-			this.nbUnit = 360;
+		double perimeter = 2 * 3.14 * radius;
+		int width = this.starshipModel.getWidth();
+		int height = this.starshipModel.getHeight();
+		
+		if(this.nbUnit * width > perimeter) {
+			restUnit = (int)(this.nbUnit * width - perimeter) / width;
+			this.nbUnit = (int)perimeter / width;
 		}
 		double angle = 0;
 		double angleDist = 360.0 / this.nbUnit;
 		
 		for(int i = 0; i < this.nbUnit; i++) {
 			
-			x = xCenter + (this.planetOrigin.getRadius() + 5) * Math.cos(angle * 3.14 / 180);
-			y = yCenter + (this.planetOrigin.getRadius() + 5) * Math.sin(angle * 3.14 / 180);
+			x = xCenter + (radius + width) * Math.cos(angle * 3.14 / 180) - height / 2;
+			y = yCenter + (radius + height) * Math.sin(angle * 3.14 / 180) - height / 2;
 			this.starshipModel.setPosition(new Point2D(x, y));
 			this.starships.add(new StarShip(this.starshipModel));
 			angle += angleDist;
