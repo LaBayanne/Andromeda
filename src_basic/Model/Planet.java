@@ -91,6 +91,14 @@ public class Planet {
 		this.owner = owner;
 	}
 	
+	public Hitbox getHitbox() {
+		return this.hitbox;
+	}
+	
+	public void setOrigin(Point2D point) {
+		this.origin = new Point2D(point.getX(), point.getY());
+	}
+	
 	public int getStock() {
 		return this.stock;
 	}

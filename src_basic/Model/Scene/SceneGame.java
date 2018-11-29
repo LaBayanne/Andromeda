@@ -34,6 +34,14 @@ public class SceneGame implements Scenery{
 		for(Planet planet:this.planets) {
 			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0)
 				this.squads.add(planet.generateSquad());
+			for(Squad squad: this.squads) {
+				for(StarShip starship: squad.getStarships()) {
+					if(planet.getHitbox().collision(starship.getHitbox())) {
+						starship.setPosition(new Point2D(50, 50));
+					}
+				}
+			}
+			
 		}
 		this.view.tick(this);
 		

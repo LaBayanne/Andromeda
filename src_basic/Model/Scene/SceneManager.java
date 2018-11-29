@@ -4,8 +4,9 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class SceneManager {
 	private Scenery activeScene;
-	private Scenery gameScene;
+	private SceneGame gameScene;
 	private Scenery menuScene;
+	private boolean continueGame;
 	
 	private GraphicsContext gc;
 	
@@ -17,6 +18,11 @@ public class SceneManager {
 		
 		// A changer si on voudra commencer le jeu avec le menu
 		this.activeScene = this.gameScene;
+		this.continueGame = true;
+	}
+	
+	public void inputEscape() {
+		this.continueGame = false;
 	}
 	
 	/**
@@ -24,6 +30,8 @@ public class SceneManager {
 	 * @return true if the game continue, else false
 	 */
 	public boolean tick() {
+		if(!this.continueGame)
+			return false;
 		return this.activeScene.tick();	//C'est pour ça que Scene nous est utile et que je l'ai remis
 	}
 }

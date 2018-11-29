@@ -1,6 +1,7 @@
 package src_basic.Model;
 
-import javafx.geometry.*;
+import javafx.geometry.Point2D;
+import javafx.scene.shape.Rectangle;
 
 /**
  * 
@@ -34,6 +35,7 @@ public class StarShip {
 		this.speed = speed;
 		this.damage = damage;
 		this.angle = 0;
+		this.hitbox = this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
 		
 		this.className = "StarShip"; // Besoin pour la création dynamique des startships
 	}
@@ -44,6 +46,7 @@ public class StarShip {
 		this.speed = starship.getSpeed();
 		this.damage = starship.getDamage();
 		this.angle = 0;
+		this.hitbox = this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
 		
 		this.className = "StarShip";
 	}
@@ -133,6 +136,9 @@ public class StarShip {
 		return squad;
 	}*/
 
+	public Hitbox getHitbox() {
+		return this.hitbox;
+	}
 	public static int getWidth() {return width;}
 	public static int getHeight() {return height;}
 	public static int getSpeed() {return width;}

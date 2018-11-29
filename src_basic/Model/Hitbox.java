@@ -14,4 +14,16 @@ public class Hitbox{
 	public Hitbox(Circle circle) {
 		this.shape = new Circle(circle.getCenterX(), circle.getCenterY(), circle.getRadius());
 	}
+	
+	public boolean collision(Hitbox hitbox) {
+		return hitbox.getShape().getBoundsInParent().intersects(this.shape.getBoundsInParent());
+	}
+	
+	public boolean collision(Shape shape) {
+		return shape.getBoundsInParent().intersects(this.shape.getBoundsInParent());
+	}
+	
+	public Shape getShape() {
+		return this.shape;
+	}
 }
