@@ -24,6 +24,10 @@ public class ViewGame{
 			Point2D where = planet.getOrigin();
 			this.gc.setFill(Color.web("#4bf221"));
 			this.gc.fillOval(where.getX(), where.getY(), planet.getRadius() * 2, planet.getRadius() * 2);
+			this.gc.setFill(Color.web("#ff0000"));
+			
+			//+7 cst magiques à changer en fonction de la taille de la police
+			this.gc.fillText(Integer.toString(planet.getStock()), where.getX() + planet.getRadius() - 7, where.getY() + planet.getRadius() + 7);
 		}
 	    
 	}

@@ -35,6 +35,7 @@ public class Game extends Application {
 		
 	    new AnimationTimer(){
 	        public void handle(long currentNanoTime){
+	        	
 	        	if (!sceneManager.tick()) {
 	        		this.stop();
 	        		System.exit(0);
