@@ -76,28 +76,22 @@ public class StarShip {
 		this.destination = new Point2D(destination.getX(), destination.getY());;
 	}
 	
+	public void setDestination(Planet destinationPlanet) {
+		Point2D destination = destinationPlanet.getOrigin();
+		this.setDestination(destination);
+	}
 	
-	private void calculateNewAngle() {
-		double angleToDest = Math.toDegrees(Math.atan2(this.destination.getY() - this.position.getY(),  this.destination.getX() - this.position.getX()));
-		
-		
-		System.err.println("Destination : " + this.destination.getX() + " : " + this.destination.getY());
-		System.err.println("Angle to dest : " + angleToDest);
-		
-		if (Math.abs(this.angle - angleToDest) > this.angleMax) {
-			this.angle += (angleToDest/Math.abs(angleToDest)) * angleMax;
-		} else {
-			this.angle = this.angle - angleToDest;
-		}
+	private double angleToDestination() {
+		return Math.toDegrees(Math.atan2(this.destination.getY() - this.position.getY(),  this.destination.getX() - this.position.getX()));
 	}
 	
 	
 	private Point2D calculateNewPos() {
 		
-		double dx = Math.round(this.speed * Math.cos(Math.toRadians(this.angle)));
-		double dy = Math.round(this.speed * Math.sin(Math.toRadians(this.angle)));
+		double angle = this.angleToDestination();
 		
-		System.err.println("DX : " + dx + " DY : " + dy);
+		double dx = this.speed * Math.cos(Math.toRadians(angle));
+		double dy = this.speed * Math.sin(Math.toRadians(angle));
 		
 		Point2D newPos = new Point2D(this.position.getX() + dx, this.position.getY() + dy);
 		return newPos;
@@ -105,43 +99,24 @@ public class StarShip {
 	
 	
 	public void move() {
-		System.err.println("\n\n\n\nOld angle : " + this.angle);
-		this.calculateNewAngle();
-		System.err.println("Calculate angle : " + this.angle);
 		Point2D newPos = this.calculateNewPos();
 		
 		//Checker si collision avec planete. Que faire s'il y a collision innatendue ?
-		
-		System.err.println("New ship pos : " + newPos.getX() + ":" + newPos.getY());
+
 		this.setPosition(newPos);
 	}
-	
-	
-	//Pourquoi mettre ça dans StarShip ? Ce n'est pas à l'unité de créer son escouade
-	
-	/*public static Squad makeSquad(int nbUnit) {
-		Squad squad = new Squad(nbUnit);
-		
-		for (int i = 0; i < nbUnit; i++) {
-			try {
-				squad.add((StarShip) Class.forName(className).newInstance());
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		return squad;
-	}*/
+
 
 	public Hitbox getHitbox() {
 		return this.hitbox;
 	}
+
+		//Vont-elles rester statique lorsque l'on aura plusieurs types de vaisseaux ?
+
 	public static int getWidth() {return width;}
 	public static int getHeight() {return height;}
-	public static int getSpeed() {return width;}
-	public static int getDamage() {return height;}
+	
+	public double getSpeed() {return this.speed;}
+	public int getDamage() {return height;}
 
 }
