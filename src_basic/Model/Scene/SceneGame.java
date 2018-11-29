@@ -42,11 +42,14 @@ public class SceneGame implements Scenery{
 	////end user events
 	
 	public boolean tick() {
+		
 		this.moveSquad();
 		for(Planet planet:this.planets) {
+			
+			planet.actualiseStock();	//Augment the planet's stock
+			
 			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0)
 				this.squads.add(planet.generateSquad());
-			
 		}
 		this.view.tick(this);
 		
@@ -60,12 +63,13 @@ public class SceneGame implements Scenery{
 	}
 	
 	public void generatePlanets() {
-		this.planets.add(new Planet(new Point2D(200, 500), 50, 0, 0));
-		this.planets.add(new Planet(new Point2D(600, 200), 85, 0, 0));
-		this.planets.add(new Planet(new Point2D(300, 150), 45, 0, 0));
-		this.planets.add(new Planet(new Point2D(500, 350), 20, 0, 0));
-		this.planets.add(new Planet(new Point2D(750, 300), 35, 0, 0));
-		this.planets.add(new Planet(new Point2D(800, 475), 60, 0, 0));
+		// public Planet(Point2D origin, double radius, int productionSpeed, int owner)
+		this.planets.add(new Planet(new Point2D(200, 500), 50, 0.04, 0));
+		this.planets.add(new Planet(new Point2D(600, 200), 85, 0.01, 0));
+		this.planets.add(new Planet(new Point2D(300, 150), 45, 0.02, 0));
+		this.planets.add(new Planet(new Point2D(500, 350), 20, 0.03, 0));
+		this.planets.add(new Planet(new Point2D(750, 300), 35, 0.02, 0));
+		this.planets.add(new Planet(new Point2D(800, 475), 60, 0.01, 0));
 	}
 		
 	
