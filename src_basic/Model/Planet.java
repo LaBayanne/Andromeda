@@ -33,7 +33,7 @@ public class Planet {
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
 		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0);
 		
-		this.nbStarshipToGenerate = 60;
+		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
 	}
@@ -47,13 +47,18 @@ public class Planet {
 		this.squadSize = 1;
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
 		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0);
-		this.nbStarshipToGenerate = 60;
+		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
 	}
 	
+	public void prepareAttack() {
+		this.nbStarshipToGenerate += getNbUnitPerSquad();
+	}
+	
 	public int getNbUnitPerSquad() {
-		return Math.floorDiv(this.squadSize * this.stock, 100);
+		return 20;
+		//return Math.floorDiv(this.squadSize * this.stock, 100);
 	}
 	
 	public Squad generateSquad() {

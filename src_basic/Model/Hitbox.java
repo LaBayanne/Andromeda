@@ -1,5 +1,6 @@
 package src_basic.Model;
 
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -21,6 +22,10 @@ public class Hitbox{
 	
 	public boolean collision(Shape shape) {
 		return shape.getBoundsInParent().intersects(this.shape.getBoundsInParent());
+	}
+	
+	public boolean collision(Point2D point) {
+		return this.shape.contains(point);
 	}
 	
 	public Shape getShape() {

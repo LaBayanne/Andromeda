@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import src_basic.Model.Scene.SceneManager;
 
 public class Controller{
@@ -35,7 +36,21 @@ public class Controller{
                     String code = e.getCode().toString();
                     input.remove( code );
                 }
-            });               
+            });
+        
+        scene.setOnMouseClicked(
+            new EventHandler<MouseEvent>()
+            {
+                public void handle(MouseEvent e)
+                {
+                	
+                	mouseClicked(e.getX(), e.getY());
+                }
+            });
+	}	
+	
+	public void mouseClicked(double x, double y) {
+		this.sceneManager.mouseClicked(x, y);
 	}
 	
 	public void tick() {

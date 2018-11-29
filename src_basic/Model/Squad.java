@@ -29,8 +29,8 @@ public class Squad{
 	public int repartsStarships() {
 		
 		double x, y;
-		double xCenter = this.planetOrigin.getOrigin().getX() + this.planetOrigin.getRadius();
-		double yCenter = this.planetOrigin.getOrigin().getY() + this.planetOrigin.getRadius();
+		double xCenter = this.planetOrigin.getOrigin().getX();
+		double yCenter = this.planetOrigin.getOrigin().getY();
 		double radius = this.planetOrigin.getRadius();
 		int restUnit = 0;
 		double perimeter = 2 * 3.14 * radius;

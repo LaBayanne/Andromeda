@@ -16,4 +16,8 @@ public class SceneMenu implements Scenery {
 		this.view.tick();
 		return false;
 	}
+	
+	public void mouseClicked(double x, double y) {
+		
+	}
 }

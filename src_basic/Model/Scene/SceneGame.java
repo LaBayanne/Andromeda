@@ -29,18 +29,23 @@ public class SceneGame implements Scenery{
 		
 	}
 	
+	//////User events
+	
+	public void mouseClicked(double x, double y) {
+		for(Planet planet:this.planets) {
+			if(planet.getHitbox().collision(new Point2D(x, y))) {
+				planet.prepareAttack();
+			}
+		}
+	}
+	
+	////end user events
+	
 	public boolean tick() {
 		this.moveSquad();
 		for(Planet planet:this.planets) {
 			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0)
 				this.squads.add(planet.generateSquad());
-			for(Squad squad: this.squads) {
-				for(StarShip starship: squad.getStarships()) {
-					if(planet.getHitbox().collision(starship.getHitbox())) {
-						starship.setPosition(new Point2D(50, 50));
-					}
-				}
-			}
 			
 		}
 		this.view.tick(this);
@@ -55,12 +60,12 @@ public class SceneGame implements Scenery{
 	}
 	
 	public void generatePlanets() {
-		// public Planet(Point2D origin, double radius, int productionSpeed, int owner)
 		this.planets.add(new Planet(new Point2D(200, 500), 50, 0, 0));
- 
 		this.planets.add(new Planet(new Point2D(600, 200), 85, 0, 0));
 		this.planets.add(new Planet(new Point2D(300, 150), 45, 0, 0));
 		this.planets.add(new Planet(new Point2D(500, 350), 20, 0, 0));
+		this.planets.add(new Planet(new Point2D(750, 300), 35, 0, 0));
+		this.planets.add(new Planet(new Point2D(800, 475), 60, 0, 0));
 	}
 		
 	
