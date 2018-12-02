@@ -1,6 +1,9 @@
 package src_basic.Model;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -21,8 +24,11 @@ public class StarShip {
 		width = 10;
 	}
 	
+	private ArrayList<Point2D> path;
+	
 	private Point2D position;
 	private Point2D destination;
+	private Planet destinationPlanet;
 	private double speed;
 	private double angle;//In °
 	private int damage;
@@ -79,10 +85,16 @@ public class StarShip {
 	public void setDestination(Planet destinationPlanet) {
 		Point2D destination = destinationPlanet.getOrigin();
 		this.setDestination(destination);
+		
+		this.destinationPlanet = destinationPlanet;
+	}
+	
+	private double angleToPoint(Point2D position, Point2D destination) {
+		return Math.toDegrees(Math.atan2(destination.getY() - position.getY(), destination.getX() - position.getX()));
 	}
 	
 	private double angleToDestination() {
-		return Math.toDegrees(Math.atan2(this.destination.getY() - this.position.getY(),  this.destination.getX() - this.position.getX()));
+		return this.angleToPoint(this.position, this.destination);
 	}
 	
 	
@@ -109,6 +121,61 @@ public class StarShip {
 
 	public Hitbox getHitbox() {
 		return this.hitbox;
+	}
+	
+	public Planet isPlanetCollision(ArrayList<Planet> planets, Point2D position) {
+		Line l = new Line(position.getX(), position.getY(), this.destination.getX(), this.destination.getY());
+		
+		for (Planet planet:planets) {
+			if (planet.getHitbox().collision(l)) {
+				return planet;
+			}
+		}
+		
+		return null;
+	}
+	
+	public void findPath(ArrayList<Planet> planets, Point2D position) {
+		Planet block = this.isPlanetCollision(planets, position);
+		
+		if (block == null) {
+			this.path.add(this.destination);
+		} else {
+			double angleToPlanet = this.angleToPoint(position, block.getOrigin());
+			double distanceToPlanet = position.distance(block.getOrigin());
+			
+			int diff = 1;
+			Point2D newDest;
+			//Très très moche
+			while (diff < 360) {
+			newDest = new Point2D(
+					position.getX() + distanceToPlanet * Math.cos(angleToPlanet + diff),
+					position.getY() + distanceToPlanet * Math.sin(angleToPlanet + diff)
+				);
+			
+			if (this.isPlanetCollision(planets, newDest) == null) {
+				this.path.add(new Point2D(newDest.getX(), newDest.getY()));
+				this.findPath(planets, newDest);
+				return;
+			}
+			
+			newDest = new Point2D(
+					position.getX() + distanceToPlanet * Math.cos(angleToPlanet - diff),
+					position.getY() + distanceToPlanet * Math.sin(angleToPlanet - diff)
+				);
+			
+			if (this.isPlanetCollision(planets, newDest) == null) {
+				this.path.add(new Point2D(newDest.getX(), newDest.getY()));
+				this.findPath(planets, newDest);
+				return;
+			}
+			
+			diff += 1;
+			}
+			
+		}
+		
+		
 	}
 
 		//Vont-elles rester statique lorsque l'on aura plusieurs types de vaisseaux ?
