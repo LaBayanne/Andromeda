@@ -114,7 +114,7 @@ public class StarShip {
 	
 	
 	public void move() {
-		if (this.position.distance(this.destination) < 20) {
+		if (this.position.distance(this.destination) < 5) {
 			if (this.path.isEmpty()) {
 				return;
 			} else {
@@ -157,69 +157,60 @@ public class StarShip {
 		if (block == null) {
 			//Si ce n'est pas le cas, on ajout la destination dans path, l'array qui contient toutes les destinations intermédiaires et on quitte
 			this.path.add(this.destination);
-			return;
 		} else {
 			
 			double angleToPlanet = this.angleToPoint(position, this.destination);
-			double distanceToPlanet = position.distance(block.getOrigin());
+			double distance = 10; //Distance jusqu'au prochain point
 			
 			boolean alreadySeen = false;
 			int diff = 1;
 			Point2D newDest;
-			//Très très moche
+			
+			//On cherche un point qui nous rapproche de la destination mais sans rencontrer de planete depuis notre position jusqu'à ce point
 			while (diff < 360) {
 				alreadySeen = false;
-				System.err.println("\n\nTesting with diff " + diff);
 				
 				newDest = new Point2D(
-					position.getX() + distanceToPlanet * Math.cos(Math.toRadians(angleToPlanet + diff)),
-					position.getY() + distanceToPlanet * Math.sin(Math.toRadians(angleToPlanet + diff))
+					position.getX() + distance * Math.cos(Math.toRadians(angleToPlanet + diff)),
+					position.getY() + distance * Math.sin(Math.toRadians(angleToPlanet + diff))
+				);
+				
+				//On vérifie qu'on n'est pas déjà passé par ce point, si oui on passe
+				for (Point2D p:this.path) {
+					if (p.getX() == newDest.getX() && p.getX() == newDest.getX()) {
+						alreadySeen = true;
+					}
+				}
+				if (!alreadySeen) {
+					if (this.isPlanetCollision(planets, position, newDest) == null) {
+						this.path.add(new Point2D(newDest.getX(), newDest.getY()));
+						this.findPath(planets, newDest);
+						return;
+					}
+				}
+				alreadySeen = false;
+				
+				//Même chose mais dans l'autre sens
+				newDest = new Point2D(
+					position.getX() + distance * Math.cos(Math.toRadians(angleToPlanet - diff)),
+					position.getY() + distance * Math.sin(Math.toRadians(angleToPlanet - diff))
 				);
 				for (Point2D p:this.path) {
 					if (p.getX() == newDest.getX() && p.getX() == newDest.getX()) {
 						alreadySeen = true;
-						break;
 					}
 				}
-				if (alreadySeen) {
-					diff += 1;
-					continue;
+				if (!alreadySeen) {
+					if (this.isPlanetCollision(planets, position, newDest) == null) {
+						this.path.add(new Point2D(newDest.getX(), newDest.getY()));
+						this.findPath(planets, newDest);
+						return;
+					}
 				}
-			System.err.println("Testing with pos " + newDest.getX() + " " + newDest.getY());
-			if (this.isPlanetCollision(planets, position, newDest) == null) {
-				this.path.add(new Point2D(newDest.getX(), newDest.getY()));
-				this.findPath(planets, newDest);
-				return;
-			}
 			
-			newDest = new Point2D(
-					position.getX() + distanceToPlanet * Math.cos(Math.toRadians(angleToPlanet - diff)),
-					position.getY() + distanceToPlanet * Math.sin(Math.toRadians(angleToPlanet - diff))
-				);
-			for (Point2D p:this.path) {
-				if (p.getX() == newDest.getX() && p.getX() == newDest.getX()) {
-					alreadySeen = true;
-					break;
-				}
-			}
-			if (alreadySeen) {
 				diff += 1;
-				continue;
 			}
-			
-			System.err.println("Testing with pos " + newDest.getX() + " " + newDest.getY());
-			if (this.isPlanetCollision(planets, position, newDest) == null) {
-				this.path.add(new Point2D(newDest.getX(), newDest.getY()));
-				this.findPath(planets, newDest);
-				return;
-			}
-			
-			diff += 1;
-			}
-			
 		}
-		
-		
 	}
 
 		//Vont-elles rester statique lorsque l'on aura plusieurs types de vaisseaux ?
