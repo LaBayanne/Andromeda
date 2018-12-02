@@ -118,7 +118,7 @@ public class StarShip {
 			if (this.path.isEmpty()) {
 				return;
 			} else {
-				this.destination = this.path.get(0);
+				this.setDestination(this.path.get(0));
 				this.path.remove(0);
 			}
 		}
@@ -139,6 +139,7 @@ public class StarShip {
 		
 		for (Planet planet:planets) {
 			if (planet.getHitbox().collision(l)) {
+				// System.err.println("COLLISION DETECTED !");
 				return planet;
 			}
 		}
@@ -148,9 +149,11 @@ public class StarShip {
 	
 	public void findPath(ArrayList<Planet> planets, Point2D position) {
 		Planet block = this.isPlanetCollision(planets, position);
+		System.err.println(this + " Collision with "+ block);
 		
 		if (block == null) {
 			this.path.add(this.destination);
+			this.displayPath();
 		} else {
 			double angleToPlanet = this.angleToPoint(position, block.getOrigin());
 			double distanceToPlanet = position.distance(block.getOrigin());
@@ -196,5 +199,15 @@ public class StarShip {
 	
 	public double getSpeed() {return this.speed;}
 	public int getDamage() {return height;}
+	
+	
+	
+	public void displayPath() {
+		System.err.println("====================================");
+		for (Point2D p:this.path) {
+			System.err.println(p.getX() + " " + p.getY());
+		}
+		System.err.println("====================================");
+	}
 
 }
