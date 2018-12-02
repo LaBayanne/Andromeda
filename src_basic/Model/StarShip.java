@@ -151,25 +151,40 @@ public class StarShip {
 	}
 	
 	public void findPath(ArrayList<Planet> planets, Point2D position) {
+		//On regarde si une planète se trouve entre nous et la planete de destination
 		Planet block = this.isPlanetCollision(planets, position, this.destination);
-		System.err.println(this + " Collision with "+ block);
 		
 		if (block == null) {
+			//Si ce n'est pas le cas, on ajout la destination dans path, l'array qui contient toutes les destinations intermédiaires et on quitte
 			this.path.add(this.destination);
-			this.displayPath();
+			return;
 		} else {
-			double angleToPlanet = this.angleToPoint(position, block.getOrigin());
+			
+			double angleToPlanet = this.angleToPoint(position, this.destination);
 			double distanceToPlanet = position.distance(block.getOrigin());
 			
+			boolean alreadySeen = false;
 			int diff = 1;
 			Point2D newDest;
 			//Très très moche
 			while (diff < 360) {
+				alreadySeen = false;
 				System.err.println("\n\nTesting with diff " + diff);
-			newDest = new Point2D(
-					position.getX() + distanceToPlanet * Math.cos(angleToPlanet + diff),
-					position.getY() + distanceToPlanet * Math.sin(angleToPlanet + diff)
+				
+				newDest = new Point2D(
+					position.getX() + distanceToPlanet * Math.cos(Math.toRadians(angleToPlanet + diff)),
+					position.getY() + distanceToPlanet * Math.sin(Math.toRadians(angleToPlanet + diff))
 				);
+				for (Point2D p:this.path) {
+					if (p.getX() == newDest.getX() && p.getX() == newDest.getX()) {
+						alreadySeen = true;
+						break;
+					}
+				}
+				if (alreadySeen) {
+					diff += 1;
+					continue;
+				}
 			System.err.println("Testing with pos " + newDest.getX() + " " + newDest.getY());
 			if (this.isPlanetCollision(planets, position, newDest) == null) {
 				this.path.add(new Point2D(newDest.getX(), newDest.getY()));
@@ -178,9 +193,19 @@ public class StarShip {
 			}
 			
 			newDest = new Point2D(
-					position.getX() + distanceToPlanet * Math.cos(angleToPlanet - diff),
-					position.getY() + distanceToPlanet * Math.sin(angleToPlanet - diff)
+					position.getX() + distanceToPlanet * Math.cos(Math.toRadians(angleToPlanet - diff)),
+					position.getY() + distanceToPlanet * Math.sin(Math.toRadians(angleToPlanet - diff))
 				);
+			for (Point2D p:this.path) {
+				if (p.getX() == newDest.getX() && p.getX() == newDest.getX()) {
+					alreadySeen = true;
+					break;
+				}
+			}
+			if (alreadySeen) {
+				diff += 1;
+				continue;
+			}
 			
 			System.err.println("Testing with pos " + newDest.getX() + " " + newDest.getY());
 			if (this.isPlanetCollision(planets, position, newDest) == null) {
