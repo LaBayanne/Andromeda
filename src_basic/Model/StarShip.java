@@ -36,7 +36,6 @@ public class StarShip {
 	private Hitbox hitbox;
 	
 	public StarShip(Point2D position, Point2D destination,double speed, int damage, double angle) {
-		this.path = new ArrayList<>();
 		this.position = new Point2D(position.getX(), position.getY());
 		this.destination = new Point2D(destination.getX(), destination.getY());
 		this.speed = speed;
@@ -49,7 +48,6 @@ public class StarShip {
 	}
 	
 	public StarShip(StarShip starship) {
-		this.path = new ArrayList<>();
 		this.position = new Point2D(starship.getPosition().getX(), starship.getPosition().getY());
 		this.destination = new Point2D(starship.getDestination().getX(), starship.getDestination().getY());
 		this.speed = starship.getSpeed();
@@ -101,9 +99,9 @@ public class StarShip {
 	}
 	
 	
-	private Point2D calculateNewPos() {
+	private Point2D calculateNewPos(Point2D dest) {
 		
-		double angle = this.angleToDestination();
+		double angle = this.angleToPoint(this.position, dest);
 		
 		double dx = this.speed * Math.cos(Math.toRadians(angle));
 		double dy = this.speed * Math.sin(Math.toRadians(angle));
@@ -114,15 +112,14 @@ public class StarShip {
 	
 	
 	public void move() {
-		if (this.position.distance(this.destination) < 5) {
-			if (this.path.isEmpty()) {
-				return;
-			} else {
-				this.setDestination(this.path.get(0));
-				this.path.remove(0);
-			}
+		if(this.path.isEmpty()) {
+			return;
 		}
-		Point2D newPos = this.calculateNewPos();
+		if (this.position.distance(this.path.get(0)) < 5) {
+			this.path.remove(0);
+			
+		}
+		Point2D newPos = this.calculateNewPos(this.path.get(0));
 		
 		//Checker si collision avec planete. Que faire s'il y a collision innatendue ?
 
@@ -227,9 +224,10 @@ public class StarShip {
 	}
 	
 	public void calculatePath(ArrayList<Planet> planets, Point2D position) {
+		this.path = new ArrayList<>();
 		this.findPath(planets, position);
+		
 		this.displayPath();
-		this.refreshDestination();
 	}
 	
 	public void displayPath() {

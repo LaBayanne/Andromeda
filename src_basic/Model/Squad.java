@@ -30,8 +30,8 @@ public class Squad{
 	public void findPath(ArrayList<Planet> planets) {
 		for (StarShip starship: this.starships) {
 			starship.calculatePath(planets, starship.getPosition());
-			// starship.displayPath();
 		}
+
 	}
 
 	public void add(StarShip starship) {
