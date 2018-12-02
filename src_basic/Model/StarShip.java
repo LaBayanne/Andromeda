@@ -117,7 +117,9 @@ public class StarShip {
 		}
 		if (this.position.distance(this.path.get(0)) < 5) {
 			this.path.remove(0);
-			
+			if (this.path.isEmpty()) {
+				return; //Arrivé à destination
+			}
 		}
 		Point2D newPos = this.calculateNewPos(this.path.get(0));
 		
@@ -157,10 +159,10 @@ public class StarShip {
 		} else {
 			
 			double angleToPlanet = this.angleToPoint(position, this.destination);
-			double distance = 10; //Distance jusqu'au prochain point
+			double distance = position.distance(block.getOrigin()); //Distance jusqu'au prochain point
 			
 			boolean alreadySeen = false;
-			int diff = 1;
+			double diff = 1;
 			Point2D newDest;
 			
 			//On cherche un point qui nous rapproche de la destination mais sans rencontrer de planete depuis notre position jusqu'à ce point
@@ -217,12 +219,7 @@ public class StarShip {
 	
 	public double getSpeed() {return this.speed;}
 	public int getDamage() {return height;}
-	
-	public void refreshDestination() {
-		this.setDestination(this.path.get(0));
-		this.path.remove(0);
-	}
-	
+
 	public void calculatePath(ArrayList<Planet> planets, Point2D position) {
 		this.path = new ArrayList<>();
 		this.findPath(planets, position);
