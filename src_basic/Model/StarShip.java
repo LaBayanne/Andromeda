@@ -138,6 +138,9 @@ public class StarShip {
 		Line l = new Line(position.getX(), position.getY(), this.destination.getX(), this.destination.getY());
 		
 		for (Planet planet:planets) {
+			if (planet == this.destinationPlanet) {
+				continue;//Osef si c'est la planète de destination
+			}
 			if (planet.getHitbox().collision(l)) {
 				// System.err.println("COLLISION DETECTED !");
 				return planet;
