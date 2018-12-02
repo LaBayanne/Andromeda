@@ -134,15 +134,15 @@ public class StarShip {
 		return this.hitbox;
 	}
 	
-	public Planet isPlanetCollision(ArrayList<Planet> planets, Point2D position) {
-		Line l = new Line(position.getX(), position.getY(), this.destination.getX(), this.destination.getY());
+	public Planet isPlanetCollision(ArrayList<Planet> planets, Point2D position1, Point2D position2) {
+		Line l = new Line(position1.getX(), position1.getY(), position2.getX(), position2.getY());
 		
 		for (Planet planet:planets) {
 			if (planet == this.destinationPlanet) {
 				continue;//Osef si c'est la planète de destination
 			}
 			if (planet.getHitbox().collision(l)) {
-				// System.err.println("COLLISION DETECTED !");
+				System.err.println("COLLISION DETECTED !");
 				return planet;
 			}
 		}
@@ -151,7 +151,7 @@ public class StarShip {
 	}
 	
 	public void findPath(ArrayList<Planet> planets, Point2D position) {
-		Planet block = this.isPlanetCollision(planets, position);
+		Planet block = this.isPlanetCollision(planets, position, this.destination);
 		System.err.println(this + " Collision with "+ block);
 		
 		if (block == null) {
@@ -165,12 +165,13 @@ public class StarShip {
 			Point2D newDest;
 			//Très très moche
 			while (diff < 360) {
+				System.err.println("\n\nTesting with diff " + diff);
 			newDest = new Point2D(
 					position.getX() + distanceToPlanet * Math.cos(angleToPlanet + diff),
 					position.getY() + distanceToPlanet * Math.sin(angleToPlanet + diff)
 				);
-			
-			if (this.isPlanetCollision(planets, newDest) == null) {
+			System.err.println("Testing with pos " + newDest.getX() + " " + newDest.getY());
+			if (this.isPlanetCollision(planets, position, newDest) == null) {
 				this.path.add(new Point2D(newDest.getX(), newDest.getY()));
 				this.findPath(planets, newDest);
 				return;
@@ -181,7 +182,8 @@ public class StarShip {
 					position.getY() + distanceToPlanet * Math.sin(angleToPlanet - diff)
 				);
 			
-			if (this.isPlanetCollision(planets, newDest) == null) {
+			System.err.println("Testing with pos " + newDest.getX() + " " + newDest.getY());
+			if (this.isPlanetCollision(planets, position, newDest) == null) {
 				this.path.add(new Point2D(newDest.getX(), newDest.getY()));
 				this.findPath(planets, newDest);
 				return;
@@ -203,7 +205,16 @@ public class StarShip {
 	public double getSpeed() {return this.speed;}
 	public int getDamage() {return height;}
 	
+	public void refreshDestination() {
+		this.setDestination(this.path.get(0));
+		this.path.remove(0);
+	}
 	
+	public void calculatePath(ArrayList<Planet> planets, Point2D position) {
+		this.findPath(planets, position);
+		this.displayPath();
+		this.refreshDestination();
+	}
 	
 	public void displayPath() {
 		System.err.println("====================================");

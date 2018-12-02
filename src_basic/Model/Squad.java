@@ -29,8 +29,7 @@ public class Squad{
 	
 	public void findPath(ArrayList<Planet> planets) {
 		for (StarShip starship: this.starships) {
-			starship.findPath(planets, starship.getPosition());
-			// System.err.print("Je passe bien par ici de temps en temps");
+			starship.calculatePath(planets, starship.getPosition());
 			// starship.displayPath();
 		}
 	}
