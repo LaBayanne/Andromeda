@@ -11,12 +11,26 @@ public class Squad{
 	private int nbUnit;
 	private StarShip starshipModel;
 	private Planet planetOrigin;
+	private Planet destinationPlanet;
 	
 	public Squad(int nbUnit, StarShip starship, Planet planet) {
 		this.nbUnit = nbUnit;
 		this.starships = new ArrayList<StarShip>();
 		this.starshipModel = new StarShip(starship);
 		this.planetOrigin = planet;
+	}
+	
+	public void setDestinationPlanet(Planet planet) {
+		this.destinationPlanet = planet;
+		for (StarShip starship : this.starships) {
+			starship.setDestination(planet);
+		}
+	}
+	
+	public void findPath(ArrayList<Planet> planets) {
+		for (StarShip starship: this.starships) {
+			starship.findPath(planets, starship.getPosition());
+		}
 	}
 
 	public void add(StarShip starship) {

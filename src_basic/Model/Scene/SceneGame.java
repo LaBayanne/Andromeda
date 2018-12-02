@@ -48,8 +48,16 @@ public class SceneGame implements Scenery{
 			
 			planet.actualiseStock();	//Augment the planet's stock
 			
-			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0)
-				this.squads.add(planet.generateSquad());
+			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0) {
+				Squad newSquad = planet.generateSquad();
+				this.squads.add(newSquad);
+				
+				//For debbug
+				newSquad.setDestinationPlanet(this.planets.get(0));
+				newSquad.findPath(this.planets);
+				
+			}
+			
 		}
 		this.view.tick(this);
 		

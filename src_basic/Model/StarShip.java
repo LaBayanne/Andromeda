@@ -36,6 +36,7 @@ public class StarShip {
 	private Hitbox hitbox;
 	
 	public StarShip(Point2D position, Point2D destination,double speed, int damage, double angle) {
+		this.path = new ArrayList<>();
 		this.position = new Point2D(position.getX(), position.getY());
 		this.destination = new Point2D(destination.getX(), destination.getY());
 		this.speed = speed;
@@ -44,9 +45,11 @@ public class StarShip {
 		this.hitbox = this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
 		
 		this.className = "StarShip"; // Besoin pour la création dynamique des startships
+		
 	}
 	
 	public StarShip(StarShip starship) {
+		this.path = new ArrayList<>();
 		this.position = new Point2D(starship.getPosition().getX(), starship.getPosition().getY());
 		this.destination = new Point2D(starship.getDestination().getX(), starship.getDestination().getY());
 		this.speed = starship.getSpeed();
@@ -111,6 +114,14 @@ public class StarShip {
 	
 	
 	public void move() {
+		if (this.position.distance(this.destination) < 20) {
+			if (this.path.isEmpty()) {
+				return;
+			} else {
+				this.destination = this.path.get(0);
+				this.path.remove(0);
+			}
+		}
 		Point2D newPos = this.calculateNewPos();
 		
 		//Checker si collision avec planete. Que faire s'il y a collision innatendue ?
