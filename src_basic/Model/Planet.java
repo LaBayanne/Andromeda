@@ -60,13 +60,11 @@ public class Planet {
 	}
 	
 	public void decreaseStock(int nbUnit) {
-		System.err.println("Decrease Stock !");
 		this.realStock -= (double) nbUnit;
 		this.stock -= nbUnit;
 	}
 	
 	public void increaseStock(int nb) {
-		System.err.println("Increase Stock !");
 		this.realStock += nb;
 		this.stock += nb;
 	}

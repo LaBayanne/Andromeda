@@ -136,16 +136,16 @@ public class StarShip {
 		Point2D newPos = this.calculateNewPos(planets);
 		
 		if (this.destination.distance(newPos) < this.destinationPlanet.getRadius()) {
-			
-			System.err.println("Destination : " + this.destinationPlanet );
-			System.err.println("This: " + this.owner + " Planet : " + this.destinationPlanet.getOwner());
-			
+					
 			if (this.destinationPlanet.getOwner() == this.owner) {
-				System.err.println("It's an ally !");
 				this.destinationPlanet.increaseStock(1);
 			} else {
-				System.err.println("It's an enemy !");
-				this.destinationPlanet.decreaseStock(1);
+				if (this.destinationPlanet.getStock() == 0) {
+					this.destinationPlanet.setOwner(this.owner);
+					this.destinationPlanet.increaseStock(1);
+				} else {
+					this.destinationPlanet.decreaseStock(1);
+				}
 			}
 			this.destinationReached = true;
 		}
