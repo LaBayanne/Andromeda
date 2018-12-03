@@ -45,6 +45,7 @@ public class SceneGame implements Scenery{
 		
 		this.moveSquad();
 		for(Planet planet:this.planets) {
+			//System.err.println(planet.getOwner());
 			
 			planet.actualiseStock();	//Augment the planet's stock
 			
@@ -54,7 +55,6 @@ public class SceneGame implements Scenery{
 				
 				//For debbug
 				newSquad.setDestinationPlanet(this.planets.get(0));
-				newSquad.findPath(this.planets);
 				
 			}
 			
@@ -66,18 +66,18 @@ public class SceneGame implements Scenery{
 	
 	public void moveSquad() {
 		for (Squad squad: this.squads) {
-			squad.moveStarships();
+			squad.moveStarships(this.planets);
 		}
 	}
 	
 	public void generatePlanets() {
 		// public Planet(Point2D origin, double radius, int productionSpeed, int owner)
-		this.planets.add(new Planet(new Point2D(200, 500), 50, 0.04, 0));
-		this.planets.add(new Planet(new Point2D(600, 200), 85, 0.01, 0));
+		this.planets.add(new Planet(new Point2D(200, 500), 50, 0.01, 0));
+		this.planets.add(new Planet(new Point2D(600, 200), 85, 0.01, 1));
 		this.planets.add(new Planet(new Point2D(300, 150), 45, 0.02, 0));
-		this.planets.add(new Planet(new Point2D(500, 350), 20, 0.03, 0));
+		this.planets.add(new Planet(new Point2D(500, 350), 20, 0.1, 1));
 		this.planets.add(new Planet(new Point2D(750, 300), 35, 0.02, 0));
-		this.planets.add(new Planet(new Point2D(800, 475), 60, 0.01, 0));
+		this.planets.add(new Planet(new Point2D(800, 475), 60, 0.01, 1));
 	}
 		
 	

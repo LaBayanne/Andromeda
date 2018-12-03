@@ -8,17 +8,16 @@ public class Planet {
 	private double radius;
 	
 	Hitbox hitbox;
+	
 	private double poductionSpeed;
 	
 	private int stock;
 	private double realStock; // TODO Faire une fonction pour décrémenter le stock, qui prends en compte stock ET realStock
 	
-	private int squadSize;
-	
+	private int squadSize;	
 	private StarShip starshipModel;
 	
 	private int owner;
-	
 	private int nbStarshipToGenerate;
 	
 	private double timerMax;
@@ -30,11 +29,11 @@ public class Planet {
 		
 		this.poductionSpeed = 0;
 		this.stock = 0;
-		this.squadSize = 1;
+		this.squadSize = 100;//100 percents by default
 		
 		this.owner = 0;
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
-		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0);
+		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0, 0);
 		
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
@@ -47,9 +46,9 @@ public class Planet {
 		this.poductionSpeed = productionSpeed;
 		this.owner = owner;
 		this.stock = 0;
-		this.squadSize = 1;
+		this.squadSize = 100;//100 percent by default
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
-		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0);
+		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0, owner);
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
@@ -60,23 +59,36 @@ public class Planet {
 		this.stock = (int) Math.round(this.realStock);
 	}
 	
+	public void decreaseStock(int nbUnit) {
+		this.realStock -= (double) nbUnit;
+		this.stock -= nbUnit;
+	}
+	
+	public void increaseStock(int nb) {
+		this.realStock += nb;
+		this.stock += nb;
+	}
+	
 	public void prepareAttack() {
-		this.nbStarshipToGenerate += getNbUnitPerSquad();
+		this.nbStarshipToGenerate += getNbUnitPerSquad();//+= was here
 	}
 	
 	public int getNbUnitPerSquad() {
-		return 20;
-		//return Math.floorDiv(this.squadSize * this.stock, 100);
+		//System.out.println(this.stock * this.);
+		return this.stock * this.squadSize/100;
 	}
 	
 	public Squad generateSquad() {
 		reloadTimer();
 		Squad squad = new Squad(this.nbStarshipToGenerate, this.starshipModel, this);
-		this.nbStarshipToGenerate = squad.repartsStarships();
+		int restUnit = squad.repartsStarships();
+		this.decreaseStock(this.nbStarshipToGenerate - restUnit);
+		
+		this.nbStarshipToGenerate = restUnit;
 		return squad;
 	}
 	
-	public int getNbStarshipToGenerate() {return this.nbStarshipToGenerate;}
+
 	
 	// Return true if the new squadSize is correct
 	public boolean setSquadSize(int newSize) {
@@ -100,9 +112,12 @@ public class Planet {
 		this.timer = this.timerMax;
 	}
 	
+	
 	public void setOwner(int owner) {
 		this.owner = owner;
 	}
+	
+	public int getNbStarshipToGenerate() {return this.nbStarshipToGenerate;}
 	
 	public Hitbox getHitbox() {
 		return this.hitbox;
@@ -123,5 +138,7 @@ public class Planet {
 	public double getRadius() {
 		return this.radius;
 	}
+	
+	public int getOwner()	{ return this.owner; }
 	
 }
