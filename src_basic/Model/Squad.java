@@ -22,6 +22,8 @@ public class Squad{
 	
 	public void setDestinationPlanet(Planet planet) {
 		this.destinationPlanet = planet;
+		this.destination = planet.getOrigin();
+		
 		for (StarShip starship : this.starships) {
 			starship.setDestination(planet);
 		}
