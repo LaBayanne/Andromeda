@@ -69,6 +69,7 @@ public class Squad{
 			
 			angle += angleDist;
 		}
+		
 		return restUnit;
 	}
 

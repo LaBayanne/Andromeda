@@ -8,17 +8,16 @@ public class Planet {
 	private double radius;
 	
 	Hitbox hitbox;
+	
 	private double poductionSpeed;
 	
 	private int stock;
 	private double realStock; // TODO Faire une fonction pour décrémenter le stock, qui prends en compte stock ET realStock
 	
-	private int squadSize;
-	
+	private int squadSize;	
 	private StarShip starshipModel;
 	
 	private int owner;
-	
 	private int nbStarshipToGenerate;
 	
 	private double timerMax;
@@ -60,6 +59,11 @@ public class Planet {
 		this.stock = (int) Math.round(this.realStock);
 	}
 	
+	public void decreaseStock(int nbUnit) {
+		this.realStock -= (double) nbUnit;
+		this.stock -= nbUnit;
+	}
+	
 	public void prepareAttack() {
 		this.nbStarshipToGenerate += getNbUnitPerSquad();//+= was here
 	}
@@ -72,7 +76,10 @@ public class Planet {
 	public Squad generateSquad() {
 		reloadTimer();
 		Squad squad = new Squad(this.nbStarshipToGenerate, this.starshipModel, this);
-		this.nbStarshipToGenerate = squad.repartsStarships();
+		int restUnit = squad.repartsStarships();
+		this.decreaseStock(this.nbStarshipToGenerate - restUnit);
+		
+		this.nbStarshipToGenerate = restUnit;
 		return squad;
 	}
 	
