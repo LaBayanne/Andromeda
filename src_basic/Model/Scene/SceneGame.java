@@ -54,7 +54,6 @@ public class SceneGame implements Scenery{
 				
 				//For debbug
 				newSquad.setDestinationPlanet(this.planets.get(0));
-				newSquad.findPath(this.planets);
 				
 			}
 			
@@ -66,7 +65,7 @@ public class SceneGame implements Scenery{
 	
 	public void moveSquad() {
 		for (Squad squad: this.squads) {
-			squad.moveStarships();
+			squad.moveStarships(this.planets);
 		}
 	}
 	

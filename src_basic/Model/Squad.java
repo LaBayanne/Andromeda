@@ -26,13 +26,6 @@ public class Squad{
 			starship.setDestination(planet);
 		}
 	}
-	
-	public void findPath(ArrayList<Planet> planets) {
-		for (StarShip starship: this.starships) {
-			starship.calculatePath(planets, starship.getPosition());
-		}
-
-	}
 
 	public void add(StarShip starship) {
 		this.starships.add(starship);
@@ -74,9 +67,9 @@ public class Squad{
 		return this.starships;
 	}
 	
-	public void moveStarships() {
+	public void moveStarships(ArrayList<Planet> planets) {
 		for (StarShip starship: this.starships) {
-			starship.move();
+			starship.move(planets);
 		}
 	}
 	

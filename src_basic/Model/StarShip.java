@@ -17,14 +17,13 @@ public class StarShip {
 	
 	private static int height;
 	private static int width;
+
 	
 	static {
 		angleMax = 10.0;
 		height = 10;
 		width = 10;
 	}
-	
-	private ArrayList<Point2D> path;
 	
 	private Point2D position;
 	private Point2D destination;
@@ -98,30 +97,64 @@ public class StarShip {
 		return this.angleToPoint(this.position, this.destination);
 	}
 	
+	private boolean detectCollision(Planet planet, Point2D p1) {
+		Point2D origin = planet.getOrigin();
+		double radius = planet.getRadius();
+		
+		Point2D corner[] = new Point2D[4];
+		
+		corner[0] = p1;
+		corner[1]= new Point2D(corner[0].getX(), corner[0].getY() + this.getHeight());
+		corner[2] = new Point2D(corner[0].getX() + this.getWidth(), corner[0].getY());
+		corner[3] = new Point2D(corner[2].getX(), corner[1].getY());
+		
+		for (Point2D p:corner) {
+			if (origin.distance(p) < radius) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
-	private Point2D calculateNewPos(Point2D dest) {
+	private boolean planetCollision(ArrayList<Planet> planets, Point2D position) {
+		for (Planet planet : planets) {
+			if (this.detectCollision(planet, position)) {
+				if (planet != this.destinationPlanet) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	private Point2D calculateNewPos(ArrayList<Planet> planets) {
 		
-		double angle = this.angleToPoint(this.position, dest);
+		double angle = this.angleToPoint(this.position, this.destination);
+		Point2D newPos;
+		double dx, dy;
+		double diff = 1.0;
+		int pivot = 1;
 		
-		double dx = this.speed * Math.cos(Math.toRadians(angle));
-		double dy = this.speed * Math.sin(Math.toRadians(angle));
+		do {
+			dx = this.speed * Math.cos(Math.toRadians(angle + diff * pivot));
+			dy = this.speed * Math.sin(Math.toRadians(angle + diff * pivot));
+			
+			newPos = new Point2D(this.position.getX() + dx, this.position.getY() + dy);
+			
+			if (pivot == -1) {
+				pivot = 1;
+				diff++;
+			} else {
+				pivot = -1;
+			}
+		} while(this.planetCollision(planets, newPos));
 		
-		Point2D newPos = new Point2D(this.position.getX() + dx, this.position.getY() + dy);
 		return newPos;
 	}
 	
 	
-	public void move() {
-		if(this.path.isEmpty()) {
-			return;
-		}
-		if (this.position.distance(this.path.get(0)) < 5) {
-			this.path.remove(0);
-			if (this.path.isEmpty()) {
-				return; //Arrivé à destination
-			}
-		}
-		Point2D newPos = this.calculateNewPos(this.path.get(0));
+	public void move(ArrayList<Planet> planets) {
+		Point2D newPos = this.calculateNewPos(planets);
 		
 		//Checker si collision avec planete. Que faire s'il y a collision innatendue ?
 
@@ -133,84 +166,6 @@ public class StarShip {
 		return this.hitbox;
 	}
 	
-	public Planet isPlanetCollision(ArrayList<Planet> planets, Point2D position1, Point2D position2) {
-		Line l = new Line(position1.getX(), position1.getY(), position2.getX(), position2.getY());
-		
-		for (Planet planet:planets) {
-			if (planet == this.destinationPlanet) {
-				continue;//Osef si c'est la planète de destination
-			}
-			if (planet.getHitbox().collision(l)) {
-				System.err.println("COLLISION DETECTED !");
-				return planet;
-			}
-		}
-		
-		return null;
-	}
-	
-	public void findPath(ArrayList<Planet> planets, Point2D position) {
-		//On regarde si une planète se trouve entre nous et la planete de destination
-		Planet block = this.isPlanetCollision(planets, position, this.destination);
-		
-		if (block == null) {
-			//Si ce n'est pas le cas, on ajout la destination dans path, l'array qui contient toutes les destinations intermédiaires et on quitte
-			this.path.add(this.destination);
-		} else {
-			
-			double angleToPlanet = this.angleToPoint(position, this.destination);
-			double distance = position.distance(block.getOrigin()); //Distance jusqu'au prochain point
-			
-			boolean alreadySeen = false;
-			double diff = 1;
-			Point2D newDest;
-			
-			//On cherche un point qui nous rapproche de la destination mais sans rencontrer de planete depuis notre position jusqu'à ce point
-			while (diff < 360) {
-				alreadySeen = false;
-				
-				newDest = new Point2D(
-					position.getX() + distance * Math.cos(Math.toRadians(angleToPlanet + diff)),
-					position.getY() + distance * Math.sin(Math.toRadians(angleToPlanet + diff))
-				);
-				
-				//On vérifie qu'on n'est pas déjà passé par ce point, si oui on passe
-				for (Point2D p:this.path) {
-					if (p.getX() == newDest.getX() && p.getX() == newDest.getX()) {
-						alreadySeen = true;
-					}
-				}
-				if (!alreadySeen) {
-					if (this.isPlanetCollision(planets, position, newDest) == null) {
-						this.path.add(new Point2D(newDest.getX(), newDest.getY()));
-						this.findPath(planets, newDest);
-						return;
-					}
-				}
-				alreadySeen = false;
-				
-				//Même chose mais dans l'autre sens
-				newDest = new Point2D(
-					position.getX() + distance * Math.cos(Math.toRadians(angleToPlanet - diff)),
-					position.getY() + distance * Math.sin(Math.toRadians(angleToPlanet - diff))
-				);
-				for (Point2D p:this.path) {
-					if (p.getX() == newDest.getX() && p.getX() == newDest.getX()) {
-						alreadySeen = true;
-					}
-				}
-				if (!alreadySeen) {
-					if (this.isPlanetCollision(planets, position, newDest) == null) {
-						this.path.add(new Point2D(newDest.getX(), newDest.getY()));
-						this.findPath(planets, newDest);
-						return;
-					}
-				}
-			
-				diff += 1;
-			}
-		}
-	}
 
 		//Vont-elles rester statique lorsque l'on aura plusieurs types de vaisseaux ?
 
@@ -219,20 +174,4 @@ public class StarShip {
 	
 	public double getSpeed() {return this.speed;}
 	public int getDamage() {return height;}
-
-	public void calculatePath(ArrayList<Planet> planets, Point2D position) {
-		this.path = new ArrayList<>();
-		this.findPath(planets, position);
-		
-		this.displayPath();
-	}
-	
-	public void displayPath() {
-		System.err.println("====================================");
-		for (Point2D p:this.path) {
-			System.err.println(p.getX() + " " + p.getY());
-		}
-		System.err.println("====================================");
-	}
-
 }
