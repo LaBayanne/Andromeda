@@ -48,7 +48,9 @@ public class ViewGame{
 	
 
 	public void tick(SceneGame game) {
-		this.gc.clearRect(0, 0, 960, 640); // PASSER EN PARAM
+		//this.gc.clearRect(0, 0, 960, 640); // PASSER EN PARAM
+		this.gc.setFill(Color.web("#000000"));
+		this.gc.fillRect(0,  0, 960, 640);
 		this.displayPlanets(game.getPlanets());
 		this.displaySquads(game.getSquads());
 	}
