@@ -79,7 +79,8 @@ public class Planet {
 	}
 	
 	public int getNbUnitPerSquad() {
-		//System.out.println(this.stock * this.);
+		System.out.println(this.squadSize);
+		System.out.println(this.stock * this.squadSize/100);
 		return this.stock * this.squadSize/100;
 	}
 	
@@ -92,20 +93,6 @@ public class Planet {
 		
 		this.nbStarshipToGenerate = restUnit;
 		return squad;
-	}
-	
-
-	
-	// Return true if the new squadSize is correct
-	public boolean setSquadSize(int newSize) {
-		
-		if (newSize > 100 || newSize < 0) {
-			return false;
-		}
-		
-		this.squadSize = newSize;
-		
-		return true;
 	}
 	
 	public double decreaseTimer() {
@@ -135,6 +122,10 @@ public class Planet {
 	
 	public int getStock() {
 		return this.stock;
+	}
+	
+	public void setSquadSize(int size) {
+		this.squadSize = size % 100;
 	}
 	
 	public Point2D getOrigin() {

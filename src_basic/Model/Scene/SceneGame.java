@@ -17,6 +17,8 @@ public class SceneGame implements Scenery{
 	ArrayList<Planet> planets;
 	ArrayList<Planet> selectedPlanets;
 	
+	int squadSize;
+	
 	public SceneGame(GraphicsContext gc) {
 		this.gc = gc;
 		this.view = new ViewGame(gc);
@@ -25,6 +27,8 @@ public class SceneGame implements Scenery{
 		this.squads = new ArrayList<Squad>();
 		this.selectedPlanets = new ArrayList<Planet>();
 		
+		this.squadSize = 100;
+		
 		this.generatePlanets();
 		
 	}
@@ -32,7 +36,7 @@ public class SceneGame implements Scenery{
 	//////User events
 	public void selectActivePlanet(double x, double y) {
 		for(Planet planet:this.planets) {
-			if(planet.getHitbox().collision(new Point2D(x, y))) {
+			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 0) { 
 				this.selectedPlanets.clear();
 				this.selectedPlanets.add(planet);
 			}
@@ -67,6 +71,15 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
+	public void moveWheel(int dy) {
+		this.setSquadSize(dy);
+		for(Planet planet:this.planets){
+			if(planet.getOwner() == 0) {
+				planet.setSquadSize(this.squadSize);
+			}
+		}
+	}
+	
 	////end user events
 	
 	public boolean tick() {
@@ -98,6 +111,16 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
+	public void setSquadSize(int size) {
+		this.squadSize += size;
+		if(this.squadSize < 1) {
+			this.squadSize = 1;
+		}
+		else if(this.squadSize > 100) {
+			this.squadSize = 100;
+		}
+	}
+	
 	public void generatePlanets() {
 		// public Planet(Point2D origin, double radius, int productionSpeed, int owner)
 		this.planets.add(new Planet(new Point2D(200, 500), 50, 0.01, 0));
@@ -108,6 +131,9 @@ public class SceneGame implements Scenery{
 		this.planets.add(new Planet(new Point2D(800, 475), 60, 0.01, 1));
 	}
 		
+	public int getSquadSize() {
+		return this.squadSize;
+	}
 	
 	public ArrayList<Planet> getPlanets() {
 		return this.planets;

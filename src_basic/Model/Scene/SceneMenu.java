@@ -20,4 +20,8 @@ public class SceneMenu implements Scenery {
 	public void mouseClicked(int button, double x, double y) {
 		
 	}
+	
+	public void moveWheel(int dy) {
+		
+	}
 }

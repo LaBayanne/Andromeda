@@ -27,6 +27,10 @@ public class SceneManager {
 		this.activeScene.mouseClicked(button, x, y);
 	}
 	
+	public void moveWheel(int dy) {
+		this.activeScene.moveWheel(dy);
+	}
+	
 	/**
 	 * 
 	 */

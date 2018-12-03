@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import src_basic.Model.Planet;
 import src_basic.Model.Squad;
 import src_basic.Model.StarShip;
@@ -33,6 +35,7 @@ public class ViewGame{
 			this.gc.setFill(Color.web("#eeeeee"));
 			
 			//+7 cst magiques à changer en fonction de la taille de la police
+			this.gc.setFont(Font.font("Verdana", 15));
 			this.gc.fillText(Integer.toString(planet.getStock()), where.getX() - 7, where.getY() + 7);
 
 		}
@@ -62,6 +65,13 @@ public class ViewGame{
 		}
 	}
 	
+	public void displaySquadSize(int size) {
+		this.gc.setFill(Color.web("#eeeeee"));
+		this.gc.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
+		//ajuster en fonction de la taille de la fenêtre
+		this.gc.fillText(Integer.toString(size) + "%", 10, 620);
+	}
+	
 
 	public void tick(SceneGame game) {
 		//this.gc.clearRect(0, 0, 960, 640); // PASSER EN PARAM
@@ -70,5 +80,6 @@ public class ViewGame{
 		this.displaySelectedPlanets(game.getSelectedPlanets());
 		this.displayPlanets(game.getPlanets());
 		this.displaySquads(game.getSquads());
+		this.displaySquadSize(game.getSquadSize());
 	}
 }
