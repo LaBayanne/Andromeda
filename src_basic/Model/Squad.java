@@ -10,6 +10,7 @@ public class Squad{
 
 	private int nbUnit;
 	private StarShip starshipModel;
+	private int owner;
 	
 	private Planet planetOrigin;
 	
@@ -80,6 +81,12 @@ public class Squad{
 	public void moveStarships(ArrayList<Planet> planets) {
 		for (StarShip starship: this.starships) {
 			starship.move(planets);
+		}
+	}
+	
+	public void setOwner(int owner) {
+		for (StarShip starship : this.starships) {
+			starship.setOwner(owner);
 		}
 	}
 	

@@ -29,16 +29,18 @@ public class StarShip {
 	private double 	speed;
 	private double 	angle;//In °
 	private int 	damage;
+	private int 	owner;
 
 	private Hitbox 	hitbox;
 	
 	
 	
-	public StarShip(Point2D position, Point2D destination,double speed, int damage, double angle) {
+	public StarShip(Point2D position, Point2D destination,double speed, int damage, double angle, int owner) {
 		
 		this.position = new Point2D(position.getX(), position.getY());
 		this.destination = new Point2D(destination.getX(), destination.getY());
 		
+		this.owner = owner;
 		this.speed = speed;
 		this.damage = damage;
 		this.angle = 0;
@@ -60,7 +62,7 @@ public class StarShip {
 	}
 	
 	public StarShip() {
-		this(Point2D.ZERO, Point2D.ZERO, 0, 0, 0.0);
+		this(Point2D.ZERO, Point2D.ZERO, 0, 0, 0.0, 0);
 	}
 	
 	
@@ -129,6 +131,14 @@ public class StarShip {
 	
 	public void move(ArrayList<Planet> planets) {
 		Point2D newPos = this.calculateNewPos(planets);
+		
+		if (this.destination.distance(newPos) < this.destinationPlanet.getRadius()) {
+			if (this.destinationPlanet.getOwner() == this.owner) {
+				this.destinationPlanet.increaseStock(1);
+			} else {
+				this.destinationPlanet.decreaseStock(1);
+			}
+		}
 		this.setPosition(newPos);
 	}
 
@@ -161,5 +171,9 @@ public class StarShip {
 		this.setDestination(destination);
 		
 		this.destinationPlanet = destinationPlanet;
+	}
+	
+	public void setOwner(int owner) {
+		this.owner = owner;
 	}
 }
