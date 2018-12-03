@@ -132,7 +132,7 @@ public class StarShip {
 		double angle = this.angleToPoint(this.position, this.destination);
 		Point2D newPos;
 		double dx, dy;
-		double diff = 1.0;
+		double diff = 0;
 		int pivot = 1;
 		
 		do {
@@ -143,11 +143,13 @@ public class StarShip {
 			
 			if (pivot == -1) {
 				pivot = 1;
-				diff++;
+				diff+= 0.1;
 			} else {
 				pivot = -1;
 			}
-		} while(this.planetCollision(planets, newPos));
+		} while(this.planetCollision(planets, newPos) && this.destination.distance(newPos) < this.destination.distance(this.position));
+		//Condition de distance empèche vaisseaux de rester coincé dans une boucle.
+		// Comme il n'y a que des planètes rondes, impossible que cette condition bloque un vaisseaux
 		
 		return newPos;
 	}
