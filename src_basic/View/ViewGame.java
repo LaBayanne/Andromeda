@@ -22,11 +22,15 @@ public class ViewGame{
 		
 		for (Planet planet : planets) {
 			Point2D where = planet.getOrigin();
-			this.gc.setFill(Color.web("#4bf221"));
-
+			
+			if (planet.getOwner() == 0) {
+				this.gc.setFill(Color.web("#4bf221"));
+			} else {
+				this.gc.setFill(Color.web("#f24b21"));
+			}
 			this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
 				planet.getRadius() * 2, planet.getRadius() * 2);
-			this.gc.setFill(Color.web("#ff0000"));
+			this.gc.setFill(Color.web("#eeeeee"));
 			
 			//+7 cst magiques à changer en fonction de la taille de la police
 			this.gc.fillText(Integer.toString(planet.getStock()), where.getX() - 7, where.getY() + 7);

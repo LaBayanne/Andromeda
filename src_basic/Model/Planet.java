@@ -134,4 +134,6 @@ public class Planet {
 		return this.radius;
 	}
 	
+	public int getOwner()	{ return this.owner; }
+	
 }
