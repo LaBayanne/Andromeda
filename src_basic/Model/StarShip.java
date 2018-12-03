@@ -33,7 +33,7 @@ public class StarShip {
 
 	private Hitbox 	hitbox;
 	
-	
+	boolean destinationReached;
 	
 	public StarShip(Point2D position, Point2D destination,double speed, int damage, double angle, int owner) {
 		
@@ -44,6 +44,7 @@ public class StarShip {
 		this.speed = speed;
 		this.damage = damage;
 		this.angle = 0;
+		this.destinationReached = false;
 		
 		this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
 	}
@@ -56,6 +57,7 @@ public class StarShip {
 		this.speed = starship.getSpeed();
 		this.damage = starship.getDamage();
 		this.angle = 0;
+		this.destinationReached = false;
 		
 		this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
 
@@ -138,6 +140,7 @@ public class StarShip {
 			} else {
 				this.destinationPlanet.decreaseStock(1);
 			}
+			this.destinationReached = true;
 		}
 		this.setPosition(newPos);
 	}
