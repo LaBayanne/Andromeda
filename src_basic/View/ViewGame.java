@@ -50,11 +50,24 @@ public class ViewGame{
 		}
 	}
 	
+	public void displaySelectedPlanets(ArrayList<Planet> planets) {
+		this.gc.setFill(Color.web("#ffffff"));
+		double edge = 5;
+		
+		for (Planet planet : planets) {
+			Point2D where = planet.getOrigin();
+			this.gc.fillOval(where.getX() - planet.getRadius() - edge / 2, where.getY() - planet.getRadius() - edge / 2, 
+				planet.getRadius() * 2 + edge, planet.getRadius() * 2 + edge);
+
+		}
+	}
+	
 
 	public void tick(SceneGame game) {
 		//this.gc.clearRect(0, 0, 960, 640); // PASSER EN PARAM
 		this.gc.setFill(Color.web("#000000"));
 		this.gc.fillRect(0,  0, 960, 640);
+		this.displaySelectedPlanets(game.getSelectedPlanets());
 		this.displayPlanets(game.getPlanets());
 		this.displaySquads(game.getSquads());
 	}

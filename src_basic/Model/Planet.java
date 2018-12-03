@@ -20,6 +20,8 @@ public class Planet {
 	private int owner;
 	private int nbStarshipToGenerate;
 	
+	private Planet target;
+	
 	private double timerMax;
 	private double timer;
 	
@@ -38,6 +40,7 @@ public class Planet {
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
+		this.target = null;
 	}
 	
 	public Planet(Point2D origin, double radius, double productionSpeed, int owner) {
@@ -52,6 +55,7 @@ public class Planet {
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
+		this.target = null;
 	}
 
 	public void actualiseStock() {
@@ -69,8 +73,9 @@ public class Planet {
 		this.stock += nb;
 	}
 	
-	public void prepareAttack() {
-		this.nbStarshipToGenerate += getNbUnitPerSquad();//+= was here
+	public void prepareAttack(Planet target) {
+		this.nbStarshipToGenerate += getNbUnitPerSquad();//+= was here //Wut ?
+		this.target = target;
 	}
 	
 	public int getNbUnitPerSquad() {
@@ -82,6 +87,7 @@ public class Planet {
 		reloadTimer();
 		Squad squad = new Squad(this.nbStarshipToGenerate, this.starshipModel, this);
 		int restUnit = squad.repartsStarships();
+		squad.setDestinationPlanet(this.target);
 		this.decreaseStock(this.nbStarshipToGenerate - restUnit);
 		
 		this.nbStarshipToGenerate = restUnit;

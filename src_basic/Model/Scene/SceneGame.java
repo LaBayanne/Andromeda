@@ -30,12 +30,40 @@ public class SceneGame implements Scenery{
 	}
 	
 	//////User events
-	
-	public void mouseClicked(double x, double y) {
+	public void selectActivePlanet(double x, double y) {
 		for(Planet planet:this.planets) {
 			if(planet.getHitbox().collision(new Point2D(x, y))) {
-				planet.prepareAttack();
+				this.selectedPlanets.clear();
+				this.selectedPlanets.add(planet);
 			}
+		}
+	}
+	
+	public void selectTarget(double x, double y) {
+		Planet target = null;
+		for(Planet planet:this.planets) {
+			if(planet.getHitbox().collision(new Point2D(x, y))) {
+				System.err.println("TOUCH");
+				target = planet;
+			}
+		}
+		if(target != null) {
+			for(Planet planet:this.selectedPlanets) {
+				planet.prepareAttack(target);
+			}
+		}
+	}
+	
+	public void mouseClicked(int button, double x, double y) {
+		switch(button) {
+			case 0:
+				System.err.println("LEFT");
+				selectActivePlanet(x, y);
+				break;
+			case 1:
+				System.err.println("RIGHT");
+				selectTarget(x, y);
+				break;
 		}
 	}
 	
@@ -54,7 +82,7 @@ public class SceneGame implements Scenery{
 				this.squads.add(newSquad);
 				
 				//For debbug
-				newSquad.setDestinationPlanet(this.planets.get(0));
+				//newSquad.setDestinationPlanet(this.planets.get(0));
 				
 			}
 			
@@ -83,6 +111,10 @@ public class SceneGame implements Scenery{
 	
 	public ArrayList<Planet> getPlanets() {
 		return this.planets;
+	}
+	
+	public ArrayList<Planet> getSelectedPlanets() {
+		return this.selectedPlanets;
 	}
 	
 	public ArrayList<Squad> getSquads() {

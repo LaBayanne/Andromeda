@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import src_basic.Model.Scene.SceneManager;
 
@@ -43,14 +44,16 @@ public class Controller{
             {
                 public void handle(MouseEvent e)
                 {
-                	
-                	mouseClicked(e.getX(), e.getY());
+                	if(e.getButton() == MouseButton.PRIMARY)
+                		mouseClicked(0, e.getX(), e.getY());
+                	if(e.getButton() == MouseButton.SECONDARY)
+                		mouseClicked(1, e.getX(), e.getY());
                 }
             });
 	}	
 	
-	public void mouseClicked(double x, double y) {
-		this.sceneManager.mouseClicked(x, y);
+	public void mouseClicked(int button, double x, double y) {
+		this.sceneManager.mouseClicked(button, x, y);
 	}
 	
 	public void tick() {

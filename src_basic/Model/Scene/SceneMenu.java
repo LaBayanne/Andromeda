@@ -17,7 +17,7 @@ public class SceneMenu implements Scenery {
 		return false;
 	}
 	
-	public void mouseClicked(double x, double y) {
+	public void mouseClicked(int button, double x, double y) {
 		
 	}
 }

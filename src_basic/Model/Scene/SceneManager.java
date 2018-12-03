@@ -23,8 +23,8 @@ public class SceneManager {
 	
 	/////User events
 	
-	public void mouseClicked(double x, double y) {
-		this.activeScene.mouseClicked(x, y);
+	public void mouseClicked(int button, double x, double y) {
+		this.activeScene.mouseClicked(button, x, y);
 	}
 	
 	/**
