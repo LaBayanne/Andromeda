@@ -58,6 +58,7 @@ public class StarShip {
 		this.damage = starship.getDamage();
 		this.angle = 0;
 		this.destinationReached = false;
+		this.owner = starship.getOwner();
 		
 		this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
 
@@ -135,14 +136,24 @@ public class StarShip {
 		Point2D newPos = this.calculateNewPos(planets);
 		
 		if (this.destination.distance(newPos) < this.destinationPlanet.getRadius()) {
+			
+			System.err.println("Destination : " + this.destinationPlanet );
+			System.err.println("This: " + this.owner + " Planet : " + this.destinationPlanet.getOwner());
+			
 			if (this.destinationPlanet.getOwner() == this.owner) {
+				System.err.println("It's an ally !");
 				this.destinationPlanet.increaseStock(1);
 			} else {
+				System.err.println("It's an enemy !");
 				this.destinationPlanet.decreaseStock(1);
 			}
 			this.destinationReached = true;
 		}
 		this.setPosition(newPos);
+	}
+	
+	public boolean asFinished() {
+		return this.destinationReached;
 	}
 
 	
@@ -160,6 +171,8 @@ public class StarShip {
 	public Hitbox getHitbox() 		{ return this.hitbox;	}
 	public Point2D getPosition() 	{ return new Point2D(this.position.getX(), this.position.getY()); }
 	public Point2D getDestination() { return new Point2D(this.destination.getX(), this.destination.getY()); }
+	
+	public int getOwner()			{ return this.owner;	}
 	
 	public void setPosition(Point2D position) {
 		this.position = new Point2D(position.getX(), position.getY());

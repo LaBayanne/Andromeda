@@ -45,6 +45,7 @@ public class SceneGame implements Scenery{
 		
 		this.moveSquad();
 		for(Planet planet:this.planets) {
+			//System.err.println(planet.getOwner());
 			
 			planet.actualiseStock();	//Augment the planet's stock
 			

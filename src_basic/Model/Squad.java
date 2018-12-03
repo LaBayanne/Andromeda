@@ -1,6 +1,7 @@
 package src_basic.Model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.lang.Math;
 
 import javafx.geometry.Point2D;
@@ -10,7 +11,6 @@ public class Squad{
 
 	private int nbUnit;
 	private StarShip starshipModel;
-	private int owner;
 	
 	private Planet planetOrigin;
 	
@@ -22,6 +22,7 @@ public class Squad{
 		this.starships = new ArrayList<StarShip>();
 		this.starshipModel = new StarShip(starship);
 		this.planetOrigin = planet;
+
 	}
 	
 	public void setDestinationPlanet(Planet planet) {
@@ -79,8 +80,15 @@ public class Squad{
 	}
 	
 	public void moveStarships(ArrayList<Planet> planets) {
-		for (StarShip starship: this.starships) {
-			starship.move(planets);
+		Iterator<StarShip> starshipIterator = this.starships.iterator();
+		StarShip s;
+		while (starshipIterator.hasNext()) {
+			s = starshipIterator.next();
+			s.move(planets);
+			
+			if (s.asFinished()) {
+				starshipIterator.remove();
+			}
 		}
 	}
 	
