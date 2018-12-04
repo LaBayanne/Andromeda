@@ -2,7 +2,6 @@ package src_basic;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -32,13 +31,17 @@ public class Game extends Application {
 	    
 	    final SceneManager sceneManager = new SceneManager(gc);
 	    final Controller controller = new Controller(scene, sceneManager);
+	    
+	    
 		
 	    new AnimationTimer(){
+	    	long prevNanoTime = System.nanoTime();
 	        public void handle(long currentNanoTime){
-	        	if (!sceneManager.tick()) {
+	        	if (!sceneManager.tick((currentNanoTime - prevNanoTime) / 1000000.0)) {
 	        		System.exit(0);
 	        	}
 	        	controller.tick();
+	        	prevNanoTime = currentNanoTime;
 	        }
 	    }.start();
 		

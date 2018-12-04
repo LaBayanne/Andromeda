@@ -12,7 +12,7 @@ public class SceneMenu implements Scenery {
 		this.view = new ViewMenu(gc);
 	}
 	
-	public boolean tick() {
+	public boolean tick(double delta) {
 		this.view.tick();
 		return false;
 	}

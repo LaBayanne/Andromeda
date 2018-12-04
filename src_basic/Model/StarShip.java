@@ -104,7 +104,7 @@ public class StarShip {
 		return false;
 	}
 	
-	private Point2D calculateNewPos(ArrayList<Planet> planets) {
+	private Point2D calculateNewPos(double delta, ArrayList<Planet> planets) {
 		
 		double angle = this.angleToPoint(this.position, this.destination);
 		Point2D newPos;
@@ -113,8 +113,10 @@ public class StarShip {
 		int pivot = 1;
 		
 		do {
-			dx = this.speed * Math.cos(Math.toRadians(angle + diff * pivot));
-			dy = this.speed * Math.sin(Math.toRadians(angle + diff * pivot));
+			
+			System.out.println("delta : " + delta);
+			dx = delta * this.speed * Math.cos(Math.toRadians(angle + diff * pivot));
+			dy = delta * this.speed * Math.sin(Math.toRadians(angle + diff * pivot));
 			
 			newPos = new Point2D(this.position.getX() + dx, this.position.getY() + dy);
 			
@@ -132,17 +134,17 @@ public class StarShip {
 	}
 	
 	
-	public void move(ArrayList<Planet> planets) {
-		Point2D newPos = this.calculateNewPos(planets);
+	public void move(double delta, ArrayList<Planet> planets) {
+		Point2D newPos = this.calculateNewPos(delta, planets);
 		
 		if (this.destination.distance(newPos) < this.destinationPlanet.getRadius()) {
 					
 			if (this.destinationPlanet.getOwner() == this.owner) {
 				this.destinationPlanet.increaseStock(1);
 			} else {
-				if (this.destinationPlanet.getStock() == 0) {
+				if (this.destinationPlanet.getStock() == 1) {
 					this.destinationPlanet.setOwner(this.owner);
-					this.destinationPlanet.increaseStock(1);
+					//this.destinationPlanet.increaseStock(1);
 				} else {
 					this.destinationPlanet.decreaseStock(1);
 				}

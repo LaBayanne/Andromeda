@@ -79,12 +79,12 @@ public class Squad{
 		return this.starships;
 	}
 	
-	public void moveStarships(ArrayList<Planet> planets) {
+	public void moveStarships(double delta, ArrayList<Planet> planets) {
 		Iterator<StarShip> starshipIterator = this.starships.iterator();
 		StarShip s;
 		while (starshipIterator.hasNext()) {
 			s = starshipIterator.next();
-			s.move(planets);
+			s.move(delta, planets);
 			
 			if (s.asFinished()) {
 				starshipIterator.remove();

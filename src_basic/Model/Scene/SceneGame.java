@@ -82,9 +82,9 @@ public class SceneGame implements Scenery{
 	
 	////end user events
 	
-	public boolean tick() {
+	public boolean tick(double delta) {
 		
-		this.moveSquad();
+		this.moveSquad(delta);
 		for(Planet planet:this.planets) {
 			//System.err.println(planet.getOwner());
 			
@@ -105,9 +105,9 @@ public class SceneGame implements Scenery{
 		return true;
 	}
 	
-	public void moveSquad() {
+	public void moveSquad(double delta) {
 		for (Squad squad: this.squads) {
-			squad.moveStarships(this.planets);
+			squad.moveStarships(delta, this.planets);
 		}
 	}
 	

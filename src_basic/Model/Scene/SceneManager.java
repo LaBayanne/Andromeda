@@ -42,9 +42,9 @@ public class SceneManager {
 	 * Run the tick of the actual scene
 	 * @return true if the game continue, else false
 	 */
-	public boolean tick() {
+	public boolean tick(double delta) {
 		if(!this.continueGame)
 			return false;
-		return this.activeScene.tick();	//C'est pour ça que Scene nous est utile et que je l'ai remis
+		return this.activeScene.tick(delta);	//C'est pour ça que Scene nous est utile et que je l'ai remis
 	}
 }
