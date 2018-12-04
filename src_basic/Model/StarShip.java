@@ -113,8 +113,6 @@ public class StarShip {
 		int pivot = 1;
 		
 		do {
-			
-			System.out.println("delta : " + delta);
 			dx = delta * this.speed * Math.cos(Math.toRadians(angle + diff * pivot));
 			dy = delta * this.speed * Math.sin(Math.toRadians(angle + diff * pivot));
 			

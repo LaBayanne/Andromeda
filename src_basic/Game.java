@@ -37,7 +37,8 @@ public class Game extends Application {
 	    new AnimationTimer(){
 	    	long prevNanoTime = System.nanoTime();
 	        public void handle(long currentNanoTime){
-	        	if (!sceneManager.tick((currentNanoTime - prevNanoTime) / 1000000.0)) {
+	        	double delta = (currentNanoTime - prevNanoTime) / 1000000;
+	        	if (!sceneManager.tick(delta)) {
 	        		System.exit(0);
 	        	}
 	        	controller.tick();
