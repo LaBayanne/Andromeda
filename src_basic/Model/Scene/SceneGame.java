@@ -1,12 +1,12 @@
 package src_basic.Model.Scene;
 
-import src_basic.Model.*;
-import src_basic.View.*;
 import java.util.ArrayList;
 
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Rectangle;
+import src_basic.Model.Planet;
+import src_basic.Model.Squad;
 import src_basic.View.ViewGame;
 
 public class SceneGame implements Scenery{
@@ -18,6 +18,9 @@ public class SceneGame implements Scenery{
 	ArrayList<Planet> selectedPlanets;
 	
 	int squadSize;
+	Rectangle selectRect;
+	Point2D selectRectOrigin;
+	boolean isThereSelectRect;
 	
 	public SceneGame(GraphicsContext gc) {
 		this.gc = gc;
@@ -30,14 +33,16 @@ public class SceneGame implements Scenery{
 		this.squadSize = 100;
 		
 		this.generatePlanets();
+		this.selectRect = new Rectangle(0, 0, 0, 0);
+		this.isThereSelectRect = false;
 		
 	}
 	
 	//////User events
 	public void selectActivePlanet(double x, double y) {
+		//this.selectedPlanets.clear();
 		for(Planet planet:this.planets) {
-			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 0) { 
-				this.selectedPlanets.clear();
+			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 0) { 	
 				this.selectedPlanets.add(planet);
 			}
 		}
@@ -47,13 +52,13 @@ public class SceneGame implements Scenery{
 		Planet target = null;
 		for(Planet planet:this.planets) {
 			if(planet.getHitbox().collision(new Point2D(x, y))) {
-				System.err.println("TOUCH");
 				target = planet;
 			}
 		}
 		if(target != null) {
 			for(Planet planet:this.selectedPlanets) {
-				planet.prepareAttack(target);
+				if(planet != target)
+					planet.prepareAttack(target);
 			}
 		}
 	}
@@ -61,11 +66,9 @@ public class SceneGame implements Scenery{
 	public void mouseClicked(int button, double x, double y) {
 		switch(button) {
 			case 0:
-				System.err.println("LEFT");
 				selectActivePlanet(x, y);
 				break;
 			case 1:
-				System.err.println("RIGHT");
 				selectTarget(x, y);
 				break;
 		}
@@ -78,6 +81,41 @@ public class SceneGame implements Scenery{
 				planet.setSquadSize(this.squadSize);
 			}
 		}
+	}
+	
+	public void inputMouseLeft(double x, double y) {
+		Rectangle rect = this.selectRect;
+		if(!this.isThereSelectRect ) {
+			this.selectRectOrigin = new Point2D(x, y);
+			this.isThereSelectRect = true;
+		}
+		if(rect.getX() >= x) {
+			rect.setWidth(this.selectRectOrigin.getX() - x);
+			rect.setX(x);
+		}
+		else {
+			rect.setX(this.selectRectOrigin.getX());
+			rect.setWidth(x - rect.getX());
+		}
+		if(rect.getY() >= y) {
+			rect.setHeight(this.selectRectOrigin.getY() - y);
+			rect.setY(y);
+		}
+		else {
+			rect.setY(this.selectRectOrigin.getY());
+			rect.setHeight(y - rect.getY());
+		}
+
+	}
+	
+	public void releasedMouseLeft(double x, double y) {
+		this.selectedPlanets.clear();
+		for(Planet planet:this.planets) {
+			if(planet.getOwner() == 0 && planet.getHitbox().collision(this.selectRect)) {
+				this.selectedPlanets.add(planet);
+			}
+		}
+		this.isThereSelectRect = false;
 	}
 	
 	////end user events
@@ -145,5 +183,13 @@ public class SceneGame implements Scenery{
 	
 	public ArrayList<Squad> getSquads() {
 		return this.squads;
+	}
+	
+	public Rectangle getSelectRect() {
+		return this.selectRect;
+	}
+	
+	public boolean getIsThereSelectRect() {
+		return this.isThereSelectRect;
 	}
 }

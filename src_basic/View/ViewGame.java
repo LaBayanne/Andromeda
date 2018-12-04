@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import src_basic.Model.Planet;
@@ -54,7 +55,7 @@ public class ViewGame{
 	}
 	
 	public void displaySelectedPlanets(ArrayList<Planet> planets) {
-		this.gc.setFill(Color.web("#ffffff"));
+		this.gc.setFill(Color.web("#ffffffff"));
 		double edge = 5;
 		
 		for (Planet planet : planets) {
@@ -72,6 +73,11 @@ public class ViewGame{
 		this.gc.fillText(Integer.toString(size) + "%", 10, 620);
 	}
 	
+	public void displaySelectRect(Rectangle rect) {
+		this.gc.setStroke(Color.web("#ffffff"));
+		this.gc.strokeRect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+	}
+	
 
 	public void tick(SceneGame game) {
 		//this.gc.clearRect(0, 0, 960, 640); // PASSER EN PARAM
@@ -81,5 +87,7 @@ public class ViewGame{
 		this.displayPlanets(game.getPlanets());
 		this.displaySquads(game.getSquads());
 		this.displaySquadSize(game.getSquadSize());
+		if(game.getIsThereSelectRect())
+			displaySelectRect(game.getSelectRect());
 	}
 }

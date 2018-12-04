@@ -3,7 +3,9 @@ package src_basic.Controller;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +15,7 @@ import src_basic.Model.Scene.SceneManager;
 public class Controller{
 	ArrayList<String> input;
 	SceneManager sceneManager;
+	Point2D mousePos;
 	
 	public Controller(Scene scene, SceneManager scnManager) {
 		this.sceneManager = scnManager;
@@ -52,6 +55,49 @@ public class Controller{
                 }
             });
         
+        scene.setOnMousePressed(
+                new EventHandler<MouseEvent>()
+                {
+                    public void handle(MouseEvent e)
+                    {
+                    	setMousePos(e.getX(), e.getY());
+                    	String code;
+                    	if(e.getButton() == MouseButton.PRIMARY) {
+                    		code = "MOUSE_LEFT";
+	                        if ( !input.contains(code) )
+	                            input.add( code );
+                    	}
+                    	if(e.getButton() == MouseButton.SECONDARY){
+                    		code = "MOUSE_RIGHT";
+	                        if ( !input.contains(code) )
+	                            input.add( code );
+                    	}
+                    	
+                    }
+                });
+        
+        scene.setOnMouseReleased(
+                new EventHandler<MouseEvent>()
+                {
+                    public void handle(MouseEvent e)
+                    {
+                    	if(e.getButton() == MouseButton.PRIMARY) 
+                    		releasedMouseLeft();
+                    	if(e.getButton() == MouseButton.SECONDARY)
+                    		input.remove("MOUSE_RIGHT");
+                    }
+                });
+
+        scene.setOnMouseDragged(
+                new EventHandler<MouseEvent>()
+                {
+                    public void handle(MouseEvent e)
+                    {
+                    	setMousePos(e.getX(), e.getY());
+                    	
+                    }
+                });
+	        
         scene.setOnScroll(
         	new EventHandler<ScrollEvent>() 
         	{
@@ -60,6 +106,15 @@ public class Controller{
         		}
         });
 	}	
+	
+	public void releasedMouseLeft() {
+		this.input.remove("MOUSE_LEFT");
+		this.sceneManager.releasedMouseLeft(this.mousePos.getX(), this.mousePos.getY());
+	}
+	
+	public void setMousePos(double x, double y) {
+		this.mousePos = new Point2D(x, y);
+	}
 	
 	public void mouseClicked(int button, double x, double y) {
 		this.sceneManager.mouseClicked(button, x, y);
@@ -72,7 +127,14 @@ public class Controller{
 	
 	public void tick() {
 		if(this.input.contains("ESCAPE")){
+			this.input.remove("ESCAPE");
 			this.sceneManager.inputEscape();
+		}
+		if(this.input.contains("MOUSE_LEFT")){
+			this.sceneManager.inputMouseLeft(this.mousePos.getX(), this.mousePos.getY());
+		}
+		if(this.input.contains("MOUSE_RIGHT")){
+			
 		}
 	}
 }

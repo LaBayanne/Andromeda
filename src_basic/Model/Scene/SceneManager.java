@@ -31,6 +31,14 @@ public class SceneManager {
 		this.activeScene.moveWheel(dy);
 	}
 	
+	public void inputMouseLeft(double x, double y) {
+		this.activeScene.inputMouseLeft(x, y);
+	}
+	
+	public void releasedMouseLeft(double x, double y) {
+		this.activeScene.releasedMouseLeft(x, y);
+	}
+	
 	/**
 	 * 
 	 */
