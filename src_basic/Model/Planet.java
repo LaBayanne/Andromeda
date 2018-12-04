@@ -35,7 +35,7 @@ public class Planet {
 		
 		this.owner = 0;
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
-		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0, 0);
+		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 0.5, 0, 0, 0);
 		
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
@@ -51,7 +51,7 @@ public class Planet {
 		this.stock = 0;
 		this.squadSize = 100;//100 percent by default
 		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
-		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 1.1, 0, 0, owner);
+		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 0.5, 0, 0, owner);
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
@@ -86,6 +86,7 @@ public class Planet {
 	
 	public Squad generateSquad() {
 		reloadTimer();
+		this.starshipModel.setOwner(this.owner);
 		Squad squad = new Squad(this.nbStarshipToGenerate, this.starshipModel, this);
 		int restUnit = squad.repartsStarships();
 		squad.setDestinationPlanet(this.target);
@@ -125,7 +126,13 @@ public class Planet {
 	}
 	
 	public void setSquadSize(int size) {
-		this.squadSize = size % 100;
+		this.squadSize += size;
+		if(this.squadSize < 1) {
+			this.squadSize = 1;
+		}
+		else if(this.squadSize > 100) {
+			this.squadSize = 100;
+		}
 	}
 	
 	public Point2D getOrigin() {
