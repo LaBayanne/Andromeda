@@ -3,6 +3,11 @@ package src_basic.Model;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
+/**
+ * Represent a planet in the game
+ * @author Chocorion and Labayanne
+ *
+ */
 public class Planet {
 	private Point2D origin;
 	private double radius;
@@ -58,26 +63,45 @@ public class Planet {
 		this.target = null;
 	}
 
+	/**
+	 * Actualize the starship stock of the planet
+	 */
 	public void actualiseStock() {
 		this.realStock += this.poductionSpeed;
 		this.stock = (int) Math.round(this.realStock);
 	}
 	
+	/**
+	 * Decrease the stock and the real stock of the planet
+	 * @param nbUnit	Number of starship to decrease
+	 */
 	public void decreaseStock(int nbUnit) {
 		this.realStock -= (double) nbUnit;
 		this.stock -= nbUnit;
 	}
 	
-	public void increaseStock(int nb) {
-		this.realStock += nb;
-		this.stock += nb;
+	/**
+	 * Increase the stock and the real stock of the planet 
+	 * @param nbUnit 	Number of starship to increase
+	 */
+	public void increaseStock(int nbUnit) {
+		this.realStock += nbUnit;
+		this.stock += nbUnit;
 	}
 	
+	/**
+	 * Set the number of unit needed for attack
+	 * @param target	The destination planet
+	 */
 	public void prepareAttack(Planet target) {
-		this.nbStarshipToGenerate += getNbUnitPerSquad();//+= was here //Wut ?
+		this.nbStarshipToGenerate += getNbUnitPerSquad();
 		this.target = target;
 	}
 	
+	/**
+	 * Calcul of many starship per squad, based on the stock and the squadsize
+	 * @return the number of starship per squad
+	 */
 	public int getNbUnitPerSquad() {
 		System.out.println("Squadsize : " + this.squadSize);
 		System.out.println("Stock : " + this.stock + " nbUnit : " + 
@@ -85,11 +109,17 @@ public class Planet {
 		return (this.stock - this.nbStarshipToGenerate) * this.squadSize/100;
 	}
 	
+	/**
+	 * Create the squad with nbStarshipToGenerate Unit
+	 * @return	The squad create
+	 */
 	public Squad generateSquad() {
 		reloadTimer();
 		this.starshipModel.setOwner(this.owner);
+		
 		Squad squad = new Squad(this.nbStarshipToGenerate, this.starshipModel, this);
 		int restUnit = squad.repartsStarships();
+		
 		squad.setDestinationPlanet(this.target);
 		this.decreaseStock(this.nbStarshipToGenerate - restUnit);
 		
@@ -97,33 +127,38 @@ public class Planet {
 		return squad;
 	}
 	
+	/**
+	 * Decrease the timer used for fragmenting the attack in multiple wave
+	 * @return the new value of the timer
+	 */
 	public double decreaseTimer() {
 		if(this.timer > 0)
 			this.timer -= 1;
 		return this.timer;
 	}
 	
+	/**
+	 * Set the timer to it's maximum value
+	 */
 	public void reloadTimer() {
 		this.timer = this.timerMax;
 	}
 	
 	
-	public void setOwner(int owner) {
-		this.owner = owner;
+	
+	public int getNbStarshipToGenerate() 	{	return this.nbStarshipToGenerate;	}
+	public int getOwner()					{ 	return this.owner;  }
+	public Hitbox getHitbox() 				{	return this.hitbox; }
+	public int getStock() 					{	return this.stock;  }
+	public void setOwner(int owner) 		{	this.owner = owner;	}
+	public double getRadius() 				{	return this.radius;	}
+	public Point2D getOrigin() {
+		return new Point2D(this.origin.getX(), this.origin.getY());
 	}
 	
-	public int getNbStarshipToGenerate() {return this.nbStarshipToGenerate;}
-	
-	public Hitbox getHitbox() {
-		return this.hitbox;
-	}
 	
 	public void setOrigin(Point2D point) {
 		this.origin = new Point2D(point.getX(), point.getY());
-	}
-	
-	public int getStock() {
-		return this.stock;
 	}
 	
 	public void setSquadSize(int size) {
@@ -135,15 +170,4 @@ public class Planet {
 			this.squadSize = 100;
 		}
 	}
-	
-	public Point2D getOrigin() {
-		return new Point2D(this.origin.getX(), this.origin.getY());
-	}
-	
-	public double getRadius() {
-		return this.radius;
-	}
-	
-	public int getOwner()	{ return this.owner; }
-	
 }

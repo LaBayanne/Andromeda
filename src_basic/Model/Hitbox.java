@@ -7,6 +7,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * This class is used to detect collision between objects in the game
+ * @author Labayanne
+ *
+ */
 public class Hitbox{
 	Shape shape;
 	
