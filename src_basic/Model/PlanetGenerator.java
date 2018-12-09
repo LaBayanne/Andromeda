@@ -6,8 +6,8 @@ import java.util.Random;
 import javafx.geometry.Point2D;
 
 public class PlanetGenerator {
-	private int maxSize;
-	private int minSize;
+	private double maxSize;
+	private double minSize;
 	
 	private int nbMax;
 	private int nbMin;
@@ -17,7 +17,7 @@ public class PlanetGenerator {
 	
 	private Random rand;
 	
-	public PlanetGenerator(int maxSize, int minSize, int nbMax, int nbMin, int windowWidth, int windowHeight) {
+	public PlanetGenerator(double maxSize, double minSize, int nbMax, int nbMin, int windowWidth, int windowHeight) {
 		this.maxSize = maxSize;
 		this.minSize = minSize;
 		
@@ -37,7 +37,13 @@ public class PlanetGenerator {
 		return this.rand.nextInt(max - min + 1) + min;
 	}
 	
-	private boolean isValidPlanet(int originX, int originY, int radius, ArrayList<Planet> planets) {
+	private double getRandomDouble(double min, double max) {
+		double random =  this.rand.nextDouble();
+		
+		return min + (random * (max - min));
+	}
+	
+	private boolean isValidPlanet(int originX, int originY, double radius, ArrayList<Planet> planets) {
 		if (originX - radius <= 0)	return false;
 		if (originY - radius <= 0)  return false;
 		
@@ -64,7 +70,7 @@ public class PlanetGenerator {
 		
 		int nbPlanet = getRandom(this.nbMin, this.nbMax);
 		int originX, originY;
-		int radius;
+		double radius, productionSpeed;
 		
 		for (int i = 0; i < nbPlanet; i++) {
 			//public Planet(Point2D origin, double radius, double productionSpeed, int owner)
@@ -72,10 +78,16 @@ public class PlanetGenerator {
 				originX = this.getRandom(50, this.windowWidth);
 				originY = this.getRandom(50, this.windowHeight);
 				
-				radius = this.getRandom(this.minSize, this.maxSize);
+				radius = this.getRandomDouble(this.minSize, this.maxSize);
 				
-				
-			}
+				if (this.isValidPlanet(originX, originY, radius, planetList)) {
+					productionSpeed = this.getRandomDouble(0.001, 0.2);//Faire en fonction de la taille et pas de manière aléatoire
+					planetList.add(new Planet(new Point2D(originX, originY), radius, productionSpeed, 0)); //Production speed and owner to define
+					break;
+				} else {
+					continue;
+				}
+			} while (true);
 		}
 		return planetList;
 	}
