@@ -53,6 +53,7 @@ public class SceneGame implements Scenery{
 			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 1 &&
 						!this.selectedPlanets.contains(planet)) { 	
 				this.selectedPlanets.add(planet);
+				planet.setSquadSize(this.squadSize);
 			}
 		}
 	}

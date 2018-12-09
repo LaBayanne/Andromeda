@@ -114,6 +114,10 @@ public class Squad{
 		}
 	}
 	
+	/**
+	 * Change the owner of all starships in the squad
+	 * @param owner
+	 */
 	public void setOwner(int owner) {
 		for (StarShip starship : this.starships) {
 			starship.setOwner(owner);
