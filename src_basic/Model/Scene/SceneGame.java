@@ -6,6 +6,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
 import src_basic.Model.Planet;
+import src_basic.Model.PlanetGenerator;
 import src_basic.Model.Squad;
 import src_basic.View.ViewGame;
 
@@ -22,17 +23,21 @@ public class SceneGame implements Scenery{
 	Point2D selectRectOrigin;
 	boolean isThereSelectRect;
 	
+	private PlanetGenerator planetGenerator;
+	
 	public SceneGame(GraphicsContext gc) {
 		this.gc = gc;
 		this.view = new ViewGame(gc);
 		
-		this.planets = new ArrayList<Planet>();
+		this.planetGenerator = new PlanetGenerator(100, 20, 30, 10, 960, 640);
+		
+		this.planets = this.planetGenerator.generate();
 		this.squads = new ArrayList<Squad>();
 		this.selectedPlanets = new ArrayList<Planet>();
 		
 		this.squadSize = 100;
 		
-		this.generatePlanets();
+		// this.generatePlanets();
 		this.selectRect = new Rectangle(0, 0, 0, 0);
 		this.isThereSelectRect = false;
 		
