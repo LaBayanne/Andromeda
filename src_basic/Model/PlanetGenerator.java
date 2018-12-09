@@ -99,7 +99,7 @@ public class PlanetGenerator {
 				radius = this.getRandomDouble(this.minSize, this.maxSize);
 				
 				if (this.isValidPlanet(originX, originY, radius, planetList)) {
-					productionSpeed = this.getRandomDouble(0.001, 0.2);//Faire en fonction de la taille et pas de manière aléatoire
+					productionSpeed = this.getRandomDouble(0.001, 0.009);//Faire en fonction de la taille et pas de manière aléatoire
 					planetList.add(new Planet(new Point2D(originX, originY), radius, productionSpeed, 0)); //Production speed and owner to define
 					break;
 				} else {
@@ -129,7 +129,7 @@ public class PlanetGenerator {
 		int planetNumber[] = new int[nbPlayers];
 		boolean alreadyIn;
 		for (int i = 0; i < nbPlayers; i++) {
-			System.err.println("Checking planet for player number " + i + 1);
+			System.err.println("Checking planet for player number " + i);
 			do {
 				planetNumber[i] = this.getRandom(0, nbPlanet);
 				System.err.println("\tGet planet number " + planetNumber[i]);
@@ -137,7 +137,7 @@ public class PlanetGenerator {
 				
 				for (int j = 0; j < i; j++) {
 					if (planetNumber[j] == planetNumber[i]) {
-						System.err.println("\tPlayer number " + (j + 1) + " already pocess this planet !");
+						System.err.println("\tPlayer number " + j + " already pocess this planet !");
 						alreadyIn = true;
 						break;
 					}
