@@ -50,7 +50,8 @@ public class SceneGame implements Scenery{
 	public void selectActivePlanet(double x, double y) {
 		//this.selectedPlanets.clear();
 		for(Planet planet:this.planets) {
-			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 0) { 	
+			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 1 &&
+						!this.selectedPlanets.contains(planet)) { 	
 				this.selectedPlanets.add(planet);
 			}
 		}
@@ -84,11 +85,6 @@ public class SceneGame implements Scenery{
 	
 	public void moveWheel(int dy) {
 		this.setSquadSize(dy);
-		for(Planet planet:this.planets){
-			if(planet.getOwner() == 0) {
-				planet.setSquadSize(this.squadSize);
-			}
-		}
 	}
 	
 	public void inputMouseLeft(double x, double y) {
@@ -140,10 +136,13 @@ public class SceneGame implements Scenery{
 			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0) {
 				Squad newSquad = planet.generateSquad();
 				this.squads.add(newSquad);
-				
 				//For debbug
 				//newSquad.setDestinationPlanet(this.planets.get(0));
 				
+			}
+			
+			if(planet.getOwner() == 1) {
+				planet.setSquadSize(this.squadSize);
 			}
 			
 		}
