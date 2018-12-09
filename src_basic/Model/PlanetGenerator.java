@@ -89,6 +89,9 @@ public class PlanetGenerator {
 				}
 			} while (true);
 		}
+		for (Planet p : planetList) {
+			p.increaseStock(this.getRandom(0, 30));
+		}
 		return planetList;
 	}
 	
