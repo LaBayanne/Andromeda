@@ -119,7 +119,7 @@ public class SceneGame implements Scenery{
 	public void releasedMouseLeft(double x, double y) {
 		this.selectedPlanets.clear();
 		for(Planet planet:this.planets) {
-			if(planet.getOwner() == 0 && planet.getHitbox().collision(this.selectRect)) {
+			if(planet.getOwner() == 1 && planet.getHitbox().collision(this.selectRect)) {
 				this.selectedPlanets.add(planet);
 			}
 		}
