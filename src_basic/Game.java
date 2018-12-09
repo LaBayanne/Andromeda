@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 import src_basic.Controller.Controller;
 import src_basic.Model.Scene.SceneManager;
 
+/**
+ * Represent the entire game !
+ * @author chocorion and labayanne
+ *
+ */
 public class Game extends Application {
 	
 	public static void main(String[] args) {
