@@ -5,6 +5,11 @@ import java.util.Random;
 
 import javafx.geometry.Point2D;
 
+/**
+ * This class is used for generating planets *
+ * @author chocorion
+ *
+ */
 public class PlanetGenerator {
 	private double maxSize;
 	private double minSize;
@@ -33,6 +38,7 @@ public class PlanetGenerator {
 		this(0, 0, 0, 0, 0, 0);
 	}
 	
+
 	private int getRandom(int min, int max) {
 		return this.rand.nextInt(max - min + 1) + min;
 	}
@@ -43,6 +49,15 @@ public class PlanetGenerator {
 		return min + (random * (max - min));
 	}
 	
+	/**
+	 * Check if a planet is on the screen with no collisions with other
+	 * planets already generates
+	 * @param originX	The x coord of the planet's center
+	 * @param originY	The y coord of the planet's center
+	 * @param radius	Planet's radius
+	 * @param planets	List of planet already generated
+	 * @return
+	 */
 	private boolean isValidPlanet(int originX, int originY, double radius, ArrayList<Planet> planets) {
 		if (originX - radius <= 0)	return false;
 		if (originY - radius <= 0)  return false;
@@ -64,7 +79,10 @@ public class PlanetGenerator {
 		}
 		return true;
 	}
-	
+	/**
+	 * Generate planets
+	 * @return the ArrayList of planets generate
+	 */
 	public ArrayList<Planet> generate() {
 		ArrayList<Planet> planetList = new ArrayList<>();
 		
@@ -95,6 +113,11 @@ public class PlanetGenerator {
 		return planetList;
 	}
 	
+	/**
+	 * Give a planet to all players
+	 * @param nbPlayers	How many players in the game
+	 * @param planets	The list of all planets
+	 */
 	public void givePlanet(int nbPlayers, ArrayList<Planet> planets) {
 		System.err.println("Welcome in givePlanet !");
 		int nbPlanet = planets.size();

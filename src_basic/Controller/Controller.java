@@ -12,6 +12,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import src_basic.Model.Scene.SceneManager;
 
+/**
+ * This class get all the input from the user
+ * @author Labayanne
+ *
+ */
 public class Controller{
 	ArrayList<String> input;
 	SceneManager sceneManager;
