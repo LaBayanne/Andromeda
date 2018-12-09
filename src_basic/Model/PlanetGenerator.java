@@ -106,7 +106,7 @@ public class PlanetGenerator {
 		int planetNumber[] = new int[nbPlayers];
 		boolean alreadyIn;
 		for (int i = 0; i < nbPlayers; i++) {
-			System.err.println("Checking planet for player number " + i);
+			System.err.println("Checking planet for player number " + i + 1);
 			do {
 				planetNumber[i] = this.getRandom(0, nbPlanet);
 				System.err.println("\tGet planet number " + planetNumber[i]);
@@ -114,7 +114,7 @@ public class PlanetGenerator {
 				
 				for (int j = 0; j < i; j++) {
 					if (planetNumber[j] == planetNumber[i]) {
-						System.err.println("\tPlayer number " + j + " already pocess this planet !");
+						System.err.println("\tPlayer number " + (j + 1) + " already pocess this planet !");
 						alreadyIn = true;
 						break;
 					}

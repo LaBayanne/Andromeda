@@ -140,7 +140,7 @@ public class StarShip {
 			if (this.destinationPlanet.getOwner() == this.owner) {
 				this.destinationPlanet.increaseStock(1);
 			} else {
-				if (this.destinationPlanet.getStock() == 1) {
+				if (this.destinationPlanet.getStock() <= 1) {
 					this.destinationPlanet.setOwner(this.owner);
 					//this.destinationPlanet.increaseStock(1);
 				} else {
