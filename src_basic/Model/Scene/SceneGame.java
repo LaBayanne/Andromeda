@@ -24,14 +24,17 @@ public class SceneGame implements Scenery{
 	boolean isThereSelectRect;
 	
 	private PlanetGenerator planetGenerator;
+	private int nbPlayers;
 	
 	public SceneGame(GraphicsContext gc) {
 		this.gc = gc;
 		this.view = new ViewGame(gc);
 		
+		this.nbPlayers = 2;//By default
 		this.planetGenerator = new PlanetGenerator(100, 20, 30, 10, 960, 640);
 		
 		this.planets = this.planetGenerator.generate();
+		this.planetGenerator.givePlanet(2, this.planets);
 		this.squads = new ArrayList<Squad>();
 		this.selectedPlanets = new ArrayList<Planet>();
 		
@@ -131,7 +134,8 @@ public class SceneGame implements Scenery{
 		for(Planet planet:this.planets) {
 			//System.err.println(planet.getOwner());
 			
-			planet.actualiseStock();	//Augment the planet's stock
+			if (planet.getOwner() != 0) //0 is neutral planet
+				planet.actualiseStock();	//Augment the planet's stock
 			
 			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0) {
 				Squad newSquad = planet.generateSquad();

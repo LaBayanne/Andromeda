@@ -18,8 +18,6 @@ public class Game extends Application {
 	
 	public void start(Stage stage) {
 		
-		System.err.println("Yolo");
-		
 		stage.setTitle("Andromeda");
 		Group root = new Group();
 		Scene scene = new Scene(root);

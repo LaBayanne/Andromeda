@@ -26,11 +26,18 @@ public class ViewGame{
 		for (Planet planet : planets) {
 			Point2D where = planet.getOrigin();
 			
-			if (planet.getOwner() == 0) {
+			switch (planet.getOwner()) {
+			case 0:
+				this.gc.setFill(Color.web("#cccccc"));
+				break;
+			case 1:
 				this.gc.setFill(Color.web("#4bf221"));
-			} else {
+				break;
+			case 2:
 				this.gc.setFill(Color.web("#f24b21"));
+				break;
 			}
+
 			this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
 				planet.getRadius() * 2, planet.getRadius() * 2);
 			this.gc.setFill(Color.web("#eeeeee"));

@@ -82,7 +82,7 @@ public class PlanetGenerator {
 				
 				if (this.isValidPlanet(originX, originY, radius, planetList)) {
 					productionSpeed = this.getRandomDouble(0.001, 0.2);//Faire en fonction de la taille et pas de manière aléatoire
-					planetList.add(new Planet(new Point2D(originX, originY), radius, productionSpeed, this.getRandom(0, 1))); //Production speed and owner to define
+					planetList.add(new Planet(new Point2D(originX, originY), radius, productionSpeed, 0)); //Production speed and owner to define
 					break;
 				} else {
 					continue;
@@ -90,5 +90,34 @@ public class PlanetGenerator {
 			} while (true);
 		}
 		return planetList;
+	}
+	
+	public void givePlanet(int nbPlayers, ArrayList<Planet> planets) {
+		System.err.println("Welcome in givePlanet !");
+		int nbPlanet = planets.size();
+		if (nbPlayers > nbPlanet) {
+			System.err.println("Problem in planet generation : To many players !");
+			System.exit(1);
+		}
+		
+		int planetNumber[] = new int[nbPlayers];
+		boolean alreadyIn;
+		for (int i = 0; i < nbPlayers; i++) {
+			System.err.println("Checking planet for player number " + i);
+			do {
+				planetNumber[i] = this.getRandom(0, nbPlanet);
+				System.err.println("\tGet planet number " + planetNumber[i]);
+				alreadyIn = false;
+				
+				for (int j = 0; j < i; j++) {
+					if (planetNumber[j] == planetNumber[i]) {
+						System.err.println("\tPlayer number " + j + " already pocess this planet !");
+						alreadyIn = true;
+						break;
+					}
+				}
+			} while (alreadyIn);
+			planets.get(planetNumber[i]).setOwner(i + 1);
+		}
 	}
 }
