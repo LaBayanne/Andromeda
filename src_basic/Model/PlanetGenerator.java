@@ -72,7 +72,7 @@ public class PlanetGenerator {
 			double distanceBetweenPlanet = distance - planetTotalSize;
 			
 			//Distance min : 20% sum of the two radius
-			if (distanceBetweenPlanet < 0.2 * (p.getRadius() + radius)) {
+			if (distanceBetweenPlanet < 0.3 * (p.getRadius() + radius)) {
 				return false;
 			}
 			
@@ -99,7 +99,7 @@ public class PlanetGenerator {
 				radius = this.getRandomDouble(this.minSize, this.maxSize);
 				
 				if (this.isValidPlanet(originX, originY, radius, planetList)) {
-					productionSpeed = this.getRandomDouble(0.001, 0.009);//Faire en fonction de la taille et pas de manière aléatoire
+					productionSpeed = this.getRandomDouble(0.003, 0.01);//Faire en fonction de la taille et pas de manière aléatoire
 					planetList.add(new Planet(new Point2D(originX, originY), radius, productionSpeed, 0)); //Production speed and owner to define
 					break;
 				} else {
@@ -144,6 +144,7 @@ public class PlanetGenerator {
 				}
 			} while (alreadyIn);
 			planets.get(planetNumber[i]).setOwner(i + 1);
+			planets.get(planetNumber[i]).setStock(0);//Egality
 		}
 	}
 }

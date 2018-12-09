@@ -170,4 +170,9 @@ public class Planet {
 			this.squadSize = 100;
 		}
 	}
+	
+	public void setStock(int n) {
+		this.realStock = n;
+		this.stock = n;
+	}
 }
