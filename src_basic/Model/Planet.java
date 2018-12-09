@@ -103,8 +103,9 @@ public class Planet {
 	 * @return the number of starship per squad
 	 */
 	public int getNbUnitPerSquad() {
-		System.out.println(this.squadSize);
-		System.out.println((this.stock - this.nbStarshipToGenerate) * this.squadSize/100);
+		System.out.println("Squadsize : " + this.squadSize);
+		System.out.println("Stock : " + this.stock + " nbUnit : " + 
+						(this.stock - this.nbStarshipToGenerate) * this.squadSize/100 + "\n");
 		return (this.stock - this.nbStarshipToGenerate) * this.squadSize/100;
 	}
 	
@@ -161,7 +162,7 @@ public class Planet {
 	}
 	
 	public void setSquadSize(int size) {
-		this.squadSize += size;
+		this.squadSize = size;
 		if(this.squadSize < 1) {
 			this.squadSize = 1;
 		}
