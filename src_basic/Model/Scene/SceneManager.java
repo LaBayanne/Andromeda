@@ -1,5 +1,7 @@
 package src_basic.Model.Scene;
 
+import java.util.ArrayList;
+
 import javafx.scene.canvas.GraphicsContext;
 
 public class SceneManager {
@@ -23,8 +25,8 @@ public class SceneManager {
 	
 	/////User events
 	
-	public void mouseClicked(int button, double x, double y) {
-		this.activeScene.mouseClicked(button, x, y);
+	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
+		this.activeScene.mouseClicked(button, x, y, buttonOptions);
 	}
 	
 	public void moveWheel(int dy) {
@@ -35,8 +37,8 @@ public class SceneManager {
 		this.activeScene.inputMouseLeft(x, y);
 	}
 	
-	public void releasedMouseLeft(double x, double y) {
-		this.activeScene.releasedMouseLeft(x, y);
+	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
+		this.activeScene.releasedMouseLeft(x, y, buttonOptions);
 	}
 	
 	/**

@@ -72,7 +72,7 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
-	public void mouseClicked(int button, double x, double y) {
+	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
 		switch(button) {
 			case 0:
 				selectActivePlanet(x, y);
@@ -112,10 +112,12 @@ public class SceneGame implements Scenery{
 
 	}
 	
-	public void releasedMouseLeft(double x, double y) {
-		this.selectedPlanets.clear();
+	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
+		if(!buttonOptions.contains("CONTROL"))
+			this.selectedPlanets.clear();
 		for(Planet planet:this.planets) {
-			if(planet.getOwner() == 1 && planet.getHitbox().collision(this.selectRect)) {
+			if(planet.getOwner() == 1 && planet.getHitbox().collision(this.selectRect) && 
+					!this.selectedPlanets.contains(planet)) {
 				this.selectedPlanets.add(planet);
 			}
 		}

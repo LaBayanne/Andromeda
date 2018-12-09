@@ -26,7 +26,9 @@ public class Controller{
                 public void handle(KeyEvent e)
                 {
                     String code = e.getCode().toString();
- 
+                    if(e.getCode().getName() == "Ctrl") {
+                    	System.out.println(code);
+                    }
                     // only add once... prevent duplicates
                     if ( !input.contains(code) )
                         input.add( code );
@@ -109,7 +111,7 @@ public class Controller{
 	
 	public void releasedMouseLeft() {
 		this.input.remove("MOUSE_LEFT");
-		this.sceneManager.releasedMouseLeft(this.mousePos.getX(), this.mousePos.getY());
+		this.sceneManager.releasedMouseLeft(this.mousePos.getX(), this.mousePos.getY(), this.input);
 	}
 	
 	public void setMousePos(double x, double y) {
@@ -117,7 +119,7 @@ public class Controller{
 	}
 	
 	public void mouseClicked(int button, double x, double y) {
-		this.sceneManager.mouseClicked(button, x, y);
+		this.sceneManager.mouseClicked(button, x, y, this.input);
 	}
 	
 	public void moveWheel(int dy) {
@@ -134,7 +136,8 @@ public class Controller{
 			this.sceneManager.inputMouseLeft(this.mousePos.getX(), this.mousePos.getY());
 		}
 		if(this.input.contains("MOUSE_RIGHT")){
-			
+		}
+		if(this.input.contains("CONTROL")){
 		}
 	}
 }

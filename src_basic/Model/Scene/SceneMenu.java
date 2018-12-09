@@ -1,5 +1,7 @@
 package src_basic.Model.Scene;
 
+import java.util.ArrayList;
+
 import javafx.scene.canvas.GraphicsContext;
 import src_basic.View.ViewMenu;
 
@@ -17,7 +19,7 @@ public class SceneMenu implements Scenery {
 		return false;
 	}
 	
-	public void mouseClicked(int button, double x, double y) {
+	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
 		
 	}
 	
@@ -29,7 +31,7 @@ public class SceneMenu implements Scenery {
 		
 	}
 	
-	public void releasedMouseLeft(double x, double y) {
+	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
 		
 	}
 }
