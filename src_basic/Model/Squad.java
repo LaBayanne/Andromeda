@@ -6,6 +6,11 @@ import java.lang.Math;
 
 import javafx.geometry.Point2D;
 
+/**
+ * Represent an escadron on the game
+ * @author chocorion and labayanne
+ *
+ */
 public class Squad{
 	private ArrayList<StarShip> starships;
 
@@ -25,6 +30,10 @@ public class Squad{
 
 	}
 	
+	/**
+	 * Change the destination of all starship in the squad
+	 * @param planet	Destination of all starships
+	 */
 	public void setDestinationPlanet(Planet planet) {
 		this.destinationPlanet = planet;
 		this.destination = planet.getOrigin();
@@ -34,10 +43,18 @@ public class Squad{
 		}
 	}
 
+	/**
+	 * Add a starship in the squad
+	 * @param starship	The starship to add
+	 */
 	public void add(StarShip starship) {
 		this.starships.add(starship);
 	}
 
+	/**
+	 * Reparts all the starships around the planet
+	 * @return the number of starship that can't be placed on orbit
+	 */
 	public int repartsStarships() {
 		
 		double x, y;
@@ -79,6 +96,11 @@ public class Squad{
 		return this.starships;
 	}
 	
+	/**
+	 * Move all the starships of the squad
+	 * @param delta		current time of the frame
+	 * @param planets	List of all planets of the game, need for starship's pathfinding
+	 */
 	public void moveStarships(double delta, ArrayList<Planet> planets) {
 		Iterator<StarShip> starshipIterator = this.starships.iterator();
 		StarShip s;
