@@ -13,6 +13,11 @@ import src_basic.Model.Squad;
 import src_basic.Model.StarShip;
 import src_basic.Model.Scene.SceneGame;
 
+/**
+ * This class represent the view of the game, used to display the game on screen
+ * @author chocorion and labayanne
+ *
+ */
 public class ViewGame{
 	private GraphicsContext gc;
 	
@@ -20,6 +25,10 @@ public class ViewGame{
 		this.gc = gc;
 	}
 	
+	/**
+	 * Display all the planets
+	 * @param planets	Array of planets to display
+	 */
 	public void displayPlanets(ArrayList<Planet> planets) {
 		this.gc.setFill(Color.web("#4bf221"));
 		
@@ -27,12 +36,18 @@ public class ViewGame{
 			Point2D where = planet.getOrigin();
 			
 			switch (planet.getOwner()) {
+			
+			/*Neutral planet by default*/
 			case 0:
 				this.gc.setFill(Color.web("#cccccc"));
 				break;
+			
+			/*Human player by default*/
 			case 1:
 				this.gc.setFill(Color.web("#4bf221"));
 				break;
+			
+			/*IA player by default*/
 			case 2:
 				this.gc.setFill(Color.web("#f24b21"));
 				break;
@@ -50,6 +65,10 @@ public class ViewGame{
 	    
 	}
 
+	/**
+	 * Display all the starships of a squad
+	 * @param squads
+	 */
 	public void displaySquads(ArrayList<Squad> squads) {
 		this.gc.setFill(Color.web("#ff0405"));
 
@@ -61,6 +80,10 @@ public class ViewGame{
 		}
 	}
 	
+	/**
+	 * Draw a white circle around selected planet
+	 * @param planets	List of selected planets
+	 */
 	public void displaySelectedPlanets(ArrayList<Planet> planets) {
 		this.gc.setFill(Color.web("#ffffffff"));
 		double edge = 5;
@@ -73,6 +96,10 @@ public class ViewGame{
 		}
 	}
 	
+	/**
+	 * Display the squad size
+	 * @param size	value to display
+	 */
 	public void displaySquadSize(int size) {
 		this.gc.setFill(Color.web("#eeeeee"));
 		this.gc.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
@@ -80,12 +107,19 @@ public class ViewGame{
 		this.gc.fillText(Integer.toString(size) + "%", 10, 620);
 	}
 	
+	/**
+	 * Show the rectangular selection
+	 * @param rect	the dimension of the rectangle
+	 */
 	public void displaySelectRect(Rectangle rect) {
 		this.gc.setStroke(Color.web("#ffffff"));
 		this.gc.strokeRect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
 	}
 	
-
+	/**
+	 * Tick function, draw the entire game
+	 * @param game
+	 */
 	public void tick(SceneGame game) {
 		//this.gc.clearRect(0, 0, 960, 640); // PASSER EN PARAM
 		this.gc.setFill(Color.web("#000000"));

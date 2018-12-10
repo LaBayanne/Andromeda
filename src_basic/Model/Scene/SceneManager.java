@@ -2,6 +2,13 @@ package src_basic.Model.Scene;
 
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * Represent the scene manager.
+ * The scene manager manage the input from controller, 
+ * and manage the current scene.
+ * @author chocorion
+ *
+ */
 public class SceneManager {
 	private Scenery activeScene;
 	private SceneGame gameScene;
@@ -16,12 +23,12 @@ public class SceneManager {
 		this.gameScene = new SceneGame(gc);
 		this.menuScene = new SceneMenu(gc);
 		
-		// A changer si on voudra commencer le jeu avec le menu
+		/* First scene to show. By default, it's the game */
 		this.activeScene = this.gameScene;
 		this.continueGame = true;
 	}
 	
-	/////User events
+	/* User events */
 	
 	public void mouseClicked(int button, double x, double y) {
 		this.activeScene.mouseClicked(button, x, y);
@@ -40,7 +47,7 @@ public class SceneManager {
 	}
 	
 	/**
-	 * 
+	 * 	End the game
 	 */
 	public void inputEscape() {
 		this.continueGame = false;
