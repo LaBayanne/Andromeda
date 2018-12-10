@@ -72,6 +72,11 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
+	/**
+	 * Find the planet destination, and prepare attack for all selected planets
+	 * @param x	x coord of click
+	 * @param y y coord of click
+	 */
 	public void selectTarget(double x, double y) {
 		Planet target = null;
 		for(Planet planet:this.planets) {
@@ -87,6 +92,13 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
+	
+	/**
+	 * On click, call the function selectActivePlanet or selectTarget
+	 * @param button	the value of button, 0 for left click, 1 for right click
+	 * @param x 		x coord of the click
+	 * @param y 		y coord of the click
+	 */
 	public void mouseClicked(int button, double x, double y) {
 		switch(button) {
 			case 0:
@@ -98,6 +110,9 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void moveWheel(int dy) {
 		this.setSquadSize(dy);
 	}
