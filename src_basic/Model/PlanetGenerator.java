@@ -11,6 +11,8 @@ import javafx.geometry.Point2D;
  *
  */
 public class PlanetGenerator {
+	private static double collisionLimit;
+	
 	private double maxSize;
 	private double minSize;
 	
@@ -22,7 +24,12 @@ public class PlanetGenerator {
 	
 	private Random rand;
 	
+	static {
+		collisionLimit = 0.3;
+	}
+	
 	public PlanetGenerator(double maxSize, double minSize, int nbMax, int nbMin, int windowWidth, int windowHeight) {
+		
 		this.maxSize = maxSize;
 		this.minSize = minSize;
 		
@@ -72,7 +79,7 @@ public class PlanetGenerator {
 			double distanceBetweenPlanet = distance - planetTotalSize;
 			
 			//Distance min : 20% sum of the two radius
-			if (distanceBetweenPlanet < 0.3 * (p.getRadius() + radius)) {
+			if (distanceBetweenPlanet < this.collisionLimit * (p.getRadius() + radius)) {
 				return false;
 			}
 			
@@ -147,4 +154,6 @@ public class PlanetGenerator {
 			planets.get(planetNumber[i]).setStock(0);//Egality
 		}
 	}
+	
+	public static double getCollisionLimit()	{	return collisionLimit; }
 }
