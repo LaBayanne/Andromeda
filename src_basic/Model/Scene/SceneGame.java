@@ -47,6 +47,11 @@ public class SceneGame implements Scenery{
 	}
 	
 	//////User events
+	/***
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void selectActivePlanet(double x, double y) {
 		//this.selectedPlanets.clear();
 		for(Planet planet:this.planets) {
@@ -57,6 +62,11 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
+	/***
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void selectTarget(double x, double y) {
 		Planet target = null;
 		for(Planet planet:this.planets) {
@@ -72,6 +82,13 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
+	/***
+	 * 
+	 * @param button
+	 * @param x
+	 * @param y
+	 * @param buttonOptions
+	 */
 	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
 		switch(button) {
 			case 0:
@@ -83,10 +100,17 @@ public class SceneGame implements Scenery{
 		}
 	}
 	
+	/***
+	 * 
+	 * param dy
+	 */
 	public void moveWheel(int dy) {
 		this.setSquadSize(dy);
 	}
 	
+	/***
+	 * 
+	 */
 	public void inputMouseLeft(double x, double y) {
 		Rectangle rect = this.selectRect;
 		if(!this.isThereSelectRect ) {

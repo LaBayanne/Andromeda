@@ -44,7 +44,8 @@ public class ViewGame{
 			
 			//+7 cst magiques à changer en fonction de la taille de la police
 			this.gc.setFont(Font.font("Verdana", 15));
-			this.gc.fillText(Integer.toString(planet.getStock()), where.getX() - 7, where.getY() + 7);
+			String txt = Integer.toString(planet.getStock());
+			this.gc.fillText(txt, where.getX() - 7, where.getY() + 7);
 
 		}
 	    
