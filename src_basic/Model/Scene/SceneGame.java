@@ -31,6 +31,9 @@ public class SceneGame implements Scenery{
 	private PlanetGenerator planetGenerator;
 	private int nbPlayers;
 	
+	private double timerDoubleClickTotal;
+	private double timerDoubleClick;
+	
 	public SceneGame(GraphicsContext gc) {
 		this.gc = gc;
 		this.view = new ViewGame(gc);
@@ -49,6 +52,9 @@ public class SceneGame implements Scenery{
 		this.selectRect = new Rectangle(0, 0, 0, 0);
 		this.isThereSelectRect = false;
 		
+		this.timerDoubleClickTotal = 60;
+		this.timerDoubleClick = 0;
+		
 	}
 	
 	/* Manage user inputs */
@@ -61,15 +67,32 @@ public class SceneGame implements Scenery{
 	 */
 	public void selectActivePlanet(double x, double y) {
 		//this.selectedPlanets.clear();
+		boolean touchPlanet = false;
 		for(Planet planet:this.planets) {
 			/* Ne pas mettre 1 mais une variable pour connaitre l'id du joueur ! */
-			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 1 &&
-						!this.selectedPlanets.contains(planet)) { 	
-				this.selectedPlanets.add(planet);
-				planet.setSquadSize(this.squadSize);
-				/* On peut quitter nan ? Il ne peut y avoir qu'une planète sur un point de l'espace */
+			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 1) { 
+				if(this.timerDoubleClick > 0) {
+					touchPlanet = true;
+				}
+				else {
+					if(!this.selectedPlanets.contains(planet)) {
+						this.selectedPlanets.add(planet);
+						planet.setSquadSize(this.squadSize);
+						/* On peut quitter nan ? Il ne peut y avoir qu'une planète sur un point de l'espace */
+					}
+				}
 			}
 		}
+		this.timerDoubleClick = this.timerDoubleClickTotal;
+		if(touchPlanet) {
+			this.timerDoubleClick = 0;
+			this.selectedPlanets.clear();
+			for(Planet planet:this.planets) {
+				if(planet.getOwner() == 1)
+					this.selectedPlanets.add(planet);
+			}
+		}
+		
 	}
 
 	/**
@@ -162,6 +185,7 @@ public class SceneGame implements Scenery{
 	public boolean tick(double delta) {
 		
 		this.moveSquad(delta);
+		updateTimerClick(delta);
 		for(Planet planet:this.planets) {
 			//System.err.println(planet.getOwner());
 			
@@ -179,11 +203,18 @@ public class SceneGame implements Scenery{
 			if(planet.getOwner() == 1) {
 				planet.setSquadSize(this.squadSize);
 			}
+			System.out.println("Timer : " + this.timerDoubleClick);
 			
 		}
 		this.view.tick(this);
 		
 		return true;
+	}
+	
+	public void updateTimerClick(double delta) {
+		if(this.timerDoubleClick > 0) {
+			this.timerDoubleClick -= delta * 0.2;
+		}
 	}
 	
 	public void moveSquad(double delta) {
@@ -200,6 +231,10 @@ public class SceneGame implements Scenery{
 		else if(this.squadSize > 100) {
 			this.squadSize = 100;
 		}
+	}
+	
+	public void setTimerDoubleClick(int value) {
+		this.timerDoubleClick = value;
 	}
 	
 	public void generatePlanets() {
