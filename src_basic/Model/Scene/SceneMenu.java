@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import src_basic.View.ViewMenu;
 
+/**
+ * This class represent the menu, and manage all inputs from the controller
+ * @author chocorion
+ *
+ */
 public class SceneMenu implements Scenery {
 	private GraphicsContext gc;
 	private ViewMenu view;

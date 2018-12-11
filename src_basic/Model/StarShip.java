@@ -49,6 +49,10 @@ public class StarShip {
 		this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
 	}
 	
+	/**
+	 * Copy constructor
+	 * @param starship	starship to copy
+	 */
 	public StarShip(StarShip starship) {
 		
 		this.position = new Point2D(starship.getPosition().getX(), starship.getPosition().getY());
@@ -64,12 +68,20 @@ public class StarShip {
 
 	}
 	
+	/**
+	 * Basic constructor, build a starship with all value set to 0
+	 */
 	public StarShip() {
 		this(Point2D.ZERO, Point2D.ZERO, 0, 0, 0.0, 0);
 	}
 	
 	
-	
+	/**
+	 * Compute the angle value between two points
+	 * @param position		The first point
+	 * @param destination	The second point
+	 * @return
+	 */
 	private double angleToPoint(Point2D position, Point2D destination) {
 		return Math.toDegrees(Math.atan2(destination.getY() - position.getY(), destination.getX() - position.getX()));
 	}

@@ -10,6 +10,11 @@ import src_basic.Model.PlanetGenerator;
 import src_basic.Model.Squad;
 import src_basic.View.ViewGame;
 
+/**
+ * Represent the model of the game.
+ * @author chocorion
+ *
+ */
 public class SceneGame implements Scenery{
 	private GraphicsContext gc;
 	private ViewGame view;
@@ -46,26 +51,31 @@ public class SceneGame implements Scenery{
 		
 	}
 	
-	//////User events
-	/***
+	/* Manage user inputs */
+	
+	/**
+	 * Select planets
 	 * 
-	 * @param x
-	 * @param y
+	 * @param x	x coord of the click
+	 * @param y	y coord of the click
 	 */
 	public void selectActivePlanet(double x, double y) {
 		//this.selectedPlanets.clear();
 		for(Planet planet:this.planets) {
+			/* Ne pas mettre 1 mais une variable pour connaitre l'id du joueur ! */
 			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 1 &&
 						!this.selectedPlanets.contains(planet)) { 	
 				this.selectedPlanets.add(planet);
+				planet.setSquadSize(this.squadSize);
+				/* On peut quitter nan ? Il ne peut y avoir qu'une planète sur un point de l'espace */
 			}
 		}
 	}
-	
-	/***
-	 * 
-	 * @param x
-	 * @param y
+
+	/**
+	 * Find the planet destination, and prepare attack for all selected planets
+	 * @param x	x coord of click
+	 * @param y y coord of click
 	 */
 	public void selectTarget(double x, double y) {
 		Planet target = null;
@@ -83,10 +93,10 @@ public class SceneGame implements Scenery{
 	}
 	
 	/***
-	 * 
-	 * @param button
-	 * @param x
-	 * @param y
+	* On click, call the function selectActivePlanet or selectTarget
+	 * @param button	the value of button, 0 for left click, 1 for right click
+	 * @param x 		x coord of the click
+	 * @param y 		y coord of the click
 	 * @param buttonOptions
 	 */
 	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
@@ -99,11 +109,10 @@ public class SceneGame implements Scenery{
 				break;
 		}
 	}
-	
 	/***
 	 * 
 	 * param dy
-	 */
+	**/
 	public void moveWheel(int dy) {
 		this.setSquadSize(dy);
 	}
@@ -148,7 +157,7 @@ public class SceneGame implements Scenery{
 		this.isThereSelectRect = false;
 	}
 	
-	////end user events
+	/* End of user inputs */
 	
 	public boolean tick(double delta) {
 		
