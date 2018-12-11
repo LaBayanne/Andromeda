@@ -41,23 +41,24 @@ class PlanetGeneratorTest {
 		}
 	}
 
+	
 	void testGivePlanet() {
-		//PlanetGenerator(double maxSize, double minSize, int nbMax, int nbMin, int windowWidth, int windowHeight)
-		System.err.println("Yoo");
-		PlanetGenerator generator = new PlanetGenerator(5, 6, 5, 5, 50, 50);
-		System.err.println("End planet generation");
+
+		PlanetGenerator generator = new PlanetGenerator(6, 5, 6, 5, 500, 500);
+
 		ArrayList<Planet> planets = generator.generate();
-		generator.givePlanet(4, planets);
-		System.err.println("End planet giving");
+		System.out.println("Number of planets generated : " + planets.size() + "\n");
+		generator.givePlanet(3, planets);
+
 		
-		boolean tab[] = { false, false, false, false, false };
+		boolean tab[] = { false, false, false, false};
 		int index;
 		
-		for (int i = 0; i < 5; i++) {
-			System.err.println("Yoo");
+		for (int i = 0; i < 3; i++) {
+
 			index = planets.get(i).getOwner();
 			
-			if (tab[index]) {
+			if (tab[index] && index != 0) {
 				fail("Two players with same planet ! ");
 			} else {
 				tab[index] = true;
@@ -67,7 +68,7 @@ class PlanetGeneratorTest {
 	
 	@Test
 	void testGivePlanetNoExceed1Second() {
-		assertTimeoutPreemptively(ofSeconds(1), () -> {
+		assertTimeoutPreemptively(ofSeconds(5), () -> {
 	         testGivePlanet();
 	    });
 	}

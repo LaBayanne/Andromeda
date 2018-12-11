@@ -93,6 +93,7 @@ public class PlanetGenerator {
 	public ArrayList<Planet> generate() {
 		ArrayList<Planet> planetList = new ArrayList<>();
 		
+		System.err.println(nbMin + " " + nbMax);
 		int nbPlanet = getRandom(this.nbMin, this.nbMax);
 		int originX, originY;
 		double radius, productionSpeed;
@@ -126,20 +127,25 @@ public class PlanetGenerator {
 	 * @param planets	The list of all planets
 	 */
 	public void givePlanet(int nbPlayers, ArrayList<Planet> planets) {
-		System.err.println("Welcome in givePlanet !");
+		System.err.println("Welcom in givePlanet !");
 		int nbPlanet = planets.size();
 		if (nbPlayers > nbPlanet) {
 			System.err.println("Problem in planet generation : To many players !");
 			System.exit(1);
 		}
 		
+		int nb = 0;
 		int planetNumber[] = new int[nbPlayers];
 		boolean alreadyIn;
+		
+		System.err.println(nbPlanet + " planets for " + nbPlayers + " players !");
 		for (int i = 0; i < nbPlayers; i++) {
-			System.err.println("Checking planet for player number " + i);
+			System.err.println("Searching planet for player " + i);
+			nb = 0;
 			do {
-				planetNumber[i] = this.getRandom(0, nbPlanet);
-				System.err.println("\tGet planet number " + planetNumber[i]);
+				planetNumber[i] = this.getRandom(0, nbPlanet - 1);
+				System.err.println("Testing planet number " + planetNumber[i]);
+				nb += 1;
 				alreadyIn = false;
 				
 				for (int j = 0; j < i; j++) {
@@ -149,7 +155,12 @@ public class PlanetGenerator {
 						break;
 					}
 				}
+				if (nb > nbPlanet) {
+					System.exit(1);
+				}
 			} while (alreadyIn);
+			System.err.println("Number of planets : " + planets.size());
+			
 			planets.get(planetNumber[i]).setOwner(i + 1);
 			planets.get(planetNumber[i]).setStock(0);//Egality
 		}
