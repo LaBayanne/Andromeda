@@ -17,6 +17,9 @@ public class Planet implements Serializable {
 	
 	private double poductionSpeed;
 	
+	/** There is a realStock because we can't have half-starship but the speed production
+	 * can't be an integer
+	 **/
 	private int stock;
 	private double realStock; 
 	
@@ -65,8 +68,10 @@ public class Planet implements Serializable {
 	 * Actualize the starship stock of the planet
 	 */
 	public void actualiseStock() {
+		
 		this.realStock += this.poductionSpeed;
 		this.stock = (int) Math.round(this.realStock);
+		
 		if(this.nbStarshipToGenerate > this.stock) {
 			this.nbStarshipToGenerate = this.stock - 1;
 		}

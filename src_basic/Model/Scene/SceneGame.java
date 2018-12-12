@@ -25,6 +25,7 @@ public class SceneGame implements Scenery, Serializable{
 	private ArrayList<Squad> squads;
 	private ArrayList<Planet> planets;
 	private ArrayList<Planet> selectedPlanets;
+	private ArrayList<Squad> selectedSquads;
 	
 	private int squadSize;
 	private Rectangle selectRect;
@@ -49,6 +50,7 @@ public class SceneGame implements Scenery, Serializable{
 		this.planetGenerator.givePlanet(2, this.planets);
 		this.squads = new ArrayList<Squad>();
 		this.selectedPlanets = new ArrayList<Planet>();
+		this.selectedSquads = new ArrayList<Squad>();
 		
 		this.squadSize = 100;
 		
@@ -66,13 +68,22 @@ public class SceneGame implements Scenery, Serializable{
 	
 	/* Manage user inputs */
 	
+	public void selectSquad(double x, double y) {
+		for (Squad s : this.squads) {
+			if (s.isStarshipCollision(x, y)) {
+				this.selectedSquads.add(s);
+				break;
+			}
+		}
+	}
+	
 	/**
 	 * Select planets
 	 * 
 	 * @param x	x coord of the click
 	 * @param y	y coord of the click
 	 */
-	public void selectActivePlanet(double x, double y) {
+	public boolean selectActivePlanet(double x, double y) {
 		//this.selectedPlanets.clear();
 		boolean touchPlanet = false;
 		for(Planet planet:this.planets) {
@@ -100,6 +111,7 @@ public class SceneGame implements Scenery, Serializable{
 			}
 		}
 		
+		return touchPlanet;
 	}
 
 	/**
@@ -119,8 +131,17 @@ public class SceneGame implements Scenery, Serializable{
 				if(planet != target)
 					planet.prepareAttack(target);
 			}
+			
+			Iterator it = this.selectedSquads.iterator();
+			while(it.hasNext()) {
+				Squad s =(Squad) it.next();
+				s.setDestinationPlanet(target);
+				it.remove();
+			}
 		}
+		
 	}
+	
 	
 	/***
 	* On click, call the function selectActivePlanet or selectTarget
@@ -132,7 +153,10 @@ public class SceneGame implements Scenery, Serializable{
 	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
 		switch(button) {
 			case 0:
-				selectActivePlanet(x, y);
+				//If we don't click on a planet:
+				if (!selectActivePlanet(x, y)) {
+					selectSquad(x, y);
+				}
 				break;
 			case 1:
 				selectTarget(x, y);

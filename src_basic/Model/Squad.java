@@ -45,6 +45,22 @@ public class Squad implements Serializable {
 		}
 	}
 	
+	/**
+	 * Check if a starship of the squad is in collition with a point
+	 * @param x	x value of the point
+	 * @param y	y value of the point
+	 * @return	true if there is a collition, false else
+	 */
+	public boolean isStarshipCollision(double x, double y) {
+		for (StarShip s : this.starships) {
+			if (s.getCollisionShape().collision(new Point(x, y))) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public Planet getDestinationPlanet() {return this.destinationPlanet;}
 
 	/**
