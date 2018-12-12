@@ -1,9 +1,9 @@
 package src_basic.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.geometry.Point2D;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
  *	This class represent the basic starship generate by planets
  *
  */
-public class StarShip {
+public class StarShip implements Serializable {
 	
 	private static int height;
 	private static int width;

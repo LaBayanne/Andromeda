@@ -1,6 +1,6 @@
 package src_basic.Model;
 
-import java.awt.Point;
+import java.io.Serializable;
 
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
@@ -12,7 +12,7 @@ import javafx.scene.shape.Shape;
  * @author Labayanne
  *
  */
-public class Hitbox{
+public class Hitbox implements Serializable {
 	Shape shape;
 	
 	public Hitbox(Rectangle rect) {

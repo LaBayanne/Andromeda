@@ -1,8 +1,8 @@
 package src_basic.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.lang.Math;
 
 import javafx.geometry.Point2D;
 
@@ -11,7 +11,7 @@ import javafx.geometry.Point2D;
  * @author chocorion and labayanne
  *
  */
-public class Squad{
+public class Squad implements Serializable {
 	private ArrayList<StarShip> starships;
 
 	private int nbUnit;

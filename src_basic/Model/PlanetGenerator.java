@@ -1,5 +1,6 @@
 package src_basic.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,7 +11,7 @@ import javafx.geometry.Point2D;
  * @author chocorion
  *
  */
-public class PlanetGenerator {
+public class PlanetGenerator implements Serializable{
 	private static double collisionLimit;
 	
 	private double maxSize;
