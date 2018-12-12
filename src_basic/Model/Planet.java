@@ -12,16 +12,13 @@ import src_basic.Geometry.Point;
  *
  */
 public class Planet implements Serializable {
-
-
-
+	/** Rigid body of the planet **/
 	private Circle collisionShape;
-	
 	
 	private double poductionSpeed;
 	
 	private int stock;
-	private double realStock; // TODO Faire une fonction pour décrémenter le stock, qui prends en compte stock ET realStock
+	private double realStock; 
 	
 	private int squadSize;	
 	private StarShip starshipModel;
@@ -34,23 +31,15 @@ public class Planet implements Serializable {
 	private double timerMax;
 	private double timer;
 	
-	public Planet() {
-		this.collisionShape = new Circle(0, 0, 0);
-		
-		this.poductionSpeed = 0;
-		this.stock = 0;
-		this.squadSize = 100;//100 percents by default
-		
-		this.owner = 0;
-		
-		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, 0);
-		
-		this.nbStarshipToGenerate = 0;
-		this.timerMax = 60;
-		this.timer = 0;
-		this.target = null;
-	}
+
 	
+	/**
+	 * Complete constructor for planet
+	 * @param origin			The top left position of the planet
+	 * @param radius			Radius of the planet
+	 * @param productionSpeed	Productin of starship per frames
+	 * @param owner				ID of the planet owner
+	 */
 	public Planet(Point origin, double radius, double productionSpeed, int owner) {
 		this.collisionShape = new Circle (origin.getX(), origin.getY(), radius);
 		
@@ -63,6 +52,13 @@ public class Planet implements Serializable {
 		this.timerMax = 60;
 		this.timer = 0;
 		this.target = null;
+	}
+	
+	/**
+	 * Basic constructor for Planet
+	 */
+	public Planet() {
+		this(new Point(), 0, 0, 0);
 	}
 
 	/**
