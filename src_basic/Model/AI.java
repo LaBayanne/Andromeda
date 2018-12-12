@@ -1,10 +1,11 @@
 package src_basic.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class AI {
+public class AI implements Serializable {
 	private int team;
 	private ArrayList<Squad> squads;
 	private ArrayList<Planet> planets;
