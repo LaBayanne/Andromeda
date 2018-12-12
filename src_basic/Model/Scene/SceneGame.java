@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
+import src_basic.Model.AI;
 import src_basic.Model.Planet;
 import src_basic.Model.PlanetGenerator;
 import src_basic.Model.Squad;
 import src_basic.View.ViewGame;
+import src_basic.Model.AI;
 
 /**
  * Represent the model of the game.
@@ -20,20 +22,22 @@ public class SceneGame implements Scenery, Serializable{
 	private GraphicsContext gc;
 	private ViewGame view;
 	
-	ArrayList<Squad> squads;
-	ArrayList<Planet> planets;
-	ArrayList<Planet> selectedPlanets;
+	private ArrayList<Squad> squads;
+	private ArrayList<Planet> planets;
+	private ArrayList<Planet> selectedPlanets;
 	
-	int squadSize;
-	Rectangle selectRect;
-	Point2D selectRectOrigin;
-	boolean isThereSelectRect;
+	private int squadSize;
+	private Rectangle selectRect;
+	private Point2D selectRectOrigin;
+	private boolean isThereSelectRect;
 	
 	private PlanetGenerator planetGenerator;
 	private int nbPlayers;
 	
 	private double timerDoubleClickTotal;
 	private double timerDoubleClick;
+	
+	private ArrayList<AI> AIs;
 	
 	public SceneGame(GraphicsContext gc) {
 		this.gc = gc;
@@ -55,6 +59,9 @@ public class SceneGame implements Scenery, Serializable{
 		
 		this.timerDoubleClickTotal = 60;
 		this.timerDoubleClick = 0;
+		
+		this.AIs = new ArrayList<AI>();
+		this.AIs.add(new AI(this.planets, this.squads, 2));
 		
 	}
 	
@@ -204,12 +211,20 @@ public class SceneGame implements Scenery, Serializable{
 			if(planet.getOwner() == 1) {
 				planet.setSquadSize(this.squadSize);
 			}
-			System.out.println("Timer : " + this.timerDoubleClick);
 			
 		}
+		updateAIs(delta);
 		this.view.tick(this);
 		
 		return true;
+	}
+	
+	public void updateAIs(double delta) {
+		for(AI ai : this.AIs) {
+			ai.setSquads(this.squads);
+			ai.setPlanets(this.planets);
+			ai.tick(delta);
+		}
 	}
 	
 	public void updateTimerClick(double delta) {
