@@ -13,7 +13,7 @@ import javafx.scene.input.ScrollEvent;
 import src_basic.Model.Scene.SceneManager;
 
 /**
- * This class get all the input from the user
+ * This class get all the input from the user, and call the associate fonction in scene manager
  * @author Labayanne
  *
  */
@@ -22,9 +22,15 @@ public class Controller{
 	SceneManager sceneManager;
 	Point2D mousePos;
 	
+	/**
+	 * Basic constructor
+	 * @param scene			Javafx scene
+	 * @param scnManager	The scene manager
+	 */
 	public Controller(Scene scene, SceneManager scnManager) {
 		this.sceneManager = scnManager;
 		this.input = new ArrayList<String>();
+
 		scene.setOnKeyPressed(
             new EventHandler<KeyEvent>()
             {
