@@ -71,6 +71,7 @@ public class SceneManager {
 	}
 	
 	public void saveGame() {
+		System.err.println("Saving game !");
 		ObjectOutputStream oos = null;
 		
 		try {
@@ -78,6 +79,8 @@ public class SceneManager {
 			oos = new ObjectOutputStream(saveFile);
 			oos.writeObject(this.gameScene);
 			oos.flush();
+			saveFile.close();
+			System.err.println("Save OK !");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -85,6 +88,7 @@ public class SceneManager {
 				if (oos != null) {
 					oos.flush();
 					oos.close();
+					System.err.println("Closing stream");
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -93,14 +97,20 @@ public class SceneManager {
 	}
 	
 	public void restoreGame() {
+		System.err.println("RESTORING GAME !");
 		ObjectInputStream ois = null;
 		
 		try {
 			final FileInputStream saveFile = new FileInputStream("save.ser");
 			ois = new ObjectInputStream(saveFile);
 			
+			System.err.println("Scenegame value before restauration : " + this.gameScene);
+			this.gameScene = null;
 			this.gameScene = (SceneGame) ois.readObject();
 			this.gameScene.restor(this.gc);
+			this.activeScene = gameScene;
+			saveFile.close();
+			System.err.println("Scenegame value after restauration : " + this.gameScene);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

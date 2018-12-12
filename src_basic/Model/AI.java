@@ -6,6 +6,10 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class AI implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1683293838719027907L;
 	private int team;
 	private ArrayList<Squad> squads;
 	private ArrayList<Planet> planets;

@@ -12,6 +12,11 @@ import src_basic.Geometry.*;
  *
  */
 public class PlanetGenerator implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6281213133881422021L;
+
 	private static double collisionLimit;
 	
 	private double maxSize;

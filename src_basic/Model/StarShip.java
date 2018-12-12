@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class StarShip implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8014098871935854813L;
 	static private int WIDTH;
 	static private int HEIGHT;
 	
