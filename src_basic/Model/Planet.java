@@ -12,10 +12,7 @@ import src_basic.Geometry.Point;
  *
  */
 public class Planet implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7600800896806649195L;
+
 
 
 	private Circle collisionShape;

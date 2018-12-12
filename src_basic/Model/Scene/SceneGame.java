@@ -18,10 +18,7 @@ import src_basic.View.ViewGame;
  *
  */
 public class SceneGame implements Scenery, Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8615390660964699181L;
+
 
 	private transient ViewGame view;
 	

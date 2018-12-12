@@ -12,10 +12,7 @@ import src_basic.Geometry.*;
  *
  */
 public class Squad implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3420217461141043998L;
+
 
 	private ArrayList<StarShip> starships;
 

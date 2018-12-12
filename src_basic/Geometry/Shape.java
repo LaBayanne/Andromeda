@@ -8,10 +8,7 @@ import java.io.Serializable;
  *
  */
 public abstract class Shape implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8900919479238777190L;
+
 	protected Point origin;
 	
 	public Shape(double x, double y) {
