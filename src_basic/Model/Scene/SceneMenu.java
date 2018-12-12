@@ -39,4 +39,5 @@ public class SceneMenu implements Scenery {
 	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
 		
 	}
+	
 }

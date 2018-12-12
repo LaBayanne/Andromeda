@@ -128,12 +128,12 @@ public class AI implements Serializable {
 		Planet ally;
 		powerAttack = 0;
 		Iterator<Planet> iterator;
-		ArrayList<Planet> toRemove;
+		ArrayList<Planet> attackers;
 		
 		
 		while(!restPlanets.isEmpty() && !targets.isEmpty() && powerAttack == 0) {
 			iterator = restPlanets.iterator();
-			toRemove = new ArrayList<Planet>();
+			attackers = new ArrayList<Planet>();
 			bestTarget = null;
 			first = true;
 			for(Planet planet : targets) {
@@ -161,17 +161,15 @@ public class AI implements Serializable {
 			while (!restPlanets.isEmpty() && iterator.hasNext() && powerAttack < bestTarget.getStock() - nbAttackers) {
 				ally = iterator.next();
 				powerAttack += ally.getStock();
-				toRemove.add(ally);
+				iterator.remove();
+				attackers.add(ally);
 			}
 			if(powerAttack >= bestTarget.getStock() - nbAttackers) {
-				for(Planet planet : toRemove) {
+				for(Planet planet : attackers) {
 					planet.setAttackGroup(bestTarget.getStock(), bestTarget);
 				}
 				targets.remove(bestTarget);
 				powerAttack = 0;
-			}
-			for(Planet planet : toRemove) {
-				restPlanets.remove(planet);
 			}
 			
 		}

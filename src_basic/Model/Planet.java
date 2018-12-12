@@ -71,6 +71,9 @@ public class Planet implements Serializable {
 	public void actualiseStock() {
 		this.realStock += this.poductionSpeed;
 		this.stock = (int) Math.round(this.realStock);
+		if(this.nbStarshipToGenerate > this.stock) {
+			this.nbStarshipToGenerate = this.stock - 1;
+		}
 	}
 	
 	/**

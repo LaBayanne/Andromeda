@@ -226,9 +226,10 @@ public class SceneGame implements Scenery, Serializable{
 		while(iterator.hasNext()) {
 			planet = iterator.next();
 			if(planet.getOwner() != 1) {
-				this.selectedPlanets.remove(planet);
+				iterator.remove();
 			}
 		}
+		
 	}
 	
 	public void updateAIs(double delta) {
