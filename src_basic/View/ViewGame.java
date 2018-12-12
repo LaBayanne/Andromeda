@@ -39,17 +39,17 @@ public class ViewGame{
 			
 			/*Neutral planet by default*/
 			case 0:
-				this.gc.setFill(Color.web("#cccccc"));
+				this.gc.setFill(Color.web("#999999"));
 				break;
 			
 			/*Human player by default*/
 			case 1:
-				this.gc.setFill(Color.web("#4bf221"));
+				this.gc.setFill(Color.web("#00bb00"));
 				break;
 			
 			/*IA player by default*/
 			case 2:
-				this.gc.setFill(Color.web("#f24b21"));
+				this.gc.setFill(Color.web("#dd0000"));
 				break;
 			}
 
@@ -71,11 +71,15 @@ public class ViewGame{
 	 * @param squads
 	 */
 	public void displaySquads(ArrayList<Squad> squads) {
-		this.gc.setFill(Color.web("#ff0405"));
-
 		for (Squad squad: squads) {
-			for (StarShip startship: squad.getStarships()) {
-				Point2D where = startship.getPosition();
+			for (StarShip starship: squad.getStarships()) {
+				if(starship.getOwner() == 1) {
+					this.gc.setFill(Color.web("#00bb00"));
+				}
+				else {
+					this.gc.setFill(Color.web("#dd0000"));
+				}
+				Point2D where = starship.getPosition();
 				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
 			}
 		}

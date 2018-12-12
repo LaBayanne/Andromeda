@@ -44,7 +44,7 @@ public class AI {
 		ArrayList<AttackedPlanet> attackedPlanets = new ArrayList<AttackedPlanet>();
 		Planet target = null;
 		AttackedPlanet targetAttackedPlanet = null;
-		int team = 0;
+		int team = this.planets.get(0).getOwner();
 		int newTeam = 0;
 		boolean cont = false;
 		

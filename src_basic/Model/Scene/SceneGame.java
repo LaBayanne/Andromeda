@@ -2,6 +2,7 @@ package src_basic.Model.Scene;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,7 +12,6 @@ import src_basic.Model.Planet;
 import src_basic.Model.PlanetGenerator;
 import src_basic.Model.Squad;
 import src_basic.View.ViewGame;
-import src_basic.Model.AI;
 
 /**
  * Represent the model of the game.
@@ -213,10 +213,22 @@ public class SceneGame implements Scenery, Serializable{
 			}
 			
 		}
+		cleanSelectedPlanets();
 		updateAIs(delta);
 		this.view.tick(this);
 		
 		return true;
+	}
+	
+	public void cleanSelectedPlanets() {
+		Iterator<Planet> iterator = this.selectedPlanets.iterator();
+		Planet planet;
+		while(iterator.hasNext()) {
+			planet = iterator.next();
+			if(planet.getOwner() != 1) {
+				this.selectedPlanets.remove(planet);
+			}
+		}
 	}
 	
 	public void updateAIs(double delta) {

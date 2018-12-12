@@ -165,6 +165,8 @@ public class Planet implements Serializable {
 	}
 	
 	public void setNbStarshipToGenerate(int value) {
+		if(value < 0)
+			value = 0;
 		this.nbStarshipToGenerate += value;
 		if(this.nbStarshipToGenerate >= this.stock) {
 			this.nbStarshipToGenerate = this.stock - 1;
