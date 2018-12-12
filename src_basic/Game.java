@@ -11,7 +11,7 @@ import src_basic.Controller.Controller;
 import src_basic.Model.Scene.SceneManager;
 
 /**
- * Represent the entire game !
+ * Main of the game 
  * @author chocorion and labayanne
  *
  */
@@ -35,8 +35,7 @@ public class Game extends Application {
 	    final SceneManager sceneManager = new SceneManager(gc);
 	    final Controller controller = new Controller(scene, sceneManager);
 	    
-	    
-		
+		/** Game loop **/
 	    new AnimationTimer(){
 	    	long prevNanoTime = System.nanoTime();
 	        public void handle(long currentNanoTime){
