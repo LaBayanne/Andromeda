@@ -42,6 +42,8 @@ public class Squad{
 			starship.setDestination(planet);
 		}
 	}
+	
+	public Planet getDestinationPlanet() {return this.destinationPlanet;}
 
 	/**
 	 * Add a starship in the squad
@@ -110,6 +112,7 @@ public class Squad{
 			
 			if (s.asFinished()) {
 				starshipIterator.remove();
+				nbUnit--;
 			}
 		}
 	}
@@ -123,5 +126,7 @@ public class Squad{
 			starship.setOwner(owner);
 		}
 	}
+	
+	public int getNbUnit() {return this.nbUnit;}
 	
 }

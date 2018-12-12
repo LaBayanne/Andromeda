@@ -98,15 +98,21 @@ public class Planet {
 		this.target = target;
 	}
 	
+	public void setAttackGroup(int nbAttackers, Planet target) {
+		setNbStarshipToGenerate(nbAttackers);
+		this.target = target;
+	}
+	
 	/**
 	 * Calcul of many starship per squad, based on the stock and the squadsize
 	 * @return the number of starship per squad
 	 */
 	public int getNbUnitPerSquad() {
-		System.out.println("Squadsize : " + this.squadSize);
-		System.out.println("Stock : " + this.stock + " nbUnit : " + 
-						(this.stock - this.nbStarshipToGenerate) * this.squadSize/100 + "\n");
-		return (this.stock - this.nbStarshipToGenerate) * this.squadSize/100;
+		int nb = (this.stock - this.nbStarshipToGenerate) * this.squadSize/100;
+		if(this.stock - nb <= 0) {
+			nb--;
+		}
+		return nb;
 	}
 	
 	/**
@@ -156,6 +162,12 @@ public class Planet {
 		return new Point2D(this.origin.getX(), this.origin.getY());
 	}
 	
+	public void setNbStarshipToGenerate(int value) {
+		this.nbStarshipToGenerate += value;
+		if(this.nbStarshipToGenerate >= this.stock) {
+			this.nbStarshipToGenerate = this.stock - 1;
+		}
+	}
 	
 	public void setOrigin(Point2D point) {
 		this.origin = new Point2D(point.getX(), point.getY());
