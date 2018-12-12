@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javafx.geometry.Point2D;
+import src_basic.Geometry.*;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.shape.Rectangle;
 import src_basic.Model.AI;
 import src_basic.Model.Planet;
 import src_basic.Model.PlanetGenerator;
@@ -28,7 +27,7 @@ public class SceneGame implements Scenery, Serializable{
 	
 	private int squadSize;
 	private Rectangle selectRect;
-	private Point2D selectRectOrigin;
+	private Point selectRectOrigin;
 	private boolean isThereSelectRect;
 	
 	private PlanetGenerator planetGenerator;
@@ -78,7 +77,7 @@ public class SceneGame implements Scenery, Serializable{
 		boolean touchPlanet = false;
 		for(Planet planet:this.planets) {
 			/* Ne pas mettre 1 mais une variable pour connaitre l'id du joueur ! */
-			if(planet.getHitbox().collision(new Point2D(x, y)) && planet.getOwner() == 1) { 
+			if(planet.getCollisionShape().collision(new Point(x, y)) && planet.getOwner() == 1) { 
 				if(this.timerDoubleClick > 0) {
 					touchPlanet = true;
 				}
@@ -111,7 +110,7 @@ public class SceneGame implements Scenery, Serializable{
 	public void selectTarget(double x, double y) {
 		Planet target = null;
 		for(Planet planet:this.planets) {
-			if(planet.getHitbox().collision(new Point2D(x, y))) {
+			if(planet.getCollisionShape().collision(new Point(x, y))) {
 				target = planet;
 			}
 		}
@@ -154,24 +153,24 @@ public class SceneGame implements Scenery, Serializable{
 	public void inputMouseLeft(double x, double y) {
 		Rectangle rect = this.selectRect;
 		if(!this.isThereSelectRect ) {
-			this.selectRectOrigin = new Point2D(x, y);
+			this.selectRectOrigin = new Point(x, y);
 			this.isThereSelectRect = true;
 		}
-		if(rect.getX() >= x) {
+		if(rect.getOrigin().getX() >= x) {
 			rect.setWidth(this.selectRectOrigin.getX() - x);
-			rect.setX(x);
+			rect.getOrigin().setX(x);
 		}
 		else {
-			rect.setX(this.selectRectOrigin.getX());
-			rect.setWidth(x - rect.getX());
+			rect.getOrigin().setX(this.selectRectOrigin.getX());
+			rect.setWidth(x - rect.getOrigin().getX());
 		}
-		if(rect.getY() >= y) {
+		if(rect.getOrigin().getY() >= y) {
 			rect.setHeight(this.selectRectOrigin.getY() - y);
-			rect.setY(y);
+			rect.getOrigin().setY(y);
 		}
 		else {
-			rect.setY(this.selectRectOrigin.getY());
-			rect.setHeight(y - rect.getY());
+			rect.getOrigin().setY(this.selectRectOrigin.getY());
+			rect.setHeight(y - rect.getOrigin().getY());
 		}
 
 	}
@@ -180,7 +179,7 @@ public class SceneGame implements Scenery, Serializable{
 		if(!buttonOptions.contains("CONTROL"))
 			this.selectedPlanets.clear();
 		for(Planet planet:this.planets) {
-			if(planet.getOwner() == 1 && planet.getHitbox().collision(this.selectRect) && 
+			if(planet.getOwner() == 1 && planet.getCollisionShape().collision(this.selectRect) && 
 					!this.selectedPlanets.contains(planet)) {
 				this.selectedPlanets.add(planet);
 			}
