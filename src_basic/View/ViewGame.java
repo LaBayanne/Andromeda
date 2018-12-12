@@ -2,7 +2,7 @@ package src_basic.View;
 
 import java.util.ArrayList;
 
-import javafx.geometry.Point2D;
+//import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -12,7 +12,7 @@ import src_basic.Model.Planet;
 import src_basic.Model.Squad;
 import src_basic.Model.StarShip;
 import src_basic.Model.Scene.SceneGame;
-
+import src_basic.Geometry.*;
 /**
  * This class represent the view of the game, used to display the game on screen
  * @author chocorion and labayanne
@@ -33,7 +33,7 @@ public class ViewGame{
 		this.gc.setFill(Color.web("#4bf221"));
 		
 		for (Planet planet : planets) {
-			Point2D where = planet.getOrigin();
+			Point where = planet.getCollisionShape().getOrigin();
 			
 			switch (planet.getOwner()) {
 			
