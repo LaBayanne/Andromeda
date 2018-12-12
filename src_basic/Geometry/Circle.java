@@ -16,9 +16,9 @@ public class Circle extends Shape {
 	public boolean collision(Rectangle r) {
 		Point points[] = {
 				r.getOrigin(),
-				new Point (r.getOrigin().getX() + r.getWith(), r.getOrigin().getY()),
+				new Point (r.getOrigin().getX() + r.getWidth(), r.getOrigin().getY()),
 				new Point (r.getOrigin().getX(), r.getOrigin().getY() + r.getHeight()),
-				new Point (r.getOrigin().getX() + r.getWith(), r.getOrigin().getY() + r.getHeight())
+				new Point (r.getOrigin().getX() + r.getWidth(), r.getOrigin().getY() + r.getHeight())
 		};
 		
 		for (Point p : points) {

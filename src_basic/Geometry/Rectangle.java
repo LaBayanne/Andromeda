@@ -14,7 +14,7 @@ public class Rectangle extends Shape {
 	public Rectangle(Rectangle r) {
 		super(r.getOrigin());
 		this.height = r.getHeight();
-		this.width = r.getWith();
+		this.width = r.getWidth();
 	}
 	
 	public Rectangle(Point topLeft, double width, double height) {
@@ -31,7 +31,7 @@ public class Rectangle extends Shape {
 		);
 	}
 	
-	public double getWith()		{ return this.width;  }
+	public double getWidth()		{ return this.width;  }
 	public double getHeight()	{ return this.height; }
 	
 	public void setWidth(double width) {

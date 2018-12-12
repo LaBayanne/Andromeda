@@ -2,10 +2,9 @@ package src_basic.View;
 
 import java.util.ArrayList;
 
-//import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import src_basic.Model.Planet;
@@ -79,7 +78,7 @@ public class ViewGame{
 				else {
 					this.gc.setFill(Color.web("#dd0000"));
 				}
-				Point2D where = starship.getPosition();
+				Point where = starship.getPosition();
 				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
 			}
 		}
@@ -94,7 +93,7 @@ public class ViewGame{
 		double edge = 5;
 		
 		for (Planet planet : planets) {
-			Point2D where = planet.getOrigin();
+			Point where = planet.getCollisionShape().getOrigin();
 			this.gc.fillOval(where.getX() - planet.getRadius() - edge / 2, where.getY() - planet.getRadius() - edge / 2, 
 				planet.getRadius() * 2 + edge, planet.getRadius() * 2 + edge);
 
@@ -118,7 +117,7 @@ public class ViewGame{
 	 */
 	public void displaySelectRect(Rectangle rect) {
 		this.gc.setStroke(Color.web("#ffffff"));
-		this.gc.strokeRect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+		this.gc.strokeRect(rect.getOrigin().getX(), rect.getOrigin().getY(), rect.getWidth(), rect.getHeight());
 	}
 	
 	/**
@@ -133,7 +132,8 @@ public class ViewGame{
 		this.displayPlanets(game.getPlanets());
 		this.displaySquads(game.getSquads());
 		this.displaySquadSize(game.getSquadSize());
-		if(game.getIsThereSelectRect())
+		if(game.getIsThereSelectRect()) {
 			displaySelectRect(game.getSelectRect());
+		}
 	}
 }
