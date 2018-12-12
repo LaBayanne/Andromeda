@@ -18,8 +18,7 @@ import src_basic.View.ViewGame;
  *
  */
 public class SceneGame implements Scenery, Serializable{
-	private GraphicsContext gc;
-	private ViewGame view;
+	private transient ViewGame view;
 	
 	private ArrayList<Squad> squads;
 	private ArrayList<Planet> planets;
@@ -39,7 +38,6 @@ public class SceneGame implements Scenery, Serializable{
 	private ArrayList<AI> AIs;
 	
 	public SceneGame(GraphicsContext gc) {
-		this.gc = gc;
 		this.view = new ViewGame(gc);
 		
 		this.nbPlayers = 2;//By default
@@ -188,6 +186,10 @@ public class SceneGame implements Scenery, Serializable{
 	}
 	
 	/* End of user inputs */
+	
+	public void restor(GraphicsContext gc) {
+		this.view = new ViewGame(gc);
+	}
 	
 	public boolean tick(double delta) {
 		

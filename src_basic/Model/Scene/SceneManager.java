@@ -100,6 +100,7 @@ public class SceneManager {
 			ois = new ObjectInputStream(saveFile);
 			
 			this.gameScene = (SceneGame) ois.readObject();
+			this.gameScene.restor(this.gc);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
