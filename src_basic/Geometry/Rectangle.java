@@ -11,6 +11,16 @@ public class Rectangle extends Shape {
 		this.height = height;
 	}
 	
+	public Rectangle(Rectangle r) {
+		super(r.getOrigin());
+		this.height = r.getHeight();
+		this.width = r.getWith();
+	}
+	
+	public Rectangle(Point topLeft, double width, double height) {
+		this(topLeft.getX(), topLeft.getY(), width, height);
+	}
+	
 	@Override
 	public boolean collision(Point p) {
 		double x = p.getX();

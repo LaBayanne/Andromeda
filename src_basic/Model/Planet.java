@@ -40,7 +40,7 @@ public class Planet implements Serializable {
 		
 		this.owner = 0;
 		
-		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 0.1, 0, 0, 0);
+		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, 0);
 		
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
@@ -55,7 +55,7 @@ public class Planet implements Serializable {
 		this.owner = owner;
 		this.stock = 0;
 		this.squadSize = 100;//100 percent by default
-		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 0.1, 0, 0, owner);
+		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, owner);
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
@@ -190,4 +190,6 @@ public class Planet implements Serializable {
 		this.realStock = n;
 		this.stock = n;
 	}
+	
+	public Circle getCollisionShape() 	{ return this.collisionShape; };
 }

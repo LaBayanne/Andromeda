@@ -45,7 +45,6 @@ public class StarShip implements Serializable {
 		this.angle = 0;
 		this.destinationReached = false;
 		
-		this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
 	}
 	
 	/**
@@ -54,8 +53,8 @@ public class StarShip implements Serializable {
 	 */
 	public StarShip(StarShip starship) {
 		
-		this.position = new Point2D(starship.getPosition().getX(), starship.getPosition().getY());
-		this.destination = new Point2D(starship.getDestination().getX(), starship.getDestination().getY());
+		this.collisionShape = new Rectangle(starship.getCollisionShape());
+		this.destination = new Point(starship.getDestination());
 		
 		this.speed = starship.getSpeed();
 		this.damage = starship.getDamage();
@@ -63,50 +62,19 @@ public class StarShip implements Serializable {
 		this.destinationReached = false;
 		this.owner = starship.getOwner();
 		
-		this.hitbox = new Hitbox(new Rectangle(this.position.getX(), this.position.getY(), this.getWidth(), this.getHeight()));
-
 	}
 	
 	/**
 	 * Basic constructor, build a starship with all value set to 0
 	 */
 	public StarShip() {
-		this(Point2D.ZERO, Point2D.ZERO, 0, 0, 0.0, 0);
+		this(new Point(), new Point(), 0, 0, 0.0, 0);
 	}
+
 	
-	
-	/**
-	 * Compute the angle value between two points
-	 * @param position		The first point
-	 * @param destination	The second point
-	 * @return
-	 */
-	private double angleToPoint(Point2D position, Point2D destination) {
-		return Math.toDegrees(Math.atan2(destination.getY() - position.getY(), destination.getX() - position.getX()));
-	}
-	
-	private boolean detectCollision(Planet planet, Point2D p1) {
-		Point2D origin = planet.getOrigin();
-		double radius = planet.getRadius();
-		
-		Point2D corner[] = new Point2D[4];
-		
-		corner[0] = p1;
-		corner[1]= new Point2D(corner[0].getX(), corner[0].getY() + this.getHeight());
-		corner[2] = new Point2D(corner[0].getX() + this.getWidth(), corner[0].getY());
-		corner[3] = new Point2D(corner[2].getX(), corner[1].getY());
-		
-		for (Point2D p:corner) {
-			if (origin.distance(p) < radius) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private boolean planetCollision(ArrayList<Planet> planets, Point2D position) {
-		for (Planet planet : planets) {
-			if (this.detectCollision(planet, position)) {
+	private boolean planetCollision(ArrayList<Planet> planets, Point position) {
+		for (Planet planet : planets) {//
+			if (planet.getCollisionShape().collision(new Rectangle(position, WIDTH, HEIGHT))) {
 				if (planet != this.destinationPlanet) {
 					return true;
 				}
@@ -115,10 +83,10 @@ public class StarShip implements Serializable {
 		return false;
 	}
 	
-	private Point2D calculateNewPos(double delta, ArrayList<Planet> planets) {
+	private Point calculateNewPos(double delta, ArrayList<Planet> planets) {
 		
-		double angle = this.angleToPoint(this.position, this.destination);
-		Point2D newPos;
+		double angle = this.collisionShape.getOrigin().angle(this.destination);
+		Point newPos;
 		double dx, dy;
 		double diff = 0;
 		int pivot = 1;
@@ -127,7 +95,7 @@ public class StarShip implements Serializable {
 			dx = delta * this.speed * Math.cos(Math.toRadians(angle + diff * pivot));
 			dy = delta * this.speed * Math.sin(Math.toRadians(angle + diff * pivot));
 			
-			newPos = new Point2D(this.position.getX() + dx, this.position.getY() + dy);
+			newPos = new Point(this.collisionShape.getOrigin().getX() + dx, this.collisionShape.getOrigin().getY() + dy);
 			
 			if (pivot == -1) {
 				pivot = 1;
@@ -135,7 +103,7 @@ public class StarShip implements Serializable {
 			} else {
 				pivot = -1;
 			}
-		} while(this.planetCollision(planets, newPos) && this.destination.distance(newPos) < this.destination.distance(this.position));
+		} while(this.planetCollision(planets, newPos) && this.destination.distance(newPos) < this.collisionShape.getOrigin().distance(destination));
 		//Condition de distance empèche vaisseaux de rester coincé dans une boucle.
 		// Comme il n'y a que des planètes rondes, impossible que cette condition bloque un vaisseaux
 		
@@ -144,7 +112,7 @@ public class StarShip implements Serializable {
 	
 	
 	public void move(double delta, ArrayList<Planet> planets) {
-		Point2D newPos = this.calculateNewPos(delta, planets);
+		Point newPos = this.calculateNewPos(delta, planets);
 		
 		if (this.destination.distance(newPos) < this.destinationPlanet.getRadius()) {
 					
@@ -174,33 +142,34 @@ public class StarShip implements Serializable {
  * 
  */
 	
-	public static int getWidth() {return width;}
-	public static int getHeight() {return height;}
+	public static int getWidth() {return WIDTH;}
+	public static int getHeight() {return HEIGHT;}
 	
 	public double getSpeed() 		{ return this.speed;	}
-	public int getDamage() 			{ return height;		}
-	public Hitbox getHitbox() 		{ return this.hitbox;	}
-	public Point2D getPosition() 	{ return new Point2D(this.position.getX(), this.position.getY()); }
-	public Point2D getDestination() { return new Point2D(this.destination.getX(), this.destination.getY()); }
+	public int getDamage() 			{ return this.damage;	}//Was height
+	public Point getPosition() 		{ return this.collisionShape.getOrigin(); }//Garder ?
+	public Point getDestination() 	{ return this.destination; }//Pas retourner le point mais en faire une copie ?
 	
 	public int getOwner()			{ return this.owner;	}
 	
-	public void setPosition(Point2D position) {
-		this.position = new Point2D(position.getX(), position.getY());
+	public void setPosition(Point position) {
+		this.collisionShape.getOrigin().set(position);
 	}
 
-	public void setDestination(Point2D destination) {
-		this.destination = new Point2D(destination.getX(), destination.getY());;
+	public void setDestination(Point destination) {
+		this.destination.set(destination);
 	}
 	
 	public void setDestination(Planet destinationPlanet) {
-		Point2D destination = destinationPlanet.getOrigin();
-		this.setDestination(destination);
-		
+		this.setDestination(destinationPlanet.getOrigin());
 		this.destinationPlanet = destinationPlanet;
 	}
 	
 	public void setOwner(int owner) {
 		this.owner = owner;
+	}
+	
+	public Rectangle getCollisionShape() {
+		return this.collisionShape;
 	}
 }

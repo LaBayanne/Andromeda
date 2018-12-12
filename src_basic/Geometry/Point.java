@@ -2,6 +2,7 @@ package src_basic.Geometry;
 
 import java.io.Serializable;
 
+
 /**
  * Represent a basic point.
  * @author chocorion
@@ -33,6 +34,10 @@ public class Point implements Serializable {
 		dy *= dy;
 		
 		return Math.sqrt(dx + dy);
+	}
+	
+	public double angle(Point p) {
+		return Math.toDegrees(Math.atan2(p.getY() - this.y, p.getX() - this.x));
 	}
 	
 	public double distance(Point p) {

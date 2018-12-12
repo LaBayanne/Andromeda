@@ -14,6 +14,10 @@ public abstract class Shape implements Serializable {
 		this.origin = new Point(x, y);
 	}
 	
+	public Shape(Point p) {
+		this(p.getX(), p.getY());
+	}
+	
 	public abstract boolean collision(Point p);
 	
 	public Point getOrigin()	{ return this.origin; }
