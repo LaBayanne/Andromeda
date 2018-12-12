@@ -1,5 +1,7 @@
 package src_basic.Model;
 
+import java.io.Serializable;
+
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
@@ -8,7 +10,7 @@ import javafx.scene.shape.Circle;
  * @author Chocorion and Labayanne
  *
  */
-public class Planet {
+public class Planet implements Serializable {
 	private Point2D origin;
 	private double radius;
 	

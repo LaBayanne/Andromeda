@@ -1,6 +1,9 @@
 package src_basic.Model.Scene;
 
 import java.util.ArrayList;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -63,5 +66,27 @@ public class SceneManager {
 		if(!this.continueGame)
 			return false;
 		return this.activeScene.tick(delta);	//C'est pour ça que Scene nous est utile et que je l'ai remis
+	}
+	
+	public void saveGame() {
+		ObjectOutputStream oos = null;
+		
+		try {
+			final FileOutputStream saveFile = new FileOutputStream("save.ser");
+			oos = new ObjectOutputStream(saveFile);
+			oos.writeObject(this.gameScene);
+			oos.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (oos != null) {
+					oos.flush();
+					oos.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

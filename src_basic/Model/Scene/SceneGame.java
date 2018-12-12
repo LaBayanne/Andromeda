@@ -1,5 +1,6 @@
 package src_basic.Model.Scene;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.geometry.Point2D;
@@ -15,7 +16,7 @@ import src_basic.View.ViewGame;
  * @author chocorion
  *
  */
-public class SceneGame implements Scenery{
+public class SceneGame implements Scenery, Serializable{
 	private GraphicsContext gc;
 	private ViewGame view;
 	
@@ -236,6 +237,7 @@ public class SceneGame implements Scenery{
 	public void setTimerDoubleClick(int value) {
 		this.timerDoubleClick = value;
 	}
+	
 	
 	public void generatePlanets() {
 		// public Planet(Point2D origin, double radius, int productionSpeed, int owner)
