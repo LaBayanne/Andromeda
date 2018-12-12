@@ -1,10 +1,9 @@
 package src_basic.Model;
 
+import src_basic.Geometry.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javafx.geometry.Point2D;
-import javafx.scene.shape.Rectangle;
 
 /**
  * 
@@ -14,16 +13,17 @@ import javafx.scene.shape.Rectangle;
  */
 public class StarShip implements Serializable {
 	
-	private static int height;
-	private static int width;
-
+	static private int WIDTH;
+	static private int HEIGHT;
+	
 	static {
-		height = 10;
-		width = 10;
+		WIDTH  = 10;
+		HEIGHT = 10;
 	}
 	
-	private Point2D position;
-	private Point2D destination;
+	private Rectangle collisionShape;
+	
+	private Point   destination;
 	private Planet 	destinationPlanet;
 	
 	private double 	speed;
@@ -31,14 +31,13 @@ public class StarShip implements Serializable {
 	private int 	damage;
 	private int 	owner;
 
-	private Hitbox 	hitbox;
 	
 	boolean destinationReached;
 	
-	public StarShip(Point2D position, Point2D destination,double speed, int damage, double angle, int owner) {
+	public StarShip(Point position, Point destination,double speed, int damage, double angle, int owner) {
 		
-		this.position = new Point2D(position.getX(), position.getY());
-		this.destination = new Point2D(destination.getX(), destination.getY());
+		this.destination = new Point(destination);
+		this.collisionShape = new Rectangle(position.getX(), position.getY(), WIDTH, HEIGHT);
 		
 		this.owner = owner;
 		this.speed = speed;

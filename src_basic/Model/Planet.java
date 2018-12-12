@@ -2,8 +2,9 @@ package src_basic.Model;
 
 import java.io.Serializable;
 
-import javafx.geometry.Point2D;
-import javafx.scene.shape.Circle;
+import src_basic.Geometry.Circle;
+import src_basic.Geometry.Point;
+
 
 /**
  * Represent a planet in the game
@@ -11,10 +12,8 @@ import javafx.scene.shape.Circle;
  *
  */
 public class Planet implements Serializable {
-	private Point2D origin;
-	private double radius;
+	private Circle collisionShape;
 	
-	Hitbox hitbox;
 	
 	private double poductionSpeed;
 	
@@ -33,15 +32,14 @@ public class Planet implements Serializable {
 	private double timer;
 	
 	public Planet() {
-		this.origin = new Point2D(0, 0);
-		this.radius = 0;
+		this.collisionShape = new Circle(0, 0, 0);
 		
 		this.poductionSpeed = 0;
 		this.stock = 0;
 		this.squadSize = 100;//100 percents by default
 		
 		this.owner = 0;
-		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
+		
 		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 0.1, 0, 0, 0);
 		
 		this.nbStarshipToGenerate = 0;
@@ -50,14 +48,13 @@ public class Planet implements Serializable {
 		this.target = null;
 	}
 	
-	public Planet(Point2D origin, double radius, double productionSpeed, int owner) {
-		this.origin = new Point2D(origin.getX(), origin.getY());
-		this.radius = radius;
+	public Planet(Point origin, double radius, double productionSpeed, int owner) {
+		this.collisionShape = new Circle (origin.getX(), origin.getY(), radius);
+		
 		this.poductionSpeed = productionSpeed;
 		this.owner = owner;
 		this.stock = 0;
 		this.squadSize = 100;//100 percent by default
-		this.hitbox = new Hitbox(new Circle(this.origin.getX(), this.origin.getY(), this.radius));
 		this.starshipModel = new StarShip(new Point2D(0, 0), new Point2D(700, 540), 0.1, 0, 0, owner);
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
@@ -159,12 +156,11 @@ public class Planet implements Serializable {
 	
 	public int getNbStarshipToGenerate() 	{	return this.nbStarshipToGenerate;	}
 	public int getOwner()					{ 	return this.owner;  }
-	public Hitbox getHitbox() 				{	return this.hitbox; }
 	public int getStock() 					{	return this.stock;  }
 	public void setOwner(int owner) 		{	this.owner = owner;	}
-	public double getRadius() 				{	return this.radius;	}
-	public Point2D getOrigin() {
-		return new Point2D(this.origin.getX(), this.origin.getY());
+	public double getRadius() 				{	return this.collisionShape.getRadius();	}
+	public Point getOrigin() {
+		return this.collisionShape.getOrigin();
 	}
 	
 	public void setNbStarshipToGenerate(int value) {
@@ -176,8 +172,8 @@ public class Planet implements Serializable {
 		}
 	}
 	
-	public void setOrigin(Point2D point) {
-		this.origin = new Point2D(point.getX(), point.getY());
+	public void setOrigin(Point point) {
+		this.collisionShape.getOrigin().set(point);
 	}
 	
 	public void setSquadSize(int size) {
