@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javafx.geometry.Point2D;
+import src_basic.Geometry.*;
 
 /**
  * This class is used for generating planets *
@@ -109,7 +109,7 @@ public class PlanetGenerator implements Serializable{
 				
 				if (this.isValidPlanet(originX, originY, radius, planetList)) {
 					productionSpeed = this.getRandomDouble(0.003, 0.01);//Faire en fonction de la taille et pas de manière aléatoire
-					planetList.add(new Planet(new Point2D(originX, originY), radius, productionSpeed, 0)); //Production speed and owner to define
+					planetList.add(new Planet(new Point(originX, originY), radius, productionSpeed, 0)); //Production speed and owner to define
 					break;
 				} else {
 					continue;

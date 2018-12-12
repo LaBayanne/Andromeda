@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javafx.geometry.Point2D;
+import src_basic.Geometry.*;
 
 /**
  * Represent an escadron on the game
@@ -20,7 +20,7 @@ public class Squad implements Serializable {
 	private Planet planetOrigin;
 	
 	private Planet destinationPlanet;
-	private Point2D destination;
+	private Point destination;
 	
 	public Squad(int nbUnit, StarShip starship, Planet planet) {
 		this.nbUnit = nbUnit;
@@ -36,7 +36,7 @@ public class Squad implements Serializable {
 	 */
 	public void setDestinationPlanet(Planet planet) {
 		this.destinationPlanet = planet;
-		this.destination = planet.getOrigin();
+		this.destination = planet.getCollisionShape().getOrigin();
 		
 		for (StarShip starship : this.starships) {
 			starship.setDestination(planet);
@@ -85,7 +85,7 @@ public class Squad implements Serializable {
 			x = xCenter + (radius + width) * Math.cos(angle * 3.14 / 180) - height / 2;
 			y = yCenter + (radius + height) * Math.sin(angle * 3.14 / 180) - height / 2;
 			
-			this.starshipModel.setPosition(new Point2D(x, y));
+			this.starshipModel.setPosition(new Point(x, y));
 			this.starships.add(new StarShip(this.starshipModel));
 			
 			angle += angleDist;
