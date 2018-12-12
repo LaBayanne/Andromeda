@@ -92,7 +92,7 @@ public class SceneManager {
 		}
 	}
 	
-	public void restorGame() {
+	public void restoreGame() {
 		ObjectInputStream ois = null;
 		
 		try {

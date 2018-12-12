@@ -31,10 +31,7 @@ public class Controller{
                 public void handle(KeyEvent e)
                 {
                     String code = e.getCode().toString();
-                    if(e.getCode().getName() == "Ctrl") {
-                    	System.out.println(code);
-                    }
-                    // only add once... prevent duplicates
+                    System.out.println(code);
                     if ( !input.contains(code) )
                         input.add( code );
                 }
@@ -140,9 +137,15 @@ public class Controller{
 		if(this.input.contains("MOUSE_LEFT")){
 			this.sceneManager.inputMouseLeft(this.mousePos.getX(), this.mousePos.getY());
 		}
-		if(this.input.contains("MOUSE_RIGHT")){
-		}
 		if(this.input.contains("CONTROL")){
+			if(this.input.contains("S")) {
+				this.sceneManager.saveGame();
+				this.input.remove("S");
+			}
+			else if(this.input.contains("L")) {
+				this.sceneManager.restoreGame();
+				this.input.remove("L");
+			}
 		}
 	}
 }
