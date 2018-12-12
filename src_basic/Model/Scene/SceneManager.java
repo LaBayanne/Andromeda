@@ -2,8 +2,10 @@ package src_basic.Model.Scene;
 
 import java.util.ArrayList;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -83,6 +85,30 @@ public class SceneManager {
 				if (oos != null) {
 					oos.flush();
 					oos.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void restorGame() {
+		ObjectInputStream ois = null;
+		
+		try {
+			final FileInputStream saveFile = new FileInputStream("save.ser");
+			ois = new ObjectInputStream(saveFile);
+			
+			this.gameScene = (SceneGame) ois.readObject();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ois != null) {
+					ois.close();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
