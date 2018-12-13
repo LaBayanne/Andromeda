@@ -8,8 +8,6 @@ import src_basic.Geometry.Point;
 
 /**
  * Represent a planet in the game
- * @author Chocorion and Labayanne
- *
  */
 public class Planet implements Serializable {
 	/** Rigid body of the planet **/
@@ -17,14 +15,14 @@ public class Planet implements Serializable {
 	
 	private double poductionSpeed;
 	
-	/** There is a realStock because we can't have half-starship but the speed production
+	/* There is a realStock because we can't have half-starship but the speed production
 	 * can't be an integer
-	 **/
+	 */
 	private int stock;
 	private double realStock; 
 	
-	private int squadSize;	
-	private StarShip starshipModel;
+	private int squadSize;			//Percentage of the stock	
+	private StarShip starshipModel;	//Model of starship that planet can generate
 	
 	private int owner;
 	private int nbStarshipToGenerate;
@@ -40,7 +38,7 @@ public class Planet implements Serializable {
 	 * Complete constructor for planet
 	 * @param origin			The top left position of the planet
 	 * @param radius			Radius of the planet
-	 * @param productionSpeed	Productin of starship per frames
+	 * @param productionSpeed	Production of starship per frames
 	 * @param owner				ID of the planet owner
 	 */
 	public Planet(Point origin, double radius, double productionSpeed, int owner) {
@@ -104,13 +102,18 @@ public class Planet implements Serializable {
 		this.target = target;
 	}
 	
+	/**
+	 * Attack target with a specified number of attackers
+	 * @param nbAttackers	number of attackers
+	 * @param target		planet to attack/help
+	 */
 	public void setAttackGroup(int nbAttackers, Planet target) {
 		setNbStarshipToGenerate(nbAttackers);
 		this.target = target;
 	}
 	
 	/**
-	 * Calcul of many starship per squad, based on the stock and the squadsize
+	 * Calculate of how many starship per squad, based on the stock and the squadsize
 	 * @return the number of starship per squad
 	 */
 	public int getNbUnitPerSquad() {
@@ -157,16 +160,49 @@ public class Planet implements Serializable {
 	}
 	
 	
+	/**
+	 * @return the number of starship to generate value.
+	 */
+	public int getNbStarshipToGenerate() {
+		return this.nbStarshipToGenerate;	
+	}
 	
-	public int getNbStarshipToGenerate() 	{	return this.nbStarshipToGenerate;	}
-	public int getOwner()					{ 	return this.owner;  }
-	public int getStock() 					{	return this.stock;  }
-	public void setOwner(int owner) 		{	this.owner = owner;	}
-	public double getRadius() 				{	return this.collisionShape.getRadius();	}
+	/**
+	 * @return the owner's id of the planet.
+	 */
+	public int getOwner() { 	
+		return this.owner;  
+	}
+	
+	/**
+	 * @return the planet's stock in number of unit.
+	 */
+	public int getStock() {	
+		return this.stock;  
+	}
+	
+	/**
+	 * @return planet's radius.
+	 */
+	public double getRadius() {	
+		return this.collisionShape.getRadius();	
+	}
+	
+	/**
+	 * @return the origin of the planet's collision shape
+	 */
 	public Point getOrigin() {
 		return this.collisionShape.getOrigin();
 	}
 	
+	/**
+	 * @param owner owner to set.
+	 */
+	public void setOwner(int owner) 		{	this.owner = owner;	}
+	
+	/**
+	 * @param value the number of starship that the planet had to generate
+	 */
 	public void setNbStarshipToGenerate(int value) {
 		if(value < 0)
 			value = 0;
@@ -176,6 +212,9 @@ public class Planet implements Serializable {
 		}
 	}
 	
+	/**
+	 * @param point the origin of planet's collision shape
+	 */
 	public void setOrigin(Point point) {
 		this.collisionShape.getOrigin().set(point);
 	}
