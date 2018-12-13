@@ -242,7 +242,7 @@ public class SceneGame implements Scenery, Serializable{
 	
 	/**
 	 * Run every tick of the game. Manage main elements of the game.
-	 * @param delta Delay since the previous tick of the game.
+	 * @param delta Delay since the previous tick of the game
 	 */
 	public boolean tick(double delta) {
 		
