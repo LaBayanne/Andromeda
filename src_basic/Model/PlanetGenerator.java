@@ -130,7 +130,6 @@ public class PlanetGenerator implements Serializable{
 	 * @param planets	The list of all planets
 	 */
 	public void givePlanet(int nbPlayers, ArrayList<Planet> planets) {
-		System.err.println("Welcom in givePlanet !");
 		int nbPlanet = planets.size();
 		if (nbPlayers > nbPlanet) {
 			System.err.println("Problem in planet generation : To many players !");
@@ -141,13 +140,10 @@ public class PlanetGenerator implements Serializable{
 		int planetNumber[] = new int[nbPlayers];
 		boolean alreadyIn;
 		
-		System.err.println(nbPlanet + " planets for " + nbPlayers + " players !");
 		for (int i = 0; i < nbPlayers; i++) {
-			System.err.println("Searching planet for player " + i);
 			nb = 0;
 			do {
 				planetNumber[i] = this.getRandom(0, nbPlanet - 1);
-				System.err.println("Testing planet number " + planetNumber[i]);
 				nb += 1;
 				alreadyIn = false;
 				
@@ -166,6 +162,7 @@ public class PlanetGenerator implements Serializable{
 			
 			planets.get(planetNumber[i]).setOwner(i + 1);
 			planets.get(planetNumber[i]).setStock(0);//Egality
+			planets.get(planetNumber[i]).setProductionSpeed(0.003);
 		}
 	}
 	

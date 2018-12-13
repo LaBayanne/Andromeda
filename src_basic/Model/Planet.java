@@ -195,5 +195,9 @@ public class Planet implements Serializable {
 		this.stock = n;
 	}
 	
+	public void setProductionSpeed(double p) {
+		this.poductionSpeed = p;
+	}
+	
 	public Circle getCollisionShape() 	{ return this.collisionShape; };
 }
