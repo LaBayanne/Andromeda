@@ -22,12 +22,22 @@ public class Rectangle extends Shape {
 		this.height = height;
 	}
 	
+	/**
+	 * Constructor by copy
+	 * @param r the rectangle to copy
+	 */
 	public Rectangle(Rectangle r) {
 		super(r.getOrigin());
 		this.height = r.getHeight();
 		this.width = r.getWidth();
 	}
 	
+	/**
+	 * Constructor with a top left position
+	 * @param topLeft	The top left position
+	 * @param width		Width of the rectangle
+	 * @param height	Height of the rectangle
+	 */
 	public Rectangle(Point topLeft, double width, double height) {
 		this(topLeft.getX(), topLeft.getY(), width, height);
 	}
@@ -51,13 +61,30 @@ public class Rectangle extends Shape {
 		return collision(c.getOrigin());
 	}
 	
-	public double getWidth()		{ return this.width;  }
-	public double getHeight()	{ return this.height; }
+	/**
+	 * @return width of rectangle
+	 */
+	public double getWidth() {
+		return this.width;  
+	}
 	
+	/**
+	 * @return height of rectangle
+	 */
+	public double getHeight() { 
+		return this.height; 
+	}
+	
+	/**
+	 * @param width new width of the rectangle
+	 */
 	public void setWidth(double width) {
 		this.width  = width;
 	}
 	
+	/**
+	 * @param height new height of the rectangle
+	 */
 	public void setHeight(double height) {
 		this.height = height;
 	}
