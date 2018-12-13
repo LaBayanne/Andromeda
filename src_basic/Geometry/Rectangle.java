@@ -1,9 +1,20 @@
 package src_basic.Geometry;
 
+/**
+ * Represent a basic rectangle in the game.
+ *
+ */
 public class Rectangle extends Shape {
 	private double width;
 	private double height;
 	
+	/**
+	 * Constructor for rectangle
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public Rectangle(double x, double y, double width, double height) {
 		super(x, y);
 		

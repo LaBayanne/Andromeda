@@ -13,7 +13,7 @@ import src_basic.Geometry.*;
  */
 public class PlanetGenerator implements Serializable{
 
-
+	//Space between planets in percentage of radius
 	private static double collisionLimit;
 	
 	private double maxSize;
@@ -31,6 +31,15 @@ public class PlanetGenerator implements Serializable{
 		collisionLimit = 0.3;
 	}
 	
+	/**
+	 * Generator for Planet generator
+	 * @param maxSize	The maximum value for the planet's radius
+	 * @param minSize	The minimum value for the planet's radius
+	 * @param nbMax		Maximum number of planets
+	 * @param nbMin		Minimum number of planets
+	 * @param windowWidth	Width of the game's window
+	 * @param windowHeight	Height of the game's window
+	 */
 	public PlanetGenerator(double maxSize, double minSize, int nbMax, int nbMin, int windowWidth, int windowHeight) {
 		
 		this.maxSize = maxSize;
@@ -44,15 +53,30 @@ public class PlanetGenerator implements Serializable{
 		
 		this.rand = new Random();
 	}
+	
+	/**
+	 * Basic generator
+	 */
 	public PlanetGenerator() {
 		this(0, 0, 0, 0, 0, 0);
 	}
 	
-
+	/**
+	 * Return random int 
+	 * @param min	minimum value
+	 * @param max	maximum value
+	 * @return	the random number
+	 */
 	private int getRandom(int min, int max) {
 		return this.rand.nextInt(max - min + 1) + min;
 	}
 	
+	/**
+	 * Return random double
+	 * @param min	minimum value
+	 * @param max	maximum value
+	 * @return	the random double
+	 */
 	private double getRandomDouble(double min, double max) {
 		double random =  this.rand.nextDouble();
 		
