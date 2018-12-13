@@ -31,6 +31,15 @@ public class Rectangle extends Shape {
 		);
 	}
 	
+	/**
+	 * Basic function, will be modified later
+	 * @param c		the cirlce to check
+	 * @return		if there is a collision
+	 */
+	public boolean collision(Circle c) {
+		return collision(c.getOrigin());
+	}
+	
 	public double getWidth()		{ return this.width;  }
 	public double getHeight()	{ return this.height; }
 	

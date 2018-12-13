@@ -44,7 +44,7 @@ public class Circle extends Shape {
 			}
 		}
 		
-		return false;
+		return r.collision(this);
 	}
 	
 	/**
