@@ -3,9 +3,8 @@ package src_basic.View;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- * This class will represent the view of the menu
- * @author chocorion
- *
+ * This class will represent the view of the menu.
+ * Not used in the game's first version.
  */
 public class ViewMenu {
 	private GraphicsContext gc;

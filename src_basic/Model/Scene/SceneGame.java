@@ -39,12 +39,15 @@ public class SceneGame implements Scenery, Serializable{
 	
 	private ArrayList<AI> AIs;
 	
+	private int screenWidth, screenHeight;
 	/**
 	 * Basic constructor.
 	 * @param gc Graphic context
 	 */
-	public SceneGame(GraphicsContext gc) {
-		this.view = new ViewGame(gc);
+	public SceneGame(GraphicsContext gc, int width, int height) {
+		this.view = new ViewGame(gc, width, height);
+		this.screenWidth = width;
+		this.screenHeight = height;
 		
 		this.nbPlayers = 2;//By default
 		this.planetGenerator = new PlanetGenerator(100, 20, 30, 10, 960, 640);
@@ -139,7 +142,7 @@ public class SceneGame implements Scenery, Serializable{
 					planet.prepareAttack(target);
 			}
 			
-			Iterator it = this.selectedSquads.iterator();
+			Iterator<Squad> it = this.selectedSquads.iterator();
 			while(it.hasNext()) {
 				Squad s =(Squad) it.next();
 				s.setDestinationPlanet(target);
@@ -150,8 +153,8 @@ public class SceneGame implements Scenery, Serializable{
 	}
 	
 	
-	/***
-	* On click, call the function selectActivePlanet or selectTarget
+	/**
+	* On click, call the function selectActivePlanet or selectTarget.
 	 * @param button	the value of button, 0 for left click, 1 for right click
 	 * @param x 		x coord of the click
 	 * @param y 		y coord of the click
@@ -172,15 +175,18 @@ public class SceneGame implements Scenery, Serializable{
 	}
 	
 	/**
-	 * Triggered when the mouse is moved. modify the value of the squadsize with the @param dy.
+	 * Triggered when the mouse is moved. Modify the value of the squadsize with the @param dy.
 	 * @param dy Wheel's vertical delta
 	 */
 	public void moveWheel(int dy) {
 		this.setSquadSize(dy);
 	}
 	
-	/***
-	 * 
+	/**
+	 * Event triggered when the mouse left is pressed. Modify the attributes of selectRect according to
+	 * the position of the mouse.
+	 * @param x Mouse's x position
+	 * @param y Mouse's y position
 	 */
 	public void inputMouseLeft(double x, double y) {
 		Rectangle rect = this.selectRect;
@@ -204,9 +210,14 @@ public class SceneGame implements Scenery, Serializable{
 			rect.getOrigin().setY(this.selectRectOrigin.getY());
 			rect.setHeight(y - rect.getOrigin().getY());
 		}
-
 	}
 	
+	/**
+	 * Event triggered when the mouse left is released. Add the planets inside selectRect to selectedPlanets.
+	 * @param x Mouse's x position
+	 * @param y Mouse's y position
+	 * @param buttonOptions List of inputs that are pressed (mainly control)
+	 */
 	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
 		if(!buttonOptions.contains("CONTROL"))
 			this.selectedPlanets.clear();
@@ -221,26 +232,26 @@ public class SceneGame implements Scenery, Serializable{
 	
 	/* End of user inputs */
 	
+	/**
+	 * Restore the sceneGame.
+	 * @param gc Graphic context
+	 */
 	public void restor(GraphicsContext gc) {
-		this.view = new ViewGame(gc);
+		this.view = new ViewGame(gc, this.screenWidth, this.screenHeight);
 	}
 	
+	/**
+	 * Run every tick of the game. Manage main elements of the game.
+	 * @param delta Delay since the previous tick of the game.
+	 */
 	public boolean tick(double delta) {
 		
-		this.moveSquad(delta);
-		updateTimerClick(delta);
 		for(Planet planet:this.planets) {
-			//System.err.println(planet.getOwner());
-			
-			if (planet.getOwner() != 0) //0 is neutral planet
-				planet.actualiseStock();	//Augment the planet's stock
+			if (planet.getOwner() != 0) 
+				planet.actualiseStock();
 			
 			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0) {
-				Squad newSquad = planet.generateSquad();
-				this.squads.add(newSquad);
-				//For debbug
-				//newSquad.setDestinationPlanet(this.planets.get(0));
-				
+				this.squads.add(planet.generateSquad());
 			}
 			
 			if(planet.getOwner() == 1) {
@@ -248,13 +259,23 @@ public class SceneGame implements Scenery, Serializable{
 			}
 			
 		}
+		
 		cleanSelectedPlanets();
+		
+		moveSquad(delta);
+		
+		updateTimerClick(delta);
+		
 		updateAIs(delta);
+		
 		this.view.tick(this);
 		
 		return true;
 	}
 	
+	/**
+	 * Remove the planets whose the owner isn't the player from the selected planets.
+	 */
 	public void cleanSelectedPlanets() {
 		Iterator<Planet> iterator = this.selectedPlanets.iterator();
 		Planet planet;
@@ -267,6 +288,10 @@ public class SceneGame implements Scenery, Serializable{
 		
 	}
 	
+	/**
+	 * Update and run the tick of the AIs.
+	 * @param delta Delay since the previous tick of the game.
+	 */
 	public void updateAIs(double delta) {
 		for(AI ai : this.AIs) {
 			ai.setSquads(this.squads);
@@ -275,18 +300,29 @@ public class SceneGame implements Scenery, Serializable{
 		}
 	}
 	
+	/**
+	 * Update the timerClick.
+	 * @param delta Delay since the previous tick of the game.
+	 */
 	public void updateTimerClick(double delta) {
 		if(this.timerDoubleClick > 0) {
 			this.timerDoubleClick -= delta * 0.2;
 		}
 	}
 	
+	/**
+	 * Move all the squads of the game.
+	 * @param delta Delay since the previous tick of the game.
+	 */
 	public void moveSquad(double delta) {
-		for (Squad squad: this.squads) {
+		for(Squad squad: this.squads) {
 			squad.moveStarships(delta, this.planets);
 		}
 	}
 	
+	/**
+	 * @param size Size of the squad
+	 */
 	public void setSquadSize(int size) {
 		this.squadSize += size;
 		if(this.squadSize < 1) {
@@ -297,35 +333,65 @@ public class SceneGame implements Scenery, Serializable{
 		}
 	}
 	
+	/**
+	 * @param value Value of the timer
+	 */
 	public void setTimerDoubleClick(int value) {
 		this.timerDoubleClick = value;
 	}
 
-		
+	/**
+	 * 
+	 * @return Return the squadSize
+	 */
 	public int getSquadSize() {
 		return this.squadSize;
 	}
 	
+	/**
+	 * 
+	 * @return Return the list of the planets
+	 */
 	public ArrayList<Planet> getPlanets() {
 		return this.planets;
 	}
 	
+	/**
+	 * 
+	 * @return Return the list of the selected planets
+	 */
 	public ArrayList<Planet> getSelectedPlanets() {
 		return this.selectedPlanets;
 	}
 	
+	/**
+	 * 
+	 * @return Return the list of the selected squads
+	 */
 	public ArrayList<Squad> getSelectedSquads() {
 		return this.selectedSquads;
 	}
 	
+	/**
+	 * 
+	 * @return Return the list of the squads
+	 */
 	public ArrayList<Squad> getSquads() {
 		return this.squads;
 	}
 	
+	/**
+	 * 
+	 * @return Return the select rectangle
+	 */
 	public Rectangle getSelectRect() {
 		return this.selectRect;
 	}
 	
+	/**
+	 * 
+	 * @return Return true if there is a select rectangle
+	 */
 	public boolean getIsThereSelectRect() {
 		return this.isThereSelectRect;
 	}
