@@ -76,9 +76,9 @@ public class SceneGame implements Scenery, Serializable{
 	public void selectSquad(double x, double y) {
 		final double selectionRadius = 20;
 		for (Squad s : this.squads) {
-			if (s.isStarshipCollision(new Circle(x, y, selectionRadius))) {
+			if (s.getOwner() == 1 &&  s.isStarshipCollision(new Circle(x, y, selectionRadius))) {
 				this.selectedSquads.add(s);
-				break;
+				//break; Pas de break si on veut pourvoir sélécctionner plusieurs squads au même endroit
 			}
 		}
 	}
@@ -310,6 +310,10 @@ public class SceneGame implements Scenery, Serializable{
 	
 	public ArrayList<Planet> getSelectedPlanets() {
 		return this.selectedPlanets;
+	}
+	
+	public ArrayList<Squad> getSelectedSquads() {
+		return this.selectedSquads;
 	}
 	
 	public ArrayList<Squad> getSquads() {

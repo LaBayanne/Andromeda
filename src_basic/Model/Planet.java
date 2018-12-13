@@ -129,7 +129,7 @@ public class Planet implements Serializable {
 		reloadTimer();
 		this.starshipModel.setOwner(this.owner);
 		
-		Squad squad = new Squad(this.nbStarshipToGenerate, this.starshipModel, this);
+		Squad squad = new Squad(this.nbStarshipToGenerate, this.starshipModel, this, this.owner);
 		int restUnit = squad.repartsStarships();
 		
 		squad.setDestinationPlanet(this.target);

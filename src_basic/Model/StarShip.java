@@ -147,7 +147,7 @@ public class StarShip implements Serializable {
 	
 	public double getSpeed() 		{ return this.speed;	}
 	public int getDamage() 			{ return this.damage;	}//Was height
-	public Point getPosition() 		{ return this.collisionShape.getOrigin(); }//Garder ?
+	public Point getPosition() 		{ return new Point(this.collisionShape.getOrigin()); }
 	public Point getDestination() 	{ return this.destination; }//Pas retourner le point mais en faire une copie ?
 	
 	public int getOwner()			{ return this.owner;	}

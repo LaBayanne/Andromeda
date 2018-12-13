@@ -64,6 +64,19 @@ public class ViewGame{
 		}
 	    
 	}
+	
+	public void displaySelectedSquads(ArrayList<Squad> selectedSquads) {
+		this.gc.setFill(Color.web("#ffffffff"));
+		final int edge = 2;
+		
+		for (Squad squad:selectedSquads) {
+			for (StarShip starship:squad.getStarships()) {
+				Point where = starship.getPosition();
+				where.translate(-edge, -edge);
+				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth() + 2 * edge, StarShip.getHeight() + 2 * edge);
+			}
+		}
+	}
 
 	/**
 	 * Display all the starships of a squad
@@ -128,8 +141,11 @@ public class ViewGame{
 		//this.gc.clearRect(0, 0, 960, 640); // PASSER EN PARAM
 		this.gc.setFill(Color.web("#000000"));
 		this.gc.fillRect(0,  0, 960, 640);
+		
 		this.displaySelectedPlanets(game.getSelectedPlanets());
 		this.displayPlanets(game.getPlanets());
+		
+		this.displaySelectedSquads(game.getSelectedSquads());
 		this.displaySquads(game.getSquads());
 		this.displaySquadSize(game.getSquadSize());
 		if(game.getIsThereSelectRect()) {

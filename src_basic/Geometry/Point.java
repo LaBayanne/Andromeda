@@ -36,6 +36,11 @@ public class Point implements Serializable {
 		return Math.sqrt(dx + dy);
 	}
 	
+	public void translate(double dx, double dy) {
+		this.x += dx;
+		this.y += dy;
+	}
+	
 	public double angle(Point p) {
 		return Math.toDegrees(Math.atan2(p.getY() - this.y, p.getX() - this.x));
 	}

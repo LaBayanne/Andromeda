@@ -24,12 +24,14 @@ public class Squad implements Serializable {
 	private Planet destinationPlanet;
 	private Point destination;
 	
-	public Squad(int nbUnit, StarShip starship, Planet planet) {
+	private int owner;
+	
+	public Squad(int nbUnit, StarShip starship, Planet planet, int owner) {
 		this.nbUnit = nbUnit;
 		this.starships = new ArrayList<StarShip>();
 		this.starshipModel = new StarShip(starship);
 		this.planetOrigin = planet;
-
+		this.owner = owner;
 	}
 	
 	/**
@@ -155,6 +157,7 @@ public class Squad implements Serializable {
 		}
 	}
 	
-	public int getNbUnit() {return this.nbUnit;}
+	public int getNbUnit() { return this.nbUnit;}
+	public int getOwner()  { return this.owner; }
 	
 }
