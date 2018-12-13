@@ -13,15 +13,24 @@ import src_basic.Model.StarShip;
 import src_basic.Model.Scene.SceneGame;
 import src_basic.Geometry.*;
 /**
- * This class represent the view of the game, used to display the game on screen
- * @author chocorion and labayanne
+ * This class represent the view of the game, used to display the game on screen.
  *
  */
 public class ViewGame{
 	private GraphicsContext gc;
+	private int screenWidth;
+	private int screenHeight;
 	
-	public ViewGame(GraphicsContext gc) {
+	/**
+	 * Basic constructor.
+	 * @param gc Graphic context
+	 * @param width	Screen width
+	 * @param height Screen height
+	 */
+	public ViewGame(GraphicsContext gc, int width, int height) {
 		this.gc = gc;
+		this.screenWidth = width;
+		this.screenHeight = height;
 	}
 	
 	/**
@@ -56,7 +65,6 @@ public class ViewGame{
 				planet.getRadius() * 2, planet.getRadius() * 2);
 			this.gc.setFill(Color.web("#eeeeee"));
 			
-			//+7 cst magiques à changer en fonction de la taille de la police
 			this.gc.setFont(Font.font("Verdana", 15));
 			String txt = Integer.toString(planet.getStock());
 			this.gc.fillText(txt, where.getX() - 7, where.getY() + 7);
@@ -65,6 +73,10 @@ public class ViewGame{
 	    
 	}
 	
+	/**
+	 * Display all the squads selected by the player.
+	 * @param selectedSquads squads selected by the player.
+	 */
 	public void displaySelectedSquads(ArrayList<Squad> selectedSquads) {
 		this.gc.setFill(Color.web("#ffffffff"));
 		final int edge = 2;
@@ -73,14 +85,15 @@ public class ViewGame{
 			for (StarShip starship:squad.getStarships()) {
 				Point where = starship.getPosition();
 				where.translate(-edge, -edge);
-				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth() + 2 * edge, StarShip.getHeight() + 2 * edge);
+				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth() + 2 * edge, 
+						StarShip.getHeight() + 2 * edge);
 			}
 		}
 	}
 
 	/**
-	 * Display all the starships of a squad
-	 * @param squads
+	 * Display all the starships of a squad.
+	 * @param squads All the squads of the game
 	 */
 	public void displaySquads(ArrayList<Squad> squads) {
 		for (Squad squad: squads) {
@@ -98,7 +111,7 @@ public class ViewGame{
 	}
 	
 	/**
-	 * Draw a white circle around selected planet
+	 * Draw a white circle around selected planet.
 	 * @param planets	List of selected planets
 	 */
 	public void displaySelectedPlanets(ArrayList<Planet> planets) {
@@ -114,19 +127,18 @@ public class ViewGame{
 	}
 	
 	/**
-	 * Display the squad size
-	 * @param size	value to display
+	 * Display the squad size.
+	 * @param size	Value to display
 	 */
 	public void displaySquadSize(int size) {
 		this.gc.setFill(Color.web("#eeeeee"));
 		this.gc.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
-		//ajuster en fonction de la taille de la fenêtre
 		this.gc.fillText(Integer.toString(size) + "%", 10, 620);
 	}
 	
 	/**
-	 * Show the rectangular selection
-	 * @param rect	the dimension of the rectangle
+	 * Show the rectangular selection.
+	 * @param rect	Dimension of the rectangle
 	 */
 	public void displaySelectRect(Rectangle rect) {
 		this.gc.setStroke(Color.web("#ffffff"));
@@ -134,20 +146,19 @@ public class ViewGame{
 	}
 	
 	/**
-	 * Tick function, draw the entire game
-	 * @param game
+	 * Tick function, draw the entire game.
+	 * @param game The game
 	 */
 	public void tick(SceneGame game) {
-		//this.gc.clearRect(0, 0, 960, 640); // PASSER EN PARAM
 		this.gc.setFill(Color.web("#000000"));
-		this.gc.fillRect(0,  0, 960, 640);
+		this.gc.fillRect(0,  0, this.screenWidth, this.screenHeight);
 		
 		this.displaySelectedPlanets(game.getSelectedPlanets());
 		this.displayPlanets(game.getPlanets());
-		
 		this.displaySelectedSquads(game.getSelectedSquads());
 		this.displaySquads(game.getSquads());
 		this.displaySquadSize(game.getSquadSize());
+		
 		if(game.getIsThereSelectRect()) {
 			displaySelectRect(game.getSelectRect());
 		}

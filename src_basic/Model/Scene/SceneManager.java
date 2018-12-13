@@ -25,10 +25,10 @@ public class SceneManager {
 	 * Basic constructor.
 	 * @param gc Graphic context
 	 */
-	public SceneManager(GraphicsContext gc) {
+	public SceneManager(GraphicsContext gc, int width, int height) {
 		this.gc = gc;
 		
-		this.gameScene = new SceneGame(gc);
+		this.gameScene = new SceneGame(gc, width, height);
 		this.menuScene = new SceneMenu(gc);
 		
 		/* First scene to show. By default, it's the game */

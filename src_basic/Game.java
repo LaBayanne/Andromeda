@@ -11,28 +11,36 @@ import src_basic.Controller.Controller;
 import src_basic.Model.Scene.SceneManager;
 
 /**
- * Main of the game 
- * @author chocorion and labayanne
+ * Main class of the game.
  *
  */
 public class Game extends Application {
+	private int screenWidth = 960;
+	private int screenHeight = 640;
 	
+	/**
+	 * Main, launch the fonction start of javafx
+	 * @param args Arguments of the command line
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
+	/**
+	 * Main fonction of the game, init all the element of javafx and lauch the game's loop.
+	 */
 	public void start(Stage stage) {
 		
 		stage.setTitle("Andromeda");
 		Group root = new Group();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		Canvas canvas = new Canvas( 960, 640 );
+		Canvas canvas = new Canvas(screenWidth , screenHeight);
 	    root.getChildren().add( canvas );
 	         
 	    GraphicsContext gc = canvas.getGraphicsContext2D();
 	    
-	    final SceneManager sceneManager = new SceneManager(gc);
+	    final SceneManager sceneManager = new SceneManager(gc, screenWidth , screenHeight);
 	    final Controller controller = new Controller(scene, sceneManager);
 	    
 		/** Game loop **/
