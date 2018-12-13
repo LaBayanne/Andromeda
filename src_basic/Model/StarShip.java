@@ -110,7 +110,11 @@ public class StarShip implements Serializable {
 		return newPos;
 	}
 	
-	
+	/**
+	 * Move all planets
+	 * @param delta	delta time
+	 * @param planets	The list of all planets
+	 */
 	public void move(double delta, ArrayList<Planet> planets) {
 		Point newPos = this.calculateNewPos(delta, planets);
 		
@@ -131,6 +135,9 @@ public class StarShip implements Serializable {
 		this.setPosition(newPos);
 	}
 	
+	/**
+	 * @return true if starship is arrived at destination, else false.
+	 */
 	public boolean asFinished() {
 		return this.destinationReached;
 	}

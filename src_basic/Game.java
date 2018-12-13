@@ -19,7 +19,7 @@ public class Game extends Application {
 	private int screenHeight = 640;
 	
 	/**
-	 * Main, launch the fonction start of javafx
+	 * Main, launch the function start of javafx
 	 * @param args Arguments of the command line
 	 */
 	public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class Game extends Application {
 	}
 	
 	/**
-	 * Main fonction of the game, init all the element of javafx and lauch the game's loop.
+	 * Main function of the game, init all the element of javafx and lauch the game's loop.
 	 */
 	public void start(Stage stage) {
 		

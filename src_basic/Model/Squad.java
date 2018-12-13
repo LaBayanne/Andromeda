@@ -63,6 +63,11 @@ public class Squad implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * Check collision between circle and starship.
+	 * @param c the circle
+	 * @return	true if collision, else false.
+	 */
 	public boolean isStarshipCollision(Circle c) {
 		for (StarShip ship : this.starships) {
 			if (c.collision(ship.getCollisionShape())) {
@@ -73,7 +78,12 @@ public class Squad implements Serializable {
 		return false;
 	}
 	
-	public Planet getDestinationPlanet() {return this.destinationPlanet;}
+	/**
+	 * @return destination planet
+	 */
+	public Planet getDestinationPlanet() {
+		return this.destinationPlanet;
+	}
 
 	/**
 	 * Add a starship in the squad

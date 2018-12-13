@@ -106,7 +106,7 @@ public class PlanetGenerator implements Serializable{
 			double distanceBetweenPlanet = distance - planetTotalSize;
 			
 			//Distance min : 20% sum of the two radius
-			if (distanceBetweenPlanet < this.collisionLimit * (p.getRadius() + radius)) {
+			if (distanceBetweenPlanet < collisionLimit * (p.getRadius() + radius)) {
 				return false;
 			}
 			
@@ -182,7 +182,6 @@ public class PlanetGenerator implements Serializable{
 					System.exit(1);
 				}
 			} while (alreadyIn);
-			System.err.println("Number of planets : " + planets.size());
 			
 			planets.get(planetNumber[i]).setOwner(i + 1);
 			planets.get(planetNumber[i]).setStock(0);//Egality
@@ -190,5 +189,10 @@ public class PlanetGenerator implements Serializable{
 		}
 	}
 	
-	public static double getCollisionLimit()	{	return collisionLimit; }
+	/**
+	 * @return the collision limit.
+	 */
+	public static double getCollisionLimit() {
+		return collisionLimit;
+	}
 }
