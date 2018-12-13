@@ -198,10 +198,12 @@ public class Planet implements Serializable {
 	/**
 	 * @param owner owner to set.
 	 */
-	public void setOwner(int owner) 		{	this.owner = owner;	}
+	public void setOwner(int owner) {	
+		this.owner = owner;	
+	}
 	
 	/**
-	 * @param value the number of starship that the planet had to generate
+	 * @param value the number of starship that the planet had to generate.
 	 */
 	public void setNbStarshipToGenerate(int value) {
 		if(value < 0)
@@ -213,12 +215,15 @@ public class Planet implements Serializable {
 	}
 	
 	/**
-	 * @param point the origin of planet's collision shape
+	 * @param point the origin of planet's collision shape.
 	 */
 	public void setOrigin(Point point) {
 		this.collisionShape.getOrigin().set(point);
 	}
 	
+	/**
+	 * @param size the size in percent of squads.
+	 */
 	public void setSquadSize(int size) {
 		this.squadSize = size;
 		if(this.squadSize < 1) {
@@ -229,14 +234,25 @@ public class Planet implements Serializable {
 		}
 	}
 	
+	/**
+	 * @param n  new value for stock.
+	 */
 	public void setStock(int n) {
 		this.realStock = n;
 		this.stock = n;
 	}
 	
+	/**
+	 * @param p the new production speed for the planet.
+	 */
 	public void setProductionSpeed(double p) {
 		this.poductionSpeed = p;
 	}
 	
-	public Circle getCollisionShape() 	{ return this.collisionShape; };
+	/**
+	 * @return the planet's collision shape.
+	 */
+	public Circle getCollisionShape() { 
+		return this.collisionShape; 
+	};
 }
