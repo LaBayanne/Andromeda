@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -13,9 +12,7 @@ import javafx.scene.input.ScrollEvent;
 import src_basic.Model.Scene.SceneManager;
 
 /**
- * This class get all the input from the user, and call the associate fonction in scene manager
- * @author Labayanne
- *
+ * This class get all the input from the user, and calls the associate fonction in scene manager.
  */
 public class Controller{
 	ArrayList<String> input;
@@ -23,12 +20,12 @@ public class Controller{
 	Point2D mousePos;
 	
 	/**
-	 * Basic constructor
+	 * Basic constructor. Init all user events.
 	 * @param scene			Javafx scene
-	 * @param scnManager	The scene manager
+	 * @param sceneManager	The scene manager
 	 */
-	public Controller(Scene scene, SceneManager scnManager) {
-		this.sceneManager = scnManager;
+	public Controller(Scene scene, SceneManager sceneManager) {
+		this.sceneManager = sceneManager;
 		this.input = new ArrayList<String>();
 
 		scene.setOnKeyPressed(
@@ -37,9 +34,8 @@ public class Controller{
                 public void handle(KeyEvent e)
                 {
                     String code = e.getCode().toString();
-                    System.out.println(code);
-                    if ( !input.contains(code) )
-                        input.add( code );
+                    if (!input.contains(code))
+                        input.add(code);
                 }
             });
 	 
@@ -49,7 +45,7 @@ public class Controller{
                 public void handle(KeyEvent e)
                 {
                     String code = e.getCode().toString();
-                    input.remove( code );
+                    input.remove(code);
                 }
             });
         
@@ -104,7 +100,6 @@ public class Controller{
                     public void handle(MouseEvent e)
                     {
                     	setMousePos(e.getX(), e.getY());
-                    	
                     }
                 });
 	        
@@ -114,27 +109,49 @@ public class Controller{
         		public void handle(ScrollEvent e) {
         			moveWheel((int)e.getDeltaY());
         		}
-        });
+        	});
 	}	
 	
-	public void releasedMouseLeft() {
+	/**
+	 * Calls the fonction associated in sceneManager when the mouse if released.
+	 */
+	private void releasedMouseLeft() {
 		this.input.remove("MOUSE_LEFT");
 		this.sceneManager.releasedMouseLeft(this.mousePos.getX(), this.mousePos.getY(), this.input);
 	}
 	
-	public void setMousePos(double x, double y) {
+	/**
+	 * Set the mouse's position.
+	 * @param x Position x
+	 * @param y	Position y
+	 */
+	private void setMousePos(double x, double y) {
 		this.mousePos = new Point2D(x, y);
 	}
 	
-	public void mouseClicked(int button, double x, double y) {
+	/**
+	 * Calls the associated fonction in sceneManager with the mouse's position when the mouse is clicked.
+	 * @param button Button of the mouse(left : 0, right : 1)
+	 * @param x Position x
+	 * @param y	Position y
+	 */
+	private void mouseClicked(int button, double x, double y) {
 		this.sceneManager.mouseClicked(button, x, y, this.input);
 	}
 	
-	public void moveWheel(int dy) {
-		//Les 20 magiques
-		this.sceneManager.moveWheel(dy / 10);
+	/**
+	 * Calls the associated fonction in sceneManager with the vertical delta of the wheel when it is moving.
+	 * @param dy Wheel's vertical delta
+	 */
+	private void moveWheel(int dy) {
+		int speed = 10;
+		this.sceneManager.moveWheel(dy / speed);
 	}
 	
+	/**
+	 * Main fonction of the class, called every step of game's main loop. It manage all the inputs it receives from
+	 * the user events.
+	 */
 	public void tick() {
 		if(this.input.contains("ESCAPE")){
 			this.input.remove("ESCAPE");
@@ -145,12 +162,12 @@ public class Controller{
 		}
 		if(this.input.contains("CONTROL")){
 			if(this.input.contains("S")) {
-				this.sceneManager.saveGame();
 				this.input.remove("S");
+				this.sceneManager.saveGame();
 			}
 			else if(this.input.contains("L")) {
-				this.sceneManager.restoreGame();
 				this.input.remove("L");
+				this.sceneManager.restoreGame();
 			}
 		}
 	}

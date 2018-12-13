@@ -11,19 +11,20 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Represent the scene manager.
- * The scene manager manage the input from controller, 
- * and manage the current scene.
- * @author chocorion
+ * The scene manager manage the input from controller, and manage the current scene.
  *
  */
 public class SceneManager {
 	private Scenery activeScene;
 	private SceneGame gameScene;
-	private Scenery menuScene;
+	private Scenery menuScene;//not used on game's first version
 	private boolean continueGame;
-	
 	private GraphicsContext gc;
 	
+	/**
+	 * Basic constructor.
+	 * @param gc Graphic context
+	 */
 	public SceneManager(GraphicsContext gc) {
 		this.gc = gc;
 		
@@ -37,24 +38,46 @@ public class SceneManager {
 	
 	/* User events */
 	
+	/**
+	 * Event triggered when the mouse is clicked. Call the associated fonction of the active scene.
+	 * @param button Button of the mouse(left : 0, right : 1)
+	 * @param x Mouse's x position
+	 * @param y Mouse's y position
+	 * @param buttonOptions List of inputs that are pressed (mainly control)
+	 */
 	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
 		this.activeScene.mouseClicked(button, x, y, buttonOptions);
 	}
 	
+	/**
+	 * Event triggered when the wheel is moved. Call the associated fonction of the active scene.
+	 * @param dy Wheel's vertical delta
+	 */
 	public void moveWheel(int dy) {
 		this.activeScene.moveWheel(dy);
 	}
 	
+	/**
+	 * Event triggered when the mouse left is pressed. Call the associated fonction of the active scene.
+	 * @param x Mouse's x position
+	 * @param y Mouse's y position
+	 */
 	public void inputMouseLeft(double x, double y) {
 		this.activeScene.inputMouseLeft(x, y);
 	}
 	
+	/**
+	 * Event triggered when the mouse left is released. Call the associated fonction of the active scene.
+	 * @param x Mouse's x position
+	 * @param y Mouse's y position
+	 * @param buttonOptions List of inputs that are pressed (mainly control)
+	 */
 	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
 		this.activeScene.releasedMouseLeft(x, y, buttonOptions);
 	}
 	
 	/**
-	 * 	End the game
+	 * 	End the game when escape is pressed
 	 */
 	public void inputEscape() {
 		this.continueGame = false;
@@ -67,11 +90,13 @@ public class SceneManager {
 	public boolean tick(double delta) {
 		if(!this.continueGame)
 			return false;
-		return this.activeScene.tick(delta);	//C'est pour ça que Scene nous est utile et que je l'ai remis
+		return this.activeScene.tick(delta);
 	}
 	
+	/**
+	 * Save the actual context of the game.
+	 */
 	public void saveGame() {
-		System.err.println("Saving game !");
 		ObjectOutputStream oos = null;
 		
 		try {
@@ -80,7 +105,6 @@ public class SceneManager {
 			oos.writeObject(this.gameScene);
 			oos.flush();
 			saveFile.close();
-			System.err.println("Save OK !");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -88,7 +112,6 @@ public class SceneManager {
 				if (oos != null) {
 					oos.flush();
 					oos.close();
-					System.err.println("Closing stream");
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -96,21 +119,21 @@ public class SceneManager {
 		}
 	}
 	
+	/**
+	 * Load the unique save file of the game.
+	 */
 	public void restoreGame() {
-		System.err.println("RESTORING GAME !");
 		ObjectInputStream ois = null;
 		
 		try {
 			final FileInputStream saveFile = new FileInputStream("save.ser");
 			ois = new ObjectInputStream(saveFile);
 			
-			System.err.println("Scenegame value before restauration : " + this.gameScene);
 			this.gameScene = null;
 			this.gameScene = (SceneGame) ois.readObject();
 			this.gameScene.restor(this.gc);
 			this.activeScene = gameScene;
 			saveFile.close();
-			System.err.println("Scenegame value after restauration : " + this.gameScene);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

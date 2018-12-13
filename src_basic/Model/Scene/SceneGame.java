@@ -14,7 +14,6 @@ import src_basic.View.ViewGame;
 
 /**
  * Represent the model of the game.
- * @author chocorion
  *
  */
 public class SceneGame implements Scenery, Serializable{
@@ -33,13 +32,17 @@ public class SceneGame implements Scenery, Serializable{
 	private boolean isThereSelectRect;
 	
 	private PlanetGenerator planetGenerator;
-	private int nbPlayers;
+	private int nbPlayers;//not used on the game's first version
 	
 	private double timerDoubleClickTotal;
 	private double timerDoubleClick;
 	
 	private ArrayList<AI> AIs;
 	
+	/**
+	 * Basic constructor.
+	 * @param gc Graphic context
+	 */
 	public SceneGame(GraphicsContext gc) {
 		this.view = new ViewGame(gc);
 		
@@ -54,7 +57,6 @@ public class SceneGame implements Scenery, Serializable{
 		
 		this.squadSize = 100;
 		
-		// this.generatePlanets();
 		this.selectRect = new Rectangle(0, 0, 0, 0);
 		this.isThereSelectRect = false;
 		
@@ -69,7 +71,7 @@ public class SceneGame implements Scenery, Serializable{
 	/* Manage user inputs */
 	
 	/**
-	 * Select squad if there is a starship where the player click
+	 * Select squad if there is a starship where the player click.
 	 * @param x		x value of the click
 	 * @param y		y value of the click
 	 */
@@ -78,22 +80,18 @@ public class SceneGame implements Scenery, Serializable{
 		for (Squad s : this.squads) {
 			if (s.getOwner() == 1 &&  s.isStarshipCollision(new Circle(x, y, selectionRadius))) {
 				this.selectedSquads.add(s);
-				//break; Pas de break si on veut pourvoir sélécctionner plusieurs squads au même endroit
 			}
 		}
 	}
 	
 	/**
-	 * Select planets
-	 * 
+	 * Select planet at the mouse position. If double click, select all the planets of the player.
 	 * @param x	x coord of the click
 	 * @param y	y coord of the click
 	 */
 	public boolean selectActivePlanet(double x, double y) {
-		//this.selectedPlanets.clear();
 		boolean touchPlanet = false;
 		for(Planet planet:this.planets) {
-			/* Ne pas mettre 1 mais une variable pour connaitre l'id du joueur ! */
 			if(planet.getCollisionShape().collision(new Point(x, y)) && planet.getOwner() == 1) { 
 				if(this.timerDoubleClick > 0) {
 					touchPlanet = true;
@@ -101,13 +99,15 @@ public class SceneGame implements Scenery, Serializable{
 				else {
 					if(!this.selectedPlanets.contains(planet)) {
 						this.selectedPlanets.add(planet);
-						planet.setSquadSize(this.squadSize);
-						/* On peut quitter nan ? Il ne peut y avoir qu'une planète sur un point de l'espace */
+						break;
 					}
 				}
 			}
 		}
+		
 		this.timerDoubleClick = this.timerDoubleClickTotal;
+		
+		//If double click, add all planets of the player at selected planets.
 		if(touchPlanet) {
 			this.timerDoubleClick = 0;
 			this.selectedPlanets.clear();
@@ -121,7 +121,7 @@ public class SceneGame implements Scenery, Serializable{
 	}
 
 	/**
-	 * Find the planet destination, and prepare attack for all selected planets
+	 * Find the planet destination, and prepare attack for all selected planets.
 	 * @param x	x coord of click
 	 * @param y y coord of click
 	 */
@@ -132,6 +132,7 @@ public class SceneGame implements Scenery, Serializable{
 				target = planet;
 			}
 		}
+		
 		if(target != null) {
 			for(Planet planet:this.selectedPlanets) {
 				if(planet != target)
@@ -169,10 +170,11 @@ public class SceneGame implements Scenery, Serializable{
 				break;
 		}
 	}
-	/***
-	 * 
-	 * param dy
-	**/
+	
+	/**
+	 * Triggered when the mouse is moved. modify the value of the squadsize with the @param dy.
+	 * @param dy Wheel's vertical delta
+	 */
 	public void moveWheel(int dy) {
 		this.setSquadSize(dy);
 	}

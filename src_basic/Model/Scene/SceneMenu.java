@@ -6,8 +6,8 @@ import javafx.scene.canvas.GraphicsContext;
 import src_basic.View.ViewMenu;
 
 /**
- * This class represent the menu, and manage all inputs from the controller
- * @author chocorion
+ * This class represent the menu, and manage all inputs from the controller. 
+ * It's not used on the game's first version.
  *
  */
 public class SceneMenu implements Scenery {
