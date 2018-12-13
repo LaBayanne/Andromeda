@@ -68,9 +68,15 @@ public class SceneGame implements Scenery, Serializable{
 	
 	/* Manage user inputs */
 	
+	/**
+	 * Select squad if there is a starship where the player click
+	 * @param x		x value of the click
+	 * @param y		y value of the click
+	 */
 	public void selectSquad(double x, double y) {
+		final double selectionRadius = 20;
 		for (Squad s : this.squads) {
-			if (s.isStarshipCollision(x, y)) {
+			if (s.isStarshipCollision(new Circle(x, y, selectionRadius))) {
 				this.selectedSquads.add(s);
 				break;
 			}

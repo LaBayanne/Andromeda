@@ -61,6 +61,16 @@ public class Squad implements Serializable {
 		return false;
 	}
 	
+	public boolean isStarshipCollision(Circle c) {
+		for (StarShip ship : this.starships) {
+			if (c.collision(ship.getCollisionShape())) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public Planet getDestinationPlanet() {return this.destinationPlanet;}
 
 	/**
