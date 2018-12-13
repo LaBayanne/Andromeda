@@ -85,6 +85,7 @@ public class SceneManager {
 	
 	/**
 	 * Run the tick of the actual scene
+	 * @param delta Delay since the previous tick of the game
 	 * @return true if the game continue, else false
 	 */
 	public boolean tick(double delta) {
