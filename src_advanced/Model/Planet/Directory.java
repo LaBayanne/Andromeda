@@ -8,7 +8,7 @@ public class Directory extends Planet{
 	
 	final static private double PRODUCTION_SPEED;
 	static {
-		PRODUCTION_SPEED = 0.008;
+		PRODUCTION_SPEED = 0.01;
 	}
 	
 	public Directory(Point origin, double radius, int owner) {

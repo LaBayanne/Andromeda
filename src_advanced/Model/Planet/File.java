@@ -7,7 +7,7 @@ public class File extends Planet{
 	
 	final static private double PRODUCTION_SPEED;
 	static {
-		PRODUCTION_SPEED = 0.006;
+		PRODUCTION_SPEED = 0.008;
 	}
 	
 	public File(Point origin, double radius, int owner) {

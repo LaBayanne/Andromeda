@@ -12,6 +12,13 @@ import src_advanced.Model.StarShip.Squad;
  * Represent a planet in the game
  */
 public class Planet implements Serializable {
+	private static int WIDTH;
+	private static int HEIGHT;
+	
+	static {
+		WIDTH = 26;
+		HEIGHT = WIDTH;
+	}
 	/** Rigid body of the planet **/
 	private Circle collisionShape;
 	
@@ -44,7 +51,7 @@ public class Planet implements Serializable {
 	 * @param owner				ID of the planet owner
 	 */
 	public Planet(Point origin, double radius, double productionSpeed, int owner) {
-		this.collisionShape = new Circle (origin.getX(), origin.getY(), radius);
+		this.collisionShape = new Circle (origin.getX(), origin.getY(), WIDTH);
 		
 		this.poductionSpeed = productionSpeed;
 		this.owner = owner;

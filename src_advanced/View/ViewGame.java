@@ -68,35 +68,62 @@ public class ViewGame{
 			//this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
 				//planet.getRadius() * 2, planet.getRadius() * 2);
 			
+			double x = where.getX() - planet.getRadius();
+			double y = where.getY() - planet.getRadius();
 			String name =  planet.getClass().getName();
 			name = name.replace("src_advanced.Model.Planet.", "");
 			String imageName = "";
 			switch (name) {
 				
 				case "File":
-					this.gc.setFill(Color.web("#bbbb00"));
+					this.gc.setFill(Color.web("#bbbb0044"));
 					imageName = "file_00.png";
+					x += 2;
+					y += 2;
 					break;
 				
 				case "Directory":
-					this.gc.setFill(Color.web("#0000aa"));
+					this.gc.setFill(Color.web("#0000aa88"));
 					imageName = "folder_00.png";
+					x += 6;
+					y += 4;
 					break;
 				
 				case "Application":
-					this.gc.setFill(Color.web("#aa40aa"));
+					this.gc.setFill(Color.web("#aa40aa44"));
 					imageName = "computer_00.png";
+					x += 4;
+					y += 4;
 					break;
 			}
-			this.gc.drawImage(this.imageBank.getImage(imageName), where.getX(), where.getY());
-			/*double edge = planet.getRadius() / 3;
-			//this.gc.fillOval(where.getX() - planet.getRadius() + edge / 2, where.getY() - planet.getRadius() + edge / 2, 
-				//	planet.getRadius() * 2 - edge, planet.getRadius() * 2 - edge);
-
-			this.gc.setFill(Color.web("#eeeeee"));
-			this.gc.setFont(Font.font("Verdana", 15));
+			
+			switch(planet.getOwner()) {
+			
+				case 0:
+					this.gc.setFill(Color.web("#88888899"));
+					break;
+				case 1:
+					this.gc.setFill(Color.web("#0000ff99"));
+					break;
+				case 2:
+					this.gc.setFill(Color.web("#ff000099"));
+					break;
+				case 3:
+					this.gc.setFill(Color.web("#00ff0099"));
+					break;
+			}
+			
+			//this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
+				//planet.getRadius() * 2, planet.getRadius() * 2);
+			this.gc.drawImage(this.imageBank.getImage(imageName), x, y);
+			
+			this.gc.fillRect(where.getX() - 20 , where.getY() + planet.getRadius() + 2, 
+					planet.getRadius() + 15, planet.getRadius() - 5);
+			
+			this.gc.setFill(Color.web("#ffffff"));
+			this.gc.setFont(Font.font("Verdana", 13));
 			String txt = Integer.toString(planet.getStock());
-			this.gc.fillText(txt, where.getX() - 7, where.getY() + 7);*/
+			this.gc.fillText(txt + "Ko", where.getX() - 15, where.getY() + planet.getRadius() + 17);
 
 		}
 	    
@@ -149,8 +176,10 @@ public class ViewGame{
 		
 		for (Planet planet : planets) {
 			Point where = planet.getCollisionShape().getOrigin();
-			this.gc.fillOval(where.getX() - planet.getRadius() - edge / 2, where.getY() - planet.getRadius() - edge / 2, 
-				planet.getRadius() * 2 + edge, planet.getRadius() * 2 + edge);
+			this.gc.drawImage(this.imageBank.getImage("zoom_00.png"), where.getX() - planet.getRadius(), 
+					where.getY() - planet.getRadius());
+			//this.gc.fillOval(where.getX() - planet.getRadius() - edge / 2, where.getY() - planet.getRadius() - edge / 2, 
+				//planet.getRadius() * 2 + edge, planet.getRadius() * 2 + edge);
 
 		}
 	}
@@ -183,8 +212,9 @@ public class ViewGame{
 		this.gc.drawImage(this.imageBank.getImage("default_background.jpg"), 0, 0, this.screenWidth, this.screenHeight);
 		//this.gc.fillRect(0,  0, this.screenWidth, this.screenHeight);
 		
-		this.displaySelectedPlanets(game.getSelectedPlanets());
+		
 		this.displayPlanets(game.getPlanets());
+		this.displaySelectedPlanets(game.getSelectedPlanets());
 		this.displaySelectedSquads(game.getSelectedSquads());
 		this.displaySquads(game.getSquads());
 		this.displaySquadSize(game.getSquadSize());
