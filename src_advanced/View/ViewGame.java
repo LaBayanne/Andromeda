@@ -42,9 +42,10 @@ public class ViewGame{
 	 * @param planets	Array of planets to display
 	 */
 	public void displayPlanets(ArrayList<Planet> planets) {
-		this.gc.setFill(Color.web("#4bf221"));
+		//this.gc.setFill(Color.web("#4bf221"));
 		
 		for (Planet planet : planets) {
+			System.out.println("Name : " + planet.getClass().getName());
 			Point where = planet.getCollisionShape().getOrigin();
 			
 			switch (planet.getOwner()) {
@@ -67,8 +68,29 @@ public class ViewGame{
 
 			this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
 				planet.getRadius() * 2, planet.getRadius() * 2);
-			this.gc.setFill(Color.web("#eeeeee"));
 			
+			String name =  planet.getClass().getName();
+			name = name.replace("src_advanced.Model.Planet.", "");
+			switch (name) {
+				
+				case "File":
+					this.gc.setFill(Color.web("#bbbb00"));
+					break;
+				
+				case "Directory":
+					this.gc.setFill(Color.web("#0000aa"));
+					break;
+				
+				case "Application":
+					this.gc.setFill(Color.web("#aa40aa"));
+					break;
+			}
+			
+			double edge = planet.getRadius() / 3;
+			this.gc.fillOval(where.getX() - planet.getRadius() + edge / 2, where.getY() - planet.getRadius() + edge / 2, 
+					planet.getRadius() * 2 - edge, planet.getRadius() * 2 - edge);
+
+			this.gc.setFill(Color.web("#eeeeee"));
 			this.gc.setFont(Font.font("Verdana", 15));
 			String txt = Integer.toString(planet.getStock());
 			this.gc.fillText(txt, where.getX() - 7, where.getY() + 7);

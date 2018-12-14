@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import src_advanced.Geometry.*;
+import src_advanced.Geometry.Point;
+import src_advanced.Model.Planet.Application;
+import src_advanced.Model.Planet.Directory;
+import src_advanced.Model.Planet.File;
 import src_advanced.Model.Planet.Planet;
 
 /**
@@ -135,8 +138,19 @@ public class PlanetGenerator implements Serializable{
 				radius = this.getRandomDouble(this.minSize, this.maxSize);
 				
 				if (this.isValidPlanet(originX, originY, radius, planetList)) {
-					productionSpeed = this.getRandomDouble(0.003, 0.01);//Faire en fonction de la taille et pas de manière aléatoire
-					planetList.add(new Planet(new Point(originX, originY), radius, productionSpeed, 0)); //Production speed and owner to define
+					
+					int type = this.getRandom(0, 3);
+					switch (type) {
+						case 0:
+							planetList.add(new File(new Point(originX, originY), radius, 0)); //Production speed and owner to define
+							break;
+						case 1:
+							planetList.add(new Directory(new Point(originX, originY), radius, 0)); //Production speed and owner to define
+							break;
+						case 2:
+							planetList.add(new Application(new Point(originX, originY), radius, 0)); //Production speed and owner to define
+							break;
+					}
 					break;
 				} else {
 					continue;

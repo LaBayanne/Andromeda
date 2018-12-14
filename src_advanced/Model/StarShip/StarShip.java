@@ -49,6 +49,15 @@ public class StarShip implements Serializable {
 		
 	}
 	
+	public StarShip(double speed, int damage, int owner) {
+		
+		this();
+		this.owner = owner;
+		this.speed = speed;
+		this.damage = damage;
+		
+	}
+	
 	/**
 	 * Copy constructor
 	 * @param starship	starship to copy
@@ -123,13 +132,13 @@ public class StarShip implements Serializable {
 		if ((new Rectangle(newPos, WIDTH, HEIGHT).collision(this.destinationPlanet.getCollisionShape()))) {
 					
 			if (this.destinationPlanet.getOwner() == this.owner) {
-				this.destinationPlanet.increaseStock(1);
+				this.destinationPlanet.increaseStock(this.damage);
 			} else {
-				if (this.destinationPlanet.getStock() <= 1) {
+				if (this.destinationPlanet.getStock() <= this.damage) {
 					this.destinationPlanet.setOwner(this.owner);
 					//this.destinationPlanet.increaseStock(1);
 				} else {
-					this.destinationPlanet.decreaseStock(1);
+					this.destinationPlanet.decreaseStock(this.damage);
 				}
 			}
 			this.destinationReached = true;
