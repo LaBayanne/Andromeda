@@ -33,6 +33,8 @@ public class ViewGame{
 		this.screenWidth = width;
 		this.screenHeight = height;
 		this.imageBank = new ImageBank();
+		
+		
 	}
 	
 	/**
@@ -164,5 +166,7 @@ public class ViewGame{
 		if(game.getIsThereSelectRect()) {
 			displaySelectRect(game.getSelectRect());
 		}
+		System.err.println("Drawing image " + this.imageBank.getImage("file_00.png"));
+		this.gc.drawImage(this.imageBank.getImage("file_00.png"), 50, 50);
 	}
 }
