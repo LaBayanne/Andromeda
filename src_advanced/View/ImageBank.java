@@ -1,7 +1,7 @@
 package src_advanced.View;
 
 import java.io.File;
-
+import java.net.MalformedURLException;
 import java.util.Hashtable;
 
 import javafx.scene.image.Image;
@@ -32,11 +32,30 @@ public class ImageBank {
 			if (file.isDirectory()) {
 				for (File f : file.listFiles()) {
 					if (f.isFile()) {
-						this.bank.put(f.getName(), new Image("file:" + f.getName()));
+						Image im = null;
+						try {
+							im = new Image(f.toURI().toURL().toString());
+						} catch (MalformedURLException e) {
+							e.printStackTrace();
+						}
+						if (im.isError()) {
+							System.err.println("Image error !");
+							System.exit(1);
+						}
+						this.bank.put(f.getName(), im);
 					}
 				}
 			} else {
-				this.bank.put(file.getName(), new Image("file:" + file.getName()));
+				Image im = null;
+				try {
+					im = new Image(file.toURI().toURL().toString());
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				if (im.isError()) {
+					System.exit(1);
+				}
+				this.bank.put(file.getName(), im);
 				
 			}
 		}

@@ -188,7 +188,8 @@ public class ViewGame{
 		if(game.getIsThereSelectRect()) {
 			displaySelectRect(game.getSelectRect());
 		}
-		System.err.println("Drawing image " + this.imageBank.getImage("file_00.png"));
+		//System.err.println("Drawing image " + this.imageBank.getImage("file_00.png") + "  " + this.imageBank.getImage("file_00.png").isError());
 		this.gc.drawImage(this.imageBank.getImage("file_00.png"), 50, 50);
+		this.gc.drawImage(this.imageBank.getImage("ie_00.png"), 200, 200, 200, 200);
 	}
 }
