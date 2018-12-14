@@ -64,35 +64,39 @@ public class ViewGame{
 				this.gc.setFill(Color.web("#dd0000"));
 				break;
 			}
-
-			this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
-				planet.getRadius() * 2, planet.getRadius() * 2);
+			
+			//this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
+				//planet.getRadius() * 2, planet.getRadius() * 2);
 			
 			String name =  planet.getClass().getName();
 			name = name.replace("src_advanced.Model.Planet.", "");
+			String imageName = "";
 			switch (name) {
 				
 				case "File":
 					this.gc.setFill(Color.web("#bbbb00"));
+					imageName = "file_00.png";
 					break;
 				
 				case "Directory":
 					this.gc.setFill(Color.web("#0000aa"));
+					imageName = "folder_00.png";
 					break;
 				
 				case "Application":
 					this.gc.setFill(Color.web("#aa40aa"));
+					imageName = "computer_00.png";
 					break;
 			}
-			
-			double edge = planet.getRadius() / 3;
-			this.gc.fillOval(where.getX() - planet.getRadius() + edge / 2, where.getY() - planet.getRadius() + edge / 2, 
-					planet.getRadius() * 2 - edge, planet.getRadius() * 2 - edge);
+			this.gc.drawImage(this.imageBank.getImage(imageName), where.getX(), where.getY());
+			/*double edge = planet.getRadius() / 3;
+			//this.gc.fillOval(where.getX() - planet.getRadius() + edge / 2, where.getY() - planet.getRadius() + edge / 2, 
+				//	planet.getRadius() * 2 - edge, planet.getRadius() * 2 - edge);
 
 			this.gc.setFill(Color.web("#eeeeee"));
 			this.gc.setFont(Font.font("Verdana", 15));
 			String txt = Integer.toString(planet.getStock());
-			this.gc.fillText(txt, where.getX() - 7, where.getY() + 7);
+			this.gc.fillText(txt, where.getX() - 7, where.getY() + 7);*/
 
 		}
 	    
@@ -175,8 +179,9 @@ public class ViewGame{
 	 * @param game The game
 	 */
 	public void tick(SceneGame game) {
-		this.gc.setFill(Color.web("#000000"));
-		this.gc.fillRect(0,  0, this.screenWidth, this.screenHeight);
+		//this.gc.setFill(Color.web("#000000"));
+		this.gc.drawImage(this.imageBank.getImage("default_background.jpg"), 0, 0, this.screenWidth, this.screenHeight);
+		//this.gc.fillRect(0,  0, this.screenWidth, this.screenHeight);
 		
 		this.displaySelectedPlanets(game.getSelectedPlanets());
 		this.displayPlanets(game.getPlanets());
@@ -187,7 +192,5 @@ public class ViewGame{
 		if(game.getIsThereSelectRect()) {
 			displaySelectRect(game.getSelectRect());
 		}
-		System.out.println("Drawing image " + this.imageBank.getImage("file_00.png"));
-		this.gc.drawImage(this.imageBank.getImage("file_00.png"), 200, 200);
 	}
 }
