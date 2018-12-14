@@ -21,7 +21,7 @@ In the first version of the game, you begin with the green planet. Your enemy is
 All the others planets are neutral. The number on the planet is the number of starships that you can generate.
 Select one of your planet with left click. You can add multiple planet to you selection by pressing `Ctrl` when you click.
 You can select all you planets with a double click.
-Bu default, you send 100% of your starship stock. You can change this value with the wheel.
+By default, you send 100% of your starship stock. You can change this value with the wheel.
 
 You can select the destination of you starships with right click.
  * If the destination is an ally, you will augment the stock of the selected planet.
