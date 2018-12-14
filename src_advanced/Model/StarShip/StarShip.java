@@ -1,6 +1,8 @@
-package src_advanced.Model;
+package src_advanced.Model.StarShip;
 
 import src_advanced.Geometry.*;
+import src_advanced.Model.Planet.Planet;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -118,7 +120,7 @@ public class StarShip implements Serializable {
 	public void move(double delta, ArrayList<Planet> planets) {
 		Point newPos = this.calculateNewPos(delta, planets);
 		
-		if (this.destination.distance(newPos) < this.destinationPlanet.getRadius()) {
+		if ((new Rectangle(newPos, WIDTH, HEIGHT).collision(this.destinationPlanet.getCollisionShape()))) {
 					
 			if (this.destinationPlanet.getOwner() == this.owner) {
 				this.destinationPlanet.increaseStock(1);

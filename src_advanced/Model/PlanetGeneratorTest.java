@@ -10,6 +10,8 @@ import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.Timeout;
 
+import src_advanced.Model.Planet.Planet;
+
 class PlanetGeneratorTest {
 	
 	@Rule

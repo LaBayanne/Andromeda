@@ -7,9 +7,9 @@ import java.util.Iterator;
 import src_advanced.Geometry.*;
 import javafx.scene.canvas.GraphicsContext;
 import src_advanced.Model.AI;
-import src_advanced.Model.Planet;
 import src_advanced.Model.PlanetGenerator;
-import src_advanced.Model.Squad;
+import src_advanced.Model.Planet.Planet;
+import src_advanced.Model.StarShip.Squad;
 import src_advanced.View.ViewGame;
 
 /**
