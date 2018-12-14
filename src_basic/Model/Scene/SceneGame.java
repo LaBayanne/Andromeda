@@ -92,7 +92,10 @@ public class SceneGame implements Scenery, Serializable{
 	 * @param x	x coord of the click
 	 * @param y	y coord of the click
 	 */
-	public boolean selectActivePlanet(double x, double y) {
+	public boolean selectActivePlanet(double x, double y, ArrayList<String> buttonOptions) {
+		if(!buttonOptions.contains("CONTROL")) {
+			this.selectedPlanets.clear();
+		}
 		boolean touchPlanet = false;
 		for(Planet planet:this.planets) {
 			if(planet.getCollisionShape().collision(new Point(x, y)) && planet.getOwner() == 1) { 
@@ -164,7 +167,7 @@ public class SceneGame implements Scenery, Serializable{
 		switch(button) {
 			case 0:
 				//If we don't click on a planet:
-				if (!selectActivePlanet(x, y)) {
+				if (!selectActivePlanet(x, y, buttonOptions)) {
 					selectSquad(x, y);
 				}
 				break;
@@ -180,54 +183,6 @@ public class SceneGame implements Scenery, Serializable{
 	 */
 	public void moveWheel(int dy) {
 		this.setSquadSize(dy);
-	}
-	
-	/**
-	 * Event triggered when the mouse left is pressed. Modify the attributes of selectRect according to
-	 * the position of the mouse.
-	 * @param x Mouse's x position
-	 * @param y Mouse's y position
-	 */
-	public void inputMouseLeft(double x, double y) {
-		Rectangle rect = this.selectRect;
-		if(!this.isThereSelectRect ) {
-			this.selectRectOrigin = new Point(x, y);
-			this.isThereSelectRect = true;
-		}
-		if(rect.getOrigin().getX() >= x) {
-			rect.setWidth(this.selectRectOrigin.getX() - x);
-			rect.getOrigin().setX(x);
-		}
-		else {
-			rect.getOrigin().setX(this.selectRectOrigin.getX());
-			rect.setWidth(x - rect.getOrigin().getX());
-		}
-		if(rect.getOrigin().getY() >= y) {
-			rect.setHeight(this.selectRectOrigin.getY() - y);
-			rect.getOrigin().setY(y);
-		}
-		else {
-			rect.getOrigin().setY(this.selectRectOrigin.getY());
-			rect.setHeight(y - rect.getOrigin().getY());
-		}
-	}
-	
-	/**
-	 * Event triggered when the mouse left is released. Add the planets inside selectRect to selectedPlanets.
-	 * @param x Mouse's x position
-	 * @param y Mouse's y position
-	 * @param buttonOptions List of inputs that are pressed (mainly control)
-	 */
-	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
-		if(!buttonOptions.contains("CONTROL"))
-			this.selectedPlanets.clear();
-		for(Planet planet:this.planets) {
-			if(planet.getOwner() == 1 && planet.getCollisionShape().collision(this.selectRect) && 
-					!this.selectedPlanets.contains(planet)) {
-				this.selectedPlanets.add(planet);
-			}
-		}
-		this.isThereSelectRect = false;
 	}
 	
 	/* End of user inputs */

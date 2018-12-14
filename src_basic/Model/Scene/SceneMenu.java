@@ -32,12 +32,4 @@ public class SceneMenu implements Scenery {
 		
 	}
 	
-	public void inputMouseLeft(double x, double y) {
-		
-	}
-	
-	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
-		
-	}
-	
 }
