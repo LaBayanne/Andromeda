@@ -57,6 +57,11 @@ public class Planet implements Serializable {
 		this.target = null;
 	}
 	
+	public Planet(Point origin, double radius, double productionSpeed, int owner, StarShip starshipModel) {
+		this(origin, radius, productionSpeed, owner);
+		this.starshipModel = new StarShip(starshipModel);
+	}
+	
 	/**
 	 * Basic constructor for Planet
 	 */
