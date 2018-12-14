@@ -43,4 +43,8 @@ public class ImageBank {
 		System.err.println("Image bank : ");
 		System.err.println(this.bank);
 	}
+	
+	public Image getImage(String name) {
+		return this.bank.get(name);
+	}
 }
