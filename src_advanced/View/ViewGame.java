@@ -20,6 +20,7 @@ public class ViewGame{
 	private GraphicsContext gc;
 	private int screenWidth;
 	private int screenHeight;
+	private ImageBank imageBank;
 	
 	/**
 	 * Basic constructor.
@@ -31,6 +32,7 @@ public class ViewGame{
 		this.gc = gc;
 		this.screenWidth = width;
 		this.screenHeight = height;
+		this.imageBank = new ImageBank();
 	}
 	
 	/**
