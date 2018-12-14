@@ -32,10 +32,12 @@ public class ImageBank {
 			if (file.isDirectory()) {
 				for (File f : file.listFiles()) {
 					if (f.isFile()) {
+						System.out.println(file.getName() + " : " + f.getName());
 						this.bank.put(f.getName(), new Image("file:" + f.getName()));
 					}
 				}
 			} else {
+				System.out.println("resources : " + file.getName());
 				this.bank.put(file.getName(), new Image("file:" + file.getName()));
 				
 			}

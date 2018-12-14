@@ -45,7 +45,6 @@ public class ViewGame{
 		//this.gc.setFill(Color.web("#4bf221"));
 		
 		for (Planet planet : planets) {
-			System.out.println("Name : " + planet.getClass().getName());
 			Point where = planet.getCollisionShape().getOrigin();
 			
 			switch (planet.getOwner()) {
@@ -188,7 +187,7 @@ public class ViewGame{
 		if(game.getIsThereSelectRect()) {
 			displaySelectRect(game.getSelectRect());
 		}
-		System.err.println("Drawing image " + this.imageBank.getImage("file_00.png"));
-		this.gc.drawImage(this.imageBank.getImage("file_00.png"), 50, 50);
+		System.out.println("Drawing image " + this.imageBank.getImage("file_00.png"));
+		this.gc.drawImage(this.imageBank.getImage("file_00.png"), 200, 200);
 	}
 }
