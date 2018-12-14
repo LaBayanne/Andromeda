@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import src_advanced.Model.Planet.Planet;
+import src_advanced.Model.StarShip.Squad;
+
 /**
  * Represent a AI in the game.
  */

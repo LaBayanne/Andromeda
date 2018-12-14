@@ -7,10 +7,10 @@ import javafx.scene.paint.Color;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import src_advanced.Model.Planet;
-import src_advanced.Model.Squad;
-import src_advanced.Model.StarShip;
+import src_advanced.Model.Planet.Planet;
 import src_advanced.Model.Scene.SceneGame;
+import src_advanced.Model.StarShip.StarShip;
+import src_advanced.Model.StarShip.Squad;
 import src_advanced.Geometry.*;
 /**
  * This class represent the view of the game, used to display the game on screen.

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import src_advanced.Geometry.*;
+import src_advanced.Model.Planet.Planet;
 
 /**
  * This class is used for generating planets *

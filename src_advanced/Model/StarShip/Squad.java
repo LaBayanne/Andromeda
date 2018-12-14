@@ -1,10 +1,11 @@
-package src_advanced.Model;
+package src_advanced.Model.StarShip;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import src_advanced.Geometry.*;
+import src_advanced.Model.Planet.Planet;
 
 /**
  * Represent an escadron on the game

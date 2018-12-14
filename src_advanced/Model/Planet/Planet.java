@@ -1,9 +1,11 @@
-package src_advanced.Model;
+package src_advanced.Model.Planet;
 
 import java.io.Serializable;
 
 import src_advanced.Geometry.Circle;
 import src_advanced.Geometry.Point;
+import src_advanced.Model.StarShip.StarShip;
+import src_advanced.Model.StarShip.Squad;
 
 
 /**

@@ -31,7 +31,7 @@ public class Circle extends Shape {
 	 * @return	True if there is a collision, else false.
 	 */
 	public boolean collision(Rectangle r) {
-		Point points[] = {
+		/*Point points[] = {
 				r.getOrigin(),
 				new Point (r.getOrigin().getX() + r.getWidth(), r.getOrigin().getY()),
 				new Point (r.getOrigin().getX(), r.getOrigin().getY() + r.getHeight()),
@@ -44,7 +44,20 @@ public class Circle extends Shape {
 			}
 		}
 		
-		return r.collision(this);
+		return r.collision(this);*/
+		double distanceX = Math.abs(this.origin.getX()- (r.origin.getX() + r.getWidth() / 2));
+		double distanceY = Math.abs(this.origin.getY() - (r.origin.getY() + r.getHeight() / 2));
+
+	    if (distanceX > (r.getWidth() / 2 + this.radius)) { return false; }
+	    if (distanceY > (r.getHeight() / 2 + this.radius)) { return false; }
+
+	    if (distanceX <= (r.getWidth() / 2)) { return true; } 
+	    if (distanceY <= (r.getHeight() / 2)) { return true; }
+
+	    double cornerDistance_sq = (distanceX - r.getWidth() / 2) * (distanceX - r.getWidth() / 2) +
+	                         (distanceY - r.getHeight() / 2) * (distanceY - r.getHeight() / 2);
+
+	    return (cornerDistance_sq <= (this.radius * this.radius));
 	}
 	
 	/**

@@ -58,25 +58,6 @@ public class SceneManager {
 	}
 	
 	/**
-	 * Event triggered when the mouse left is pressed. Call the associated fonction of the active scene.
-	 * @param x Mouse's x position
-	 * @param y Mouse's y position
-	 */
-	public void inputMouseLeft(double x, double y) {
-		this.activeScene.inputMouseLeft(x, y);
-	}
-	
-	/**
-	 * Event triggered when the mouse left is released. Call the associated fonction of the active scene.
-	 * @param x Mouse's x position
-	 * @param y Mouse's y position
-	 * @param buttonOptions List of inputs that are pressed (mainly control)
-	 */
-	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
-		this.activeScene.releasedMouseLeft(x, y, buttonOptions);
-	}
-	
-	/**
 	 * 	End the game when escape is pressed
 	 */
 	public void inputEscape() {

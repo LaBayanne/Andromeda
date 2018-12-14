@@ -60,48 +60,6 @@ public class Controller{
                 		mouseClicked(1, e.getX(), e.getY());
                 }
             });
-        
-        scene.setOnMousePressed(
-                new EventHandler<MouseEvent>()
-                {
-                    public void handle(MouseEvent e)
-                    {
-                    	setMousePos(e.getX(), e.getY());
-                    	String code;
-                    	if(e.getButton() == MouseButton.PRIMARY) {
-                    		code = "MOUSE_LEFT";
-	                        if ( !input.contains(code) )
-	                            input.add( code );
-                    	}
-                    	if(e.getButton() == MouseButton.SECONDARY){
-                    		code = "MOUSE_RIGHT";
-	                        if ( !input.contains(code) )
-	                            input.add( code );
-                    	}
-                    	
-                    }
-                });
-        
-        scene.setOnMouseReleased(
-                new EventHandler<MouseEvent>()
-                {
-                    public void handle(MouseEvent e)
-                    {
-                    	if(e.getButton() == MouseButton.PRIMARY) 
-                    		releasedMouseLeft();
-                    	if(e.getButton() == MouseButton.SECONDARY)
-                    		input.remove("MOUSE_RIGHT");
-                    }
-                });
-
-        scene.setOnMouseDragged(
-                new EventHandler<MouseEvent>()
-                {
-                    public void handle(MouseEvent e)
-                    {
-                    	setMousePos(e.getX(), e.getY());
-                    }
-                });
 	        
         scene.setOnScroll(
         	new EventHandler<ScrollEvent>() 
@@ -111,23 +69,6 @@ public class Controller{
         		}
         	});
 	}	
-	
-	/**
-	 * Calls the fonction associated in sceneManager when the mouse if released.
-	 */
-	private void releasedMouseLeft() {
-		this.input.remove("MOUSE_LEFT");
-		this.sceneManager.releasedMouseLeft(this.mousePos.getX(), this.mousePos.getY(), this.input);
-	}
-	
-	/**
-	 * Set the mouse's position.
-	 * @param x Position x
-	 * @param y	Position y
-	 */
-	private void setMousePos(double x, double y) {
-		this.mousePos = new Point2D(x, y);
-	}
 	
 	/**
 	 * Calls the associated fonction in sceneManager with the mouse's position when the mouse is clicked.
@@ -156,9 +97,6 @@ public class Controller{
 		if(this.input.contains("ESCAPE")){
 			this.input.remove("ESCAPE");
 			this.sceneManager.inputEscape();
-		}
-		if(this.input.contains("MOUSE_LEFT")){
-			this.sceneManager.inputMouseLeft(this.mousePos.getX(), this.mousePos.getY());
 		}
 		if(this.input.contains("CONTROL")){
 			if(this.input.contains("S")) {

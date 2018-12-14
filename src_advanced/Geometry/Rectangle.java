@@ -58,7 +58,8 @@ public class Rectangle extends Shape {
 	 * @return		if there is a collision
 	 */
 	public boolean collision(Circle c) {
-		return collision(c.getOrigin());
+		return c.collision(this);
+		//return collision(c.getOrigin());
 	}
 	
 	/**
