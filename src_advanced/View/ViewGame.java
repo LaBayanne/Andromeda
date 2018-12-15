@@ -215,7 +215,7 @@ public class ViewGame{
 				}
 				Point where = starship.getPosition();
 				
-
+				//Modifier la valeur de l'angle quand c'est le curseur
 				this.drawRotate(this.imageBank.getImage(getImageName(starship, squad.getOwner())), starship.getAngle(), where.getX(), 
 						where.getY(), starship.getWidth(), starship.getHeight());
 				//this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
