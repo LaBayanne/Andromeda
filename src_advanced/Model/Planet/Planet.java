@@ -42,7 +42,7 @@ public class Planet implements Serializable {
 	private Planet target;
 	
 	private double timerMax;
-	private double timer;
+	protected double timer;
 	
 
 	
@@ -60,7 +60,7 @@ public class Planet implements Serializable {
 		this.owner = owner;
 		this.stock = 0;
 		this.squadSize = 100;//100 percent by default
-		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, owner);
+		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, owner, 20, 20);
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
@@ -83,6 +83,8 @@ public class Planet implements Serializable {
 			
 			case "MoveCursor":
 				this.starshipModel = new MoveCursor(starshipModel);
+				this.starshipModel.setWidth(28);
+				this.starshipModel.setHeight(28);
 				break;
 		}
 	}

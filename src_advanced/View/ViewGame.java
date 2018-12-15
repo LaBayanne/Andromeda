@@ -141,8 +141,8 @@ public class ViewGame{
 			for (StarShip starship:squad.getStarships()) {
 				Point where = starship.getPosition();
 				where.translate(-edge, -edge);
-				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth() + 2 * edge, 
-						StarShip.getHeight() + 2 * edge);
+				this.gc.fillRect(where.getX(), where.getY(), starship.getWidth() + 2 * edge, 
+						starship.getHeight() + 2 * edge);
 			}
 		}
 	}
@@ -178,6 +178,7 @@ public class ViewGame{
 						imageName = "cursor_02.png";
 						break;
 				}
+
 				this.gc.drawImage(this.imageBank.getImage(imageName), where.getX(), 
 						where.getY(), starship.getWidth(), starship.getHeight());
 				//this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());

@@ -13,5 +13,15 @@ public class Application extends Planet{
 	public Application(Point origin, double radius, int owner) {
 		super(origin, radius, PRODUCTION_SPEED, owner, new MoveCursor(owner));
 	}
+	
+	@Override
+	public double decreaseTimer() {
+		if(this.timer - 0.3 > 0)
+			this.timer -= 0.3;
+		else
+			this.timer = 0;
+		return this.timer;
+	}
+	
 
 }
