@@ -147,6 +147,37 @@ public class ViewGame{
 		}
 	}
 
+	private String getImageName(StarShip s, int owner) {
+		String name = s.getClass().getName();
+		name = name.replace("src_advanced.Model.StarShip.", "");
+		String imageName = "";
+		switch (name) {
+			
+			case "Arrow":
+				if (owner == 1)
+					imageName = "cursor_01.png";
+				else 
+					imageName = "cursor_04.png";
+				break;
+			
+			case "Finger":
+				if (owner == 1)
+					imageName = "cursor_00.png";
+				else
+					imageName = "cursor_03.png";
+				break;
+			
+			case "MoveCursor":
+				if (owner == 1)
+					imageName = "cursor_02.png";
+				else
+					imageName = "cursor_05.png";
+				break;
+		}
+		
+		return imageName;
+	}
+	
 	/**
 	 * Display all the starships of a squad.
 	 * @param squads All the squads of the game
@@ -161,34 +192,9 @@ public class ViewGame{
 					this.gc.setFill(Color.web("#dd0000"));
 				}
 				Point where = starship.getPosition();
-				String name = starship.getClass().getName();
-				name = name.replace("src_advanced.Model.StarShip.", "");
-				String imageName = "";
-				switch (name) {
-					
-					case "Arrow":
-						if (squad.getOwner() == 1)
-							imageName = "cursor_01.png";
-						else 
-							imageName = "cursor_04.png";
-						break;
-					
-					case "Finger":
-						if (squad.getOwner() == 1)
-							imageName = "cursor_00.png";
-						else
-							imageName = "cursor_03.png";
-						break;
-					
-					case "MoveCursor":
-						if (squad.getOwner() == 1)
-							imageName = "cursor_02.png";
-						else
-							imageName = "cursor_05.png";
-						break;
-				}
+				
 
-				this.gc.drawImage(this.imageBank.getImage(imageName), where.getX(), 
+				this.gc.drawImage(this.imageBank.getImage(getImageName(starship, squad.getOwner())), where.getX(), 
 						where.getY(), starship.getWidth(), starship.getHeight());
 				//this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
 			}
