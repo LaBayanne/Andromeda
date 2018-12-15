@@ -167,15 +167,24 @@ public class ViewGame{
 				switch (name) {
 					
 					case "Arrow":
-						imageName = "cursor_01.png";
+						if (squad.getOwner() == 1)
+							imageName = "cursor_01.png";
+						else 
+							imageName = "cursor_04.png";
 						break;
 					
 					case "Finger":
-						imageName = "cursor_00.png";
+						if (squad.getOwner() == 1)
+							imageName = "cursor_00.png";
+						else
+							imageName = "cursor_03.png";
 						break;
 					
 					case "MoveCursor":
-						imageName = "cursor_02.png";
+						if (squad.getOwner() == 1)
+							imageName = "cursor_02.png";
+						else
+							imageName = "cursor_05.png";
 						break;
 				}
 
