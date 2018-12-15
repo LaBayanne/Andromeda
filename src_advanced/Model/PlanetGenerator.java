@@ -101,7 +101,7 @@ public class PlanetGenerator implements Serializable{
 		if (originY - radius <= 0)  return false;
 		
 		if (originX + radius >= this.windowWidth) 	return false;
-		if (originY + radius >= this.windowHeight)	return false;
+		if (originY + radius >= this.windowHeight - 50)	return false;
 		
 		for (Planet p: planets) {
 			double distance = p.getOrigin().distance(originX, originY);
