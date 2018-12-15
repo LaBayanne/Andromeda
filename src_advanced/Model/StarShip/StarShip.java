@@ -24,7 +24,7 @@ public class StarShip implements Serializable {
 	private Planet 	destinationPlanet;
 	
 	private double 	speed;
-	private double 	angle;//In °
+	private double 	angle;
 	private int 	damage;
 	private int 	owner;
 
@@ -115,7 +115,7 @@ public class StarShip implements Serializable {
 		} while(this.planetCollision(planets, newPos) && this.destination.distance(newPos) < this.collisionShape.getOrigin().distance(destination));
 		//Condition de distance empèche vaisseaux de rester coincé dans une boucle.
 		// Comme il n'y a que des planètes rondes, impossible que cette condition bloque un vaisseaux
-		
+		this.angle = angle;
 		return newPos;
 	}
 	
@@ -195,5 +195,9 @@ public class StarShip implements Serializable {
 	
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	
+	public double getAngle() {
+		return this.angle;
 	}
 }

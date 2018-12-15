@@ -2,16 +2,21 @@ package src_advanced.View;
 
 import java.util.ArrayList;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.transform.Rotate;
+import src_advanced.Geometry.Point;
+import src_advanced.Geometry.Rectangle;
 import src_advanced.Model.Planet.Planet;
 import src_advanced.Model.Scene.SceneGame;
-import src_advanced.Model.StarShip.StarShip;
 import src_advanced.Model.StarShip.Squad;
-import src_advanced.Geometry.*;
+import src_advanced.Model.StarShip.StarShip;
 /**
  * This class represent the view of the game, used to display the game on screen.
  *
@@ -129,6 +134,23 @@ public class ViewGame{
 	    
 	}
 	
+	private void drawRotate(Image image, double angle, double x, double y, int width, int height) {
+		/*ImageView iv = new ImageView(image);
+		iv.setRotate((angle + 90)%360);
+		SnapshotParameters params = new SnapshotParameters();
+		params.setFill(Color.TRANSPARENT);
+		Image rotatedImage = iv.snapshot(params, null);
+		gc.drawImage(rotatedImage, x, y);*/
+		
+		ImageView iv = new ImageView(image);
+	    SnapshotParameters params = new SnapshotParameters();
+	    params.setFill(Color.TRANSPARENT);
+	    params.setTransform(new Rotate((angle + 90)%360, image.getHeight() / 2, image.getWidth() / 2));
+	    params.setViewport(new Rectangle2D(0, 0, image.getHeight(), image.getWidth()));
+	    Image toDraw =  iv.snapshot(params, null);
+	    gc.drawImage(toDraw, x, y, width, height);
+	}
+	
 	/**
 	 * Display all the squads selected by the player.
 	 * @param selectedSquads squads selected by the player.
@@ -194,7 +216,7 @@ public class ViewGame{
 				Point where = starship.getPosition();
 				
 
-				this.gc.drawImage(this.imageBank.getImage(getImageName(starship, squad.getOwner())), where.getX(), 
+				this.drawRotate(this.imageBank.getImage(getImageName(starship, squad.getOwner())), starship.getAngle(), where.getX(), 
 						where.getY(), starship.getWidth(), starship.getHeight());
 				//this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
 			}
