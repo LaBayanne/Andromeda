@@ -1,6 +1,7 @@
 package src_advanced.Model.StarShip;
 
 import src_advanced.Geometry.Point;
+import src_advanced.Geometry.Rectangle;
 
 public class Arrow extends StarShip {
 	
@@ -14,6 +15,11 @@ public class Arrow extends StarShip {
 	
 	public Arrow(Point position, Point destination, double angle, int owner) {
 		super(position, destination, SPEED, DAMAGE, angle, owner);
+	}
+	
+	public Arrow(StarShip starship) {
+		super(starship);
+		
 	}
 	
 	public Arrow(int owner) {

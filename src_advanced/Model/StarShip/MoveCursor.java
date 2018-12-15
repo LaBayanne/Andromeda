@@ -16,6 +16,11 @@ public class MoveCursor extends StarShip{
 		super(position, destination, 0.02, 4, angle, owner);
 	}
 	
+	public MoveCursor(StarShip starship) {
+		super(starship);
+		
+	}
+	
 	public MoveCursor(int owner) {
 		super(SPEED, DAMAGE, owner);
 	}

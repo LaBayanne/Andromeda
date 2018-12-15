@@ -16,6 +16,11 @@ public class Finger extends StarShip {
 		super(position, destination, SPEED, DAMAGE, angle, owner);
 	}
 	
+	public Finger(StarShip starship) {
+		super(starship);
+		
+	}
+	
 	public Finger(int owner) {
 		super(SPEED, DAMAGE, owner);
 	}

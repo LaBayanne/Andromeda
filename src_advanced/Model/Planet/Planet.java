@@ -5,6 +5,9 @@ import java.io.Serializable;
 import src_advanced.Geometry.Circle;
 import src_advanced.Geometry.Point;
 import src_advanced.Model.StarShip.StarShip;
+import src_advanced.Model.StarShip.Arrow;
+import src_advanced.Model.StarShip.Finger;
+import src_advanced.Model.StarShip.MoveCursor;
 import src_advanced.Model.StarShip.Squad;
 
 
@@ -66,7 +69,22 @@ public class Planet implements Serializable {
 	
 	public Planet(Point origin, double radius, double productionSpeed, int owner, StarShip starshipModel) {
 		this(origin, radius, productionSpeed, owner);
-		this.starshipModel = new StarShip(starshipModel);
+		String name = starshipModel.getClass().getName();
+		name = name.replace("src_advanced.Model.StarShip.", "");
+		switch (name) {
+		
+			case "Arrow":
+				this.starshipModel = new Arrow(starshipModel);
+				break;
+			
+			case "Finger":
+				this.starshipModel = new Finger(starshipModel);
+				break;
+			
+			case "MoveCursor":
+				this.starshipModel = new MoveCursor(starshipModel);
+				break;
+		}
 	}
 	
 	/**

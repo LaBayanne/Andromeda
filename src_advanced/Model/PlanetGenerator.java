@@ -139,18 +139,13 @@ public class PlanetGenerator implements Serializable{
 				
 				if (this.isValidPlanet(originX, originY, radius, planetList)) {
 					
-					int type = this.getRandom(0, 3);
-					switch (type) {
-						case 0:
-							planetList.add(new File(new Point(originX, originY), radius, 0)); //Production speed and owner to define
-							break;
-						case 1:
-							planetList.add(new Directory(new Point(originX, originY), radius, 0)); //Production speed and owner to define
-							break;
-						case 2:
-							planetList.add(new Application(new Point(originX, originY), radius, 0)); //Production speed and owner to define
-							break;
-					}
+					int type = this.getRandom(0, 10);
+					if(type < 6)
+						planetList.add(new File(new Point(originX, originY), radius, 0)); //Production speed and owner to define
+					else if(type < 9)
+						planetList.add(new Directory(new Point(originX, originY), radius, 0)); //Production speed and owner to define
+					else
+						planetList.add(new Application(new Point(originX, originY), radius, 0)); //Production speed and owner to define
 					break;
 				} else {
 					continue;
@@ -158,7 +153,7 @@ public class PlanetGenerator implements Serializable{
 			} while (true);
 		}
 		for (Planet p : planetList) {
-			p.increaseStock(this.getRandom(0, 30));
+			p.increaseStock(this.getRandom(1, 30));
 		}
 		return planetList;
 	}

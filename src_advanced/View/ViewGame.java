@@ -161,7 +161,26 @@ public class ViewGame{
 					this.gc.setFill(Color.web("#dd0000"));
 				}
 				Point where = starship.getPosition();
-				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
+				String name = starship.getClass().getName();
+				name = name.replace("src_advanced.Model.StarShip.", "");
+				String imageName = "";
+				switch (name) {
+					
+					case "Arrow":
+						imageName = "cursor_01.png";
+						break;
+					
+					case "Finger":
+						imageName = "cursor_00.png";
+						break;
+					
+					case "MoveCursor":
+						imageName = "cursor_02.png";
+						break;
+				}
+				this.gc.drawImage(this.imageBank.getImage(imageName), where.getX(), 
+						where.getY(), starship.getWidth(), starship.getHeight());
+				//this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
 			}
 		}
 	}

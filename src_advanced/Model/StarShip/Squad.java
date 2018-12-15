@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import src_advanced.Geometry.*;
+import src_advanced.Geometry.Circle;
+import src_advanced.Geometry.Point;
 import src_advanced.Model.Planet.Planet;
 
 /**
@@ -30,7 +31,22 @@ public class Squad implements Serializable {
 	public Squad(int nbUnit, StarShip starship, Planet planet, int owner) {
 		this.nbUnit = nbUnit;
 		this.starships = new ArrayList<StarShip>();
-		this.starshipModel = new StarShip(starship);
+		String name = starship.getClass().getName();
+		name = name.replace("src_advanced.Model.StarShip.", "");
+		switch (name) {
+		
+			case "Arrow":
+				this.starshipModel = new Arrow(starship);
+				break;
+			
+			case "Finger":
+				this.starshipModel = new Finger(starship);
+				break;
+			
+			case "MoveCursor":
+				this.starshipModel = new MoveCursor(starship);
+				break;
+		}
 		this.planetOrigin = planet;
 		this.owner = owner;
 	}
@@ -127,7 +143,23 @@ public class Squad implements Serializable {
 			y = yCenter + (radius + height) * Math.sin(angle * 3.14 / 180) - height / 2;
 			
 			this.starshipModel.setPosition(new Point(x, y));
-			this.starships.add(new StarShip(this.starshipModel));
+			String name =  starshipModel.getClass().getName();
+			name = name.replace("src_advanced.Model.StarShip.", "");
+			switch (name) {
+			
+				case "Arrow":
+					this.starships.add(new Arrow(this.starshipModel));
+					break;
+				
+				case "Finger":
+					this.starships.add(new Finger(this.starshipModel));
+					break;
+				
+				case "MoveCursor":
+					this.starships.add(new MoveCursor(this.starshipModel));
+					break;
+			}
+			
 			
 			angle += angleDist;
 		}
