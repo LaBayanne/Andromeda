@@ -42,7 +42,7 @@ public class Planet implements Serializable {
 	private Planet target;
 	
 	private double timerMax;
-	private double timer;
+	protected double timer;
 	
 
 	
@@ -60,7 +60,7 @@ public class Planet implements Serializable {
 		this.owner = owner;
 		this.stock = 0;
 		this.squadSize = 100;//100 percent by default
-		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, owner);
+		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, owner, 20, 20);
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
@@ -83,6 +83,8 @@ public class Planet implements Serializable {
 			
 			case "MoveCursor":
 				this.starshipModel = new MoveCursor(starshipModel);
+				this.starshipModel.setWidth(28);
+				this.starshipModel.setHeight(28);
 				break;
 		}
 	}
@@ -102,8 +104,8 @@ public class Planet implements Serializable {
 		this.realStock += this.poductionSpeed;
 		this.stock = (int) Math.round(this.realStock);
 		
-		if(this.nbStarshipToGenerate > this.stock) {
-			this.nbStarshipToGenerate = this.stock - 1;
+		if(this.nbStarshipToGenerate * this.starshipModel.getDamage() > this.stock) {
+			this.nbStarshipToGenerate = (this.stock - 1)* this.starshipModel.getDamage();
 		}
 	}
 	
@@ -140,7 +142,7 @@ public class Planet implements Serializable {
 	 * @param target		planet to attack/help
 	 */
 	public void setAttackGroup(int nbAttackers, Planet target) {
-		setNbStarshipToGenerate(nbAttackers);
+		setNbStarshipToGenerate(nbAttackers/this.starshipModel.getDamage());
 		this.target = target;
 	}
 	
@@ -149,9 +151,9 @@ public class Planet implements Serializable {
 	 * @return the number of starship per squad
 	 */
 	public int getNbUnitPerSquad() {
-		int nb = (this.stock - this.nbStarshipToGenerate) * this.squadSize/100;
+		int nb = (this.stock - (this.nbStarshipToGenerate * this.starshipModel.getDamage())) * this.squadSize/100;
 		if(this.stock - nb <= 0) {
-			nb--;
+			nb =  stock/this.starshipModel.getDamage();
 		}
 		return nb;
 	}
@@ -168,7 +170,7 @@ public class Planet implements Serializable {
 		int restUnit = squad.repartsStarships();
 		
 		squad.setDestinationPlanet(this.target);
-		this.decreaseStock(this.nbStarshipToGenerate - restUnit);
+		this.decreaseStock((this.nbStarshipToGenerate - restUnit) * this.starshipModel.getDamage());
 		
 		this.nbStarshipToGenerate = restUnit;
 		return squad;
@@ -211,6 +213,10 @@ public class Planet implements Serializable {
 	 */
 	public int getStock() {	
 		return this.stock;  
+	}
+	
+	public int getPower() {
+		return this.stock * this.starshipModel.getDamage();
 	}
 	
 	/**

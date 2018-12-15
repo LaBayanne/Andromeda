@@ -15,13 +15,8 @@ import java.util.ArrayList;
  */
 public class StarShip implements Serializable {
 
-	static private int WIDTH;
-	static private int HEIGHT;
-	
-	static {
-		WIDTH  = 20;
-		HEIGHT = 20;
-	}
+	private int width;
+	private int height;
 	
 	private Rectangle collisionShape;
 	
@@ -29,17 +24,18 @@ public class StarShip implements Serializable {
 	private Planet 	destinationPlanet;
 	
 	private double 	speed;
-	private double 	angle;//In °
+	private double 	angle;
 	private int 	damage;
 	private int 	owner;
 
 	
 	boolean destinationReached;
 	
-	public StarShip(Point position, Point destination,double speed, int damage, double angle, int owner) {
-		
+	public StarShip(Point position, Point destination,double speed, int damage, double angle, int owner, int width, int height) {
+		this.width = width;
+		this.height = height;
 		this.destination = new Point(destination);
-		this.collisionShape = new Rectangle(position.getX(), position.getY(), WIDTH, HEIGHT);
+		this.collisionShape = new Rectangle(position.getX(), position.getY(), this.width, this.height);
 		
 		this.owner = owner;
 		this.speed = speed;
@@ -72,6 +68,8 @@ public class StarShip implements Serializable {
 		this.angle = 0;
 		this.destinationReached = false;
 		this.owner = starship.getOwner();
+		this.width = starship.getWidth();
+		this.height = starship.getHeight();
 		
 	}
 	
@@ -79,13 +77,13 @@ public class StarShip implements Serializable {
 	 * Basic constructor, build a starship with all value set to 0
 	 */
 	public StarShip() {
-		this(new Point(), new Point(), 0, 0, 0.0, 0);
+		this(new Point(), new Point(), 0, 0, 0.0, 0, 20, 20);
 	}
 
 	
 	private boolean planetCollision(ArrayList<Planet> planets, Point position) {
 		for (Planet planet : planets) {//
-			if (planet.getCollisionShape().collision(new Rectangle(position, WIDTH, HEIGHT))) {
+			if (planet.getCollisionShape().collision(new Rectangle(position, this.width, this.height))) {
 				if (planet != this.destinationPlanet) {
 					return true;
 				}
@@ -117,7 +115,7 @@ public class StarShip implements Serializable {
 		} while(this.planetCollision(planets, newPos) && this.destination.distance(newPos) < this.collisionShape.getOrigin().distance(destination));
 		//Condition de distance empèche vaisseaux de rester coincé dans une boucle.
 		// Comme il n'y a que des planètes rondes, impossible que cette condition bloque un vaisseaux
-		
+		this.angle = angle;
 		return newPos;
 	}
 	
@@ -129,7 +127,7 @@ public class StarShip implements Serializable {
 	public void move(double delta, ArrayList<Planet> planets) {
 		Point newPos = this.calculateNewPos(delta, planets);
 		
-		if ((new Rectangle(newPos, WIDTH, HEIGHT).collision(this.destinationPlanet.getCollisionShape()))) {
+		if ((new Rectangle(newPos, this.width, this.height).collision(this.destinationPlanet.getCollisionShape()))) {
 					
 			if (this.destinationPlanet.getOwner() == this.owner) {
 				this.destinationPlanet.increaseStock(this.damage);
@@ -160,8 +158,8 @@ public class StarShip implements Serializable {
  * 
  */
 	
-	public static int getWidth() {return WIDTH;}
-	public static int getHeight() {return HEIGHT;}
+	public int getWidth() {return this.width;}
+	public int getHeight() {return this.height;}
 	
 	public double getSpeed() 		{ return this.speed;	}
 	public int getDamage() 			{ return this.damage;	}//Was height
@@ -189,5 +187,17 @@ public class StarShip implements Serializable {
 	
 	public Rectangle getCollisionShape() {
 		return this.collisionShape;
+	}
+	
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+	public double getAngle() {
+		return this.angle;
 	}
 }

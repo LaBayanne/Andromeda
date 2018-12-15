@@ -2,12 +2,19 @@ package src_advanced.View;
 
 import java.util.ArrayList;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import src_advanced.Geometry.Point;
 import src_advanced.Geometry.Rectangle;
 import src_advanced.Model.Menus.Menu;
+import javafx.scene.text.FontWeight;
+import javafx.scene.transform.Rotate;
+
 import src_advanced.Model.Planet.Planet;
 import src_advanced.Model.Scene.SceneGame;
 import src_advanced.Model.StarShip.Squad;
@@ -129,6 +136,23 @@ public class ViewGame{
 	    
 	}
 	
+	private void drawRotate(Image image, double angle, double x, double y, int width, int height) {
+		/*ImageView iv = new ImageView(image);
+		iv.setRotate((angle + 90)%360);
+		SnapshotParameters params = new SnapshotParameters();
+		params.setFill(Color.TRANSPARENT);
+		Image rotatedImage = iv.snapshot(params, null);
+		gc.drawImage(rotatedImage, x, y);*/
+		
+		ImageView iv = new ImageView(image);
+	    SnapshotParameters params = new SnapshotParameters();
+	    params.setFill(Color.TRANSPARENT);
+	    params.setTransform(new Rotate((angle + 90)%360, image.getHeight() / 2, image.getWidth() / 2));
+	    params.setViewport(new Rectangle2D(0, 0, image.getHeight(), image.getWidth()));
+	    Image toDraw =  iv.snapshot(params, null);
+	    gc.drawImage(toDraw, x, y, width, height);
+	}
+	
 	/**
 	 * Display all the squads selected by the player.
 	 * @param selectedSquads squads selected by the player.
@@ -141,12 +165,43 @@ public class ViewGame{
 			for (StarShip starship:squad.getStarships()) {
 				Point where = starship.getPosition();
 				where.translate(-edge, -edge);
-				this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth() + 2 * edge, 
-						StarShip.getHeight() + 2 * edge);
+				this.gc.fillRect(where.getX(), where.getY(), starship.getWidth() + 2 * edge, 
+						starship.getHeight() + 2 * edge);
 			}
 		}
 	}
 
+	private String getImageName(StarShip s, int owner) {
+		String name = s.getClass().getName();
+		name = name.replace("src_advanced.Model.StarShip.", "");
+		String imageName = "";
+		switch (name) {
+			
+			case "Arrow":
+				if (owner == 1)
+					imageName = "cursor_01.png";
+				else 
+					imageName = "cursor_04.png";
+				break;
+			
+			case "Finger":
+				if (owner == 1)
+					imageName = "cursor_00.png";
+				else
+					imageName = "cursor_03.png";
+				break;
+			
+			case "MoveCursor":
+				if (owner == 1)
+					imageName = "cursor_02.png";
+				else
+					imageName = "cursor_05.png";
+				break;
+		}
+		
+		return imageName;
+	}
+	
 	/**
 	 * Display all the starships of a squad.
 	 * @param squads All the squads of the game
@@ -161,24 +216,9 @@ public class ViewGame{
 					this.gc.setFill(Color.web("#dd0000"));
 				}
 				Point where = starship.getPosition();
-				String name = starship.getClass().getName();
-				name = name.replace("src_advanced.Model.StarShip.", "");
-				String imageName = "";
-				switch (name) {
-					
-					case "Arrow":
-						imageName = "cursor_01.png";
-						break;
-					
-					case "Finger":
-						imageName = "cursor_00.png";
-						break;
-					
-					case "MoveCursor":
-						imageName = "cursor_02.png";
-						break;
-				}
-				this.gc.drawImage(this.imageBank.getImage(imageName), where.getX(), 
+				
+				//Modifier la valeur de l'angle quand c'est le curseur
+				this.drawRotate(this.imageBank.getImage(getImageName(starship, squad.getOwner())), starship.getAngle(), where.getX(), 
 						where.getY(), starship.getWidth(), starship.getHeight());
 				//this.gc.fillRect(where.getX(), where.getY(), StarShip.getWidth(), StarShip.getHeight());
 			}

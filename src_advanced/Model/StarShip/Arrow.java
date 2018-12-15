@@ -14,7 +14,7 @@ public class Arrow extends StarShip {
 	}
 	
 	public Arrow(Point position, Point destination, double angle, int owner) {
-		super(position, destination, SPEED, DAMAGE, angle, owner);
+		super(position, destination, SPEED, DAMAGE, angle, owner, 20, 20);
 	}
 	
 	public Arrow(StarShip starship) {
