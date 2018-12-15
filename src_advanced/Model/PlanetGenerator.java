@@ -32,7 +32,7 @@ public class PlanetGenerator implements Serializable{
 	private Random rand;
 	
 	static {
-		collisionLimit = 0.3;
+		collisionLimit = 0.4;
 	}
 	
 	/**

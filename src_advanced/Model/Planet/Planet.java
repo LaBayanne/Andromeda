@@ -170,7 +170,7 @@ public class Planet implements Serializable {
 		int restUnit = squad.repartsStarships();
 		
 		squad.setDestinationPlanet(this.target);
-		this.decreaseStock(this.nbStarshipToGenerate - restUnit);
+		this.decreaseStock((this.nbStarshipToGenerate - restUnit) * this.starshipModel.getDamage());
 		
 		this.nbStarshipToGenerate = restUnit;
 		return squad;
