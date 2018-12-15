@@ -142,7 +142,7 @@ public class Planet implements Serializable {
 	 * @param target		planet to attack/help
 	 */
 	public void setAttackGroup(int nbAttackers, Planet target) {
-		setNbStarshipToGenerate(nbAttackers);
+		setNbStarshipToGenerate(nbAttackers/this.starshipModel.getDamage());
 		this.target = target;
 	}
 	
@@ -213,6 +213,10 @@ public class Planet implements Serializable {
 	 */
 	public int getStock() {	
 		return this.stock;  
+	}
+	
+	public int getPower() {
+		return this.stock * this.starshipModel.getDamage();
 	}
 	
 	/**

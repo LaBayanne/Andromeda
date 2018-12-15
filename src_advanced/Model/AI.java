@@ -212,7 +212,7 @@ public class AI implements Serializable {
 			//We verify if we can attack the planet and determine the attacking planets
 			while (!restPlanets.isEmpty() && iterator.hasNext() && powerAttack < bestTarget.getStock() - nbAttackers) {
 				ally = iterator.next();
-				powerAttack += ally.getStock();
+				powerAttack += ally.getPower();
 				iterator.remove();
 				attackers.add(ally);
 			}
