@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import src_advanced.Geometry.Point;
+import src_advanced.Geometry.Rectangle;
+import src_advanced.Model.Menus.Menu;
 import src_advanced.Model.Planet.Planet;
 import src_advanced.Model.Scene.SceneGame;
-import src_advanced.Model.StarShip.StarShip;
 import src_advanced.Model.StarShip.Squad;
-import src_advanced.Geometry.*;
+import src_advanced.Model.StarShip.StarShip;
 /**
  * This class represent the view of the game, used to display the game on screen.
  *
@@ -208,9 +208,9 @@ public class ViewGame{
 	 * @param size	Value to display
 	 */
 	public void displaySquadSize(int size) {
-		this.gc.setFill(Color.web("#eeeeee"));
-		this.gc.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
-		this.gc.fillText(Integer.toString(size) + "%", 10, 620);
+		this.gc.setFill(Color.web("#ffffff"));
+		this.gc.setFont(Font.font("Verdana", 15));
+		this.gc.fillText(Integer.toString(size) + "%", this.screenWidth - 65, this.screenHeight - 10);
 	}
 	
 	/**
@@ -222,24 +222,62 @@ public class ViewGame{
 		this.gc.strokeRect(rect.getOrigin().getX(), rect.getOrigin().getY(), rect.getWidth(), rect.getHeight());
 	}
 	
+	public void displayTaskBar() {
+		int taskBarHeight = 30;
+		this.gc.drawImage(this.imageBank.getImage("taskBar.png"), 0, this.screenHeight - taskBarHeight,
+				this.screenWidth, taskBarHeight);
+	}
+	
+	public void displayMenu(Menu menu) {
+		this.gc.setStroke(Color.web("#0000ff"));
+		this.gc.setFont(Font.font("Verdana", 17));
+		this.gc.setFill(Color.web("#ffffff"));
+		double x;
+		double y;
+		double width;
+		double height;
+		x = menu.getCollisionShape().getOrigin().getX();
+		y = menu.getCollisionShape().getOrigin().getY();
+		width = menu.getCollisionShape().getWidth();
+		height = menu.getCollisionShape().getHeight();
+		this.gc.fillRect(x, y, width, height);
+		this.gc.strokeRect(x, y, width, height);
+		this.gc.setFill(Color.web("#0000ff"));
+		this.gc.fillText(menu.getText(), x + 5, y + 22);
+	}
+	
+	public void displayMenus(ArrayList<Menu> menus) {
+		
+		for(Menu menu : menus) {
+			if(menu.isAvailable()) {
+				displayMenu(menu);
+				for(Menu subMenu : menu.getSubMenus()) {
+					if(subMenu.isAvailable()) {
+						displayMenu(subMenu);
+					}
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Tick function, draw the entire game.
 	 * @param game The game
 	 */
 	public void tick(SceneGame game) {
-		//this.gc.setFill(Color.web("#000000"));
 		this.gc.drawImage(this.imageBank.getImage("default_background.jpg"), 0, 0, this.screenWidth, this.screenHeight);
-		//this.gc.fillRect(0,  0, this.screenWidth, this.screenHeight);
 		
 		
 		this.displayPlanets(game.getPlanets());
 		this.displaySelectedPlanets(game.getSelectedPlanets());
 		this.displaySelectedSquads(game.getSelectedSquads());
 		this.displaySquads(game.getSquads());
+		this.displayTaskBar();
 		this.displaySquadSize(game.getSquadSize());
+		this.displayMenus(game.getMenus());
 		
 		if(game.getIsThereSelectRect()) {
-			displaySelectRect(game.getSelectRect());
+			this.displaySelectRect(game.getSelectRect());
 		}
 	}
 }

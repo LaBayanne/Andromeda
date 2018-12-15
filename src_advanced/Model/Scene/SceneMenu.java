@@ -3,6 +3,7 @@ package src_advanced.Model.Scene;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
+import src_advanced.Model.Menus.Menu;
 import src_advanced.View.ViewMenu;
 
 /**
@@ -13,6 +14,7 @@ import src_advanced.View.ViewMenu;
 public class SceneMenu implements Scenery {
 	private GraphicsContext gc;
 	private ViewMenu view;
+	private ArrayList<Menu> menus;
 	
 	public SceneMenu(GraphicsContext gc) {
 		this.gc = gc;
@@ -38,6 +40,10 @@ public class SceneMenu implements Scenery {
 	
 	public void releasedMouseLeft(double x, double y, ArrayList<String> buttonOptions) {
 		
+	}
+	
+	public ArrayList<Menu> getMenus(){
+		return this.getMenus();
 	}
 	
 }

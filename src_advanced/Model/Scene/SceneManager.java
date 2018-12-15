@@ -1,13 +1,15 @@
 package src_advanced.Model.Scene;
 
-import java.util.ArrayList;
-import java.io.FileOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
+import src_advanced.Geometry.Point;
+import src_advanced.Model.Menus.Menu;
 
 /**
  * Represent the scene manager.
@@ -36,8 +38,28 @@ public class SceneManager {
 		this.continueGame = true;
 	}
 	
-	/* User events */
+	public void selectMenu(double x, double y) {
+		String text = "";
+		
+		for(Menu menu : this.activeScene.getMenus()) {
+			if((text = menu.collision(new Point(x, y))) != "")
+				break;
+		}
+		
+		System.out.println("Texte menu : " + text);
+		
+		switch(text) {
+		
+			case "/Start/Save":
+				this.saveGame();
+				break;
+			case "/Start/Load":
+				this.restoreGame();
+				break;
+		}
+	}
 	
+	/* User events */
 	/**
 	 * Event triggered when the mouse is clicked. Call the associated fonction of the active scene.
 	 * @param button Button of the mouse(left : 0, right : 1)
@@ -46,6 +68,7 @@ public class SceneManager {
 	 * @param buttonOptions List of inputs that are pressed (mainly control)
 	 */
 	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
+		selectMenu(x, y);
 		this.activeScene.mouseClicked(button, x, y, buttonOptions);
 	}
 	

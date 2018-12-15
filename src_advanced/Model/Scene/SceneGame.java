@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import src_advanced.Geometry.*;
 import javafx.scene.canvas.GraphicsContext;
+import src_advanced.Geometry.Circle;
+import src_advanced.Geometry.Point;
+import src_advanced.Geometry.Rectangle;
 import src_advanced.Model.AI;
 import src_advanced.Model.PlanetGenerator;
+import src_advanced.Model.Menus.Menu;
 import src_advanced.Model.Planet.Planet;
 import src_advanced.Model.StarShip.Squad;
 import src_advanced.View.ViewGame;
@@ -25,6 +28,7 @@ public class SceneGame implements Scenery, Serializable{
 	private ArrayList<Planet> planets;
 	private ArrayList<Planet> selectedPlanets;
 	private ArrayList<Squad> selectedSquads;
+	private ArrayList<Menu> menus;
 	
 	private int squadSize;
 	private Rectangle selectRect;
@@ -68,6 +72,14 @@ public class SceneGame implements Scenery, Serializable{
 		
 		this.AIs = new ArrayList<AI>();
 		this.AIs.add(new AI(this.planets, this.squads, 2));
+		
+		this.menus = new ArrayList<Menu>();
+		Menu startMenu = new Menu("Start", new Rectangle(0, height - 35, 100, 35), true, false);
+		Menu loadMenu = new Menu("Load", new Rectangle(0, height - 70, 120, 35), false, false);
+		Menu saveMenu = new Menu("Save", new Rectangle(0, height - 105, 120, 35), false, false);
+		startMenu.addMenu(saveMenu);
+		startMenu.addMenu(loadMenu);
+		this.menus.add(startMenu);
 		
 	}
 	
@@ -386,6 +398,10 @@ public class SceneGame implements Scenery, Serializable{
 	 */
 	public Rectangle getSelectRect() {
 		return this.selectRect;
+	}
+	
+	public ArrayList<Menu> getMenus(){
+		return this.menus;
 	}
 	
 	/**

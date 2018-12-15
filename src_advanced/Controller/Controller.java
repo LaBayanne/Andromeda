@@ -144,7 +144,7 @@ public class Controller{
 	 * @param dy Wheel's vertical delta
 	 */
 	private void moveWheel(int dy) {
-		int speed = 10;
+		int speed = 5;
 		this.sceneManager.moveWheel(dy / speed);
 	}
 	
