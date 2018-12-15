@@ -104,8 +104,8 @@ public class Planet implements Serializable {
 		this.realStock += this.poductionSpeed;
 		this.stock = (int) Math.round(this.realStock);
 		
-		if(this.nbStarshipToGenerate > this.stock) {
-			this.nbStarshipToGenerate = this.stock - 1;
+		if(this.nbStarshipToGenerate * this.starshipModel.getDamage() > this.stock) {
+			this.nbStarshipToGenerate = (this.stock - 1)* this.starshipModel.getDamage();
 		}
 	}
 	
@@ -151,9 +151,9 @@ public class Planet implements Serializable {
 	 * @return the number of starship per squad
 	 */
 	public int getNbUnitPerSquad() {
-		int nb = (this.stock - this.nbStarshipToGenerate) * this.squadSize/100;
+		int nb = (this.stock - (this.nbStarshipToGenerate * this.starshipModel.getDamage())) * this.squadSize/100;
 		if(this.stock - nb <= 0) {
-			nb--;
+			nb =  stock/this.starshipModel.getDamage();
 		}
 		return nb;
 	}
