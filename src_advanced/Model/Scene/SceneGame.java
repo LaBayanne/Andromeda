@@ -77,35 +77,28 @@ public class SceneGame implements Scenery, Serializable{
 		
 		this.menus = new ArrayList<Menu>();
 		
-		int menuWidth = 120;
-		int menuHeight = 35;
+		int menuWidth = 115;
+		int menuHeight = 30;
+		int menu2Width = 175;
+		int menu2Height = 40;
+		int menu3Width = menu2Width - 2;
+		int menu3Height = 34;
+		
 		
 		Menu startMenu = new Menu("Start", new Rectangle(0, height - menuHeight, menuWidth, menuHeight), true, false);
 		
-		Menu loadMenu = new Menu("Load", new Rectangle(0, height - menuHeight * 3, menuWidth, menuHeight), false, false);
+		Menu loadMenu = new Menu("Load", new Rectangle(0, height - 210, menu2Width, menu2Height), false, false);
 		
-		Menu saveMenu = new Menu("Save", new Rectangle(0, height - menuHeight * 4, menuWidth, menuHeight), false, false);
+		Menu saveMenu = new Menu("Save", new Rectangle(0, height - 255, menu2Width, menu2Height), false, false);
+					
+		Menu backMenu = new Menu("Back", new Rectangle(160, height - 67, 90, 36), false, false);
 		
-		/*Menu playMenu = new Menu("Play", new Rectangle(0, height - menuHeight * 5, menuWidth, menuHeight), false, false);
+		Menu quitMenu = new Menu("Quit", new Rectangle(250, height - 67, 97, 36), false, false);
 		
-		Menu nbPlayers2Menu = new Menu("2 Players", new Rectangle(menuWidth, height - menuHeight * 5, menuWidth, menuHeight), false, false);
-		Menu nbPlayers3Menu = new Menu("3 Players", new Rectangle(menuWidth, height - menuHeight * 6, menuWidth, menuHeight), false, false);
-		Menu nbPlayers4Menu = new Menu("4 Players", new Rectangle(menuWidth, height - menuHeight * 7, menuWidth, menuHeight), false, false);
-		Menu nbPlayers5Menu = new Menu("5 Players", new Rectangle(menuWidth, height - menuHeight * 8, menuWidth, menuHeight), false, false);
-		playMenu.addMenu(nbPlayers2Menu);
-		playMenu.addMenu(nbPlayers3Menu);
-		playMenu.addMenu(nbPlayers4Menu);
-		playMenu.addMenu(nbPlayers5Menu);*/
-		
-		Menu quitMenu = new Menu("Quit", new Rectangle(menuWidth - menuHeight, height - menuHeight * 2, menuHeight, menuHeight), false, false);
-		
-		Menu returnMainMenuMenu = new Menu("Return to main menu", new Rectangle(menuWidth - menuHeight * 2, height - menuHeight * 2, menuHeight, menuHeight), false, false);
-		
-		startMenu.addMenu(returnMainMenuMenu);
 		startMenu.addMenu(quitMenu);
-		//startMenu.addMenu(playMenu);
-		startMenu.addMenu(saveMenu);
 		startMenu.addMenu(loadMenu);
+		startMenu.addMenu(backMenu);
+		startMenu.addMenu(saveMenu);
 		this.menus.add(startMenu);
 		
 	}
@@ -285,27 +278,31 @@ public class SceneGame implements Scenery, Serializable{
 	 */
 	public boolean tick(double delta) {
 		
-		for(Planet planet:this.planets) {
-			if (planet.getOwner() != 0) 
-				planet.actualiseStock();
+		if(!this.menus.get(0).isActivated()) {
 			
-			if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0) {
-				this.squads.add(planet.generateSquad());
+			for(Planet planet:this.planets) {
+				if (planet.getOwner() != 0) 
+					planet.actualiseStock();
+				
+				if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0) {
+					this.squads.add(planet.generateSquad());
+				}
+				
+				if(planet.getOwner() == 1) {
+					planet.setSquadSize(this.squadSize);
+				}
+				
 			}
 			
-			if(planet.getOwner() == 1) {
-				planet.setSquadSize(this.squadSize);
-			}
+			cleanSelectedPlanets();
 			
+			moveSquad(delta);
+			
+			updateTimerClick(delta);
+			
+			updateAIs(delta);
+		
 		}
-		
-		cleanSelectedPlanets();
-		
-		moveSquad(delta);
-		
-		updateTimerClick(delta);
-		
-		updateAIs(delta);
 		
 		this.view.tick(this);
 		

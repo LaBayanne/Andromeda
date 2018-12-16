@@ -60,7 +60,7 @@ public class SceneManager {
 			case "/Start/Load":
 				this.restoreGame();
 				break;
-			case "/Start/Return to main menu":
+			case "/Start/Back":
 				this.newMainMenu();
 				break;
 			case "/Start/Quit":
@@ -140,7 +140,10 @@ public class SceneManager {
 	 * 	End the game when escape is pressed
 	 */
 	public void inputEscape() {
-		this.continueGame = false;
+		if(this.activeScene.getMenus().get(0).isActivated())
+			this.activeScene.getMenus().get(0).deactivate();
+		else
+			this.activeScene.getMenus().get(0).activate();
 	}
 	
 	/**
