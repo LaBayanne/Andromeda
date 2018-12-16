@@ -13,6 +13,7 @@ import src_advanced.Model.PlanetGenerator;
 import src_advanced.Model.Menus.Menu;
 import src_advanced.Model.Planet.Planet;
 import src_advanced.Model.StarShip.Squad;
+import src_advanced.View.SongController;
 import src_advanced.View.ViewGame;
 
 /**
@@ -42,6 +43,8 @@ public class SceneGame implements Scenery, Serializable{
 	private double timerDoubleClick;
 	
 	private ArrayList<AI> AIs;
+	
+	private SongController songController;
 	
 	private int screenWidth, screenHeight;
 	/**
@@ -80,6 +83,10 @@ public class SceneGame implements Scenery, Serializable{
 		startMenu.addMenu(saveMenu);
 		startMenu.addMenu(loadMenu);
 		this.menus.add(startMenu);
+		
+		this.songController = new SongController();
+		songController.playSong("outfile.wav");
+		songController.setVolume(0.1);
 		
 	}
 	

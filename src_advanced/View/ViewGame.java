@@ -28,7 +28,6 @@ public class ViewGame{
 	private int screenWidth;
 	private int screenHeight;
 	private ImageBank imageBank;
-	private SongController songController;
 	
 	/**
 	 * Basic constructor.
@@ -41,9 +40,7 @@ public class ViewGame{
 		this.screenWidth = width;
 		this.screenHeight = height;
 		this.imageBank = new ImageBank();
-		this.songController = new SongController();
-		songController.playSong("outfile.wav");
-		songController.setVolume(0.1);
+		
 		
 		
 	}
