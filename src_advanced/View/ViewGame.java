@@ -54,27 +54,6 @@ public class ViewGame{
 		for (Planet planet : planets) {
 			Point where = planet.getCollisionShape().getOrigin();
 			
-			switch (planet.getOwner()) {
-			
-			/*Neutral planet by default*/
-			case 0:
-				this.gc.setFill(Color.web("#999999"));
-				break;
-			
-			/*Human player by default*/
-			case 1:
-				this.gc.setFill(Color.web("#00bb00"));
-				break;
-			
-			/*IA player by default*/
-			case 2:
-				this.gc.setFill(Color.web("#dd0000"));
-				break;
-			}
-			
-			//this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
-				//planet.getRadius() * 2, planet.getRadius() * 2);
-			
 			double x = where.getX() - planet.getRadius();
 			double y = where.getY() - planet.getRadius();
 			String name =  planet.getClass().getName();
@@ -116,7 +95,13 @@ public class ViewGame{
 					this.gc.setFill(Color.web("#ff000099"));
 					break;
 				case 3:
-					this.gc.setFill(Color.web("#00ff0099"));
+					this.gc.setFill(Color.web("#00bb0099"));
+					break;
+				case 4:
+					this.gc.setFill(Color.web("#ee51aa99"));
+					break;
+				case 5:
+					this.gc.setFill(Color.web("#ffff0099"));
 					break;
 			}
 			

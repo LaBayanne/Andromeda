@@ -22,8 +22,8 @@ public class SceneManager {
 	private Scenery menuScene;//not used on game's first version
 	private boolean continueGame;
 	private GraphicsContext gc;
-	private int width;
-	private int height;
+	private int screenWidth;
+	private int screenHeight;
 	
 	/**
 	 * Basic constructor.
@@ -31,13 +31,13 @@ public class SceneManager {
 	 */
 	public SceneManager(GraphicsContext gc, int width, int height) {
 		this.gc = gc;
-		this.width = width;
-		this.height = height;
+		this.screenWidth = width;
+		this.screenHeight = height;
 		this.gameScene = new SceneGame(gc, width, height, 2);
-		this.menuScene = new SceneMenu(gc);
+		this.menuScene = new SceneMenu(gc, width, height);
 		
 		/* First scene to show. By default, it's the game */
-		this.activeScene = this.gameScene;
+		this.activeScene = this.menuScene;
 		this.continueGame = true;
 	}
 	
@@ -53,12 +53,21 @@ public class SceneManager {
 		
 		switch(text) {
 			
+			//In game
 			case "/Start/Save":
 				this.saveGame();
 				break;
 			case "/Start/Load":
 				this.restoreGame();
 				break;
+			case "/Start/Return to main menu":
+				this.newMainMenu();
+				break;
+			case "/Start/Quit":
+				this.continueGame = false;
+				break;
+				
+			//In main menu
 			case "/Start/Play/2 Players":
 				this.newGame(2);
 				break;
@@ -71,24 +80,19 @@ public class SceneManager {
 			case "/Start/Play/5 Players":
 				this.newGame(5);
 				break;
-			case "/Start/Return to main menu":
-				this.newMainMenu();
-				break;
-			case "/Start/Quit":
-				this.continueGame = false;
-				break;
+			
 		}
 	}
 	
 	public void newGame(int nbPlayers) {
 		System.out.println("NewGame");
-		this.gameScene = new SceneGame(this.gc, this.width, this.height, nbPlayers);
+		this.gameScene = new SceneGame(this.gc, this.screenWidth, this.screenHeight, nbPlayers);
 		this.activeScene = this.gameScene;
 	}
 	
 	public void newMainMenu() {
 		System.out.println("NewMainMenu");
-		this.menuScene = new SceneMenu(this.gc);
+		this.menuScene = new SceneMenu(this.gc, this.screenWidth, this.screenHeight);
 		this.activeScene = this.menuScene;
 	}
 	

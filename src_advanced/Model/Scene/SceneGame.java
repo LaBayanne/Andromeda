@@ -44,6 +44,7 @@ public class SceneGame implements Scenery, Serializable{
 	private ArrayList<AI> AIs;
 	
 	private int screenWidth, screenHeight;
+	
 	/**
 	 * Basic constructor.
 	 * @param gc Graphic context
@@ -57,7 +58,7 @@ public class SceneGame implements Scenery, Serializable{
 		this.planetGenerator = new PlanetGenerator(100, 20, 30, 10, 960, 640);
 		
 		this.planets = this.planetGenerator.generate();
-		this.planetGenerator.givePlanet(2, this.planets);
+		this.planetGenerator.givePlanet(this.nbPlayers, this.planets);
 		this.squads = new ArrayList<Squad>();
 		this.selectedPlanets = new ArrayList<Planet>();
 		this.selectedSquads = new ArrayList<Squad>();
@@ -71,7 +72,8 @@ public class SceneGame implements Scenery, Serializable{
 		this.timerDoubleClick = 0;
 		
 		this.AIs = new ArrayList<AI>();
-		this.AIs.add(new AI(this.planets, this.squads, 2));
+		for(int id = 0; id < nbPlayers; id++)
+			this.AIs.add(new AI(this.planets, this.squads, id + 2));
 		
 		this.menus = new ArrayList<Menu>();
 		
@@ -84,9 +86,16 @@ public class SceneGame implements Scenery, Serializable{
 		
 		Menu saveMenu = new Menu("Save", new Rectangle(0, height - menuHeight * 4, menuWidth, menuHeight), false, false);
 		
-		Menu playMenu = new Menu("Play", new Rectangle(0, height - menuHeight * 5, menuWidth, menuHeight), false, false);
-		Menu nbPlayers2Menu = new Menu("2 Players", new Rectangle(menuWidth, height - menuHeight * 4, menuWidth, menuHeight), false, false);
+		/*Menu playMenu = new Menu("Play", new Rectangle(0, height - menuHeight * 5, menuWidth, menuHeight), false, false);
+		
+		Menu nbPlayers2Menu = new Menu("2 Players", new Rectangle(menuWidth, height - menuHeight * 5, menuWidth, menuHeight), false, false);
+		Menu nbPlayers3Menu = new Menu("3 Players", new Rectangle(menuWidth, height - menuHeight * 6, menuWidth, menuHeight), false, false);
+		Menu nbPlayers4Menu = new Menu("4 Players", new Rectangle(menuWidth, height - menuHeight * 7, menuWidth, menuHeight), false, false);
+		Menu nbPlayers5Menu = new Menu("5 Players", new Rectangle(menuWidth, height - menuHeight * 8, menuWidth, menuHeight), false, false);
 		playMenu.addMenu(nbPlayers2Menu);
+		playMenu.addMenu(nbPlayers3Menu);
+		playMenu.addMenu(nbPlayers4Menu);
+		playMenu.addMenu(nbPlayers5Menu);*/
 		
 		Menu quitMenu = new Menu("Quit", new Rectangle(menuWidth - menuHeight, height - menuHeight * 2, menuHeight, menuHeight), false, false);
 		
@@ -94,7 +103,7 @@ public class SceneGame implements Scenery, Serializable{
 		
 		startMenu.addMenu(returnMainMenuMenu);
 		startMenu.addMenu(quitMenu);
-		startMenu.addMenu(playMenu);
+		//startMenu.addMenu(playMenu);
 		startMenu.addMenu(saveMenu);
 		startMenu.addMenu(loadMenu);
 		this.menus.add(startMenu);
