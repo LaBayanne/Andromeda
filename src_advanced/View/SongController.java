@@ -2,6 +2,7 @@ package src_advanced.View;
 
 
 import java.io.File;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.Hashtable;
 
@@ -12,7 +13,7 @@ import javafx.scene.media.MediaPlayer;
 
 
 
-public class SongController {
+public class SongController implements Serializable{
 	private static String DATA_DIR;
 	private Hashtable<String, AudioClip> bank;
 	private AudioClip current;
