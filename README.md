@@ -39,3 +39,5 @@ You can select the destination of you starships with right click.
 ---------------
  Works with `openjdk 1.8` and `openjfx 1.8`.
  Test with `Junit5`.
+ 
+ `ffmpeg -acodec pcm_s16le -i infile.wav  outfile.wav` pour pouvoir lire les sons.
