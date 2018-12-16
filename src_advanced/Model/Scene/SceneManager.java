@@ -22,6 +22,8 @@ public class SceneManager {
 	private Scenery menuScene;//not used on game's first version
 	private boolean continueGame;
 	private GraphicsContext gc;
+	private int width;
+	private int height;
 	
 	/**
 	 * Basic constructor.
@@ -29,8 +31,9 @@ public class SceneManager {
 	 */
 	public SceneManager(GraphicsContext gc, int width, int height) {
 		this.gc = gc;
-		
-		this.gameScene = new SceneGame(gc, width, height);
+		this.width = width;
+		this.height = height;
+		this.gameScene = new SceneGame(gc, width, height, 2);
 		this.menuScene = new SceneMenu(gc);
 		
 		/* First scene to show. By default, it's the game */
@@ -49,14 +52,44 @@ public class SceneManager {
 		System.out.println("Texte menu : " + text);
 		
 		switch(text) {
-		
+			
 			case "/Start/Save":
 				this.saveGame();
 				break;
 			case "/Start/Load":
 				this.restoreGame();
 				break;
+			case "/Start/Play/2 Players":
+				this.newGame(2);
+				break;
+			case "/Start/Play/3 Players":
+				this.newGame(3);
+				break;
+			case "/Start/Play/4 Players":
+				this.newGame(4);
+				break;
+			case "/Start/Play/5 Players":
+				this.newGame(5);
+				break;
+			case "/Start/Return to main menu":
+				this.newMainMenu();
+				break;
+			case "/Start/Quit":
+				this.continueGame = false;
+				break;
 		}
+	}
+	
+	public void newGame(int nbPlayers) {
+		System.out.println("NewGame");
+		this.gameScene = new SceneGame(this.gc, this.width, this.height, nbPlayers);
+		this.activeScene = this.gameScene;
+	}
+	
+	public void newMainMenu() {
+		System.out.println("NewMainMenu");
+		this.menuScene = new SceneMenu(this.gc);
+		this.activeScene = this.menuScene;
 	}
 	
 	/* User events */

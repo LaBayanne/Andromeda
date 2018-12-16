@@ -39,7 +39,7 @@ public class Menu implements Serializable{
 			if(textReturn == "") {
 				for(Menu menu : this.subMenus) {
 					if((text = menu.collision(cursor)) != "") {
-						textReturn += path + text;
+						return textReturn += path + text;
 					}
 				}
 			}

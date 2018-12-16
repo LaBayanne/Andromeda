@@ -115,7 +115,7 @@ public class StarShip implements Serializable {
 		} while(this.planetCollision(planets, newPos) && this.destination.distance(newPos) < this.collisionShape.getOrigin().distance(destination));
 		//Condition de distance empèche vaisseaux de rester coincé dans une boucle.
 		// Comme il n'y a que des planètes rondes, impossible que cette condition bloque un vaisseaux
-		this.angle = angle;
+		this.angle = this.collisionShape.getOrigin().angle(newPos);
 		return newPos;
 	}
 	

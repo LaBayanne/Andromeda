@@ -291,11 +291,7 @@ public class ViewGame{
 		for(Menu menu : menus) {
 			if(menu.isAvailable()) {
 				displayMenu(menu);
-				for(Menu subMenu : menu.getSubMenus()) {
-					if(subMenu.isAvailable()) {
-						displayMenu(subMenu);
-					}
-				}
+				displayMenus(menu.getSubMenus());
 			}
 		}
 	}
