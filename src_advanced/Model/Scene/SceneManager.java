@@ -42,7 +42,6 @@ public class SceneManager {
 		songController.setVolume(0.5);
 		
 		this.newMainMenu();
-		
 	}
 	
 	public void selectMenu(double x, double y) {
