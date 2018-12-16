@@ -1,18 +1,20 @@
 package src_advanced.View;
 
 
-
-import java.applet.Applet;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.Hashtable;
+
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 
 
 
 public class SongController {
 	private static String DATA_DIR;
-	private Hashtable<String, java.applet.AudioClip> bank;
+	private Hashtable<String, AudioClip> bank;
 	
 	static {
 		DATA_DIR = "resources/Songs/";
@@ -32,26 +34,30 @@ public class SongController {
 			if (file.isDirectory()) {
 				for (File f : file.listFiles()) {
 					if (f.isFile()) {
-						java.applet.AudioClip song = null;
-						try {
-							song = Applet.newAudioClip(f.toURI().toURL());
-						} catch (MalformedURLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						AudioClip song = null;
+						
+							try {
+								song = new AudioClip(f.toURI().toURL().toString());
+							} catch (MalformedURLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						
 						if (song != null) {
 							this.bank.put(f.getName(), song);
 						}
 					}
 				}
 			} else {
-				java.applet.AudioClip song = null;
-				try {
-					song = Applet.newAudioClip(file.toURI().toURL());
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				AudioClip song = null;
+				
+					try {
+						song = new AudioClip(file.toURI().toURL().toString());
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				if (song != null) {
 					this.bank.put(file.getName(), song);
 				}
@@ -63,11 +69,13 @@ public class SongController {
 	}
 	
 	public void playSong(String songName) {
-		java.applet.AudioClip m = this.bank.get(songName);
+		AudioClip m = this.bank.get(songName);
 		
 		if (m != null) {
 			System.err.println("Playing song : " + songName);
+			m.setVolume(0.1);
 			m.play();
+			
 		} else {
 			System.err.println("Error in playSong: " + songName + " not in dataBase");
 		}
