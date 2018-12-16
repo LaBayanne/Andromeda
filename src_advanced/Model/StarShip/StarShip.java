@@ -140,7 +140,6 @@ public class StarShip implements Serializable {
 				if (this.destinationPlanet.getStock() <= this.damage) {
 					this.destinationPlanet.setOwner(this.owner);
 					//this.destinationPlanet.increaseStock(1);
-				} else {
 					this.destinationPlanet.decreaseStock(this.damage);
 				}
 			}

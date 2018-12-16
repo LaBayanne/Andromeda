@@ -74,7 +74,11 @@ public class SongController {
 		AudioClip m = this.bank.get(songName);
 		
 		if (m != null) {
+			if (current != null) {
+				current.stop();
+			}
 			System.err.println("Playing song : " + songName);
+			m.setCycleCount(42);
 			m.play();
 			this.current = m;
 			

@@ -116,6 +116,9 @@ public class Planet implements Serializable {
 	public void decreaseStock(int nbUnit) {
 		this.realStock -= (double) nbUnit;
 		this.stock -= nbUnit;
+		if(this.stock < 1) {
+			this.stock = 0;
+		}
 	}
 	
 	/**

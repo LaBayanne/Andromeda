@@ -44,7 +44,7 @@ public class SceneGame implements Scenery, Serializable{
 	
 	private ArrayList<AI> AIs;
 	
-	private SongController songController;
+
 	
 	private int screenWidth, screenHeight;
 	
@@ -104,10 +104,7 @@ public class SceneGame implements Scenery, Serializable{
 		startMenu.addMenu(saveMenu);
 		this.menus.add(startMenu);
 		
-		this.songController = new SongController();
-		songController.playSong("outfile.wav");
-		songController.setVolume(0.1);
-		
+
 	}
 	
 	/* Manage user inputs */

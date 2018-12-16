@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import src_advanced.Geometry.Point;
 import src_advanced.Model.Menus.Menu;
+import src_advanced.View.SongController;
 
 /**
  * Represent the scene manager.
@@ -24,6 +25,7 @@ public class SceneManager {
 	private GraphicsContext gc;
 	private int screenWidth;
 	private int screenHeight;
+	private SongController songController;
 	
 	/**
 	 * Basic constructor.
@@ -37,6 +39,9 @@ public class SceneManager {
 		this.continueGame = true;
 		
 		this.newMainMenu();
+		this.songController = new SongController();
+		songController.playSong("song_01.wav");
+		songController.setVolume(0.5);
 	}
 	
 	public void selectMenu(double x, double y) {
@@ -84,12 +89,14 @@ public class SceneManager {
 	
 	public void newGame(int nbPlayers) {
 		System.out.println("NewGame");
+		this.songController.playSong("song_01.wav");
 		this.gameScene = new SceneGame(this.gc, this.screenWidth, this.screenHeight, nbPlayers);
 		this.activeScene = this.gameScene;
 	}
 	
 	public void newMainMenu() {
 		System.out.println("NewMainMenu");
+		this.songController.playSong("song_00.wav");
 		this.menuScene = new SceneMenu(this.gc, this.screenWidth, this.screenHeight);
 		this.activeScene = this.menuScene;
 	}
