@@ -164,24 +164,63 @@ public class ViewGame{
 		switch (name) {
 			
 			case "Arrow":
-				if (owner == 1)
-					imageName = "cursor_01.png";
-				else 
-					imageName = "cursor_04.png";
+				switch(owner) {
+					case 1:
+						imageName = "cursor_01_00.png";
+						break;
+					case 2:
+						imageName = "cursor_01_01.png";
+						break;
+					case 3:
+						imageName = "cursor_01_02.png";
+						break;
+					case 4:
+						imageName = "cursor_01_03.png";
+						break;
+					case 5:
+						imageName = "cursor_01_04.png";
+						break;
+				}
 				break;
 			
 			case "Finger":
-				if (owner == 1)
-					imageName = "cursor_00.png";
-				else
-					imageName = "cursor_03.png";
+				switch(owner) {
+				case 1:
+					imageName = "cursor_00_00.png";
+					break;
+				case 2:
+					imageName = "cursor_00_01.png";
+					break;
+				case 3:
+					imageName = "cursor_00_02.png";
+					break;
+				case 4:
+					imageName = "cursor_00_03.png";
+					break;
+				case 5:
+					imageName = "cursor_00_04.png";
+					break;
+				}
 				break;
 			
 			case "MoveCursor":
-				if (owner == 1)
-					imageName = "cursor_02.png";
-				else
-					imageName = "cursor_05.png";
+				switch(owner) {
+				case 1:
+					imageName = "cursor_02_00.png";
+					break;
+				case 2:
+					imageName = "cursor_02_01.png";
+					break;
+				case 3:
+					imageName = "cursor_02_02.png";
+					break;
+				case 4:
+					imageName = "cursor_02_03.png";
+					break;
+				case 5:
+					imageName = "cursor_02_04.png";
+					break;
+				}
 				break;
 		}
 		
@@ -195,11 +234,13 @@ public class ViewGame{
 	public void displaySquads(ArrayList<Squad> squads) {
 		for (Squad squad: squads) {
 			for (StarShip starship: squad.getStarships()) {
-				if(starship.getOwner() == 1) {
-					this.gc.setFill(Color.web("#00bb00"));
-				}
-				else {
-					this.gc.setFill(Color.web("#dd0000"));
+				switch(starship.getOwner()){
+					case 0:
+						this.gc.setFill(Color.web("#00bb00"));
+						break;
+					case 1:
+						this.gc.setFill(Color.web("#dd0000"));
+						break;
 				}
 				Point where = starship.getPosition();
 				
