@@ -26,12 +26,14 @@ public class StarShip implements Serializable {
 	private double 	speed;
 	private double 	angle;
 	private int 	damage;
+	private int cost;
 	private int 	owner;
 
 	
 	boolean destinationReached;
 	
-	public StarShip(Point position, Point destination,double speed, int damage, double angle, int owner, int width, int height) {
+	public StarShip(Point position, Point destination,double speed, int damage, int cost, double angle, int owner, 
+			int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.destination = new Point(destination);
@@ -40,17 +42,19 @@ public class StarShip implements Serializable {
 		this.owner = owner;
 		this.speed = speed;
 		this.damage = damage;
+		this.cost = cost;
 		this.angle = 0;
 		this.destinationReached = false;
 		
 	}
 	
-	public StarShip(double speed, int damage, int owner) {
+	public StarShip(double speed, int damage, int cost, int owner) {
 		
 		this();
 		this.owner = owner;
 		this.speed = speed;
 		this.damage = damage;
+		this.cost = cost;
 		
 	}
 	
@@ -65,6 +69,7 @@ public class StarShip implements Serializable {
 		
 		this.speed = starship.getSpeed();
 		this.damage = starship.getDamage();
+		this.cost = starship.getCost();
 		this.angle = 0;
 		this.destinationReached = false;
 		this.owner = starship.getOwner();
@@ -77,7 +82,7 @@ public class StarShip implements Serializable {
 	 * Basic constructor, build a starship with all value set to 0
 	 */
 	public StarShip() {
-		this(new Point(), new Point(), 0, 0, 0.0, 0, 20, 20);
+		this(new Point(), new Point(), 0, 0, 0, 0.0, 0, 20, 20);
 	}
 
 	
@@ -199,5 +204,9 @@ public class StarShip implements Serializable {
 	
 	public double getAngle() {
 		return this.angle;
+	}
+	
+	public int getCost() {
+		return this.cost;
 	}
 }

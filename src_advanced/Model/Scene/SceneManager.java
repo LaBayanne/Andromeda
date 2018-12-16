@@ -33,12 +33,10 @@ public class SceneManager {
 		this.gc = gc;
 		this.screenWidth = width;
 		this.screenHeight = height;
-		this.gameScene = new SceneGame(gc, width, height, 2);
-		this.menuScene = new SceneMenu(gc, width, height);
 		
-		/* First scene to show. By default, it's the game */
-		this.activeScene = this.menuScene;
 		this.continueGame = true;
+		
+		this.newMainMenu();
 	}
 	
 	public void selectMenu(double x, double y) {

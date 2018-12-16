@@ -60,7 +60,7 @@ public class Planet implements Serializable {
 		this.owner = owner;
 		this.stock = 0;
 		this.squadSize = 100;//100 percent by default
-		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, owner, 20, 20);
+		this.starshipModel = new StarShip(new Point(0, 0), new Point(700, 540), 0.1, 0, 0, 0, owner, 20, 20);
 		this.nbStarshipToGenerate = 0;
 		this.timerMax = 60;
 		this.timer = 0;
@@ -104,8 +104,8 @@ public class Planet implements Serializable {
 		this.realStock += this.poductionSpeed;
 		this.stock = (int) Math.round(this.realStock);
 		
-		if(this.nbStarshipToGenerate * this.starshipModel.getDamage() > this.stock) {
-			this.nbStarshipToGenerate = (this.stock - 1)* this.starshipModel.getDamage();
+		if(this.nbStarshipToGenerate * this.starshipModel.getCost() > this.stock) {
+			this.nbStarshipToGenerate = (this.stock - 1)* this.starshipModel.getCost();
 		}
 	}
 	
@@ -142,7 +142,7 @@ public class Planet implements Serializable {
 	 * @param target		planet to attack/help
 	 */
 	public void setAttackGroup(int nbAttackers, Planet target) {
-		setNbStarshipToGenerate(nbAttackers/this.starshipModel.getDamage());
+		setNbStarshipToGenerate(nbAttackers/this.starshipModel.getCost());
 		this.target = target;
 	}
 	
@@ -151,9 +151,9 @@ public class Planet implements Serializable {
 	 * @return the number of starship per squad
 	 */
 	public int getNbUnitPerSquad() {
-		int nb = (this.stock - (this.nbStarshipToGenerate * this.starshipModel.getDamage())) * this.squadSize/100;
+		int nb = (this.stock - (this.nbStarshipToGenerate * this.starshipModel.getCost())) * this.squadSize/100;
 		if(this.stock - nb <= 0) {
-			nb =  stock/this.starshipModel.getDamage();
+			nb =  stock/this.starshipModel.getCost();
 		}
 		return nb;
 	}
@@ -170,7 +170,7 @@ public class Planet implements Serializable {
 		int restUnit = squad.repartsStarships();
 		
 		squad.setDestinationPlanet(this.target);
-		this.decreaseStock((this.nbStarshipToGenerate - restUnit) * this.starshipModel.getDamage());
+		this.decreaseStock((this.nbStarshipToGenerate - restUnit) * this.starshipModel.getCost());
 		
 		this.nbStarshipToGenerate = restUnit;
 		return squad;

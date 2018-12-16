@@ -7,14 +7,16 @@ public class Arrow extends StarShip {
 	
 	final static private double SPEED;
 	final static private int DAMAGE;
+	final static private int COST;
 	
 	static {
 		SPEED = 0.1;
 		DAMAGE = 1;
+		COST = 1;
 	}
 	
 	public Arrow(Point position, Point destination, double angle, int owner) {
-		super(position, destination, SPEED, DAMAGE, angle, owner, 20, 20);
+		super(position, destination, SPEED, DAMAGE, COST, angle, owner, 20, 20);
 	}
 	
 	public Arrow(StarShip starship) {
@@ -23,7 +25,7 @@ public class Arrow extends StarShip {
 	}
 	
 	public Arrow(int owner) {
-		super(SPEED, DAMAGE, owner);
+		super(SPEED, DAMAGE, COST, owner);
 	}
 
 }
