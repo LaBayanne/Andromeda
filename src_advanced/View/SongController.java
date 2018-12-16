@@ -15,12 +15,14 @@ import javafx.scene.media.MediaPlayer;
 public class SongController {
 	private static String DATA_DIR;
 	private Hashtable<String, AudioClip> bank;
+	private AudioClip current;
 	
 	static {
 		DATA_DIR = "resources/Songs/";
 	}
 	
 	public SongController() {
+		this.current = null;
 		this.bank = new Hashtable<>();
 		this.loadSongs();
 	}
@@ -73,11 +75,18 @@ public class SongController {
 		
 		if (m != null) {
 			System.err.println("Playing song : " + songName);
-			m.setVolume(0.1);
 			m.play();
+			this.current = m;
 			
 		} else {
 			System.err.println("Error in playSong: " + songName + " not in dataBase");
 		}
+	}
+	
+	public void setVolume(double value) {
+		if (this.current == null)	return;
+		this.current.stop();
+		this.current.setVolume(value);
+		this.current.play();
 	}
 }

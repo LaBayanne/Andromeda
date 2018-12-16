@@ -43,6 +43,7 @@ public class ViewGame{
 		this.imageBank = new ImageBank();
 		this.songController = new SongController();
 		songController.playSong("outfile.wav");
+		songController.setVolume(0.1);
 		
 		
 	}
