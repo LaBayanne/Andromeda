@@ -9,12 +9,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Rotate;
 import src_advanced.Geometry.Point;
 import src_advanced.Geometry.Rectangle;
 import src_advanced.Model.Menus.Menu;
-import javafx.scene.text.FontWeight;
-import javafx.scene.transform.Rotate;
-
+import src_advanced.Model.Planet.Avast;
 import src_advanced.Model.Planet.Planet;
 import src_advanced.Model.Scene.SceneGame;
 import src_advanced.Model.StarShip.Squad;
@@ -53,12 +52,13 @@ public class ViewGame{
 		//this.gc.setFill(Color.web("#4bf221"));
 		
 		for (Planet planet : planets) {
+			
+			String name =  planet.getClass().getName();
+			name = name.replace("src_advanced.Model.Planet.", "");
 			Point where = planet.getCollisionShape().getOrigin();
 			
 			double x = where.getX() - planet.getRadius();
 			double y = where.getY() - planet.getRadius();
-			String name =  planet.getClass().getName();
-			name = name.replace("src_advanced.Model.Planet.", "");
 			String imageName = "";
 			switch (name) {
 				
@@ -164,24 +164,63 @@ public class ViewGame{
 		switch (name) {
 			
 			case "Arrow":
-				if (owner == 1)
-					imageName = "cursor_01.png";
-				else 
-					imageName = "cursor_04.png";
+				switch(owner) {
+					case 1:
+						imageName = "cursor_01_00.png";
+						break;
+					case 2:
+						imageName = "cursor_01_01.png";
+						break;
+					case 3:
+						imageName = "cursor_01_02.png";
+						break;
+					case 4:
+						imageName = "cursor_01_03.png";
+						break;
+					case 5:
+						imageName = "cursor_01_04.png";
+						break;
+				}
 				break;
 			
 			case "Finger":
-				if (owner == 1)
-					imageName = "cursor_00.png";
-				else
-					imageName = "cursor_03.png";
+				switch(owner) {
+				case 1:
+					imageName = "cursor_00_00.png";
+					break;
+				case 2:
+					imageName = "cursor_00_01.png";
+					break;
+				case 3:
+					imageName = "cursor_00_02.png";
+					break;
+				case 4:
+					imageName = "cursor_00_03.png";
+					break;
+				case 5:
+					imageName = "cursor_00_04.png";
+					break;
+				}
 				break;
 			
 			case "MoveCursor":
-				if (owner == 1)
-					imageName = "cursor_02.png";
-				else
-					imageName = "cursor_05.png";
+				switch(owner) {
+				case 1:
+					imageName = "cursor_02_00.png";
+					break;
+				case 2:
+					imageName = "cursor_02_01.png";
+					break;
+				case 3:
+					imageName = "cursor_02_02.png";
+					break;
+				case 4:
+					imageName = "cursor_02_03.png";
+					break;
+				case 5:
+					imageName = "cursor_02_04.png";
+					break;
+				}
 				break;
 		}
 		
@@ -195,11 +234,13 @@ public class ViewGame{
 	public void displaySquads(ArrayList<Squad> squads) {
 		for (Squad squad: squads) {
 			for (StarShip starship: squad.getStarships()) {
-				if(starship.getOwner() == 1) {
-					this.gc.setFill(Color.web("#00bb00"));
-				}
-				else {
-					this.gc.setFill(Color.web("#dd0000"));
+				switch(starship.getOwner()){
+					case 0:
+						this.gc.setFill(Color.web("#00bb00"));
+						break;
+					case 1:
+						this.gc.setFill(Color.web("#dd0000"));
+						break;
 				}
 				Point where = starship.getPosition();
 				
@@ -354,6 +395,30 @@ public class ViewGame{
 		}
 	}
 	
+	public void displayAvast(Avast avast) {
+		if(avast != null) {
+			double x = avast.getOrigin().getX() - avast.getRadius();
+			double y = avast.getOrigin().getY() - avast.getRadius(); 
+			this.gc.drawImage(this.imageBank.getImage("avast.png"), x, y,
+				avast.getWidth(), avast.getWidth());
+			
+			/*this.gc.setFont(Font.font("Verdana", 16));
+			this.gc.setFill(Color.web("#ff000088"));
+			
+			this.gc.fillOval(x, y, 
+					avast.getRadius() * 2, avast.getRadius() * 2);*/
+			
+			this.gc.setFill(Color.web("#ffffff"));
+			this.gc.fillText("La base des données virales", x + 16, y + 80);
+			this.gc.fillText("VPS a été mise à jour", x + 16, y + 108);
+			
+			this.gc.setFont(Font.font("Verdana", 15));
+			this.gc.setFill(Color.web("#000000"));
+			this.gc.fillText("Don't click  >>", x + 23, y + 197);
+
+		}
+	}
+	
 	/**
 	 * Tick function, draw the entire game.
 	 * @param game The game
@@ -366,6 +431,7 @@ public class ViewGame{
 		this.displaySelectedPlanets(game.getSelectedPlanets());
 		this.displaySelectedSquads(game.getSelectedSquads());
 		this.displaySquads(game.getSquads());
+		this.displayAvast(game.getAvast());
 		this.displayTaskBar();
 		this.displaySquadSize(game.getSquadSize());
 		this.displayMenus2(game.getMenus());

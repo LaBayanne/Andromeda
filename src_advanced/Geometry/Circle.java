@@ -19,10 +19,18 @@ public class Circle extends Shape {
 		this.radius = radius;
 	}
 	
+	public Circle(Circle circle) {
+		this(circle.getOrigin().getX(), circle.getOrigin().getY(), circle.getRadius());
+	}
+	
 	
 	@Override
 	public boolean collision(Point p) {
 		return this.origin.distance(p) <= this.radius;
+	}
+	
+	public boolean collision(Circle circle) {
+		return this.origin.distance(circle.getOrigin()) < this.radius + circle.getRadius();
 	}
 	
 	/**

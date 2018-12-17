@@ -166,8 +166,9 @@ public class StarShip implements Serializable {
 				if (this.destinationPlanet.getStock() <= this.damage) {
 					this.destinationPlanet.setOwner(this.owner);
 					//this.destinationPlanet.increaseStock(1);
-					this.destinationPlanet.decreaseStock(this.damage);
-				}
+				} 
+				this.destinationPlanet.decreaseStock(this.damage);
+				
 			}
 			this.destinationReached = true;
 		}
@@ -195,6 +196,7 @@ public class StarShip implements Serializable {
 	public int getDamage() 			{ return this.damage;	}//Was height
 	public Point getPosition() 		{ return new Point(this.collisionShape.getOrigin()); }
 	public Point getDestination() 	{ return this.destination; }//Pas retourner le point mais en faire une copie ?
+	public Planet getDestinationPlanet() 	{ return this.destinationPlanet; }
 	
 	public int getOwner()			{ return this.owner;	}
 	

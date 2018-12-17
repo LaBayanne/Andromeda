@@ -37,10 +37,10 @@ public class SceneManager {
 		this.screenHeight = height;
 		
 		this.continueGame = true;
-		
 		this.songController = new SongController();
 		songController.playSong("song_01.wav");
 		songController.setVolume(0.5);
+		
 		this.newMainMenu();
 	}
 	
