@@ -1,6 +1,8 @@
 package src_advanced.Model.Planet;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import src_advanced.Geometry.Circle;
 import src_advanced.Geometry.Point;
@@ -43,8 +45,6 @@ public class Planet implements Serializable {
 	
 	private double timerMax;
 	protected double timer;
-	
-
 	
 	/**
 	 * Complete constructor for planet
@@ -94,6 +94,21 @@ public class Planet implements Serializable {
 	 */
 	public Planet() {
 		this(new Point(), 0, 0, 0);
+	}
+	
+	public void destroyed(ArrayList<Planet> planets, ArrayList<Squad> squads) {
+		for(Planet planet : planets){
+			if(planet.getTarget() == this) {
+				planet.setTarget(this);
+			}
+		}
+		for(Squad squad : squads) {
+			for(StarShip starship : squad.getStarships()){
+				if(starship.getDestinationPlanet() == this) {
+					starship.setDestination(this);
+				}
+			}
+		}
 	}
 
 	/**
@@ -284,6 +299,14 @@ public class Planet implements Serializable {
 	public void setStock(int n) {
 		this.realStock = n;
 		this.stock = n;
+	}
+	
+	public Planet getTarget() {
+		return this.target;
+	}
+	
+	public void setTarget(Planet target) {
+		this.target = target;
 	}
 	
 	/**

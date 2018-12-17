@@ -6,6 +6,7 @@ import java.util.Random;
 
 import src_advanced.Geometry.Point;
 import src_advanced.Model.Planet.Application;
+import src_advanced.Model.Planet.Avast;
 import src_advanced.Model.Planet.Directory;
 import src_advanced.Model.Planet.File;
 import src_advanced.Model.Planet.Planet;
@@ -132,8 +133,8 @@ public class PlanetGenerator implements Serializable{
 		for (int i = 0; i < nbPlanet; i++) {
 			//public Planet(Point2D origin, double radius, double productionSpeed, int owner)
 			do {
-				originX = this.getRandom(50, this.windowWidth);
-				originY = this.getRandom(50, this.windowHeight);
+				originX = this.getRandom(50, this.windowWidth - 50);
+				originY = this.getRandom(50, this.windowHeight - 85);
 				
 				radius = this.getRandomDouble(this.minSize, this.maxSize);
 				
@@ -155,6 +156,7 @@ public class PlanetGenerator implements Serializable{
 		for (Planet p : planetList) {
 			p.increaseStock(this.getRandom(1, 30));
 		}
+		
 		return planetList;
 	}
 	

@@ -64,6 +64,10 @@ public class Squad implements Serializable {
 		}
 	}
 	
+	public void destroy(StarShip starship) {
+		this.starships.remove(starship);
+	}
+	
 	/**
 	 * Check if a starship of the squad is in collition with a point
 	 * @param x	x value of the point

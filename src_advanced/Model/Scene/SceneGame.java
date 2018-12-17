@@ -11,9 +11,9 @@ import src_advanced.Geometry.Rectangle;
 import src_advanced.Model.AI;
 import src_advanced.Model.PlanetGenerator;
 import src_advanced.Model.Menus.Menu;
+import src_advanced.Model.Planet.Avast;
 import src_advanced.Model.Planet.Planet;
 import src_advanced.Model.StarShip.Squad;
-import src_advanced.View.SongController;
 import src_advanced.View.ViewGame;
 
 /**
@@ -43,6 +43,10 @@ public class SceneGame implements Scenery, Serializable{
 	private double timerDoubleClick;
 	
 	private ArrayList<AI> AIs;
+	private Avast avast;
+	
+	private int timerAvast;
+	private double realTimerAvast;
 	
 
 	
@@ -104,7 +108,33 @@ public class SceneGame implements Scenery, Serializable{
 		startMenu.addMenu(saveMenu);
 		this.menus.add(startMenu);
 		
+		this.realTimerAvast = 40;
+		
+		this.avast = null;
+		
 
+	}
+	
+	private void updateTimerAvast(double delta) {
+		if(this.realTimerAvast > 0) {
+			this.realTimerAvast -= delta * 0.01;
+			if(realTimerAvast <= 0) {
+				this.realTimerAvast = 0;
+				this.createAvast();
+			}
+			this.timerAvast= (int) Math.round(this.realTimerAvast);
+		}
+		
+	}
+	
+	private void updateAvast(double delta, ArrayList<Planet> planets, ArrayList<Squad> squads) {
+		if(avast != null) {
+			this.avast.tick(delta, planets, squads);
+		}
+	}
+	
+	private void createAvast() {
+		this.avast = new Avast(this.screenWidth, this.screenHeight);
 	}
 	
 	/* Manage user inputs */
@@ -302,6 +332,9 @@ public class SceneGame implements Scenery, Serializable{
 			
 			moveSquad(delta);
 			
+			updateTimerAvast(delta);
+			updateAvast(delta, this.planets, this.squads);
+			
 			updateTimerClick(delta);
 			
 			updateAIs(delta);
@@ -321,7 +354,7 @@ public class SceneGame implements Scenery, Serializable{
 		Planet planet;
 		while(iterator.hasNext()) {
 			planet = iterator.next();
-			if(planet.getOwner() != 1) {
+			if(planet.getOwner() != 1 && !this.planets.contains(planet)) {
 				iterator.remove();
 			}
 		}
@@ -439,4 +472,6 @@ public class SceneGame implements Scenery, Serializable{
 	public boolean getIsThereSelectRect() {
 		return this.isThereSelectRect;
 	}
+	
+	public Avast getAvast() {return this.avast;}
 }
