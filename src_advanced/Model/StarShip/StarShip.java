@@ -30,12 +30,17 @@ public class StarShip implements Serializable {
 	private int 	damage;
 	private int 	cost;
 	private int 	owner;
+	
+	private boolean collisionPlanetState;
 
 	
 	boolean destinationReached;
 	
 	public StarShip(Point position, Point destination,double speed, int damage, int cost, double angle, int owner, 
 			int width, int height) {
+		
+		this.collisionPlanetState = false;
+		
 		this.width = width;
 		this.height = height;
 		this.destination = new Point(destination);
@@ -99,55 +104,28 @@ public class StarShip implements Serializable {
 		return false;
 	}
 	
-	private Point calculateNewPos(double delta, ArrayList<Planet> planets) {
-		
+	private Point calculateNewPos(double delta, ArrayList<Planet> planets) {		
 		double destinationAngle = this.collisionShape.getOrigin().angle(this.destination);
-		double newAngle;
-		double diffAngle = this.angle - destinationAngle;
+		double diff =  (this.angle < destinationAngle)? -0.2:0.2;
 		
-		
-		if (diffAngle > ANGLE_MAX) {
-			newAngle = this.angle - ANGLE_MAX;
-		} else if (diffAngle < -ANGLE_MAX) {
-			newAngle = this.angle + ANGLE_MAX;
-		} else {
-			newAngle = destinationAngle;
+		Point newPos = new Point(
+				this.collisionShape.getOrigin().getX() + delta * this.speed * Math.toRadians(destinationAngle),
+				this.collisionShape.getOrigin().getY() + delta * this.speed * Math.toRadians(destinationAngle)
+				);
+		while(!planetCollision(planets, newPos)) {
+			destinationAngle += diff;
+			
+			newPos.setX(this.collisionShape.getOrigin().getX() + delta * this.speed * Math.toRadians(destinationAngle));
+			newPos.setY(this.collisionShape.getOrigin().getY() + delta * this.speed * Math.toRadians(destinationAngle));
 		}
-		this.angle = newAngle;
-		System.err.println(this.speed);
-		Point newPos = new Point(this.collisionShape.getOrigin().getX() + delta * this.speed * 3 * Math.cos(Math.toRadians(angle)) ,
-				this.collisionShape.getOrigin().getY() + delta * 3 * this.speed * Math.sin(Math.toRadians(angle)));
+		this.angle = destinationAngle - diff;
 		
-		Point[] tab = new Point[2];
-		double[]   tabAngle = new double[2];
-		double diff = 0.5;
 		
-		if (planetCollision(planets, newPos)) {
-			for (int i = 0; i < 2; i++) {
-				this.angle = newAngle;
-			
-				while(planetCollision(planets, newPos)) {
-					this.angle += diff * i;
-					newPos = new Point(this.collisionShape.getOrigin().getX() + delta *  this.speed * Math.cos(Math.toRadians(angle)) ,
-						this.collisionShape.getOrigin().getY() + delta * this.speed * Math.sin(Math.toRadians(angle)));
-					diff += diff;
-				}
-				tab[i] = new Point(newPos);
-				tabAngle[i] = this.angle;
-			}
-			
-			double diff_1 = this.destination.distance(tab[0]);
-			double diff_2 = this.destination.distance(tab[1]);
-			
-			if (diff_1 < diff_2) {
-				this.angle = tabAngle[0];
-				return tab[0];
-			}
-			this.angle = tabAngle[1];
-			return tab[1];
-		}
-		return new Point(this.collisionShape.getOrigin().getX() + delta * this.speed * Math.cos(Math.toRadians(angle)) ,
-				this.collisionShape.getOrigin().getY() + delta * this.speed  * Math.sin(Math.toRadians(angle)));
+		
+		newPos.setX(this.collisionShape.getOrigin().getX() + delta * this.speed * Math.toRadians(this.angle));
+		newPos.setY(this.collisionShape.getOrigin().getY() + delta * this.speed * Math.toRadians(this.angle));
+		
+		return newPos;
 	}
 	
 	/**
