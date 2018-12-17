@@ -7,7 +7,7 @@ public class Application extends Planet{
 	
 	final static private double PRODUCTION_SPEED;
 	static {
-		PRODUCTION_SPEED = 0.003;
+		PRODUCTION_SPEED = 0.001;
 	}
 	
 	public Application(Point origin, double radius, int owner) {

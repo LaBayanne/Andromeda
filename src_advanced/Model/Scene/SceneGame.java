@@ -130,6 +130,9 @@ public class SceneGame implements Scenery, Serializable{
 	private void updateAvast(double delta, ArrayList<Planet> planets, ArrayList<Squad> squads) {
 		if(avast != null) {
 			this.avast.tick(delta, planets, squads);
+			if(avast.getNbStarshipToGenerate() > 0 && avast.decreaseTimer() == 0) {
+				this.squads.add(avast.generateSquad(this.planets));
+			}
 		}
 	}
 	
@@ -316,7 +319,7 @@ public class SceneGame implements Scenery, Serializable{
 			
 			for(Planet planet:this.planets) {
 				if (planet.getOwner() != 0) 
-					planet.actualiseStock();
+					planet.actualiseStock(delta);
 				
 				if(planet.getNbStarshipToGenerate() > 0 && planet.decreaseTimer() == 0) {
 					this.squads.add(planet.generateSquad());

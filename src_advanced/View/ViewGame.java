@@ -158,9 +158,10 @@ public class ViewGame{
 	}
 
 	private String getImageName(StarShip s, int owner) {
+		String imageName = "";
 		String name = s.getClass().getName();
 		name = name.replace("src_advanced.Model.StarShip.", "");
-		String imageName = "";
+		
 		switch (name) {
 			
 			case "Arrow":
@@ -180,46 +181,55 @@ public class ViewGame{
 					case 5:
 						imageName = "cursor_01_04.png";
 						break;
+					case 6:
+						imageName = "avastStarship_00.png";
+						break;
 				}
 				break;
 			
 			case "Finger":
 				switch(owner) {
-				case 1:
-					imageName = "cursor_00_00.png";
-					break;
-				case 2:
-					imageName = "cursor_00_01.png";
-					break;
-				case 3:
-					imageName = "cursor_00_02.png";
-					break;
-				case 4:
-					imageName = "cursor_00_03.png";
-					break;
-				case 5:
-					imageName = "cursor_00_04.png";
-					break;
+					case 1:
+						imageName = "cursor_00_00.png";
+						break;
+					case 2:
+						imageName = "cursor_00_01.png";
+						break;
+					case 3:
+						imageName = "cursor_00_02.png";
+						break;
+					case 4:
+						imageName = "cursor_00_03.png";
+						break;
+					case 5:
+						imageName = "cursor_00_04.png";
+						break;
+					case 6:
+						imageName = "avastStarship_00.png";
+						break;
 				}
 				break;
 			
 			case "MoveCursor":
 				switch(owner) {
-				case 1:
-					imageName = "cursor_02_00.png";
-					break;
-				case 2:
-					imageName = "cursor_02_01.png";
-					break;
-				case 3:
-					imageName = "cursor_02_02.png";
-					break;
-				case 4:
-					imageName = "cursor_02_03.png";
-					break;
-				case 5:
-					imageName = "cursor_02_04.png";
-					break;
+					case 1:
+						imageName = "cursor_02_00.png";
+						break;
+					case 2:
+						imageName = "cursor_02_01.png";
+						break;
+					case 3:
+						imageName = "cursor_02_02.png";
+						break;
+					case 4:
+						imageName = "cursor_02_03.png";
+						break;
+					case 5:
+						imageName = "cursor_02_04.png";
+						break;
+					case 6:
+						imageName = "avastStarship_00.png";
+						break;
 				}
 				break;
 		}
@@ -411,7 +421,7 @@ public class ViewGame{
 			this.gc.setFill(Color.web("#ffffff"));
 			this.gc.fillText("La base des données virales", x + 16, y + 80);
 			this.gc.fillText("VPS a été mise à jour", x + 16, y + 108);
-			
+			this.gc.fillText(avast.getStock() + " virus detected", x + 16, y + 150);
 			this.gc.setFont(Font.font("Verdana", 15));
 			this.gc.setFill(Color.web("#000000"));
 			this.gc.fillText("Don't click  >>", x + 23, y + 197);

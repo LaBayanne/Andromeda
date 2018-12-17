@@ -25,25 +25,25 @@ public class Planet implements Serializable {
 		HEIGHT = WIDTH;
 	}
 	/** Rigid body of the planet **/
-	private Circle collisionShape;
+	protected Circle collisionShape;
 	
-	private double poductionSpeed;
+	protected double productionSpeed;
 	
 	/* There is a realStock because we can't have half-starship but the speed production
 	 * can't be an integer
 	 */
-	private int stock;
-	private double realStock; 
+	protected int stock;
+	protected double realStock; 
 	
-	private int squadSize;			//Percentage of the stock	
-	private StarShip starshipModel;	//Model of starship that planet can generate
+	protected int squadSize;			//Percentage of the stock	
+	protected StarShip starshipModel;	//Model of starship that planet can generate
 	
-	private int owner;
-	private int nbStarshipToGenerate;
+	protected int owner;
+	protected int nbStarshipToGenerate;
 	
-	private Planet target;
+	protected Planet target;
 	
-	private double timerMax;
+	protected double timerMax;
 	protected double timer;
 	
 	/**
@@ -56,7 +56,7 @@ public class Planet implements Serializable {
 	public Planet(Point origin, double radius, double productionSpeed, int owner) {
 		this.collisionShape = new Circle (origin.getX(), origin.getY(), WIDTH);
 		
-		this.poductionSpeed = productionSpeed;
+		this.productionSpeed = productionSpeed;
 		this.owner = owner;
 		this.stock = 0;
 		this.squadSize = 100;//100 percent by default
@@ -114,9 +114,9 @@ public class Planet implements Serializable {
 	/**
 	 * Actualize the starship stock of the planet
 	 */
-	public void actualiseStock() {
+	public void actualiseStock(double delta) {
 		
-		this.realStock += this.poductionSpeed;
+		this.realStock += this.productionSpeed * delta;
 		this.stock = (int) Math.round(this.realStock);
 		
 		if(this.nbStarshipToGenerate * this.starshipModel.getCost() > this.stock) {
@@ -313,7 +313,7 @@ public class Planet implements Serializable {
 	 * @param p the new production speed for the planet.
 	 */
 	public void setProductionSpeed(double p) {
-		this.poductionSpeed = p;
+		this.productionSpeed = p;
 	}
 	
 	/**
