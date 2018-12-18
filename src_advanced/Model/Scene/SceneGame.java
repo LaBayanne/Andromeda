@@ -332,8 +332,8 @@ public class SceneGame implements Scenery, Serializable{
 			
 			moveSquad(delta);
 			
-			updateTimerAvast(delta);
-			updateAvast(delta, this.planets, this.squads);
+			//updateTimerAvast(delta);
+			//updateAvast(delta, this.planets, this.squads);
 			
 			updateTimerClick(delta);
 			

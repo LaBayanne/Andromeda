@@ -104,17 +104,19 @@ public class StarShip implements Serializable {
 		return false;
 	}
 	
-	private Point calculateNewPos(double delta, ArrayList<Planet> planets) {		
+	private Point calculateNewPos(double delta, ArrayList<Planet> planets) {
 		double destinationAngle = this.collisionShape.getOrigin().angle(this.destination);
 		
 		Point newPos = new Point(
 				this.collisionShape.getOrigin().getX() + delta * this.speed * Math.cos(Math.toRadians(destinationAngle)),
 				this.collisionShape.getOrigin().getY() + delta * this.speed * Math.sin(Math.toRadians(destinationAngle))
 				);
-		double diffValue = 0.2;
+		double diffValue = 2;
 		double angleMin = 0, angleMax = 0;
 		Point Min = new Point(newPos);
 		Point Max = new Point(newPos);
+		
+		double speed_Value = this.speed; //Faire baisser la speed pour trouver autre point ?
 		
 		if (!planetCollision(planets, newPos)) {
 			this.collisionPlanetState = 0;
@@ -123,35 +125,47 @@ public class StarShip implements Serializable {
 		} else {
 			if (collisionPlanetState == 0 || collisionPlanetState == 1) {
 				do {
-					angleMin += diffValue;
-					Min.setX(this.collisionShape.getOrigin().getX() + delta * this.speed * Math.cos(Math.toRadians((destinationAngle - angleMin)%360)));
-					Min.setY(this.collisionShape.getOrigin().getY() + delta * this.speed * Math.sin(Math.toRadians((destinationAngle - angleMin)%360)));
+					angleMin -= diffValue;
+					
+					if (destinationAngle + angleMin < 0) {
+						angleMin = 360 - destinationAngle;
+					}
+
+					Min.setX(this.collisionShape.getOrigin().getX() + delta * this.speed * Math.cos(Math.toRadians((destinationAngle + angleMin))));
+					Min.setY(this.collisionShape.getOrigin().getY() + delta * this.speed * Math.sin(Math.toRadians((destinationAngle + angleMin))));
+					
+					System.err.println("Block in Min -> " + Min.getX() + " " + Min.getY() + "   ->  " + ((destinationAngle + angleMin)));
 				} while (planetCollision(planets, Min));
 			}
 			
 			if (collisionPlanetState == 0 || collisionPlanetState == 2) {
 				do {
 					angleMax += diffValue;
-					Max.setX(this.collisionShape.getOrigin().getX() + delta * this.speed * Math.cos(Math.toRadians((destinationAngle + angleMax)%360)));
-					Max.setY(this.collisionShape.getOrigin().getY() + delta * this.speed * Math.sin(Math.toRadians((destinationAngle + angleMax)%360)));
+					if (angleMax > 360) {
+						angleMax = 0;
+					}
+					Max.setX(this.collisionShape.getOrigin().getX() + delta * this.speed * Math.cos(Math.toRadians(destinationAngle + angleMax)));
+					Max.setY(this.collisionShape.getOrigin().getY() + delta * this.speed * Math.sin(Math.toRadians(destinationAngle + angleMax)));
+					
+					System.err.println("Block in Max -> " + Max.getX() + " " + Max.getY() + "   ->   " + (destinationAngle + angleMax));
 				} while (planetCollision(planets, Max));
 			}
 			
 			if (collisionPlanetState == 0) {
 				if (Min.distance(destination) < Max.distance(destination)) {
-					this.angle = (this.angle - angleMin)%360;
+					this.angle = this.angle + angleMin;
 					this.collisionPlanetState = 1;
 					return Min;
 				} else {
-					this.angle = (this.angle + angleMax)%360;
+					this.angle = this.angle + angleMax;
 					this.collisionPlanetState = 2;
 					return Max;
 				}
 			} else if (collisionPlanetState == 1) {
-				this.angle = (this.angle - angleMin)%360;
+				this.angle = this.angle - angleMin;
 				return Min;
 			} else {//if (collisionPlanetState == 2){
-				this.angle = (this.angle + angleMax)%360;
+				this.angle = this.angle + angleMax;
 				return Max;
 			}
 			
