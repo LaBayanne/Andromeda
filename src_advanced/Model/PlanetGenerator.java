@@ -196,8 +196,10 @@ public class PlanetGenerator implements Serializable{
 			} while (alreadyIn);
 			
 			planets.get(planetNumber[i]).setOwner(i + 1);
-			planets.get(planetNumber[i]).setStock(1);//Egality
-			//planets.get(planetNumber[i]).setProductionSpeed(0.003);
+			if(i + 1 == 1)
+				planets.get(planetNumber[i]).setStock(10);
+			else
+				planets.get(planetNumber[i]).setStock(1);
 		}
 	}
 	

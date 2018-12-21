@@ -108,7 +108,7 @@ public class SceneGame implements Scenery, Serializable{
 		startMenu.addMenu(saveMenu);
 		this.menus.add(startMenu);
 		
-		this.realTimerAvast = 40;
+		this.realTimerAvast = 600;
 		
 		this.avast = null;
 		
@@ -235,7 +235,7 @@ public class SceneGame implements Scenery, Serializable{
 			case 0:
 				//If we don't click on a planet:
 				if (!selectActivePlanet(x, y)) {
-					selectSquad(x, y);
+					//selectSquad(x, y);
 				}
 				break;
 			case 1:
@@ -358,7 +358,7 @@ public class SceneGame implements Scenery, Serializable{
 		Planet planet;
 		while(iterator.hasNext()) {
 			planet = iterator.next();
-			if(planet.getOwner() != 1 && !this.planets.contains(planet)) {
+			if(planet.getOwner() != 1 || !this.planets.contains(planet)) {
 				iterator.remove();
 			}
 		}

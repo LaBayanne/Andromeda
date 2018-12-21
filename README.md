@@ -16,7 +16,8 @@
 
 
 -------------------------------
-### How to play:
+#### src_basic
+
 In the first version of the game, you begin with the green planet. Your enemy is in red.
 All the others planets are neutral. The number on the planet is the number of starships that you can generate.
 Select one of your planet with left click. You can add multiple planet to you selection by pressing `Ctrl` when you click.
@@ -35,6 +36,17 @@ You can select the destination of you starships with right click.
  The number of starship on planet owned by players augment each frame, depending of the generation speed of the planet.
  If you are the last player controlling planets, you win the game.
  If it'a an other player who controle the game, you lose :)
+
+
+### src_advanced
+
+I think you should test this version before reading this.
+
+This version include a main menu, similarly to a windows desktop. Click on Start or to open a submenu.
+In this menu, you can launch a new game (and select the number of players), load an existing game (there is only one saved game on the same moment) and quit the game.
+
+On the main game, similarly to the first version of the game, you control a file and must take all the file of the screen. 
+
 
 ---------------
  Works with `openjdk 1.8` and `openjfx 1.8`.

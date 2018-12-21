@@ -271,15 +271,15 @@ public class ViewGame{
 	 * @param planets	List of selected planets
 	 */
 	public void displaySelectedPlanets(ArrayList<Planet> planets) {
-		this.gc.setFill(Color.web("#ffffffff"));
+		this.gc.setFill(Color.web("#0000ff66"));
 		double edge = 5;
 		
 		for (Planet planet : planets) {
 			Point where = planet.getCollisionShape().getOrigin();
-			this.gc.drawImage(this.imageBank.getImage("zoom_00.png"), where.getX() - planet.getRadius(), 
-					where.getY() - planet.getRadius());
-			//this.gc.fillOval(where.getX() - planet.getRadius() - edge / 2, where.getY() - planet.getRadius() - edge / 2, 
-				//planet.getRadius() * 2 + edge, planet.getRadius() * 2 + edge);
+			//this.gc.drawImage(this.imageBank.getImage("zoom_00.png"), where.getX() - planet.getRadius(), 
+					//where.getY() - planet.getRadius());
+			this.gc.fillRect(where.getX() - planet.getRadius() - edge / 2, where.getY() - planet.getRadius() - edge / 2, 
+				planet.getRadius() * 2 + edge, planet.getRadius() * 2 + edge);
 
 		}
 	}
@@ -299,7 +299,7 @@ public class ViewGame{
 	 * @param rect	Dimension of the rectangle
 	 */
 	public void displaySelectRect(Rectangle rect) {
-		this.gc.setStroke(Color.web("#ffffff"));
+		this.gc.setStroke(Color.web("#0000ff"));
 		this.gc.strokeRect(rect.getOrigin().getX(), rect.getOrigin().getY(), rect.getWidth(), rect.getHeight());
 	}
 	
