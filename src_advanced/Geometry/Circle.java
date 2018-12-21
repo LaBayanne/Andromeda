@@ -19,6 +19,11 @@ public class Circle extends Shape {
 		this.radius = radius;
 	}
 	
+	/**
+	 * 
+	 * Constructor by copy
+	 * @param circle circle to copy.
+	 */
 	public Circle(Circle circle) {
 		this(circle.getOrigin().getX(), circle.getOrigin().getY(), circle.getRadius());
 	}
@@ -29,6 +34,11 @@ public class Circle extends Shape {
 		return this.origin.distance(p) <= this.radius;
 	}
 	
+	/**
+	 * Detect collision with another circle
+	 * @param circle	the circle to check
+	 * @return	true if there is collision, else false
+	 */
 	public boolean collision(Circle circle) {
 		return this.origin.distance(circle.getOrigin()) < this.radius + circle.getRadius();
 	}
@@ -39,20 +49,7 @@ public class Circle extends Shape {
 	 * @return	True if there is a collision, else false.
 	 */
 	public boolean collision(Rectangle r) {
-		/*Point points[] = {
-				r.getOrigin(),
-				new Point (r.getOrigin().getX() + r.getWidth(), r.getOrigin().getY()),
-				new Point (r.getOrigin().getX(), r.getOrigin().getY() + r.getHeight()),
-				new Point (r.getOrigin().getX() + r.getWidth(), r.getOrigin().getY() + r.getHeight())
-		};
-		
-		for (Point p : points) {
-			if (collision(p)) {
-				return true;
-			}
-		}
-		
-		return r.collision(this);*/
+
 		double distanceX = Math.abs(this.origin.getX()- (r.origin.getX() + r.getWidth() / 2));
 		double distanceY = Math.abs(this.origin.getY() - (r.origin.getY() + r.getHeight() / 2));
 
