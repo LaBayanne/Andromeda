@@ -12,7 +12,10 @@ import javafx.scene.media.MediaPlayer;
 
 
 
-
+/**
+ * Represent the bank of all songs of the games
+ *
+ */
 public class SongController implements Serializable{
 	private static String DATA_DIR;
 	private Hashtable<String, AudioClip> bank;
@@ -22,12 +25,18 @@ public class SongController implements Serializable{
 		DATA_DIR = "resources/sounds/";
 	}
 	
+	/**
+	 * Basic constructor
+	 */
 	public SongController() {
 		this.current = null;
 		this.bank = new Hashtable<>();
 		this.loadSongs();
 	}
 	
+	/**
+	 * Load all songs from resources/sounds/
+	 */
 	private void loadSongs() {
 		File directory = new File(DATA_DIR);
 		File[] files = directory.listFiles();
@@ -84,6 +93,10 @@ public class SongController implements Serializable{
 		System.err.println(this.bank);
 	}
 	
+	/**
+	 * Play a sound
+	 * @param songName the name of the soung file
+	 */
 	public void playSong(String songName) {
 		AudioClip m = this.bank.get(songName);
 		
@@ -101,6 +114,10 @@ public class SongController implements Serializable{
 		}
 	}
 	
+	/**
+	 * Change the volume of the current sound.
+	 * @param value	Value between 0 and 1
+	 */
 	public void setVolume(double value) {
 		if (this.current == null)	return;
 		this.current.stop();

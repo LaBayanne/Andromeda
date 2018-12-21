@@ -38,7 +38,7 @@ public class SceneManager {
 		
 		this.continueGame = true;
 		this.songController = new SongController();
-		songController.playSong("song_01.wav");
+		songController.playSong("song_01.mp3");
 		songController.setVolume(0.5);
 		
 		this.newMainMenu();
@@ -98,7 +98,7 @@ public class SceneManager {
 	 */
 	public void newGame(int nbPlayers) {
 		System.out.println("NewGame");
-		this.songController.playSong("song_01.wav");
+		this.songController.playSong("song_01.mp3");
 		this.gameScene = new SceneGame(this.gc, this.screenWidth, this.screenHeight, nbPlayers);
 		this.activeScene = this.gameScene;
 	}
@@ -108,7 +108,7 @@ public class SceneManager {
 	 */
 	public void newMainMenu() {
 		System.out.println("NewMainMenu");
-		this.songController.playSong("song_00.wav");
+		this.songController.playSong("song_00.mp3");
 		this.menuScene = new SceneMenu(this.gc, this.screenWidth, this.screenHeight);
 		this.activeScene = this.menuScene;
 	}
