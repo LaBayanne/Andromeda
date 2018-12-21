@@ -138,6 +138,7 @@ public class SceneGame implements Scenery, Serializable{
 	
 	private void createAvast() {
 		this.avast = new Avast(this.screenWidth, this.screenHeight);
+		this.AIs.add(new AI(this.planets, this.squads, 6));
 	}
 	
 	/* Manage user inputs */

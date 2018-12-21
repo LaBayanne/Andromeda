@@ -104,6 +104,10 @@ public class ViewGame{
 				case 5:
 					this.gc.setFill(Color.web("#ffff0099"));
 					break;
+				//Avast	
+				case 6:
+					this.gc.setFill(Color.web("#ffa50099"));
+					break;
 			}
 			
 			//this.gc.fillOval(where.getX() - planet.getRadius(), where.getY() - planet.getRadius(), 
