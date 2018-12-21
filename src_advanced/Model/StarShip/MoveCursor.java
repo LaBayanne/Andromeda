@@ -11,7 +11,7 @@ public class MoveCursor extends StarShip{
 	static {
 		SPEED = 0.02;
 		DAMAGE = 4;
-		COST = 2;
+		COST = 3;
 	}
 	
 	public MoveCursor(Point position, Point destination, double angle, int owner) {
