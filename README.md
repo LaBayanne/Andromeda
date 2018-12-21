@@ -14,7 +14,6 @@
 </br>
 <a href="https://docs.google.com/document/d/1InqnvMFz5X4-hOMiPz7J0wUCnQpDNI-ywEv3xuSAwLo/edit?usp=sharing">Lien du "cahier des charge" du projet</a>
 
-
 -------------------------------
 ### How to play:
 In the first version of the game, you begin with the green planet. Your enemy is in red.
@@ -26,10 +25,10 @@ By default, you send 100% of your starship stock. You can change this value with
 You can select the destination of you starships with right click.
  * If the destination is an ally, you will augment the stock of the selected planet.
  * If the destination is an enemy, or a neutral planet, you will decrease its stock.
- 	If it's stock decrease to 0, you became the owner of this planet.
- 
+	 	If it's stock decrease to 0, you became the owner of this planet.
+
  You can redirect your squad by clicking on one of the starship composing the squad, and selecting a new target.
- 
+
  You can quick save the game when you want, by clicking `Ctrl + s`. You can restore when you want with `Ctrl + l`.
  	
  The number of starship on planet owned by players augment each frame, depending of the generation speed of the planet.
@@ -39,6 +38,4 @@ You can select the destination of you starships with right click.
 ---------------
  Works with `openjdk 1.8` and `openjfx 1.8`.
  Test with `Junit5`.
- 
- `mpg123 -w song_00.wav 8-Bit-Mayhem.mp3 `
- `ffmpeg -acodec pcm_s16le -i infile.wav  outfile.wav` pour pouvoir lire les sons.
+
