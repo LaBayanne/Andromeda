@@ -37,6 +37,13 @@ public class SongController implements Serializable{
 			if (file.isDirectory()) {
 				for (File f : file.listFiles()) {
 					if (f.isFile()) {
+						//Readme obligatoire sur moodle, on skip
+						if (f.getName().equals("README.md")) {
+							continue;
+						}
+						if (f.getName().equals("README")) {
+							continue;
+						}
 						AudioClip song = null;
 						
 							try {
@@ -52,6 +59,12 @@ public class SongController implements Serializable{
 					}
 				}
 			} else {
+				if (file.getName().equals("README.md") ) {
+					continue;
+				}
+				if (file.getName().equals("README")) {
+					continue;
+				}
 				AudioClip song = null;
 				
 					try {
