@@ -15,7 +15,7 @@ public class ImageBank {
 	private Hashtable<String, Image> bank;
 	
 	static {
-		DATA_DIR = "resources/Images/";
+		DATA_DIR = "resources/images/";
 	}
 	
 	public ImageBank() {
