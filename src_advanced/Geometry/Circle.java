@@ -2,7 +2,6 @@ package src_advanced.Geometry;
 
 /**
  * Represent a basic circle
- * @author chocorion
  *
  */
 public class Circle extends Shape {
