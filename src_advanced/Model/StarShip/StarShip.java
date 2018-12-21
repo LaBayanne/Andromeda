@@ -32,6 +32,18 @@ public class StarShip implements Serializable {
 	
 	boolean destinationReached;
 	
+	/**
+	 * Basic constructor.
+	 * @param position	The position of the starship
+	 * @param destination	The destination of the starship
+	 * @param speed		Its speed
+	 * @param damage	Its damage
+	 * @param cost		Its cost
+	 * @param angle		Its angle
+	 * @param owner		Its owner
+	 * @param width		Its width
+	 * @param height	Its height
+	 */
 	public StarShip(Point position, Point destination,double speed, int damage, int cost, double angle, int owner, 
 			int width, int height) {
 		this.width = width;
@@ -48,6 +60,13 @@ public class StarShip implements Serializable {
 		
 	}
 	
+	/**
+	 * Constructor.
+	 * @param speed		Its speed
+	 * @param damage	Its damage
+	 * @param cost		Its cost
+	 * @param owner		Its owner
+	 */
 	public StarShip(double speed, int damage, int cost, int owner) {
 		
 		this();

@@ -44,6 +44,11 @@ public class SceneManager {
 		this.newMainMenu();
 	}
 	
+	/**
+	 * Manage the menus of the game
+	 * @param x	The x position of the mouse
+	 * @param y	The y position of the mouse
+	 */
 	public void selectMenu(double x, double y) {
 		String text = "";
 		
@@ -87,6 +92,10 @@ public class SceneManager {
 		}
 	}
 	
+	/**
+	 * Create a new game
+	 * @param nbPlayers
+	 */
 	public void newGame(int nbPlayers) {
 		System.out.println("NewGame");
 		this.songController.playSong("song_01.wav");
@@ -94,6 +103,9 @@ public class SceneManager {
 		this.activeScene = this.gameScene;
 	}
 	
+	/**
+	 * Create a new Main menu
+	 */
 	public void newMainMenu() {
 		System.out.println("NewMainMenu");
 		this.songController.playSong("song_00.wav");

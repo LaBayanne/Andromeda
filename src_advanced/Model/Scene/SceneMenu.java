@@ -18,6 +18,12 @@ public class SceneMenu implements Scenery {
 	private ArrayList<Menu> menus;
 	private int screenWidth, screenHeight;
 	
+	/**
+	 * Basic constructor.
+	 * @param gc	The Graphic Context
+	 * @param width	The width of the screen
+	 * @param height	The height of the screen
+	 */
 	public SceneMenu(GraphicsContext gc, int width, int height) {
 		this.gc = gc;
 		this.view = new ViewMenu(gc, width, height);
@@ -63,11 +69,25 @@ public class SceneMenu implements Scenery {
 		this.menus.add(startMenu);
 	}
 	
+	/**
+	 * Run every tick of the game.
+	 * @param delta The delay since last tick
+	 */
 	public boolean tick(double delta) {
 		this.view.tick(this);
 		return true;
 	}
 	
+	/**
+	 * @return A list of the menus of the sceneManager
+	 */
+	public ArrayList<Menu> getMenus(){
+		return this.menus;
+	}
+	
+	
+	
+	//Not used in this version
 	public void mouseClicked(int button, double x, double y, ArrayList<String> buttonOptions) {
 		
 	}
@@ -84,8 +104,6 @@ public class SceneMenu implements Scenery {
 		
 	}
 	
-	public ArrayList<Menu> getMenus(){
-		return this.menus;
-	}
+	
 	
 }

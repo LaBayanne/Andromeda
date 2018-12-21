@@ -302,6 +302,10 @@ public class Planet implements Serializable {
 		this.stock = n;
 	}
 	
+	/**
+	 * 
+	 * @return The Planet target
+	 */
 	public Planet getTarget() {
 		return this.target;
 	}
