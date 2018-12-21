@@ -47,7 +47,7 @@ public class Planet implements Serializable {
 	protected double timer;
 	
 	/**
-	 * Complete constructor for planet
+	 * Constructor for planet
 	 * @param origin			The top left position of the planet
 	 * @param radius			Radius of the planet
 	 * @param productionSpeed	Production of starship per frames
@@ -96,6 +96,7 @@ public class Planet implements Serializable {
 		this(new Point(), 0, 0, 0);
 	}
 	
+
 	public void destroyed(ArrayList<Planet> planets, ArrayList<Squad> squads) {
 		for(Planet planet : planets){
 			if(planet.getTarget() == this) {

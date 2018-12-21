@@ -19,7 +19,7 @@ public class SongController implements Serializable{
 	private AudioClip current;
 	
 	static {
-		DATA_DIR = "resources/Songs/";
+		DATA_DIR = "resources/sounds/";
 	}
 	
 	public SongController() {
