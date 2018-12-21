@@ -42,10 +42,39 @@ You can select the destination of you starships with right click.
 
 I think you should test this version before reading this.
 
-This version include a main menu, similarly to a windows desktop. Click on Start or to open a submenu.
+This version include a main menu, similarly to a windows desktop. Click on Start or press escape to open a submenu.
 In this menu, you can launch a new game (and select the number of players), load an existing game (there is only one saved game on the same moment) and quit the game.
 
-On the main game, similarly to the first version of the game, you control a file and must take all the file of the screen. 
+On the main game, similarly to the first version of the game, you control a file and must take all the file of the screen. Like on the main menu you can click on start or press escape top open a submenu, where you can go back to the main menu, quit the game, save the game or load a game. This menu stop the game too.
+
+The game includes three different "planets" and three different "starships".
+Planets :
+
+	- File : 			
+			- production speed : 		average
+			- type of starships : 	Finger
+	- Directory : 		
+			- production speed : 		fast
+			- type of starships : 	Arrow
+	- Application : 	
+			- production speed : 		slow
+			- type of starships : 	MoveCursor
+						
+Starships :
+
+	- Finger :			
+			- damage :					2
+			- speed : 					average
+			- cost :					1
+	- Arrow : 			
+			- damage : 				1
+			- speed : 					fast
+			- cost : 					1
+	- MoveCursor : 	
+			- damage : 				4
+			- speed :					slow
+			- cost :					3
+						
 
 
 ---------------
