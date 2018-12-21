@@ -33,13 +33,16 @@ public class ViewMenu {
 		
 	}
 	
+	/**
+	 * Display the task bar
+	 */
 	public void displayTaskBar() {
 		int taskBarHeight = 30;
 		this.gc.drawImage(this.imageBank.getImage("taskBar.png"), 0, this.screenHeight - taskBarHeight,
 				this.screenWidth, taskBarHeight);
 	}
 	
-	public void displayMenu(Menu menu) {
+	private void displayMenu(Menu menu) {
 		this.gc.setStroke(Color.web("#0000ff88"));
 		this.gc.setFont(Font.font("Verdana", 17));
 		this.gc.setFill(Color.web("#ff000088"));
@@ -57,7 +60,7 @@ public class ViewMenu {
 		this.gc.fillText(menu.getText(), x + 5, y + 22);
 	}
 	
-	public void displayMenus(ArrayList<Menu> menus) {
+	private void displayMenus(ArrayList<Menu> menus) {
 		
 		for(Menu menu : menus) {
 			if(menu.isAvailable()) {
@@ -67,6 +70,11 @@ public class ViewMenu {
 		}
 	}
 	
+	/**
+	 * Second version of the function displayMenu.
+	 * Display the image of the menu
+	 * @param menu	The menu to display
+	 */
 	public void displayMenu2(Menu menu) {
 		int menuWidth = 350;
 		int menuHeight = 450;
@@ -96,6 +104,10 @@ public class ViewMenu {
 		}
 	}
 	
+	/**
+	 * Display the text of the menu.
+	 * @param menu The menu to display
+	 */
 	public void displayTextMenu(Menu menu) {
 		double x;
 		double y;
@@ -145,6 +157,10 @@ public class ViewMenu {
 		
 	}
 	
+	/**
+	 * Display the text of the menus.
+	 * @param menus The menus to display
+	 */
 	public void displayTextMenus(ArrayList<Menu> menus) {
 		for(Menu menu : menus) {
 			if(menu.isAvailable()) {
@@ -154,6 +170,10 @@ public class ViewMenu {
 		}
 	}
 	
+	/**
+	 * Display the menus (seconde version of this function)
+	 * @param menus The menus to display
+	 */
 	public void displayMenus2(ArrayList<Menu> menus) {
 		
 		for(Menu menu : menus) {

@@ -303,13 +303,16 @@ public class ViewGame{
 		this.gc.strokeRect(rect.getOrigin().getX(), rect.getOrigin().getY(), rect.getWidth(), rect.getHeight());
 	}
 	
+	/**
+	 * Show the task bar.
+	 */
 	public void displayTaskBar() {
 		int taskBarHeight = 30;
 		this.gc.drawImage(this.imageBank.getImage("taskBar.png"), 0, this.screenHeight - taskBarHeight,
 				this.screenWidth, taskBarHeight);
 	}
 	
-	public void displayMenu(Menu menu) {
+	private void displayMenu(Menu menu) {
 		this.gc.setStroke(Color.web("#0000ff77"));
 		this.gc.setFont(Font.font("Verdana", 17));
 		this.gc.setFill(Color.web("#ff000077"));
@@ -327,7 +330,7 @@ public class ViewGame{
 		this.gc.fillText(menu.getText(), x + 5, y + 22);
 	}
 	
-	public void displayMenus(ArrayList<Menu> menus) {
+	private void displayMenus(ArrayList<Menu> menus) {
 		
 		for(Menu menu : menus) {
 			if(menu.isAvailable()) {
@@ -337,6 +340,11 @@ public class ViewGame{
 		}
 	}
 	
+	/**
+	 * Second version of the function displayMenu.
+	 * Display the image of the menu
+	 * @param menu	The menu to display
+	 */
 	public void displayMenu2(Menu menu) {
 		int menuWidth = 350;
 		int menuHeight = 450;
@@ -357,6 +365,10 @@ public class ViewGame{
 		}
 	}
 	
+	/**
+	 * Display the text of the menu.
+	 * @param menu The menu to display
+	 */
 	public void displayTextMenu(Menu menu) {
 		double x;
 		double y;
@@ -390,6 +402,10 @@ public class ViewGame{
 		
 	}
 	
+	/**
+	 * Display the text of the menus.
+	 * @param menus The menus to display
+	 */
 	public void displayTextMenus(ArrayList<Menu> menus) {
 		for(Menu menu : menus) {
 			if(menu.isAvailable()) {
@@ -399,6 +415,10 @@ public class ViewGame{
 		}
 	}
 	
+	/**
+	 * Display the menus (seconde version of this function)
+	 * @param menus The menus to display
+	 */
 	public void displayMenus2(ArrayList<Menu> menus) {
 		
 		for(Menu menu : menus) {
@@ -409,6 +429,10 @@ public class ViewGame{
 		}
 	}
 	
+	/**
+	 * Display the BOSS Avast.
+	 * @param avast Avast
+	 */
 	public void displayAvast(Avast avast) {
 		if(avast != null) {
 			double x = avast.getOrigin().getX() - avast.getRadius();
