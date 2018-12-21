@@ -108,13 +108,17 @@ public class SceneGame implements Scenery, Serializable{
 		startMenu.addMenu(saveMenu);
 		this.menus.add(startMenu);
 		
-		this.realTimerAvast = 40;
+		this.realTimerAvast = 600;
 		
 		this.avast = null;
 		
 
 	}
 	
+	/**
+	 * Update the timer before the appearance of avast.
+	 * @param delta The delay since last tick
+	 */
 	private void updateTimerAvast(double delta) {
 		if(this.realTimerAvast > 0) {
 			this.realTimerAvast -= delta * 0.01;
@@ -127,6 +131,12 @@ public class SceneGame implements Scenery, Serializable{
 		
 	}
 	
+	/**
+	 * Update Avast every tick of the game.
+	 * @param delta	The delay since last tick
+	 * @param planets	List of planets of the game
+	 * @param squads	List of squads of the game
+	 */
 	private void updateAvast(double delta, ArrayList<Planet> planets, ArrayList<Squad> squads) {
 		if(avast != null) {
 			this.avast.tick(delta, planets, squads);
@@ -136,8 +146,12 @@ public class SceneGame implements Scenery, Serializable{
 		}
 	}
 	
+	/**
+	 * Create a new instance of Avast and add it to AIs.
+	 */
 	private void createAvast() {
 		this.avast = new Avast(this.screenWidth, this.screenHeight);
+		this.AIs.add(new AI(this.planets, this.squads, 6));
 	}
 	
 	/* Manage user inputs */
@@ -234,7 +248,7 @@ public class SceneGame implements Scenery, Serializable{
 			case 0:
 				//If we don't click on a planet:
 				if (!selectActivePlanet(x, y)) {
-					selectSquad(x, y);
+					//selectSquad(x, y);
 				}
 				break;
 			case 1:
@@ -357,7 +371,7 @@ public class SceneGame implements Scenery, Serializable{
 		Planet planet;
 		while(iterator.hasNext()) {
 			planet = iterator.next();
-			if(planet.getOwner() != 1 && !this.planets.contains(planet)) {
+			if(planet.getOwner() != 1 || !this.planets.contains(planet)) {
 				iterator.remove();
 			}
 		}

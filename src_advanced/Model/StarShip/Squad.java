@@ -64,6 +64,10 @@ public class Squad implements Serializable {
 		}
 	}
 	
+	/**
+	 * Remove the starship of its list.
+	 * @param starship	The starship to remove
+	 */
 	public void destroy(StarShip starship) {
 		this.starships.remove(starship);
 	}
@@ -171,6 +175,10 @@ public class Squad implements Serializable {
 		return restUnit;
 	}
 
+	/**
+	 * 
+	 * @return A list of the starships of the squad
+	 */
 	public ArrayList<StarShip> getStarships() {
 		return this.starships;
 	}
