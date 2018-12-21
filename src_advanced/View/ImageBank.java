@@ -18,11 +18,17 @@ public class ImageBank {
 		DATA_DIR = "resources/images/";
 	}
 	
+	/**
+	 * Basic constructor
+	 */
 	public ImageBank() {
 		this.bank = new Hashtable<>();
 		loadImages();
 	}
 	
+	/**
+	 * Load all images in resources/images
+	 */
 	private void loadImages() {
 		File directory = new File(DATA_DIR);
 		File[] files = directory.listFiles();
@@ -63,6 +69,11 @@ public class ImageBank {
 		System.err.println(this.bank);
 	}
 	
+	/**
+	 * Return an image of the bank.
+	 * @param name	The image filename
+	 * @return	the reference of the image in the bank.
+	 */
 	public Image getImage(String name) {
 		return this.bank.get(name);
 	}
