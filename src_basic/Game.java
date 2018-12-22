@@ -1,4 +1,3 @@
-package src_basic;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -7,8 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import src_basic.Controller.Controller;
-import src_basic.Model.Scene.SceneManager;
+import Controller.Controller;
+import Model.Scene.SceneManager;
 
 /**
  * Main class of the game.

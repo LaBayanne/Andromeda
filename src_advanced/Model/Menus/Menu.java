@@ -1,10 +1,10 @@
-package src_advanced.Model.Menus;
+package Model.Menus;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import src_advanced.Geometry.Point;
-import src_advanced.Geometry.Rectangle;
+import Geometry.Point;
+import Geometry.Rectangle;
 
 /**
  * Represent a menu who can manage any number of submenus

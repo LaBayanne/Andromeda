@@ -1,6 +1,6 @@
-package src_advanced.Model.StarShip;
+package Model.StarShip;
 
-import src_advanced.Geometry.Point;
+import Geometry.Point;
 
 public class MoveCursor extends StarShip{
 	
@@ -22,7 +22,7 @@ public class MoveCursor extends StarShip{
 	 * @param owner			Its owner
 	 */
 	public MoveCursor(Point position, Point destination, double angle, int owner) {
-		super(position, destination, 0.02, 4, COST, angle, owner, 30, 30);
+		super(position, destination, SPEED, DAMAGE, COST, angle, owner, 30, 30);
 	}
 	
 	/**

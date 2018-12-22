@@ -1,4 +1,4 @@
-package src_advanced.View;
+package View;
 
 import java.util.ArrayList;
 
@@ -10,14 +10,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
-import src_advanced.Geometry.Point;
-import src_advanced.Geometry.Rectangle;
-import src_advanced.Model.Menus.Menu;
-import src_advanced.Model.Planet.Avast;
-import src_advanced.Model.Planet.Planet;
-import src_advanced.Model.Scene.SceneGame;
-import src_advanced.Model.StarShip.Squad;
-import src_advanced.Model.StarShip.StarShip;
+import Geometry.Point;
+import Geometry.Rectangle;
+import Model.Menus.Menu;
+import Model.Planet.Avast;
+import Model.Planet.Planet;
+import Model.Scene.SceneGame;
+import Model.StarShip.Squad;
+import Model.StarShip.StarShip;
 /**
  * This class represent the view of the game, used to display the game on screen.
  *

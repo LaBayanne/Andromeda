@@ -1,7 +1,6 @@
-package src_advanced.Model.StarShip;
+package Model.StarShip;
 
-import src_advanced.Geometry.Point;
-import src_advanced.Geometry.Rectangle;
+import Geometry.Point;
 
 /**
  * Represent a specific Starship.

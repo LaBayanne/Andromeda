@@ -1,11 +1,11 @@
-package src_advanced.Model.Scene;
+package Model.Scene;
 
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
-import src_advanced.Geometry.Rectangle;
-import src_advanced.Model.Menus.Menu;
-import src_advanced.View.ViewMenu;
+import Geometry.Rectangle;
+import Model.Menus.Menu;
+import View.ViewMenu;
 
 /**
  * This class represent the menu, and manage all inputs from the controller. 

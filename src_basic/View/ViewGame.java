@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import src_basic.Geometry.Point;
+import src_basic.Geometry.Rectangle;
 import src_basic.Model.Planet;
 import src_basic.Model.Squad;
 import src_basic.Model.StarShip;
 import src_basic.Model.Scene.SceneGame;
-import src_basic.Geometry.*;
 /**
  * This class represent the view of the game, used to display the game on screen.
  *

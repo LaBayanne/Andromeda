@@ -1,8 +1,10 @@
 package src_basic.Model;
 
-import src_basic.Geometry.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import src_basic.Geometry.Point;
+import src_basic.Geometry.Rectangle;
 
 
 /**

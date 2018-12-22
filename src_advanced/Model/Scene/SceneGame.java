@@ -1,20 +1,20 @@
-package src_advanced.Model.Scene;
+package Model.Scene;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javafx.scene.canvas.GraphicsContext;
-import src_advanced.Geometry.Circle;
-import src_advanced.Geometry.Point;
-import src_advanced.Geometry.Rectangle;
-import src_advanced.Model.AI;
-import src_advanced.Model.PlanetGenerator;
-import src_advanced.Model.Menus.Menu;
-import src_advanced.Model.Planet.Avast;
-import src_advanced.Model.Planet.Planet;
-import src_advanced.Model.StarShip.Squad;
-import src_advanced.View.ViewGame;
+import Geometry.Circle;
+import Geometry.Point;
+import Geometry.Rectangle;
+import Model.AI;
+import Model.PlanetGenerator;
+import Model.Menus.Menu;
+import Model.Planet.Avast;
+import Model.Planet.Planet;
+import Model.StarShip.Squad;
+import View.ViewGame;
 
 /**
  * Represent the model of the game.

@@ -1,4 +1,4 @@
-package src_advanced.View;
+package View;
 
 
 import java.io.File;
@@ -7,8 +7,6 @@ import java.net.MalformedURLException;
 import java.util.Hashtable;
 
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 
 

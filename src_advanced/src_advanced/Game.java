@@ -1,5 +1,4 @@
 package src_advanced;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -7,8 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import src_advanced.Controller.Controller;
-import src_advanced.Model.Scene.SceneManager;
+import Controller.Controller;
+import Model.Scene.SceneManager;
 
 /**
  * Main class of the game.

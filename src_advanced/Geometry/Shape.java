@@ -1,4 +1,4 @@
-package src_advanced.Geometry;
+package Geometry;
 
 import java.io.Serializable;
 

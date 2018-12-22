@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import src_basic.Geometry.*;
 import javafx.scene.canvas.GraphicsContext;
+import src_basic.Geometry.Circle;
+import src_basic.Geometry.Point;
+import src_basic.Geometry.Rectangle;
 import src_basic.Model.AI;
 import src_basic.Model.Planet;
 import src_basic.Model.PlanetGenerator;

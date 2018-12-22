@@ -1,7 +1,5 @@
 package src_basic.Geometry;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 class RectangleTest {

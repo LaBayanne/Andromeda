@@ -1,4 +1,4 @@
-package src_basic.Controller;
+package Controller;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import src_basic.Model.Scene.SceneManager;
+import Model.Scene.SceneManager;
 
 /**
  * This class get all the input from the user, and calls the associate fonction in scene manager.

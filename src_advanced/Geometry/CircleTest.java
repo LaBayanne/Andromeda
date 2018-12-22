@@ -1,6 +1,4 @@
-package src_advanced.Geometry;
-
-import static org.junit.jupiter.api.Assertions.*;
+package Geometry;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
-package src_advanced.Model.Planet;
+package Model.Planet;
 
-import src_advanced.Geometry.Point;
-import src_advanced.Model.StarShip.Finger;
+import Geometry.Point;
+import Model.StarShip.Finger;
 
 /**
  * Specific type of planet in the game.

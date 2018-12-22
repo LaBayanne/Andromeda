@@ -1,10 +1,11 @@
-package src_advanced.Model.StarShip;
-
-import src_advanced.Geometry.*;
-import src_advanced.Model.Planet.Planet;
+package Model.StarShip;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import Geometry.Point;
+import Geometry.Rectangle;
+import Model.Planet.Planet;
 
 
 /**

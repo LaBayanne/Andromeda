@@ -1,8 +1,8 @@
-package src_advanced.Model.Scene;
+package Model.Scene;
 
 import java.util.ArrayList;
 
-import src_advanced.Model.Menus.Menu;
+import Model.Menus.Menu;
 
 /**
  * This interface represents a scene in game. Scenery because Scene is already taken by javafx.

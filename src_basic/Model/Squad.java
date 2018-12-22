@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import src_basic.Geometry.*;
+import src_basic.Geometry.Circle;
+import src_basic.Geometry.Point;
 
 /**
  * Represent an escadron on the game

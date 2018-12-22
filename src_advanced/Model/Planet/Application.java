@@ -1,7 +1,7 @@
-package src_advanced.Model.Planet;
+package Model.Planet;
 
-import src_advanced.Geometry.Point;
-import src_advanced.Model.StarShip.MoveCursor;
+import Geometry.Point;
+import Model.StarShip.MoveCursor;
 
 /**
  * Represent a specific planet in the game

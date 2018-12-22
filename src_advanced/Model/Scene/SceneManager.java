@@ -1,4 +1,4 @@
-package src_advanced.Model.Scene;
+package Model.Scene;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,9 +8,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
-import src_advanced.Geometry.Point;
-import src_advanced.Model.Menus.Menu;
-import src_advanced.View.SongController;
+import Geometry.Point;
+import Model.Menus.Menu;
+import View.SongController;
 
 /**
  * Represent the scene manager.

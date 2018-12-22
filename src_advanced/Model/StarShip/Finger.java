@@ -1,6 +1,6 @@
-package src_advanced.Model.StarShip;
+package Model.StarShip;
 
-import src_advanced.Geometry.Point;
+import Geometry.Point;
 
 public class Finger extends StarShip {
 	

@@ -1,12 +1,12 @@
-package src_advanced.Model;
+package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-import src_advanced.Model.Planet.Planet;
-import src_advanced.Model.StarShip.Squad;
+import Model.Planet.Planet;
+import Model.StarShip.Squad;
 
 /**
  * Represent a AI in the game.

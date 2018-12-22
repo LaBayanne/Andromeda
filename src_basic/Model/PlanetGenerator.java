@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import src_basic.Geometry.*;
+import src_basic.Geometry.Point;
 
 /**
  * This class is used for generating planets *

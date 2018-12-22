@@ -1,4 +1,4 @@
-package src_advanced.Geometry;
+package Geometry;
 
 /**
  * Represent a basic circle

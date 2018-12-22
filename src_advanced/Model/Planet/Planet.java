@@ -1,16 +1,15 @@
-package src_advanced.Model.Planet;
+package Model.Planet;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import src_advanced.Geometry.Circle;
-import src_advanced.Geometry.Point;
-import src_advanced.Model.StarShip.StarShip;
-import src_advanced.Model.StarShip.Arrow;
-import src_advanced.Model.StarShip.Finger;
-import src_advanced.Model.StarShip.MoveCursor;
-import src_advanced.Model.StarShip.Squad;
+import Geometry.Circle;
+import Geometry.Point;
+import Model.StarShip.Arrow;
+import Model.StarShip.Finger;
+import Model.StarShip.MoveCursor;
+import Model.StarShip.Squad;
+import Model.StarShip.StarShip;
 
 
 /**

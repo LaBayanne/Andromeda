@@ -1,12 +1,12 @@
-package src_advanced.View;
+package View;
 
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import src_advanced.Model.Menus.Menu;
-import src_advanced.Model.Scene.SceneMenu;
+import Model.Menus.Menu;
+import Model.Scene.SceneMenu;
 
 /**
  * This class will represent the view of the menu.

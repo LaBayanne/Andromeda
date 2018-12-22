@@ -1,8 +1,8 @@
 package src_basic.Model;
 
+import static java.time.Duration.ofSeconds;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static org.junit.jupiter.api.Assertions.fail;
-import static java.time.Duration.ofSeconds;
 
 import java.util.ArrayList;
 

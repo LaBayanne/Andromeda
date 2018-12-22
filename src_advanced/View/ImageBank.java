@@ -1,4 +1,4 @@
-package src_advanced.View;
+package View;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -23,7 +23,137 @@ public class ImageBank {
 	 */
 	public ImageBank() {
 		this.bank = new Hashtable<>();
-		loadImages();
+		loadImagesMoodleVersion();
+	}
+	
+	public static String getRessourcePathByName(String name) {
+		System.err.println(("/images/" + name).toString());
+		return ImageBank.class.getResource("/images/" + name).toString();
+
+	}
+	
+	/**
+	 * Quickfix for moodle
+	 */
+	private void loadImagesMoodleVersion() {
+		
+		String [][]imageName = {
+				{
+					"avast.png",
+					"avast/"
+				},
+				{
+					"avast.jpg",
+					"avast/"
+				},
+				{
+					"avastStarship_00.png",
+					"avast/"
+				},
+				{
+					"default_background.jpg",
+					"background/"
+				},
+				{
+					"cursor_00_00.png",
+					"cursors/"
+				},
+				{
+					"cursor_00_01.png",
+					"cursors/"
+				},
+				{
+					"cursor_00_02.png",
+					"cursors/"
+				},
+				{
+					"cursor_00_03.png",
+					"cursors/"
+				},
+				{
+					"cursor_00_04.png",
+					"cursors/"
+				},
+				{
+					"cursor_01_00.png",
+					"cursors/"
+				},
+				{
+					"cursor_01_01.png",
+					"cursors/"
+				},
+				{
+					"cursor_01_02.png",
+					"cursors/"
+				},
+				{
+					"cursor_01_03.png",
+					"cursors/"
+				},
+				{
+					"cursor_01_04.png",
+					"cursors/"
+				},
+				{
+					"cursor_02_00.png",
+					"cursors/"
+				},
+				{
+					"cursor_02_01.png",
+					"cursors/"
+				},
+				{
+					"cursor_02_02.png",
+					"cursors/"
+				},
+				{
+					"cursor_02_03.png",
+					"cursors/"
+				},
+				{
+					"cursor_02_04.png",
+					"cursors/"
+				},
+				{
+					"computer_00.png",
+					"icons/"
+				},
+				{
+					"file_00.png",
+					"icons/"
+				},
+				{
+					"folder_00.png",
+					"icons/"
+				},
+				{
+					"zoom_00.png",
+					"icons/"
+				},
+				{
+					"mainMenu.png",
+					"Menus/"
+				},
+				{
+					"mainMenuPlayersChoice.png",
+					"Menus/"
+				},
+				{
+					"pauseMenu.png",
+					"Menus/"
+				},
+				{
+					"taskBar.png",
+					"Menus/"
+				}
+		};
+		
+		for (String[] s : imageName) {
+			this.bank.put(
+					s[0], 
+					new Image(getRessourcePathByName(s[1] + s[0])));
+		}
+
 	}
 	
 	/**

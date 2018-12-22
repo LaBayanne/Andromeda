@@ -1,15 +1,14 @@
-package src_advanced.Model;
+package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import src_advanced.Geometry.Point;
-import src_advanced.Model.Planet.Application;
-import src_advanced.Model.Planet.Avast;
-import src_advanced.Model.Planet.Directory;
-import src_advanced.Model.Planet.File;
-import src_advanced.Model.Planet.Planet;
+import Geometry.Point;
+import Model.Planet.Application;
+import Model.Planet.Directory;
+import Model.Planet.File;
+import Model.Planet.Planet;
 
 /**
  * This class is used for generating planets *
