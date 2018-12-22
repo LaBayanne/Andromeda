@@ -32,7 +32,7 @@ public class Squad implements Serializable {
 		this.nbUnit = nbUnit;
 		this.starships = new ArrayList<StarShip>();
 		String name = starship.getClass().getName();
-		name = name.replace("src_advanced.Model.StarShip.", "");
+		name = name.replace("Model.StarShip.", "");
 		switch (name) {
 		
 			case "Arrow":

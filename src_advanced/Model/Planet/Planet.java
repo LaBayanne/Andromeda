@@ -69,7 +69,7 @@ public class Planet implements Serializable {
 	public Planet(Point origin, double radius, double productionSpeed, int owner, StarShip starshipModel) {
 		this(origin, radius, productionSpeed, owner);
 		String name = starshipModel.getClass().getName();
-		name = name.replace("src_advanced.Model.StarShip.", "");
+		name = name.replace("Model.StarShip.", "");
 		switch (name) {
 		
 			case "Arrow":
