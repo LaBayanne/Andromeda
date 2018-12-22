@@ -152,7 +152,7 @@ public class Squad implements Serializable {
 			
 			this.starshipModel.setPosition(new Point(x, y));
 			String name =  starshipModel.getClass().getName();
-			name = name.replace("src_advanced.Model.StarShip.", "");
+			name = name.replace("Model.StarShip.", "");
 			switch (name) {
 			
 				case "Arrow":

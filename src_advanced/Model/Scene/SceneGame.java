@@ -108,7 +108,7 @@ public class SceneGame implements Scenery, Serializable{
 		startMenu.addMenu(saveMenu);
 		this.menus.add(startMenu);
 		
-		this.realTimerAvast = 600;
+		this.realTimerAvast = 100;
 		
 		this.avast = null;
 		
