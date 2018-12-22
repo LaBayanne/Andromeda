@@ -54,7 +54,7 @@ public class ViewGame{
 		for (Planet planet : planets) {
 			
 			String name =  planet.getClass().getName();
-			name = name.replace("src_advanced.Model.Planet.", "");
+			name = name.replace("Model.Planet.", "");
 			Point where = planet.getCollisionShape().getOrigin();
 			
 			double x = where.getX() - planet.getRadius();
@@ -164,7 +164,7 @@ public class ViewGame{
 	private String getImageName(StarShip s, int owner) {
 		String imageName = "";
 		String name = s.getClass().getName();
-		name = name.replace("src_advanced.Model.StarShip.", "");
+		name = name.replace("Model.StarShip.", "");
 		
 		switch (name) {
 			
