@@ -172,7 +172,7 @@ public class StarShip implements Serializable {
 	/**
 	 * @return true if starship is arrived at destination, else false.
 	 */
-	public boolean asFinished() {
+	public boolean isFinished() {
 		return this.destinationReached;
 	}
 

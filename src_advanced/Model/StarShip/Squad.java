@@ -195,7 +195,7 @@ public class Squad implements Serializable {
 			s = starshipIterator.next();
 			s.move(delta, planets);
 			
-			if (s.asFinished()) {
+			if (s.isFinished()) {
 				starshipIterator.remove();
 				nbUnit--;
 			}

@@ -12,20 +12,14 @@ import javafx.scene.image.Image;
  */
 public class ImageBank {
 	private static String DATA_DIR;
-	private Hashtable<String, Image> bank;
+	private static Hashtable<String, Image> bank;
 	
 	static {
 		DATA_DIR = "resources/images/";
-	}
-	
-	/**
-	 * Basic constructor
-	 */
-	public ImageBank() {
-		this.bank = new Hashtable<>();
+		bank = new Hashtable<>();
 		loadImagesMoodleVersion();
 	}
-	
+
 	public static String getRessourcePathByName(String name) {
 		System.err.println(("/images/" + name).toString());
 		return ImageBank.class.getResource("/images/" + name).toString();
@@ -35,7 +29,7 @@ public class ImageBank {
 	/**
 	 * Quickfix for moodle
 	 */
-	private void loadImagesMoodleVersion() {
+	private static void loadImagesMoodleVersion() {
 		
 		String [][]imageName = {
 				{
@@ -149,7 +143,7 @@ public class ImageBank {
 		};
 		
 		for (String[] s : imageName) {
-			this.bank.put(
+			bank.put(
 					s[0], 
 					new Image(getRessourcePathByName(s[1] + s[0])));
 		}

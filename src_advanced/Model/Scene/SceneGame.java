@@ -324,11 +324,27 @@ public class SceneGame implements Scenery, Serializable{
 	}
 	
 	/**
+	 * Delete empty squads.
+	 */
+	public void clearSquad() {
+		Iterator<Squad> it = this.squads.iterator();
+		
+		while(it.hasNext()) {
+			Squad s = (Squad) it.next();
+			
+			if (s.getNbUnit() <= 0) {
+				System.err.println("Empty squad removed !");
+				it.remove();
+			}
+		}
+	}
+	
+	/**
 	 * Run every tick of the game. Manage main elements of the game.
 	 * @param delta Delay since the previous tick of the game
 	 */
 	public boolean tick(double delta) {
-		
+		clearSquad();
 		if(!this.menus.get(0).isActivated()) {
 			
 			for(Planet planet:this.planets) {
