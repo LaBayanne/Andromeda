@@ -36,7 +36,7 @@ public class Game extends Application {
 		stage.setScene(scene);
 		Canvas canvas = new Canvas(screenWidth , screenHeight);
 	    root.getChildren().add( canvas );
-	         
+	     
 	    GraphicsContext gc = canvas.getGraphicsContext2D();
 	    
 	    final SceneManager sceneManager = new SceneManager(gc, screenWidth , screenHeight);

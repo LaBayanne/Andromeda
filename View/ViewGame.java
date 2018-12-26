@@ -40,8 +40,6 @@ public class ViewGame{
 		this.screenHeight = height;
 		this.imageBank = new ImageBank();
 		
-		
-		
 	}
 	
 	/**
@@ -312,33 +310,6 @@ public class ViewGame{
 				this.screenWidth, taskBarHeight);
 	}
 	
-	private void displayMenu(Menu menu) {
-		this.gc.setStroke(Color.web("#0000ff77"));
-		this.gc.setFont(Font.font("Verdana", 17));
-		this.gc.setFill(Color.web("#ff000077"));
-		double x;
-		double y;
-		double width;
-		double height;
-		x = menu.getCollisionShape().getOrigin().getX();
-		y = menu.getCollisionShape().getOrigin().getY();
-		width = menu.getCollisionShape().getWidth();
-		height = menu.getCollisionShape().getHeight();
-		this.gc.fillRect(x, y, width, height);
-		this.gc.strokeRect(x, y, width, height);
-		this.gc.setFill(Color.web("#0000ff77"));
-		this.gc.fillText(menu.getText(), x + 5, y + 22);
-	}
-	
-	private void displayMenus(ArrayList<Menu> menus) {
-		
-		for(Menu menu : menus) {
-			if(menu.isAvailable()) {
-				displayMenu(menu);
-				displayMenus(menu.getSubMenus());
-			}
-		}
-	}
 	
 	/**
 	 * Second version of the function displayMenu.
