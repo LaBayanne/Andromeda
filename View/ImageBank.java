@@ -2,7 +2,7 @@ package View;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.util.Hashtable;
+import java.util.LinkedHashMap;
 
 import javafx.scene.image.Image;
 
@@ -12,11 +12,11 @@ import javafx.scene.image.Image;
  */
 public class ImageBank {
 	private static String DATA_DIR;
-	private static Hashtable<String, Image> bank;
+	private static LinkedHashMap<String, Image> bank;
 	
 	static {
 		DATA_DIR = "/resources/images/";
-		bank = new Hashtable<>();
+		bank = new LinkedHashMap<>();
 		loadImagesMoodleVersion();
 	}
 
@@ -172,7 +172,7 @@ public class ImageBank {
 							System.err.println("Image error !");
 							System.exit(1);
 						}
-						this.bank.put(f.getName(), im);
+						bank.put(f.getName(), im);
 					}
 				}
 			} else {
@@ -185,12 +185,12 @@ public class ImageBank {
 				if (im.isError()) {
 					System.exit(1);
 				}
-				this.bank.put(file.getName(), im);
+				bank.put(file.getName(), im);
 				
 			}
 		}
 		System.err.println("Image bank : ");
-		System.err.println(this.bank);
+		System.err.println(bank);
 	}
 	
 	/**
@@ -199,6 +199,6 @@ public class ImageBank {
 	 * @return	the reference of the image in the bank.
 	 */
 	public Image getImage(String name) {
-		return this.bank.get(name);
+		return bank.get(name);
 	}
 }
