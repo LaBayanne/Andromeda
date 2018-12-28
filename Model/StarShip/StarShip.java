@@ -108,7 +108,7 @@ public class StarShip implements Serializable {
 	
 	private boolean planetCollision(ArrayList<Planet> planets, Point position) {
 		for (Planet planet : planets) {//
-			if (planet.getCollisionShape().collision(this.getCollisionShape())) {
+			if (planet.getCollisionShape().collision(new Rectangle(position, this.width, this.height))) {
 				if (planet != this.destinationPlanet) {
 					return true;
 				}
@@ -152,8 +152,9 @@ public class StarShip implements Serializable {
 	 */
 	public void move(double delta, ArrayList<Planet> planets) {
 		Point newPos = this.calculateNewPos(delta, planets);
+		this.setPosition(newPos);
 		
-		if ((new Rectangle(newPos, this.width, this.height).collision(this.destinationPlanet.getCollisionShape()))) {
+		if (this.getCollisionShape().collision(this.destinationPlanet.getCollisionShape())) {
 					
 			if (this.destinationPlanet.getOwner() == this.owner) {
 				this.destinationPlanet.increaseStock(this.damage);
@@ -167,7 +168,7 @@ public class StarShip implements Serializable {
 			}
 			this.destinationReached = true;
 		}
-		this.setPosition(newPos);
+		
 	}
 	
 	/**
