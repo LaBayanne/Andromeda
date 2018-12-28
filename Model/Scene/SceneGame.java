@@ -345,7 +345,7 @@ public class SceneGame implements Scenery, Serializable{
 	 */
 	public boolean tick(double delta) {
 		clearSquad();
-		//System.gc();
+		System.gc();
 		if(!this.menus.get(0).isActivated()) {
 			
 			for(Planet planet:this.planets) {
