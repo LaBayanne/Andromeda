@@ -59,7 +59,7 @@ public class Avast extends Planet{
 	 * @param squads 	ArrayList of squads of the game
 	 */
 	public void destroyEncounter(ArrayList<Planet> planets, ArrayList<Squad> squads) {
-		ArrayList<Planet> toRemovePlanet = new ArrayList<Planet>();
+		ArrayList<Planet>   toRemovePlanet = new ArrayList<Planet>();
 		ArrayList<StarShip> toRemoveStarship = new ArrayList<StarShip>();
 		
 		for(Planet planet : planets){
@@ -69,7 +69,6 @@ public class Avast extends Planet{
 			}
 		}
 		for(Squad squad : squads) {
-			toRemoveStarship = new ArrayList<StarShip>();
 			for(StarShip starship : squad.getStarships()){
 				if(starship.getCollisionShape().collision(this.getCollisionShape())) {
 					toRemoveStarship.add(starship);
