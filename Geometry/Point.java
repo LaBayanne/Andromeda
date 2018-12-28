@@ -117,4 +117,9 @@ public class Point implements Serializable {
 		setX(p.getX());
 		setY(p.getY());
 	}
+	
+	public void set(double x, double y) {
+		setX(x);
+		setY(y);
+	}
 }

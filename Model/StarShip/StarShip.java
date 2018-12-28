@@ -120,16 +120,17 @@ public class StarShip implements Serializable {
 	private Point calculateNewPos(double delta, ArrayList<Planet> planets) {
 		
 		double angle = this.collisionShape.getOrigin().angle(this.destination);
-		Point newPos;
+		Point newPos = new Point();
 		double dx, dy;
 		double diff = 0;
 		int pivot = 1;
+		
 		
 		do {
 			dx = delta * this.speed * Math.cos(Math.toRadians(angle + diff * pivot));
 			dy = delta * this.speed * Math.sin(Math.toRadians(angle + diff * pivot));
 			
-			newPos = new Point(this.collisionShape.getOrigin().getX() + dx, this.collisionShape.getOrigin().getY() + dy);
+			newPos.set(this.collisionShape.getOrigin().getX() + dx, this.collisionShape.getOrigin().getY() + dy);
 			
 			if (pivot == -1) {
 				pivot = 1;
