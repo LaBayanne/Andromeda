@@ -110,7 +110,7 @@ public class Point implements Serializable {
 	}
 	
 	/**
-	 * Set point to specific position
+	 * Set point to specific position 
 	 * @param p the new position of the point
 	 */
 	public void set(Point p) {
@@ -118,6 +118,11 @@ public class Point implements Serializable {
 		setY(p.getY());
 	}
 	
+	/**
+	 * Set point to specific position
+	 * @param x	x coordinate of the point
+	 * @param y	y coordinate of the point
+	 */
 	public void set(double x, double y) {
 		setX(x);
 		setY(y);

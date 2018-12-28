@@ -108,7 +108,7 @@ public class StarShip implements Serializable {
 	
 	private boolean planetCollision(ArrayList<Planet> planets, Point position) {
 		for (Planet planet : planets) {//
-			if (planet.getCollisionShape().collision(new Rectangle(position, this.width, this.height))) {
+			if (planet.getCollisionShape().collision(this.getCollisionShape())) {
 				if (planet != this.destinationPlanet) {
 					return true;
 				}
